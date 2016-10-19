@@ -40,7 +40,7 @@ module.exports.routes = {
   //查找证书信息（假数据）
   "post /getCert": {controller: "ServantController", action: "getCertInfo"},
 
-
+  "get /weixinLogIn": {controller: "UserController", action: "logIn" },
   "/test": {controller: "ServantController", action: "getCertInfo"},
   /***************************************************************************
   *                                                                          *

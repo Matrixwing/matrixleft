@@ -87,7 +87,7 @@ module.exports = {
    * @param   {res}  response
    */
   getCertInfo: function (req, res) {
-    var queryInfo =  req.param('queryInfo','测试');
+    var queryInfo =  req.param('queryInfo','');
     var options = new Object();
     sails.log.debug(queryInfo);
     var Regx = /^[A-Za-z0-9]*$/;
