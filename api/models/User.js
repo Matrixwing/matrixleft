@@ -8,10 +8,14 @@
 module.exports = {
   connection: 'localMysqlServer',
   table:'user',
+  autoCreatedAt: false,
+  autoUpdatedAt: false,
+  autoid: false,
   attributes: {
     userName: {
       type:'string',
 //      size: 50
+      primaryKey: true
     },
 
     IDCard: {
@@ -32,19 +36,21 @@ module.exports = {
     userID: {
       type:'int'
     },
-    openID: {
+    nickname: {
       type:'string'
     },
-
-
+    openid: {
+      type:'string'
+    }
   },
-
   createUser: function(options,cb){
-
   },
 
   validateUser: function(options,cb){
-
+    User.find(options).exec(function(err,result){
+      if (err) return cb(err);
+      cb(null,result)
+    });
   },
 
   refreshAccessToken: function(options,cb){

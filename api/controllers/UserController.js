@@ -6,7 +6,7 @@
  */
 
 var async = require('async');
-
+var util = require('util');
 module.exports = {
 	/*
 	*响应微信登录
@@ -19,7 +19,7 @@ module.exports = {
       stat : req.param('state',''),
     };
 
-    //todo : 1,从微信获取openid 2，根据openid查是否注册，若没有注册则拉取用户资料然后再写入，3若成功，重定向url带openid
+    // 1,从微信获取openid 2，根据openid查是否注册，若没有注册则拉取用户资料然后再写入，3若成功，重定向url带openid
 
     async.waterfall([
       function(cb){
@@ -29,11 +29,26 @@ module.exports = {
       UserLogIn.validateRegisterByOpenID,
     ],function (err,result){
       if (err != null ) return res.send(500,'服务暂不可用:'+err);
-      console.log(result);
+      console.log('result1',result);
+      console.log('result1',result.openid);
       var redirectUrl = '/index.html?openid='+result.openid;
       res.redirect(302,redirectUrl);
     })
 
+  },
+
+  getUserInfo : function (req,res){
+    var opts = {
+      openid : req.param ('openid','')
+      };
+    console.log(opts);
+    UserLogIn.getUserInfoFromDBByOpenid(opts,function(err,result){
+      if (err) return res.send(500,'{"msgNo":"9999","msgInfo":"服务出错，请您稍后再试"}');
+      if (result=='') return res.send(404,'{"msgNo":"8888","msgInfo":"对不起，没有找到您要信息"}');
+      var str = JSON.stringify(result) ;
+      result = util.format('{"msgNo":"0000","msgInfo":"查询到了信息","data":%s}',str);
+      res.send(result);
+    })
   },
 };
 
