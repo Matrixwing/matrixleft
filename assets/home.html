@@ -151,6 +151,16 @@
 			view.addEventListener('pageBack', function(e) {
 				//				console.log(e.detail.page.id + ' back');
 			});
+			var openid=getQueryString('openid');
+			$.get("/getUser?openid=ovSs8w7mUy1j1SkeLBsmWpjVpkGM",function(data,status){
+			    alert("Data: " + data + "\nStatus: " + status);
+			});
 		})(mui);
+		function getQueryString(name) {
+	        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+	        var r = window.location.search.substr(1).match(reg);
+	        if (r != null) return unescape(r[2]);
+	        return null;
+	    }
 	</script>
 </html>

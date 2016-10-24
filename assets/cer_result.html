@@ -156,22 +156,24 @@
 			                    			listHtml.push('<div class="weui-flex__item item_left"><p class="">操作技能考核成绩：</p></div>')
 			                    			listHtml.push('<div class="weui-flex__item item_right"><p class="">'+certInfo[i].score2+'</p></div>')
 			                    		listHtml.push('</div>')
-
-			                    		listHtml.push('<div class="weui-flex info_list">')
-			                    			listHtml.push('<div class="weui-flex__item item_left"><p class="">发证单位：</p></div>')
-			                    			listHtml.push('<div class="weui-flex__item item_right"><p class="">'+certInfo[i].authorityUnit+'</p></div>')
-			                    		listHtml.push('</div>')
-
+			                    		if (certInfo[i].authorityUnit!=null) {
+				                    		listHtml.push('<div class="weui-flex info_list">')
+				                    			listHtml.push('<div class="weui-flex__item item_left"><p class="">发证单位：</p></div>')
+				                    			listHtml.push('<div class="weui-flex__item item_right"><p class="">'+certInfo[i].authorityUnit+'</p></div>')
+				                    		listHtml.push('</div>')
+			                    		};
+			                    		if (certInfo[i].authorityDate!=null) {
 			                    		listHtml.push('<div class="weui-flex info_list">')
 			                    			listHtml.push('<div class="weui-flex__item item_left"><p class="">发证日期：</p></div>')
 			                    			listHtml.push('<div class="weui-flex__item item_right"><p class="">'+certInfo[i].authorityDate+'</p></div>')
 			                    		listHtml.push('</div>')
-
+			                    		};
+			                    		if (certInfo[i].serialNumber!=null) {
 			                    		listHtml.push('<div class="weui-flex info_list">')
 			                    			listHtml.push('<div class="weui-flex__item item_left"><p class="">发证流水码及所属号段：</p></div>')
 			                    			listHtml.push('<div class="weui-flex__item item_right"><p class="">'+certInfo[i].serialNumber+'</p></div>')
 			                    		listHtml.push('</div>')
-
+			                    		};
 			                    	listHtml.push('</div>')
 		                		listHtml.push('</div>')
 				            listHtml.push('</div>')

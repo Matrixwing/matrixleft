@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>证书查询</title>
+    <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/1.0.2/weui.min.css"/>
+    <link rel="stylesheet" href="styles/main.css"/>
+    <style type="text/css">
+    	.sure_query{margin-top: 20px;width: 80%}
+    	.result_ss{margin-top: 10px}
+    	.weui-footer {position: absolute;bottom: 20px;left: 0;right: 0;}
+    	.weui-cell__bd{font-size: 0.8em}
+    	.page2 .page__hd{padding: 15px;}
+    	.page__title{font-size: 16px}
+    	.sure_query{margin-top: 20px;width: 80%}
+    	.result_ss{margin-top: 10px}
+    	.weui-footer {position: absolute;bottom: 10px}
+    	#ag_input{margin-top: -8px;display: none}
+    	#ag_input:before{border-top: none}
+    	#ag_input input{padding: 4px 10px;width: 100%;height: 1.42857143em;font-size: 14px;line-height: 1.42857143em;box-sizing: content-box;border: none;border-radius: 5px !important;}
+		.weui-loadmore_line .weui-loadmore__tips{background-color: #f8f8f8}
+
+    </style>
+</head>
+<body ontouchstart>
+		<div class="demo-wrap">
+    <input type="text" id="data-ipt"/>
+    <button onclick="getAES();">AES加密</button>
+    <button onclick="getDAes();">AES解密</button>
+    <br/>
+    加密后的数据:
+    <p id = "encrypted"></p>
+    解密后的数据:
+    <p id="decrypted"></p>
+</div>
+	<script>
+        function getAesString(data,key,iv){//加密
+            var key  = CryptoJS.enc.Hex.parse(key);
+            var iv   = CryptoJS.enc.Latin1.parse(iv);
+            var encrypted = CryptoJS.AES.encrypt(data,key,
+                    {
+                        iv:iv,
+                        mode:CryptoJS.mode.CBC,
+                        padding:CryptoJS.pad.Pkcs7
+                    });
+            return encrypted;
+        }
+        function getDAesString(encrypted,key,iv){//解密
+            var key  = CryptoJS.enc.Hex.parse(key);
+            var iv   = CryptoJS.enc.Latin1.parse(iv);
+            var decrypted = CryptoJS.AES.decrypt(encrypted,key,
+                    {
+                        iv:iv,
+                        mode:CryptoJS.mode.CBC,
+                        padding:CryptoJS.pad.Pkcs7
+                    });
+            return decrypted.toString(CryptoJS.enc.Utf8);
+        }
+        function getAES(){ //加密
+            var data = document.getElementById("data-ipt").value;//明文
+            var key  = '1234567812345678';  //密钥
+            var iv   = 'Pkcs7';
+            var encrypted = getAesString(data,key,iv); //密文
+            document.getElementById("encrypted").innerHTML = encrypted;
+        }
+
+        function getDAes(){//解密
+            var encrypted = document.getElementById("encrypted").innerHTML; //密文
+            var key  = '1234567812345678';
+            var iv   = 'Pkcs7';
+            var decryptedStr = getDAesString(encrypted,key,iv);
+            document.getElementById("decrypted").innerHTML = decryptedStr;
+        }
+    	</script>
+    <script src="js/zepto.min.js"></script>
+    
+    <script src="js/core-min.js"></script>
+    <script src="js/aes.js"></script>
+</body>
+</html>
