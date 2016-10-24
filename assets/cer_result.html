@@ -64,9 +64,9 @@
 					            <div class="weui-flex__item item_left"><p class="">姓名：</p></div>
 					            <div class="weui-flex__item item_right"><p class="userName"></p></div>
 					        </div>
-					        <div class="weui-flex info_list">
+					        <div class="weui-flex info_list avatarUrl_div">
 					            <div class="weui-flex__item item_left pic"><p class="">照片：</p></div>
-					            <div class="weui-flex__item item_right"><div class="avatarUrl"><img src="images/11.png"></div></div>
+					            <div class="weui-flex__item item_right"><div class="avatarUrl"><img src=""></div></div>
 					        </div>
 					        <div class="weui-flex info_list">
 					            <div class="weui-flex__item item_left"><p class="">性别：</p></div>
@@ -113,7 +113,7 @@
 			        	certInfo = data.data[0].certInfo;
 			        	$('.certInfo_bd').empty();
 			        	if (data.data[0].avatarUrl==null) {
-			        		$('.avatarUrl img').attr('src','images/timg.jpg')
+			        		$('.avatarUrl_div').hide()
 			        	}else{
 			        		$('.avatarUrl img').attr('src',data.data[0].avatarUrl)
 			        	};
@@ -192,5 +192,6 @@
 			});
 		});
     </script>
+    <script src="https://s4.cnzz.com/z_stat.php?id=1260604409&web_id=1260604409" language="JavaScript"></script>
 </body>
 </html>
