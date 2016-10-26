@@ -52,10 +52,12 @@
         			return;
         		};
         	}
+            $('#data_input').attr('enc',getAesString(queryInfo,'1234567812345678','Pkcs7'));
+            var encrypted = $('#data_input').attr('enc')
         	$.ajax({
 			    type: 'post',
 			    url: '/getCert',
-			    data: {'queryInfo':queryInfo},
+			    data: {'queryInfo':encrypted},
 			    dataType: 'json',
 			    success: function(data) {
 			    	$('#loadingToast').hide();
@@ -70,8 +72,8 @@
 			        }else if (data.data.length==1) {
 			        	$('#data_input').val('');
 			        	$('#idcard_input').val('');
-			        	var a = getAesString(data.data[0].IDCard,'1234567812345678','Pkcs7')
-			        	window.location.href='/cer_result.html?queryInfo='+a;
+			        	var encrypted = getAesString(data.data[0].IDCard,'1234567812345678','Pkcs7')
+			        	window.location.href='/cer_result.html?queryInfo='+encrypted;
 			        }else{
 			        	$('.result_empty').show();
 			        };
