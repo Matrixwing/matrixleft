@@ -25,6 +25,7 @@ module.exports = {
     var key = CryptoJS.enc.Utf8.parse('ABCDEF1234567890')
     var bytes  = CryptoJS.AES.decrypt(queryInfoD,key);
     console.log(bytes);
+    //
     var queryInfo = bytes.toString(CryptoJS.enc.Utf8);
     //加密部分结束
     console.log('加密部分结束',queryInfo);
