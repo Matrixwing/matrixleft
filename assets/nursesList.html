@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>保姆列表</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="styles/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="styles/home.css"/>
+		<style type="text/css">
+			.mui-table-view-cell{padding: 15px;}
+			.mw_left{font-size: .8em;margin-left: 0 !important;line-height: 44px;}
+			.mw_left .mui-icon{font-size: 1em}
+			.mw_select_div{width: 20%;background-color: #f7f7f7;margin-left: 15px;height: 44px;font-size: .8em;}
+			.mw_select_div select{width: 100%;padding: 5px 15px 5px 15px !important;background-color: #f7f7f7;border: 1px solid #ccc !important}
+			.mw_select_div .mui-icon{font-size: 1em;position: relative;top: -25px;right: 10px}
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-views">
+			<div class="mui-bar mui-bar-nav">
+				<div class="mui-left mui-btn-nav mui-pull-left mw_left">
+					成都<span class="mui-icon mui-icon-arrowdown"></span>
+				</div>
+				<div class=" mui-pull-left  mw_select_div">
+					<select class="mui-btn mui-btn-block mui-pull-left">
+						<option value="item-1">工资</option>
+						<option value="item-2">item-2</option>
+						<option value="item-3">item-3</option>
+						<option value="item-4">item-4</option>
+						<option value="item-5">item-5</option>
+					</select>
+					<span class="mui-icon mui-icon-arrowdown mui-pull-right"></span>
+				</div>
+				<div class=" mui-pull-left  mw_select_div">
+					<select class="mui-btn mui-btn-block mui-pull-left">
+						<option value="item-1">经验</option>
+						<option value="item-2">item-2</option>
+						<option value="item-3">item-3</option>
+						<option value="item-4">item-4</option>
+						<option value="item-5">item-5</option>
+					</select>
+					<span class="mui-icon mui-icon-arrowdown mui-pull-right"></span>
+				</div>
+				<div class=" mui-pull-left  mw_select_div">
+					<select class="mui-btn mui-btn-block mui-pull-left">
+						<option value="item-1">年龄</option>
+						<option value="item-2">item-2</option>
+						<option value="item-3">item-3</option>
+						<option value="item-4">item-4</option>
+						<option value="item-5">item-5</option>
+					</select>
+					<span class="mui-icon mui-icon-arrowdown mui-pull-right"></span>
+				</div>
+				
+
+					
+			</div> 
+			<div class="mui-content">
+				<ul class="mui-table-view mui-table-view-chevron">
+					<li class="mui-table-view-cell mui-media">
+						<a class="mui-navigate-right">
+							<img class="mui-media-object mui-pull-left" src="../images/timg.jpg">
+							<div class="mui-media-body">
+								<span>王二小</span>
+								<div class="kbd_div">
+									<div class="kbd">mbutton</div>
+									<div class="kbd">mbutton</div>
+									<div class="kbd">mbutton</div>
+								</div>
+							</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		
+
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script>
+		mui.init({
+			swipeBack:true //启用右滑关闭功能
+		});
+	</script>
+	<script src="js/zepto.min.js"></script>
+	<script src="https://s4.cnzz.com/z_stat.php?id=1260604409&web_id=1260604409" language="JavaScript"></script>
+</html>
