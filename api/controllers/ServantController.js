@@ -17,7 +17,8 @@ module.exports = {
    */
   getCertInfo: function (req, res) {
     //var queryInfo =  req.param('queryInfo','');
-
+    console.log(req.cookie);
+    console.log(req.session);
     //*加密部分  以后需封装
     var queryInfoD =  req.param('queryInfo','');
     var key = CryptoJS.enc.Hex.parse('1234567812345678');
@@ -31,6 +32,8 @@ module.exports = {
       });
     var queryInfo = bytes.toString(CryptoJS.enc.Utf8);
     //加密部分结束
+
+
     console.log('加密部分结束',queryInfo);
     var options = new Object();
     sails.log.debug(queryInfo);
