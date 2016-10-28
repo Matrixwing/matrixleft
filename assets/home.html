@@ -160,8 +160,8 @@
 	        if (r != null) return unescape(r[2]);
 	        return null;
 	    }
-	    var code=getQueryString('code');
-		$.get("/getUser?code="+code,function(data,status){
+	    var openid=getQueryString('openid');
+		$.get("/getUser?openid="+openid,function(data,status){
 			console.log(JSON.parse(data))
 			var data = JSON.parse(data).data[0];
 		    $('#avatarUrl').attr('src', data.avatarUrl);
