@@ -106,11 +106,11 @@
 		                    <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="pay_test.html">
 				                    <span class="mui-icon iconfont icon-yduigengduo"></span>
 				                  <div class="mui-media-body">支付test</div></a></li>
-				        </ul> 
+				        </ul>
 					</div>
 				</div>
 			</div>
-				
+
 		</div>
 
 	</body>
@@ -152,7 +152,7 @@
 			view.addEventListener('pageBack', function(e) {
 				//				console.log(e.detail.page.id + ' back');
 			});
-			
+
 		})(mui);
 		function getQueryString(name) {
 	        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
@@ -160,14 +160,14 @@
 	        if (r != null) return unescape(r[2]);
 	        return null;
 	    }
-	    var openid=getQueryString('openid');
-		$.get("/getUser?openid=ovSs8w7mUy1j1SkeLBsmWpjVpkGM",function(data,status){
+	    var code=getQueryString('code');//whl 改
+		$.get("/getUser?code="+code,function(data,status){
 			console.log(JSON.parse(data))
 			var data = JSON.parse(data).data[0];
 		    $('#avatarUrl').attr('src', data.avatarUrl);
 		    $('#nickname').html(data.nickname);
 		});
 	</script>
-	
+
 	<script src="https://s4.cnzz.com/z_stat.php?id=1260604409&web_id=1260604409" language="JavaScript"></script>
 </html>
