@@ -44,6 +44,7 @@ module.exports.routes = {
   "/test": {controller: "ServantController", action: "getCertInfo"},
   "get /getUser" : {controller: "UserController" , action : "getUserInfo"},
   "get /sendNumToPhone" :  {controller: "UserController" , action : "sendNumToPhone"},
+
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *
