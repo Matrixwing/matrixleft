@@ -73,7 +73,6 @@ module.exports = {
    */
   getUserInfoFromWeiXin :function (opts,cb){
     var hostname = util.format('https://api.weixin.qq.com/sns/userinfo?access_token=%s&openid=%s&lang=zh_CN',opts.access_token,opts.openid);
-    console.log(hostname);
     https.get(hostname, function(res) {
       var buffers = [];
       res.on('data', function(d) {
@@ -142,6 +141,22 @@ module.exports = {
         return cb(null,result);
       }
     )
-  }
+  },
+
+  /**
+   * 生产一个4位随机数并且发送至手机
+   * @param opts js对象，需要包含该用户的openid和access_token
+   * @param cb 回调函数 cb(err,result)  err为错误信息  result为拉取的用户信息
+   */
+  sendNumToPhone :  function(opts,cb) {
+    //todo : 发送至手机
+    var rnd="";
+    for(var i=0;i<4;i++)
+      rnd+=Math.floor(Math.random()*10);
+
+    var result = rnd;
+
+    cb(null,result);
+  },
 
 }
