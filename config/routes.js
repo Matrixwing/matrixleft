@@ -37,14 +37,17 @@ module.exports.routes = {
   ////},
 
 
-  //查找证书信息（假数据）
-  "post /getCert": {controller: "ServantController", action: "getCertInfo"},
 
+  "post /getCert": {controller: "ServantController", action: "getCertInfo"},
   "get /weixinLogIn": {controller: "UserController", action: "logIn" },
   "/test": {controller: "ServantController", action: "getCertInfo"},
   "get /getUser" : {controller: "UserController" , action : "getUserInfo"},
   "get /sendNumToPhone" :  {controller: "UserController" , action : "sendNumToPhone"},
+  "get /register" : {controller: "UserController" , action : "register"},
 
+
+  //测试
+  "get /weixinLogInTest" : {controller: "UserController" , action : "logInTest"},
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *
