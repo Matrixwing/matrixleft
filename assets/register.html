@@ -13,7 +13,6 @@
 		<link href="styles/home.css" rel="stylesheet" />
 		<style>
 			html,body,.mui-content{height: 100%;}
-			.mui-toast-container{top: 50%;bottom: 50%}
 			.area {
 				margin: 20px auto 0px auto;
 			}
@@ -52,7 +51,7 @@
 			<form class="mui-input-group">
 				<div class="mui-input-row">
 					<label>账号</label>
-					<input id='account' type="text" class="mui-input-clear mui-input" placeholder="请输入手机号">
+					<input id='account' type="text" class="mui-input-clear mui-input" placeholder="请输入手机号" maxlength="11">
 				</div>
 				<div class="mui-input-row">
 					<label>验证</label>
@@ -82,9 +81,15 @@
 					mui.toast('请输入正确的手机号');
 					return;
 				}else{
+					var _this = this;
 					$.get("/sendNumToPhone?phone="+account,function(data,status){
-						console.log(JSON.parse(data))
-						settime(this)
+						if (JSON.parse(data).msgNo == '0000' ) {
+							mui.toast(JSON.parse(data).msgInfo);
+							settime(_this);
+						}else{
+							mui.toast(JSON.parse(data).msgInfo);
+						};
+						
 					});
 					
 				};
