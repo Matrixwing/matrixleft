@@ -43,6 +43,7 @@ module.exports.routes = {
   "get /weixinLogIn": {controller: "UserController", action: "logIn" },
   "/test": {controller: "ServantController", action: "getCertInfo"},
   "get /getUser" : {controller: "UserController" , action : "getUserInfo"},
+  "get /sendNumToPhone" :  {controller: "UserController" , action : "sendNumToPhone"},
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *

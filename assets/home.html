@@ -1,173 +1,176 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<meta charset="utf-8">
-		<title>我的主页</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<head>
+  <meta charset="utf-8">
+  <title>我的主页</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-		<link rel="stylesheet" href="styles/mui.min.css">
-		<link rel="stylesheet" type="text/css" href="styles/home.css"/>
-	</head>
+  <link rel="stylesheet" href="styles/mui.min.css">
+  <link rel="stylesheet" type="text/css" href="styles/home.css"/>
+</head>
 
-	<body class="mui-fullscreen">
-		<!--页面主结构开始-->
-		<div id="app" class="mui-views">
-			<div class="mui-view">
-				<div class="mui-navbar">
-				</div>
-				<div class="mui-pages">
-				</div>
-			</div>
-		</div>
-		<!--页面主结构结束-->
-		<!--单页面开始-->
-        <!-- <div id="account" class="mui-page">
-			<div class="mui-navbar-inner mui-bar mui-bar-nav">
-				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
-					<span class="mui-icon mui-icon-left-nav"></span>主页
-				</button>
-				<h1 class="mui-center mui-title">个人信息</h1>
-			</div>
-			<div class="mui-page-content">
-				<div class="mui-scroll-wrapper">
-					<div class="mui-scroll">
-						<ul class="mui-table-view">
-							<li class="mui-table-view-cell">
-								<a id="head" class="mui-navigate-right">头像
-								<span class="mui-pull-right head">
-									<img class="head-img mui-action-preview" id="head-img1" src=""/>
-								</span>
-							</a>
-							</li>
-							<li class="mui-table-view-cell">
-								<a>昵称<span class="mui-pull-right">Hbuilder</span></a>
-							</li>
-						</ul>
-						<ul class="mui-table-view">
-							<li class="mui-table-view-cell">
-								<a>微信号<span class="mui-pull-right">88888888</span></a>
-							</li>
-							<li class="mui-table-view-cell">
-								<a>手机号<span class="mui-pull-right">18601234567</span></a>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div> -->
+<body class="mui-fullscreen">
+<!--页面主结构开始-->
+<div id="app" class="mui-views">
+  <div class="mui-view">
+    <div class="mui-navbar">
+    </div>
+    <div class="mui-pages">
+    </div>
+  </div>
+</div>
+<!--页面主结构结束-->
+<!--单页面开始-->
+<!-- <div id="account" class="mui-page">
+    <div class="mui-navbar-inner mui-bar mui-bar-nav">
+        <button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+            <span class="mui-icon mui-icon-left-nav"></span>主页
+        </button>
+        <h1 class="mui-center mui-title">个人信息</h1>
+    </div>
+    <div class="mui-page-content">
+        <div class="mui-scroll-wrapper">
+            <div class="mui-scroll">
+                <ul class="mui-table-view">
+                    <li class="mui-table-view-cell">
+                        <a id="head" class="mui-navigate-right">头像
+                        <span class="mui-pull-right head">
+                            <img class="head-img mui-action-preview" id="head-img1" src=""/>
+                        </span>
+                    </a>
+                    </li>
+                    <li class="mui-table-view-cell">
+                        <a>昵称<span class="mui-pull-right">Hbuilder</span></a>
+                    </li>
+                </ul>
+                <ul class="mui-table-view">
+                    <li class="mui-table-view-cell">
+                        <a>微信号<span class="mui-pull-right">88888888</span></a>
+                    </li>
+                    <li class="mui-table-view-cell">
+                        <a>手机号<span class="mui-pull-right">18601234567</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div> -->
 
-		<div class="mui-page" id="home">
-			<div class="mui-navbar-inner mui-bar mui-bar-nav">
-				<h1 class="mui-center mui-title">个人主页</h1>
-			</div>
-			<div class="mui-page-content">
-				<div class="mui-scroll-wrapper">
-					<div class="mui-scroll">
-						<ul class="mui-table-view mui-table-view-chevron">
-							<li class="mui-table-view-cell mui-media">
-								<a class="mui-navigate-right" href="#">
-									<img class="mui-media-object mui-pull-left head-img" id="avatarUrl" src="images/timg.jpg">
-									<div class="mui-media-body">
-										<span id='nickname'></span>
-										<p class='mui-ellipsis'>--</p>
-									</div>
-								</a>
-							</li>
-						</ul>
-				        <ul class="mui-table-view mui-grid-view mui-grid-9">
-				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
-				                    <span class="mui-icon iconfont icon-qianbao"></span>
-				                    <div class="mui-media-body">钱包</div></a></li>
-				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
-				                    <span class="mui-icon iconfont icon-red"></span>
-				                    <div class="mui-media-body">红包</div></a></li>
-				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
-				                    <span class="mui-icon iconfont icon-order"></span>
-				                    <div class="mui-media-body">记录</div></a></li>
-				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
-				                    <span class="mui-icon iconfont icon-news"></span>
-				                    <div class="mui-media-body">消息</div></a></li>
-				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
-				                    <span class="mui-icon iconfont icon-yduifenxiang1"></span>
-				                    <div class="mui-media-body">分享</div></a></li>
-				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
-				                    <span class="mui-icon iconfont icon-yduiwenhao"></span>
-				                    <div class="mui-media-body">帮助</div></a></li>
-				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="setting.html">
-				                    <span class="mui-icon iconfont icon-yduishezhi"></span>
-				                    <div class="mui-media-body">设置</div></a></li>
-				            <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#" id="more" onclick='_czc.push(["_trackEvent", "更多", "点击", "", "", "more"]);'>
+<div class="mui-page" id="home">
+  <div class="mui-navbar-inner mui-bar mui-bar-nav">
+    <h1 class="mui-center mui-title">个人主页</h1>
+  </div>
+  <div class="mui-page-content">
+    <div class="mui-scroll-wrapper">
+      <div class="mui-scroll">
+        <ul class="mui-table-view mui-table-view-chevron">
+          <li class="mui-table-view-cell mui-media">
+            <a class="mui-navigate-right" href="###">
+              <img class="mui-media-object mui-pull-left head-img" id="avatarUrl" src="images/timg.jpg">
+              <div class="mui-media-body">
+                <span id='nickname'></span>
+                <p class='mui-ellipsis'>--</p>
+              </div>
+            </a>
+          </li>
+        </ul>
+        <ul class="mui-table-view mui-grid-view mui-grid-9">
+          <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="###"  onclick='_czc.push(["_trackEvent", "个人主页", "钱包", "", "", ""]);'>
+            <span class="mui-icon iconfont icon-qianbao"></span>
+            <div class="mui-media-body">钱包</div></a></li>
+          <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="###"  onclick='_czc.push(["_trackEvent", "个人主页", "红包", "", "", ""]);'>
+            <span class="mui-icon iconfont icon-red"></span>
+            <div class="mui-media-body">红包</div></a></li>
+          <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="###">
+            <span class="mui-icon iconfont icon-order"></span>
+            <div class="mui-media-body">记录</div></a></li>
+          <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="###">
+            <span class="mui-icon iconfont icon-news"></span>
+            <div class="mui-media-body">消息</div></a></li>
+          <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="###">
+            <span class="mui-icon iconfont icon-yduifenxiang1"></span>
+            <div class="mui-media-body">分享</div></a></li>
+          <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="###">
+            <span class="mui-icon iconfont icon-yduiwenhao"></span>
+            <div class="mui-media-body">帮助</div></a></li>
+          <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="setting.html">
+            <span class="mui-icon iconfont icon-yduishezhi"></span>
+            <div class="mui-media-body">设置</div></a></li>
+          <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="###" id="more" onclick='_czc.push(["_trackEvent", "更多", "点击", "", "", "more"]);'>
 
-				                    <span class="mui-icon iconfont icon-yduigengduo"></span>
-				                    <div class="mui-media-body">更多</div></a></li>
-		                    <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="pay_test.html">
-				                    <span class="mui-icon iconfont icon-yduigengduo"></span>
-				                  <div class="mui-media-body">支付test</div></a></li>
-				        </ul>
-					</div>
-				</div>
-			</div>
+            <span class="mui-icon iconfont icon-yduigengduo"></span>
+            <div class="mui-media-body">更多</div></a></li>
+          <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="pay_test.html">
+            <span class="mui-icon iconfont icon-yduigengduo"></span>
+            <div class="mui-media-body">支付test</div></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-		</div>
+</div>
 
-	</body>
-	<script src="js/zepto.min.js"></script>
-	<script src="js/mui/mui.min.js"></script>
-	<script src="js/mui/mui.view.js "></script>
-	<script>
-		mui.init({
-			swipeBack:true //启用右滑关闭功能
-		});
-		//初始化单页view
-		var viewApi = mui('#app').view({
-			defaultPage: '#home'
-		});
-		//初始化单页的区域滚动
-		mui('.mui-scroll-wrapper').scroll();
-		var view = viewApi.view;
-		(function($) {
-			//处理view的后退与webview后退
-			var oldBack = $.back;
-			$.back = function() {
-				if (viewApi.canBack()) { //如果view可以后退，则执行view的后退
-					viewApi.back();
-				} else { //执行webview后退
-					oldBack();
-				}
-			};
-			//监听页面切换事件方案1,通过view元素监听所有页面切换事件，目前提供pageBeforeShow|pageShow|pageBeforeBack|pageBack四种事件(before事件为动画开始前触发)
-			//第一个参数为事件名称，第二个参数为事件回调，其中e.detail.page为当前页面的html对象
-			view.addEventListener('pageBeforeShow', function(e) {
-				//				console.log(e.detail.page.id + ' beforeShow');
-			});
-			view.addEventListener('pageShow', function(e) {
-				//				console.log(e.detail.page.id + ' show');
-			});
-			view.addEventListener('pageBeforeBack', function(e) {
-				//				console.log(e.detail.page.id + ' beforeBack');
-			});
-			view.addEventListener('pageBack', function(e) {
-				//				console.log(e.detail.page.id + ' back');
-			});
+</body>
+<script src="js/zepto.min.js"></script>
+<script src="js/mui/mui.min.js"></script>
+<script src="js/mui/mui.view.js "></script>
+<script>
+  mui.init({
+    swipeBack:true //启用右滑关闭功能
+  });
+  //初始化单页view
+  var viewApi = mui('#app').view({
+    defaultPage: '#home'
+  });
+  //初始化单页的区域滚动
+  mui('.mui-scroll-wrapper').scroll();
+  var view = viewApi.view;
+  (function($) {
+    //处理view的后退与webview后退
+    var oldBack = $.back;
+    $.back = function() {
+      if (viewApi.canBack()) { //如果view可以后退，则执行view的后退
+        viewApi.back();
+      } else { //执行webview后退
+        oldBack();
+      }
+    };
+    //监听页面切换事件方案1,通过view元素监听所有页面切换事件，目前提供pageBeforeShow|pageShow|pageBeforeBack|pageBack四种事件(before事件为动画开始前触发)
+    //第一个参数为事件名称，第二个参数为事件回调，其中e.detail.page为当前页面的html对象
+    view.addEventListener('pageBeforeShow', function(e) {
+      //				console.log(e.detail.page.id + ' beforeShow');
+    });
+    view.addEventListener('pageShow', function(e) {
+      //				console.log(e.detail.page.id + ' show');
+    });
+    view.addEventListener('pageBeforeBack', function(e) {
+      //				console.log(e.detail.page.id + ' beforeBack');
+    });
+    view.addEventListener('pageBack', function(e) {
+      //				console.log(e.detail.page.id + ' back');
+    });
 
-		})(mui);
-		function getQueryString(name) {
-	        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-	        var r = window.location.search.substr(1).match(reg);
-	        if (r != null) return unescape(r[2]);
-	        return null;
-	    }
-	    var code=getQueryString('code');//whl 改
-		$.get("/getUser?code="+code,function(data,status){
-			console.log(JSON.parse(data))
-			var data = JSON.parse(data).data[0];
-		    $('#avatarUrl').attr('src', data.avatarUrl);
-		    $('#nickname').html(data.nickname);
-		});
-	</script>
+  })(mui);
+  function getQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return unescape(r[2]);
+    return null;
+  }
+  var code=getQueryString('code');
+  $.get("/getUser?code="+code,function(data,status){
+    console.log(JSON.parse(data))
+    var data = JSON.parse(data).data[0];
+    $('#avatarUrl').attr('src', data.avatarUrl);
+    $('#nickname').html(data.nickname);
+  });
+  $('.mui-media').on('tap', function() {
+    mui.toast('敬请期待...');
+  });
+</script>
 
-	<script src="https://s4.cnzz.com/z_stat.php?id=1260604409&web_id=1260604409" language="JavaScript"></script>
+<script src="https://s4.cnzz.com/z_stat.php?id=1260604409&web_id=1260604409" language="JavaScript"></script>
 </html>
