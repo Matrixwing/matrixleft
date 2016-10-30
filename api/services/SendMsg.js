@@ -34,12 +34,9 @@ module.exports = {
         'sms_template_code':'SMS_24540103'
       },
       function (error,response) {
-        if(!error)
+        if(error) return next(error);
 
-          next(error);
-        else
-          console.log(response);
-          next(null,response);
+        return next(null,response);
       })
   },
 
