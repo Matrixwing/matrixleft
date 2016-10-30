@@ -44,7 +44,7 @@ module.exports.routes = {
   "get /getUser" : {controller: "UserController" , action : "getUserInfo"},
   "get /sendNumToPhone" :  {controller: "UserController" , action : "sendNumToPhone"},
   "get /register" : {controller: "UserController" , action : "register"},
-
+  "get /bindingPhone" : {controller: "UserController" , action : "bindingPhone"},
 
   //测试
   "get /weixinLogInTest" : {controller: "UserController" , action : "logInTest"},

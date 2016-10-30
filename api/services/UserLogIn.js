@@ -46,9 +46,11 @@ module.exports = {
    */
   validateRegisterByOpenID : function (opts,cb){
     var queryObj ={
-      openID:opts.openid
+      openid:opts.openid
     };
+    console.log(queryObj);
     User.find(queryObj).exec(function(err,result){
+      console.log(result);
       if (err) return cb(err);
       if (result == ''){
         //如果沒有註冊，先拉取拉取用户信息再写入
@@ -57,6 +59,7 @@ module.exports = {
             cb(null,opts);
           },UserLogIn.getUserInfoFromWeiXin,
           function(dataObj,cb){
+            console.log("dataObj+++++++++++",dataObj);
             var updateUser = dataObj;
             updateUser.phone=opts.phone;
             console.log(updateUser);
@@ -137,6 +140,22 @@ module.exports = {
     })
   },
 
+  /**
+   * 通过userID从数据库取用户数据
+   * @param opts js对象，需要包含该用户的openid和access_token
+   * @param cb 回调函数 cb(err,result)  err为错误信息  result为拉取的用户信息
+   */
+  getUserInfoFromDBByuserID : function (opts,cb) {
+    //根据openid获取用户信息
+    console.log(opts);
+    User.find(opts).exec(function(err,result){
+      console.log(result);
+      if(err) return cb(err);
+      return cb(null,result);
+    })
+  },
+
+
 
   /**
    * 通过code从读取取用户数据，如果没有注册则让用户注册
@@ -165,15 +184,15 @@ module.exports = {
     async.waterfall([
       function(cb){
         cb(null,opts);
-      },User.isPhoneExExisted,//验证这个手机是不是已经注册了
+      },User.isPhoneRegistered,//验证这个手机是不是已经注册了
       function(opts,cb){//验证上一次短信是否在60秒内，并且该是否已经超出10条
         console.log(opts);
         ValidatePhone.find({where:opts,sort:'createdAt DESC'}).exec(function(err,validateNum){
-
+          console.log('validateNum',validateNum);
           if(err) return cb(err);
 
-          if(validateNum){
-            console.log(validateNum[0]);
+          if(validateNum!=''){
+            console.log('validateNum[0]1111',validateNum[0]);
             var timeDiff = Date.now() - (new Date(validateNum[0].createdAt).getTime());
             if(timeDiff<=60*1000){
               //时间没有超过60秒
@@ -184,6 +203,8 @@ module.exports = {
             }else{
               return cb(null,opts);
             }
+          }else{//这个手机好没有用过注册码
+            return cb(null,opts);
           }
         });
 
@@ -216,12 +237,11 @@ module.exports = {
    * @param opts js对象，需要包含该用户的phone:手机和num:用户验证码微信授权成功后返回的code
    * @param cb 回调函数 cb(err,result)  err为错误信息  result为拉取的用户信息
    */
-  register : function (opts,cb) {
-    //todo:已经存在的微信号 写入手机
+  register1 : function (opts,cb) {
     async.waterfall([
       function(cb){
         cb(null,opts);
-      },User.isPhoneExisted,//验证手机是否注册
+      },User.isPhoneRegistered,//验证手机是否注册
       ValidatePhone.validateNum,//手机验证码是否正确？
       UserLogIn.getOrRegUserByCode//拉取用户资料，没有则写入
     ],function(err,newUser){
@@ -230,25 +250,67 @@ module.exports = {
     });
   },
 
-  /**
-   * 创建或者更新一个用户
-   * @param opts js对象，需要包含该用户的phone:手机和num:用户验证码微信授权成功后返回的code
-   * @param cb 回调函数 cb(err,result)  err为错误信息  result为拉取的用户信息
-   */
-  createOrUpdataAUser : function(opts,cb) {
-    //  async.waterfall([
-    //      function(cb){
-    //        cb(null,opts)
-    //      }, UserLogIn.getUserByCode,
-    //      UserLogIn.validateRegisterByOpenID,
-    //    ],function(err,result){
-    //      if(err) return cb(err);
-    //      return cb(null,result);
-    //    }
-    //  )
-    //},
-    //todo 通过code找到openid
-    //todo 通过openid查找是否注册
-    //todo 没有注册则注册，注册了就更新手机号
-  }
+
+  register : function (opts,cb) {
+    ValidatePhone.validateNum(opts,function(err,optPassedOn){
+      if(err) return cb(err);
+      User.isPhoneExisted(optPassedOn,function(err,phoneReslut){
+        console.log('isPhoneExisted+++++++',phoneReslut[0]);
+        if(err) return cb(err);
+        if(phoneReslut==''){
+          //todo 手机号不存在，接来下拉取用户信息
+        }else {
+          /**
+           *手机号存在，接下来判断是否有openid。有则表示手机号被占用。无则拉取用户信息
+          */
+
+          //又有手机号又有openid，这个号码已经被注册过了
+          console.log('openid+++++++',phoneReslut[0].openid);
+          if(phoneReslut[0].openid){return cb('这手机已经被注册了');}
+
+          //有手机号但没有openid。表示这是个我们导入的用户。拉取这个人的微信信息，更新到我们的数据库
+          console.log('有手机号但没有openid。表示这是个我们导入的用户。拉取这个人的微信信息，更新到我们的数据库');
+          async.waterfall([
+              function(cb1){
+                console.log('1111111111111111');
+                cb1(null,opts);
+              },UserLogIn.getUserByCode,
+              function(dataFromWeixin,cb1){
+                cb1(null,{phone:opts.phone},dataFromWeixin);
+              },User.updateUser
+            ]
+            ,function(err,newUser){
+              if (err) return cb(err);
+              cb(null,newUser);
+            });
+        }
+      })
+    })
+
+  },
+
+  bindingPhone : function(opts,cb){
+    ValidatePhone.validateNum(opts,function(err,optPassedOn){
+      if(err) return cb(err);
+      User.isPhoneExisted(optPassedOn,function(err,phoneReslut){
+        if(err) return cb(err);
+        if(phoneReslut==''){
+          //todo 手机号不存在
+          User.update({userID:opts.userID},{phone:opts.phone}).exec(function(err,result){
+            if (err) return cb(err);
+            cb(null,result);
+          });
+        }else {
+          /**
+           *手机号存在，接下来判断是否有openid。有则表示手机号被占用。无则拉取用户信息
+           */
+            //又有手机号又有openid，这个号码已经被注册过了
+          if(phoneReslut[0].openid){return cb('这手机已经被注册了');}
+          //有手机号但没有openid。表示这是个我们导入的用户。拉取这个人的微信信息，更新到我们的数据库
+          //todo 更新信息
+        }
+      })
+    })
+  },
+
 }
