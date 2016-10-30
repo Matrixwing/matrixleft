@@ -216,6 +216,7 @@ module.exports = {
         var result = opts;
         result.num=rnd;
         SendMsg.sendValidaNumToPhone(result,function(err,infoFormaili){
+          console.log(infoFormaili);
           if(err) cb(err);
           cb(null,result);
         })

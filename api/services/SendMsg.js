@@ -17,6 +17,7 @@ module.exports = {
       phone : opts.phone  || null,
       num :    opts.num    || null,
     }
+    console.log('{"code":'+toPhone.num+',"product":"微元汇"}');
     if(!(toPhone.phone||toPhone.num)) return next('没有成功的发送短信');
     var client = new TopClient({
       'appkey':'23496956',
@@ -27,15 +28,16 @@ module.exports = {
         'extend':'123456',
         'sms_type':'normal',
         'sms_free_sign_name':'矩阵科技-微元汇',
-        'sms_param':'{\"code\":'+toPhone.num+',\"product\":\"微元汇\"}',
+       // 'sms_param':'{\"code\":'+toPhone.num+',\"product\":\"微元汇\"}',
+        'sms_param':'{"code":"'+toPhone.num+'","product":"微元汇"}',
         'rec_num':toPhone.phone,
         'sms_template_code':'SMS_24540103'
       },
       function (error,response) {
         if(!error)
-          next(error);
+          console.log(response);
         else
-          next(null,response);
+          console.log(error);
       })
   },
 
