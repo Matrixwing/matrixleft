@@ -133,6 +133,7 @@ ul{list-style:none}
 			.mui-view,
 			.mui-pages,
 			.mui-page,
+			.mui-content,
 			.mui-page-content {
 				position: absolute;
 				left: 0;
@@ -296,3 +297,10 @@ ul{list-style:none}
 	background-color: #fefefe;
 	cursor: pointer;
 }
+.mui-title{font-size: 16px;}
+.mui-bar-nav{box-shadow: none;border-bottom: 1px solid #eee;}
+.mui-views, .mui-view, .mui-pages, .mui-page, .mui-page-content{background-color: #f0f2f5}
+.mui-table-view.mui-grid-view{background-color: #fff;margin-top: 5px}
+.mui-navbar{background-color: #fff;}
+.mui-page .mui-table-view:first-child{margin-top: 5px;}
+.mui-table-view-cell:after,.mui-table-view-cell:before,.mui-table-view:before,.mui-table-view:after{background-color: #e8ebf0;-webkit-transform:none;transform:none;}

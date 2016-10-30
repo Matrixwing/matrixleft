@@ -1,52 +1,53 @@
+<!DOCTYPE html>
+<html>
 
- <!DOCTYPE html>
-<html lang="zh-cmn-Hans">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <title>微元汇</title>
-</head>
-<body ontouchstart>
-    <!-- <div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div> -->
+	<head>
+		<meta charset="utf-8">
+		<title>微元汇</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="styles/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="styles/main.css"/>
+		<link rel="stylesheet" type="text/css" href="styles/pages/home.css"/>
+		<style>
+		
+		</style>
+	</head>
 
-    <div class="container" id="container"></div>
-
-    <script type="text/html" id="tpl_tabbar">
-		<div class="page">
-		    <div class="page__bd" style="height: 100%;">
-		        <div class="weui-tab">
-		            <div class="weui-tab__panel">
-
-		            </div>
-		            <div class="weui-tabbar">
-		                <a href="javascript:;" class="weui-tabbar__item weui-bar__item_on js_item" data-id="tt" href="javascript:;">
-		                    <img src="images/icon_nav_dialog.png" alt="" class="weui-tabbar__icon">
-		                    <p class="weui-tabbar__label">关于我们</p>
-		                </a>
-		                <a href="javascript:;" class="weui-tabbar__item js_item">
-		                    <img src="images/icon_nav_article.png" alt="" class="weui-tabbar__icon">
-		                    <p class="weui-tabbar__label">培训</p>
-		                </a>
-		                <a href="javascript:;" class="weui-tabbar__item">
-		                    <img src="images/icon_nav_search_bar.png" alt="" class="weui-tabbar__icon">
-		                    <p class="weui-tabbar__label">证书查询</p>
-		                </a>
-		            </div>
-		        </div>
-		    </div>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">首页</h1>
+		</header>
+		<nav class="mui-bar mui-bar-tab">
+			<a class="mui-tab-item mui-active" href="###">
+				<span class="mui-icon mui-icon-home"></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a class="mui-tab-item" href="#tabbar-with-chat">
+				<span class="mui-icon mui-icon-email"></span>
+				<span class="mui-tab-label">消息</span>
+			</a>
+			<a class="mui-tab-item" href="#tabbar-with-contact">
+				<span class="mui-icon mui-icon-contact"></span>
+				<span class="mui-tab-label">通讯录</span>
+			</a>
+			<a class="mui-tab-item" href="#tabbar-with-map">
+				<span class="mui-icon mui-icon-gear"></span>
+				<span class="mui-tab-label">设置</span>
+			</a>
+		</nav>
+		<div class="mui-content">
+			
 		</div>
+	</body>
+	<script src="js/zepto.min.js"></script>
+	<script src="js/mui/mui.min.js"></script>
+	<script>
+		mui.init({
+			swipeBack:true //启用右滑关闭功能
+		});
 	</script>
-	<script type="text/html" id="tpl_tt">
-		<div class="page">
-		    <div class="page__bd" style="height: 100%;">
-		        <div class="weui-tab">
-		            111
-		        </div>
-		    </div>
-		</div>
-	</script>
-    <script src="js/zepto.min.js"></script>
-    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-    <script src="js/main.js"></script>
-</body>
+	<script src="https://s4.cnzz.com/z_stat.php?id=1260604409&web_id=1260604409" language="JavaScript"></script>
 </html>

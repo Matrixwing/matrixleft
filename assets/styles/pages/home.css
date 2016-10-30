@@ -17,12 +17,12 @@
 	margin-top: 20px;
 }
 .mui-input-group label {
-	width: 22%;
+	width: 26%;
 }
 .mui-input-row label~input,
 .mui-input-row label~select,
 .mui-input-row label~textarea {
-	width: 78%;
+	width: 74%;
 }
 .mui-checkbox input[type=checkbox],
 .mui-radio input[type=radio] {
@@ -34,5 +34,5 @@
 .mui-btn {
 	padding: 10px;
 }
-#password{width: 40%;float: left;}
+#code{width: 40%;float: left;}
 .mui-input-row .code{width: auto !important;padding: 8px;margin-right: 10px;margin-top: 3px;}
