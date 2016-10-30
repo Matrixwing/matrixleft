@@ -50,7 +50,7 @@ module.exports = {
     };
     console.log(queryObj);
     User.find(queryObj).exec(function(err,result){
-      console.log(result);
+      console.log('ssssssssssssss',result);
       if (err) return cb(err);
       if (result == ''){
         //如果沒有註冊，先拉取拉取用户信息再写入
@@ -215,7 +215,11 @@ module.exports = {
           rnd+=Math.floor(Math.random()*10);
         var result = opts;
         result.num=rnd;
-        cb(null,result);
+        SendMsg.sendValidaNumToPhone(result,function(err,infoFormaili){
+          if(err) cb(err);
+          cb(null,result);
+        })
+
       },
       function(opts,cb){
         //写入数据库
