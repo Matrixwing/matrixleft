@@ -28,7 +28,7 @@
         <div id="infos" class="mui-page">
 			<div class="mui-navbar-inner mui-bar mui-bar-nav">
 				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
-					<span class="mui-icon mui-icon-left-nav"></span>主页
+					<span class="mui-icon mui-icon-left-nav"></span>
 				</button>
 				<h1 class="mui-center mui-title">个人信息</h1>
 			</div>
@@ -46,6 +46,9 @@
 							<li class="mui-table-view-cell">
 								<a>昵称<span class="mui-pull-right nickname">--</span></a>
 							</li>
+							<li class="mui-table-view-cell">
+								<a>性别<span class="mui-pull-right gender">--</span></a>
+							</li>
 						</ul>
 						<ul class="mui-table-view">
 							<li class="mui-table-view-cell">
@@ -62,7 +65,7 @@
 		<div id="reg_phone" class="mui-page">
 			<div class="mui-navbar-inner mui-bar mui-bar-nav">
 				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
-					<span class="mui-icon mui-icon-left-nav"></span>个人中心
+					<span class="mui-icon mui-icon-left-nav"></span>
 				</button>
 				<h1 class="mui-center mui-title">绑定手机号</h1>
 			</div>
@@ -207,6 +210,7 @@
 			var data = JSON.parse(data).data[0];
 		    $('.avatarUrl').attr('src', data.avatarUrl);
 		    $('.nickname').html(data.nickname);
+		    $('.gender').html(data.gender);
 		    if (data.phone) {
 		    	$('.phone').html(data.phone);
 		    }else{
@@ -237,12 +241,12 @@
 			};
 		})
 		/*倒计时*/
-		var countdown=10; 
+		var countdown=60; 
 		function settime(obj) { 
 		    if (countdown == 0) { 
 		        obj.removeAttribute("disabled");    
 		        obj.innerHTML ="获取验证码"; 
-		        countdown = 10; 
+		        countdown = 60; 
 		        return;
 		    } else { 
 		        obj.setAttribute("disabled", true); 
