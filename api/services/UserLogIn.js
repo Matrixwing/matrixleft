@@ -218,9 +218,9 @@ module.exports = {
         SendMsg.sendValidaNumToPhone(result,function(err,infoFormaili){
           console.log(infoFormaili);
           if(err) cb(err);
-          cb(null,result);
+         return cb(null,result);
         })
-
+       // return cb(null,result);
       },
       function(opts,cb){
         //写入数据库

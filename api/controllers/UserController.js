@@ -86,6 +86,7 @@ module.exports = {
       var str = JSON.stringify(result) ;
       //result = util.format('{"msgNo":"0000","msgInfo":"发送到手机，请查收(测试)","data":%s}',str);
       result ='{"msgNo":"0000","msgInfo":"发送到手机，请查收"}';
+      console.log(result);
       res.send(result);
     });
   },

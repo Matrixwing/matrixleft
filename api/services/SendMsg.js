@@ -35,9 +35,11 @@ module.exports = {
       },
       function (error,response) {
         if(!error)
-          console.log(response);
+
+          next(error);
         else
-          console.log(error);
+          console.log(response);
+          next(null,response);
       })
   },
 
