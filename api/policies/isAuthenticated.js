@@ -6,18 +6,14 @@
  * @docs        :: http://sailsjs.org/#!documentation/policies
  *
  */
-//module.exports = function(req, res, next) {
-//  console.log('req.wantsJSON',req.wantsJSON);
-//  // If `req.session.me` exists, that means the user is logged in.
-//  if (req.session.openid) return next();
-//
-//  // If this is not an HTML-wanting browser, e.g. AJAX/sockets/cURL/etc.,
-//  // send a 401 response letting the user agent know they need to login to
-//  // access this endpoint.
-//  if (req.wantsJSON) {
-//    return res.send(401);
-//  }
-//
-//  // Otherwise if this is an HTML-wanting browser, do a redirect.
-//  return res.redirect('/login');
-//};
+module.exports = function(req, res, next) {
+  // If `req.session.userID` 则表示已经登录过了
+  if (req.session.userID) return next();
+
+  //  异步处理请求比如ajax
+  if (req.wantsJSON) {
+    return res.send(401);
+  }
+
+  return res.redirect('https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8306afd398ab31e5&redirect_uri=http%3a%2f%2f1k5x895985.iask.in%2fweixinLogIn&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect');
+};
