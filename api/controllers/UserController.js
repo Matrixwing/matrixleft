@@ -25,9 +25,11 @@ module.exports = {
       UserLogIn.getUserByCode,
       UserLogIn.validateRegisterByOpenID,
     ],function (err,result){
-      if (err != null ) return res.send(500,'服务暂不可用:'+err);
+
+      if (err != null ) {sails.log.error(err); return res.send(500,'服务暂不可用:'+err);}
       console.log('result1',result);
       console.log('result1',result.openid);
+      req.session.userID=result.userID;
       var redirectUrl = '/home.html?userID='+result.userID;
       res.redirect(302,redirectUrl);
     })
