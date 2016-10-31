@@ -9,8 +9,8 @@ var base = {
             var id = this.getAttribute('id');
             var data_click = this.getAttribute('data-click');
             var userID = base.getQueryString('userID');
-            var nsukey = base.getQueryString('nsukey');
-            var src = id + '.html?tab='+id+'&userID='+userID+'&nsukey='+nsukey;
+            //var nsukey = base.getQueryString('nsukey');
+            var src = id + '.html?tab='+id+'&userID='+userID;
             _czc.push(["_trackEvent", "", data_click, "", "", ""]);
             window.location.href = src;
             /*if (id != currentSubWebview){
