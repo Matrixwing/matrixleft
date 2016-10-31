@@ -8,7 +8,9 @@ var base = {
         mui('#tab-bar').on('tap', 'a', function() {
             var id = this.getAttribute('id');
             var data_click = this.getAttribute('data-click');
-            var src = id + '.html?tab='+id;
+            var userID = base.getQueryString('userID');
+            var nsukey = base.getQueryString('nsukey');
+            var src = id + '.html?tab='+id+'&userID='+userID+'&nsukey='+nsukey;
             _czc.push(["_trackEvent", "", data_click, "", "", ""]);
             window.location.href = src;
             /*if (id != currentSubWebview){

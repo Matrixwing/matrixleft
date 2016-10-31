@@ -122,7 +122,7 @@ ul{list-style:none}
 
 .mui-toast-container{top: 50%;bottom: 50%}
 .mui-grid-view.mui-grid-9 .mui-media .mui-icon {
-    font-size: 2em;
+    font-size: 1.6em;
     position: relative
 }
 			html,
@@ -298,7 +298,7 @@ ul{list-style:none}
 	cursor: pointer;
 }
 .mui-title{font-size: 16px;}
-.mui-bar-nav{box-shadow: none;border-bottom: 1px solid #eee;}
+.mui-bar-nav{box-shadow: none;border-bottom: 1px solid #ccc;}
 .mui-views, .mui-view, .mui-pages, .mui-page, .mui-page-content{background-color: #f0f2f5}
 .mui-table-view.mui-grid-view{background-color: #fff;margin-top: 5px}
 .mui-navbar{background-color: #fff;}
