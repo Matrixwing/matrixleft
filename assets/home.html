@@ -87,9 +87,12 @@
 				</div>
 			</div>
 		</div>
-		<div class="mui-page" id="home">
+		<div class="mui-page" id="myhome">
 			<div class="mui-navbar-inner mui-bar mui-bar-nav">
-				<h1 class="mui-center mui-title">个人主页</h1>
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>
+				</button>
+				<h1 class="mui-center mui-title">个人中心</h1>
 			</div>
 			<div class="mui-page-content">
 				<div class="mui-scroll-wrapper">
@@ -157,14 +160,14 @@
 	<script src="js/zepto.min.js"></script>
 	<script src="js/mui/mui.min.js"></script>
 	<script src="js/mui/mui.view.js "></script>
-	<script src="js/page/login.js"></script>
+	<script src="js/base.js"></script>
 	<script>
 		mui.init({
 			swipeBack:true //启用右滑关闭功能
 		});
 		//初始化单页view
 		var viewApi = mui('#app').view({
-			defaultPage: '#home'
+			defaultPage: '#myhome'
 		});
 		//初始化单页的区域滚动
 		mui('.mui-scroll-wrapper').scroll();
@@ -179,29 +182,9 @@
 					oldBack();
 				}
 			};
-			//监听页面切换事件方案1,通过view元素监听所有页面切换事件，目前提供pageBeforeShow|pageShow|pageBeforeBack|pageBack四种事件(before事件为动画开始前触发)
-			//第一个参数为事件名称，第二个参数为事件回调，其中e.detail.page为当前页面的html对象
-			view.addEventListener('pageBeforeShow', function(e) {
-				//				console.log(e.detail.page.id + ' beforeShow');
-			});
-			view.addEventListener('pageShow', function(e) {
-				//				console.log(e.detail.page.id + ' show');
-			});
-			view.addEventListener('pageBeforeBack', function(e) {
-				//				console.log(e.detail.page.id + ' beforeBack');
-			});
-			view.addEventListener('pageBack', function(e) {
-				//				console.log(e.detail.page.id + ' back');
-			});
 			
 		})(mui);
-		function getQueryString(name) {
-	        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-	        var r = window.location.search.substr(1).match(reg);
-	        if (r != null) return unescape(r[2]);
-	        return null;
-	    }
-	    var userID=getQueryString('userID');
+	    var userID=base.getQueryString('userID');
 		$.get("/getUser?userID="+userID,function(data,status){
 			console.log(JSON.parse(data))
 			var data = JSON.parse(data).data[0];
@@ -278,7 +261,7 @@
 			};
 			_czc.push(["_trackEvent", "个人主页", "绑定手机号", "", "", ""]);
 		})
+		base.tabbarHtml();
 	</script>
-	
 	<script src="https://s4.cnzz.com/z_stat.php?id=1260604409&web_id=1260604409" language="JavaScript"></script>
 </html>
