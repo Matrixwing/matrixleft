@@ -48,6 +48,9 @@ var base = {
         tabbarHtml = tabbarHtml.join('');
         mui('body')[0].insertAdjacentHTML('beforeend', tabbarHtml);
         var tabid= base.getQueryString('tab')
+        if (!tabid) {
+            tabid='index'
+        };
         var lastActiveElem = document.querySelector('#tab-bar a.mui-active');
         lastActiveElem&&lastActiveElem.classList.remove('mui-active');
         document.getElementById(tabid).classList.add('mui-active');

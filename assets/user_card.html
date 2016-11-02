@@ -11,28 +11,203 @@
 		<link rel="stylesheet" type="text/css" href="styles/main.css"/>
 		<link rel="stylesheet" type="text/css" href="styles/pages/life.css"/>
 		<style>
-		
+			.card_main{margin: 20px;}
+			img{width: 100%}
+			.mui-pull-right{margin-left: 5%}
+			.mui-card-footer{padding: 0}
+			.mui-table-view{margin: 0;width: 100%}
+			.mui-page .mui-table-view:last-child{margin-bottom: 0}
+			.mui-icon{color: #e3457d}
+			.cardbar{background: #fff;border-bottom: 1px solid #ccc;text-align: right;padding: 0 15px}
+
+			.card_info span{font-size: 14px;}
+			.card_info .cardbar span{font-size: 24px;}
+			.card_info .cardbar a{display:block;margin: 0 5px !important;padding: 9px 10px}
+			.card_info .cardbar a:first-child{margin-right: 0;padding-right: 0}
+			#card_more{display: none}
 		</style>
 	</head>
 
 	<body>
-		<header class="mui-bar mui-bar-nav">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 class="mui-title">名片</h1>
-		</header>
-		
+		<!--页面主结构开始-->
+		<div id="app" class="mui-views">
+			<div class="mui-view">
+				<div class="mui-navbar">
+				</div>
+				<div class="mui-pages">
+				</div>
+			</div>
+		</div>
+		<!--页面主结构结束-->
+		<!--单页面开始-->
+        <div id="card" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<h1 class="mui-center mui-title">XXX名片</h1>
+			</div>
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<div class="mui-row card_main">
+							<div class="mui-pull-left mui-col-xs-5">
+								<img src="images/timg.jpg">
+							</div>
+							<div class="mui-pull-right mui-col-xs-6 ">
+								<span class="mui-icon iconfont icon-personalcenter mui-pull-left"></span><p class="">王二小</p>
+								<span class="mui-icon iconfont icon-tishi mui-pull-left"></span><p>待岗</p>
+								<span class="mui-icon iconfont icon-shouhuodizhi mui-pull-left"></span><p>成都市</p>
+							</div>
+						</div>
+						<div class="mui-row card_info">
+							<ul class="mui-table-view">
+								 <li class="mui-table-view-cell">
+								 	<p class="mui-pull-left mui-col-xs-3">当前住址：</p>
+								 	<span>成都市</span>
+								 </li>
+								 <li class="mui-table-view-cell">
+								 	<p class="mui-pull-left mui-col-xs-3">每月休息：</p>
+								 	<span>成都市</span>
+								 </li>
+								 <li class="mui-table-view-cell">
+								 	<p class="mui-pull-left mui-col-xs-3">类&#12288;&#12288;型：</p>
+								 	<span>成都市</span>
+								 </li>
+								 <li class="mui-table-view-cell">
+								 	<p class="mui-pull-left mui-col-xs-3">专&#12288;&#12288;场：</p>
+								 	<span>成都市</span>
+								 </li>
+								 <li class="mui-table-view-cell">
+								 	<p class="mui-pull-left mui-col-xs-3">小元实名：</p>
+								 	<span>成都市</span>
+								 </li>
+								 <li class="mui-table-view-cell">
+								 	<p class="mui-pull-left mui-col-xs-3">小元评价：</p>
+								 	<span>成都市成都市成都市成都市成都市成都市成都市成都市</span>
+								 </li>
+							</ul>
+							<ul class="mui-table-view" id="card_more">
+								 <li class="mui-table-view-cell">
+								 	<p class="mui-pull-left mui-col-xs-3">当前住址：</p>
+								 	<span>成都市</span>
+								 </li>
+								 <li class="mui-table-view-cell">
+								 	<p class="mui-pull-left mui-col-xs-3">每月休息：</p>
+								 	<span>成都市</span>
+								 </li>
+								 <li class="mui-table-view-cell">
+								 	<p class="mui-pull-left mui-col-xs-3">类&#12288;&#12288;型：</p>
+								 	<span>成都市</span>
+								 </li>
+								 <li class="mui-table-view-cell">
+								 	<p class="mui-pull-left mui-col-xs-3">专&#12288;&#12288;场：</p>
+								 	<span>成都市</span>
+								 </li>
+								 <li class="mui-table-view-cell">
+								 	<p class="mui-pull-left mui-col-xs-3">小元实名：</p>
+								 	<span>成都市</span>
+								 </li>
+								 <li class="mui-table-view-cell">
+								 	<p class="mui-pull-left mui-col-xs-3">小元评价：</p>
+								 	<span>成都市成都市成都市成都市成都市成都市成都市成都市</span>
+								 </li>
+							</ul>
+							<div class="mui-row cardbar">
 
-		<div class="mui-content">
-			
+							 	<a href="javascript:;" class="mui-pull-right" id="card_up"><span class="mui-icon iconfont icon-xiangxiajiantou mui-pull-left"></span></a>
+							 	<a href="javascript:;" class="mui-pull-right" id="card_down"  style="display:none"><span class="mui-icon iconfont icon-xiangshangjiantou mui-pull-left"></span></a>
+							 	<a href="#cer" class="mui-pull-right"><span class="mui-icon iconfont icon-zhengshu mui-pull-left"></span></a>
+								<a href="#rated" class="mui-pull-right"><span class="mui-icon iconfont icon-pingjia1 mui-pull-left"></span></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="rated" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>
+				</button>
+				<h1 class="mui-center mui-title">XX的评价</h1>
+			</div>
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<div class="mui-row card_main">
+							<div class="mui-pull-left mui-col-xs-5">
+								<img src="images/timg.jpg">
+							</div>
+							<div class="mui-pull-right mui-col-xs-6 ">
+								<span class="mui-icon iconfont icon-personalcenter mui-pull-left"></span><p class="">王二小</p>
+								<span class="mui-icon iconfont icon-tishi mui-pull-left"></span><p>待岗</p>
+								<span class="mui-icon iconfont icon-shouhuodizhi mui-pull-left"></span><p>成都市</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="cer" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>
+				</button>
+				<h1 class="mui-center mui-title">XX的证书</h1>
+			</div>
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<div class="mui-row card_main">
+							<div class="mui-pull-left mui-col-xs-5">
+								<img src="images/timg.jpg">
+							</div>
+							<div class="mui-pull-right mui-col-xs-6 ">
+								<span class="mui-icon iconfont icon-personalcenter mui-pull-left"></span><p class="">王二小</p>
+								<span class="mui-icon iconfont icon-tishi mui-pull-left"></span><p>待岗</p>
+								<span class="mui-icon iconfont icon-shouhuodizhi mui-pull-left"></span><p>成都市</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</body>
 	<script src="js/zepto.min.js"></script>
 	<script src="js/mui/mui.min.js"></script>
+	<script src="js/mui/mui.view.js "></script>
 	<script src="js/base.js"></script>
 	<script>
 		mui.init({
 			swipeBack:true //启用右滑关闭功能
 		});
+		var viewApi = mui('#app').view({
+			defaultPage: '#card'
+		});
+		//初始化单页的区域滚动
+		mui('.mui-scroll-wrapper').scroll();
+		var view = viewApi.view;
+		(function($) {
+			//处理view的后退与webview后退
+			var oldBack = $.back;
+			$.back = function() {
+				if (viewApi.canBack()) { //如果view可以后退，则执行view的后退
+					viewApi.back();
+				} else { //执行webview后退
+					oldBack();
+				}
+			};
+			
+		})(mui);
+
+		$('#card_up').on('tap',function(){
+			$('#card_more').show()
+			$('#card_down').show()
+			$('#card_up').hide();
+		})
+		$('#card_down').on('tap',function(){
+			$('#card_more').hide()
+			$('#card_down').hide()
+			$('#card_up').show();
+		})
 	</script>
 	<script src="https://s4.cnzz.com/z_stat.php?id=1260604409&web_id=1260604409" language="JavaScript"></script>
 </html>
