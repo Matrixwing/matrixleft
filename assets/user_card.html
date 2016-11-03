@@ -17,18 +17,18 @@
 			.mui-card-footer{padding: 0}
 			.mui-table-view{margin: 0;width: 100%}
 			.mui-page .mui-table-view:last-child{margin-bottom: 0}
-			.mui-icon{color: #e3457d}
+			.mui-icon{color: #e3457d;margin: 4px 5px 0 0}
 			.cardbar{background: #fff;border-bottom: 1px solid #ccc;text-align: right;padding: 0 15px}
 
 			.card_info span{font-size: 14px;}
 			.card_info .cardbar span{font-size: 24px;}
 			.card_info .cardbar a{display:block;margin: 0 5px !important;padding: 9px 10px}
-			.card_info .cardbar a:first-child{margin-right: 0;padding-right: 0}
+			/*.card_info .cardbar a:first-child{margin-right: 0;padding-right: 0}*/
 			#card_more{display: none}
 		</style>
 	</head>
 
-	<body>
+	<body  class="mui-fullscreen">
 		<!--页面主结构开始-->
 		<div id="app" class="mui-views">
 			<div class="mui-view">
@@ -51,7 +51,7 @@
 							<div class="mui-pull-left mui-col-xs-5">
 								<img src="images/timg.jpg">
 							</div>
-							<div class="mui-pull-right mui-col-xs-6 ">
+							<div class="mui-pull-right mui-col-xs-6 " style="margin-top:20px">
 								<span class="mui-icon iconfont icon-personalcenter mui-pull-left"></span><p class="">王二小</p>
 								<span class="mui-icon iconfont icon-tishi mui-pull-left"></span><p>待岗</p>
 								<span class="mui-icon iconfont icon-shouhuodizhi mui-pull-left"></span><p>成都市</p>
@@ -171,14 +171,13 @@
 			</div>
 		</div>
 	</body>
-	<script src="js/zepto.min.js"></script>
+	<script src="js/jquery.min.js"></script>
 	<script src="js/mui/mui.min.js"></script>
 	<script src="js/mui/mui.view.js "></script>
+
 	<script src="js/base.js"></script>
 	<script>
-		mui.init({
-			swipeBack:true //启用右滑关闭功能
-		});
+		mui.init();
 		var viewApi = mui('#app').view({
 			defaultPage: '#card'
 		});
@@ -199,15 +198,19 @@
 		})(mui);
 
 		$('#card_up').on('tap',function(){
-			$('#card_more').show()
+			/*$('#card_more').show()*/
 			$('#card_down').show()
 			$('#card_up').hide();
+			$('#card_more').slideDown();
 		})
 		$('#card_down').on('tap',function(){
-			$('#card_more').hide()
+			$('#card_more').slideUp();
 			$('#card_down').hide()
 			$('#card_up').show();
+			mui('.mui-scroll-wrapper').scroll().scrollTo(0,0,100);/
 		})
+
 	</script>
+
 	<script src="https://s4.cnzz.com/z_stat.php?id=1260604409&web_id=1260604409" language="JavaScript"></script>
 </html>
