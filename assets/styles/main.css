@@ -216,6 +216,8 @@ ul{list-style:none}
 .icon-yduijia:before { content: "\e63d"; }
 
 .icon-yduijian:before { content: "\e63e"; }
+.fa-star-o:before {content: "\e636"; }
+.fa-star:before {content: "\e637"; }
 
 
 
@@ -428,3 +430,13 @@ ul{list-style:none}
 .mui-table-view-cell:after,.mui-table-view-cell:before,.mui-table-view:before,.mui-table-view:after{background-color: #e8ebf0;-webkit-transform:none;transform:none;}
 .mui-bar-tab .mui-tab-item.mui-active{color: #e3457d}
 .mui-bar .mui-btn-link{color: #e3457d}
+
+/*pingjia*/
+.starrr {
+  display: inline-block; }
+  .starrr a {
+    font-size: 24px;
+    padding: 0 1px;
+    cursor: pointer;
+    color: #e3457d;
+    text-decoration: none; }
