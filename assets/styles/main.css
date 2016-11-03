@@ -426,3 +426,5 @@ ul{list-style:none}
 .mui-navbar{background-color: #fff;}
 .mui-page .mui-table-view:first-child{margin-top: 5px;}
 .mui-table-view-cell:after,.mui-table-view-cell:before,.mui-table-view:before,.mui-table-view:after{background-color: #e8ebf0;-webkit-transform:none;transform:none;}
+.mui-bar-tab .mui-tab-item.mui-active{color: #e3457d}
+.mui-bar .mui-btn-link{color: #e3457d}
