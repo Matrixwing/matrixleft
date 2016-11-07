@@ -73,6 +73,8 @@ ul{list-style:none}
 
 .icon-pingjia1:before { content: "\e69a"; }
 
+.icon-mingpian:before { content: "\e6b4"; }
+
 .icon-gouwuchetianjia:before { content: "\e640"; }
 
 .icon-erweima:before { content: "\e642"; }
@@ -210,6 +212,8 @@ ul{list-style:none}
 .icon-yduifanhui:before { content: "\e63b"; }
 
 .icon-yduiqianjin:before { content: "\e63c"; }
+
+.icon-mingpian1:before { content: "\e645"; }
 
 .icon-zhengshu:before { content: "\e664"; }
 

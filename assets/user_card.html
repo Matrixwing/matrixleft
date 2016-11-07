@@ -25,9 +25,12 @@
 			.card_info .cardbar a{display:block;margin: 0 5px !important;padding: 9px 10px}
 			/*.card_info .cardbar a:first-child{margin-right: 0;padding-right: 0}*/
 			#card_more{display: none}
-			.cer_info .mui-table-view-cell{padding: 11px 15px !important;}
+			.cer_info .mui-table-view-cell{padding: 11px 0px !important;}
+			.cer_info .mui-table-view{margin: 0 !important;}
+			.cer_info .mui-table-view-cell:after{left: 0 !important;}
 			.rated_info .mui-card-header{font-size: 14px;}
 			.rated_info .mui-card-link{color: #6d6d72}
+
 			.rated_info .mui-card-link span{color: #e3457d;font-size: 16px}
 		</style>
 	</head>
@@ -263,6 +266,19 @@
 			mui('#returnup').scroll().scrollTo(0,0,1000);
 
 		})
+		$(document).ready(function(){
+		    var userID=base.getQueryString('userID');
+		    var userID= '6'
+		    $.get('getUserCard?userID='+userID,function(data,status){
+					if (JSON.parse(data).msgNo == '0000' ) {
+						mui.toast(JSON.parse(data).msgInfo);
+						setTimeout(function(){window.location.href=document.referrer;},1000);
+					}else{
+						mui.toast(JSON.parse(data).msgInfo);
+					};
+					
+				});
+		});
 	</script>
 
 	<script src="https://s4.cnzz.com/z_stat.php?id=1260604409&web_id=1260604409" language="JavaScript"></script>
