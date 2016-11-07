@@ -2,9 +2,10 @@
  * Created by Administrator on 2016/10/30.
  */
 
-//todo 需要配置文件
+
 TopClient = require('./aliSendMsg/topClient').TopClient;
-//alidayu    = require('../config');
+//阿里配置文件
+// alidayu    = require('../config/alidayu');
 module.exports = {
 
   /**
