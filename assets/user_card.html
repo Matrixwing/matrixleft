@@ -11,7 +11,7 @@
 		<link rel="stylesheet" type="text/css" href="styles/main.css"/>
 		<link rel="stylesheet" type="text/css" href="styles/pages/life.css"/>
 		<style>
-			.card_main{margin: 20px;}
+			.card_main{margin: 15px;}
 			img{width: 100%}
 			.mui-pull-right{margin-left: 5%}
 			.card_main .mui-card-footer{padding: 0}
@@ -49,73 +49,95 @@
 		<!--单页面开始-->
         <div id="card" class="mui-page">
 			<div class="mui-navbar-inner mui-bar mui-bar-nav">
-				<h1 class="mui-center mui-title">XXX名片</h1>
+				<h1 class="mui-center mui-title" id="name_card">名片</h1>
 			</div>
 			<div class="mui-page-content">
 				<div class="mui-scroll-wrapper" id="returnup">
 					<div class="mui-scroll">
 						<div class="mui-row card_main">
-							<div class="mui-pull-left mui-col-xs-5">
-								<img src="images/timg.jpg">
+							<div class="mui-pull-left mui-col-xs-4">
+								<img src="images/timg.jpg" id="avatarUrl">
 							</div>
-							<div class="mui-pull-right mui-col-xs-6 " style="margin-top:20px">
-								<span class="mui-icon iconfont icon-personalcenter mui-pull-left"></span><p class="">王二小</p>
-								<span class="mui-icon iconfont icon-tishi mui-pull-left"></span><p>待岗</p>
-								<span class="mui-icon iconfont icon-shouhuodizhi mui-pull-left"></span><p>北京市</p>
+							<div class="mui-pull-right mui-col-xs-7 ">
+								<span class="mui-icon iconfont icon-personalcenter mui-pull-left"></span><p id="userName">--</p>
+								<span class="mui-icon iconfont icon-mingpian mui-pull-left"></span><p id="IDCard">--</p>
+								<span class="mui-icon iconfont icon-tishi mui-pull-left"></span><p id="workstatus">--</p>
+								<span class="mui-icon iconfont icon-shouhuodizhi mui-pull-left"></span><p id="serveCity">--</p>
 							</div>
 						</div>
 						<div class="mui-row card_info">
 							<ul class="mui-table-view">
 								 <li class="mui-table-view-cell">
 								 	<p class="mui-pull-left mui-col-xs-3">当前住址：</p>
-								 	<span>北京市</span>
-								 </li>
-								 <li class="mui-table-view-cell">
-								 	<p class="mui-pull-left mui-col-xs-3">每月休息：</p>
-								 	<span>北京市</span>
+								 	<span id="address">--</span>
 								 </li>
 								 <li class="mui-table-view-cell">
 								 	<p class="mui-pull-left mui-col-xs-3">类&#12288;&#12288;型：</p>
-								 	<span>北京市</span>
+								 	<span id="servantTypeName">--</span>
 								 </li>
 								 <li class="mui-table-view-cell">
-								 	<p class="mui-pull-left mui-col-xs-3">专&#12288;&#12288;场：</p>
-								 	<span>北京市</span>
+								 	<p class="mui-pull-left mui-col-xs-3">专&#12288;&#12288;长：</p>
+								 	<span id="skillName">--</span>
+								 </li>
+								 <li class="mui-table-view-cell">
+								 	<p class="mui-pull-left mui-col-xs-3">服务经验：</p>
+								 	<span id="workExp">--</span>
+								 </li>
+								 <li class="mui-table-view-cell">
+								 	<p class="mui-pull-left mui-col-xs-3">每月休息：</p>
+								 	<span id='mouthRest'>--</span>
 								 </li>
 								 <li class="mui-table-view-cell">
 								 	<p class="mui-pull-left mui-col-xs-3">小元实名：</p>
-								 	<span>北京市</span>
+								 	<span id="identityAuth">--</span>
+								 </li>
+								 <li class="mui-table-view-cell">
+								 	<p class="mui-pull-left mui-col-xs-3">小元体检：</p>
+								 	<span id="examination">--</span>
 								 </li>
 								 <li class="mui-table-view-cell">
 								 	<p class="mui-pull-left mui-col-xs-3">小元评价：</p>
-								 	<span>北京市北京市北京市北京市北京市北京市北京市北京市</span>
+								 	<span id="assessment">--</span>
 								 </li>
 							</ul>
 							<ul class="mui-table-view" id="card_more">
 								 <li class="mui-table-view-cell">
-								 	<p class="mui-pull-left mui-col-xs-3">当前住址：</p>
-								 	<span>北京市</span>
+								 	<p class="mui-pull-left mui-col-xs-3">手机号码：</p>
+								 	<span  id="phone">--</span>
 								 </li>
 								 <li class="mui-table-view-cell">
-								 	<p class="mui-pull-left mui-col-xs-3">每月休息：</p>
-								 	<span>北京市</span>
+								 	<p class="mui-pull-left mui-col-xs-3">籍&#12288;&#12288;贯：</p>
+								 	<span id='homeTown'>--</span>
 								 </li>
 								 <li class="mui-table-view-cell">
-								 	<p class="mui-pull-left mui-col-xs-3">类&#12288;&#12288;型：</p>
-								 	<span>北京市</span>
+								 	<p class="mui-pull-left mui-col-xs-3">民&#12288;&#12288;族：</p>
+								 	<span id='folk'>--</span>
 								 </li>
 								 <li class="mui-table-view-cell">
-								 	<p class="mui-pull-left mui-col-xs-3">专&#12288;&#12288;场：</p>
-								 	<span>北京市</span>
+								 	<p class="mui-pull-left mui-col-xs-3">婚&#12288;&#12288;姻：</p>
+								 	<span id='marriage'>--</span>
 								 </li>
 								 <li class="mui-table-view-cell">
-								 	<p class="mui-pull-left mui-col-xs-3">小元实名：</p>
-								 	<span>北京市</span>
+								 	<p class="mui-pull-left mui-col-xs-3">学&#12288;&#12288;历：</p>
+								 	<span id='eduName'>--</span>
 								 </li>
 								 <li class="mui-table-view-cell">
-								 	<p class="mui-pull-left mui-col-xs-3">小元评价：</p>
-								 	<span>北京市北京市北京市北京市北京市北京市北京市北京市</span>
+								 	<p class="mui-pull-left mui-col-xs-3">年&#12288;&#12288;龄：</p>
+								 	<span id='niandai'>--</span>
 								 </li>
+								 <li class="mui-table-view-cell">
+								 	<p class="mui-pull-left mui-col-xs-3">属&#12288;&#12288;相：</p>
+								 	<span id='shengxiao'>--</span>
+								 </li>
+								 <li class="mui-table-view-cell">
+								 	<p class="mui-pull-left mui-col-xs-3">星&#12288;&#12288;座：</p>
+								 	<span id='xingzuo'>--</span>
+								 </li>
+								 <li class="mui-table-view-cell">
+								 	<p class="mui-pull-left mui-col-xs-3">自我介绍：</p>
+								 	<span id='selfEvaluation'>--</span>
+								 </li>
+								 <input id='certID' type="hidden" >
 							</ul>
 							<div class="mui-row cardbar">
 
@@ -185,42 +207,7 @@
 			</div>
 			<div class="mui-page-content">
 				<div class="mui-scroll-wrapper">
-					<div class="mui-scroll">
-						<div class="mui-card">
-							<ul class="mui-table-view">
-								<li class="mui-table-view-cell mui-collapse mui-active">
-									<a class="mui-navigate-right" href="#">文字排版</a>
-									<div class="mui-collapse-content cer_info">
-										<ul class="mui-table-view">
-											 <li class="mui-table-view-cell">
-											 	<p class="mui-pull-left mui-col-xs-4">当前住址：</p>
-											 	<span>北京市</span>
-											 </li>
-											 <li class="mui-table-view-cell">
-											 	<p class="mui-pull-left mui-col-xs-4">每月休息：</p>
-											 	<span>北京市</span>
-											 </li>
-											 <li class="mui-table-view-cell">
-											 	<p class="mui-pull-left mui-col-xs-4">类&#12288;&#12288;型：</p>
-											 	<span>北京市</span>
-											 </li>
-											 <li class="mui-table-view-cell">
-											 	<p class="mui-pull-left mui-col-xs-4">专&#12288;&#12288;场：</p>
-											 	<span>北京市</span>
-											 </li>
-											 <li class="mui-table-view-cell">
-											 	<p class="mui-pull-left mui-col-xs-4">小元实名：</p>
-											 	<span>北京市</span>
-											 </li>
-											 <li class="mui-table-view-cell">
-											 	<p class="mui-pull-left mui-col-xs-4">小元评价：</p>
-											 	<span>北京市北京市北京市北京市北京市北京市北京市北京市</span>
-											 </li>
-										</ul>
-									</div>
-								</li>
-							</ul>
-						</div>
+					<div class="mui-scroll" id="card_main">
 					</div>
 				</div>
 			</div>
@@ -229,57 +216,9 @@
 	<script src="js/jquery.min.js"></script>
 	<script src="js/mui/mui.min.js"></script>
 	<script src="js/mui/mui.view.js "></script>
-
 	<script src="js/base.js"></script>
-	<script>
-		mui.init();
-		var viewApi = mui('#app').view({
-			defaultPage: '#card'
-		});
-		//初始化单页的区域滚动
-		mui('.mui-scroll-wrapper').scroll();
-		var view = viewApi.view;
-		(function($) {
-			//处理view的后退与webview后退
-			var oldBack = $.back;
-			$.back = function() {
-				if (viewApi.canBack()) { //如果view可以后退，则执行view的后退
-					viewApi.back();
-				} else { //执行webview后退
-					oldBack();
-				}
-			};
-			
-		})(mui);
-
-		$('#card_up').on('tap',function(){
-			/*$('#card_more').show()*/
-			$('#card_down').show()
-			$('#card_up').hide();
-			$('#card_more').slideDown();
-		})
-		$('#card_down').on('tap',function(){
-			$('#card_more').slideUp();
-			$('#card_down').hide()
-			$('#card_up').show();
-			/*mui('#card_up').scroll().scrollTo(0,0);*/
-			mui('#returnup').scroll().scrollTo(0,0,1000);
-
-		})
-		$(document).ready(function(){
-		    var userID=base.getQueryString('userID');
-		    var userID= '6'
-		    $.get('getUserCard?userID='+userID,function(data,status){
-					if (JSON.parse(data).msgNo == '0000' ) {
-						mui.toast(JSON.parse(data).msgInfo);
-						setTimeout(function(){window.location.href=document.referrer;},1000);
-					}else{
-						mui.toast(JSON.parse(data).msgInfo);
-					};
-					
-				});
-		});
-	</script>
+	<script src="js/page/user_card.js"></script>
+	
 
 	<script src="https://s4.cnzz.com/z_stat.php?id=1260604409&web_id=1260604409" language="JavaScript"></script>
 </html>
