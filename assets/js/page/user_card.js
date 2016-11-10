@@ -35,10 +35,13 @@
 		})
 		$(document).ready(function(){
 		    var userID=base.getQueryString('userID');
-		    //var userID= '6'
+		    //var userID= '6';
+		    var mask = mui.createMask();
+			mask.show()
 		    $.get('getUserCard?userID='+userID,function(data,status){
 		    	var data= JSON.parse(data);
 				if (data.msgNo == '0000' ) {
+					mask.close()
 					$('#avatarUrl').attr('src',data.data.avatarUrl)
 					$('#userName').html(data.data.userName)
 					$('#name_card').html(data.data.userName+'的名片')
@@ -85,6 +88,7 @@
 			    	if (data.data) {
 			        	var listHtml = [];
 			        	var certInfo = data.data[0].certInfo;
+			        	$('#cer_title').html(data.data[0].userName+'的证书');
 			        	for(var i =0;i<certInfo.length;i++){
 			        		listHtml.push('<div class="mui-card">')
 								listHtml.push('<ul class="mui-table-view">')
@@ -144,3 +148,26 @@
 			    }
 			});
 		})
+		
+		$('#qcode').on('tap',function(){
+			var mask = mui.createMask(closeqcode);
+			mask.show();
+			$('body').append('<div id="qcode_div"></div>')
+			var src = $('#avatarUrl').attr('src');
+			if (!src) {
+				var src = 'images/timg.jpg';
+			};
+			var href = 'http://192.168.2.108/user_card.html?userID='+base.getQueryString('userID')
+			$('#qcode_div').qrcode({
+                text: href,
+                height: 250,
+                width: 250,
+                correctLevel    : QRErrorCorrectLevel.H,
+                background      : "#fff",
+                src: src//这里配置Logo的地址即可。
+                });
+			//$('#qcode_div').show();
+		})
+		function closeqcode(){
+			$('#qcode_div').remove()
+		}

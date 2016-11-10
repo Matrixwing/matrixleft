@@ -12,15 +12,16 @@
 <script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
 <script src="js/jquery.qrcode.min.js"></script>
 <script type="text/javascript">
+var a = 'images/timg.jpg'
     jQuery(function() {
            jQuery('#code').qrcode({
-                                  text: "http://",
-                                  height: 250,
-                                  width: 250,
-                                  correctLevel    : QRErrorCorrectLevel.H,
-                                  background      : "red",
-                                  src: 'images/timg.jpg'//这里配置Logo的地址即可。
-                                  });
+                text: "http://11111",
+                height: 250,
+                width: 250,
+                correctLevel    : QRErrorCorrectLevel.H,
+                background      : "#fff",
+                src: a//这里配置Logo的地址即可。
+                });
            })
 
 </script>

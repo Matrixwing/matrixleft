@@ -434,7 +434,7 @@ ul{list-style:none}
 .mui-table-view-cell:after,.mui-table-view-cell:before,.mui-table-view:before,.mui-table-view:after{background-color: #e8ebf0;-webkit-transform:none;transform:none;}
 .mui-bar-tab .mui-tab-item.mui-active{color: #e3457d}
 .mui-bar .mui-btn-link{color: #e3457d}
-
+.mui-backdrop{background-color: rgba(0,0,0,0.7)}
 /*pingjia*/
 .starrr {
   display: inline-block; }

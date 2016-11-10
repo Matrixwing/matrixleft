@@ -32,6 +32,8 @@
 			.rated_info .mui-card-link{color: #6d6d72}
 
 			.rated_info .mui-card-link span{color: #e3457d;font-size: 16px}
+			#qcode_div{position: absolute;top: 0;bottom: 0;left: 0;right: 0;width: 270px;height: 270px;background-color: #fff;z-index: 999;margin: auto;overflow: hidden;}
+			#qcode_div canvas{padding: 10px}
 		</style>
 	</head>
 
@@ -53,6 +55,8 @@
 					<span class="mui-icon mui-icon-left-nav"></span>
 				</button>
 				<h1 class="mui-center mui-title" id="name_card">名片</h1>
+
+				<button type="button" class="mui-left mui-btn  mui-btn-link mui-btn-nav mui-pull-right" id="qcode">二维码</button>
 			</div>
 			<div class="mui-page-content">
 				<div class="mui-scroll-wrapper" id="returnup">
@@ -147,7 +151,7 @@
 							 	<a href="javascript:;" class="mui-pull-right" id="card_up"><span class="mui-icon iconfont icon-xiangxiajiantou mui-pull-left"></span></a>
 							 	<a href="javascript:;" class="mui-pull-right" id="card_down"  style="display:none"><span class="mui-icon iconfont icon-xiangshangjiantou mui-pull-left"></span></a>
 							 	<a href="#cer" class="mui-pull-right"><span class="mui-icon iconfont icon-zhengshu mui-pull-left"></span></a>
-								<a href="#rated" class="mui-pull-right"><span class="mui-icon iconfont icon-pingjia1 mui-pull-left"></span></a>
+								<!-- <a href="#rated" class="mui-pull-right"><span class="mui-icon iconfont icon-pingjia1 mui-pull-left"></span></a> -->
 							</div>
 						</div>
 					</div>
@@ -206,7 +210,7 @@
 				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
 					<span class="mui-icon mui-icon-left-nav"></span>
 				</button>
-				<h1 class="mui-center mui-title">XX的证书</h1>
+				<h1 class="mui-center mui-title" id="cer_title">证书</h1>
 			</div>
 			<div class="mui-page-content">
 				<div class="mui-scroll-wrapper">
@@ -217,6 +221,7 @@
 		</div>
 	</body>
 	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery.qrcode.min.js"></script>
 	<script src="js/mui/mui.min.js"></script>
 	<script src="js/mui/mui.view.js "></script>
 	<script src="js/base.js"></script>
