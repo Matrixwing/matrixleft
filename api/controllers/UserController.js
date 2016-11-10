@@ -30,7 +30,7 @@ module.exports = {
       console.log('result1',result);
       console.log('result1',result.openid);
       req.session.userID=result.userID;
-      var redirectUrl = '/home.html?userID='+result.userID;
+      var redirectUrl = '/index.html?userID='+result.userID+'&tab=index';
       res.redirect(302,redirectUrl);
     })
 

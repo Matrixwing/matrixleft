@@ -16,6 +16,7 @@ module.exports = {
    * @param   {res}  response
    */
   getCertInfo: function (req, res) {
+    sails.log.info('getCertInfo');
     var queryInfo =  req.param('queryInfo','');
 
     ////*加密部分  以后需封装
