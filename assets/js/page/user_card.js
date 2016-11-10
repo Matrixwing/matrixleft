@@ -162,11 +162,10 @@
                 text: href,
                 height: 250,
                 width: 250,
-                correctLevel    : QRErrorCorrectLevel.H,
-                background      : "#fff",
-                src: src//这里配置Logo的地址即可。
+                correctLevel: QRErrorCorrectLevel.H,
+                background: "#fff",
+                src: src
                 });
-			//$('#qcode_div').show();
 		})
 		function closeqcode(){
 			$('#qcode_div').remove()
