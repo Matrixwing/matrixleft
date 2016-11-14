@@ -47,23 +47,23 @@ module.exports.connections = {
   //   password: 'YOUR_MYSQL_PASSWORD', //optional
   //   database: 'YOUR_MYSQL_DB' //optional
   // },
-  // localMysqlServer: {
-  //   adapter: 'sails-mysql',
-  //   host: '120.76.214.131',
-  //   user: 'wyhtest', //optional
-  //   port: 3306,
-  //  password:'wyhtest',
-  //   database: 'wyhtest' //optional
-  // },
+   localMysqlServer: {
+     adapter: 'sails-mysql',
+     host: '120.76.214.131',
+     user: 'wyhtest', //optional
+     port: 3306,
+    password:'wyhtest',
+     database: 'wyhtest' //optional
+   },
 
-  localMysqlServer: {
-    adapter: 'sails-mysql',
-    host: 'localhost',
-    user: 'root', //optional
-    port: 3306,
-    //password:'wyhtest',
-    database: 'mydb' //optional
-  },
+  //localMysqlServer: {
+  //  adapter: 'sails-mysql',
+  //  host: 'localhost',
+  //  user: 'root', //optional
+  //  port: 3306,
+  //  //password:'wyhtest',
+  //  database: 'mydb' //optional
+  //},
   /***************************************************************************
   *                                                                          *
   * MongoDB is the leading NoSQL database.                                   *
