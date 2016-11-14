@@ -50,7 +50,10 @@ module.exports.routes = {
   "get /weixinLogInTest" : {controller: "UserController" , action : "logInTest"},
 
   "get /getAllSkill" : {controller: "SkillController" , action : "getAllSkill"},
-"get /updateUserInfo": {controller: "UserInfoController" , action : "updateUserInfo"},
+  "get /updateUserInfo": {controller: "UserInfoController" , action : "updateUserInfo"},
+
+  "get /getTagList" : {controller: "TagController" , action : "getTagList"},
+  "get /getServantList": {controller: "TagController" , action : "getServantList"},
    /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *
