@@ -1,0 +1,56 @@
+.choose{
+	background-color: #fff;
+	padding: 10px 15px;
+}
+.choose .mui-btn{
+	float: left;
+	width: auto;
+	padding: 5px 15px;
+	margin: 7px 15px 0 0;
+	background-color: #f0f2f5;
+	border: 1px solid #f0f2f5;
+	border-radius: 5px;
+	font-size: 12px;
+}
+@media screen and (max-width: 320px) { 
+	.choose .mui-btn{
+		padding: 5px 10px;
+	}
+} 
+.choose .mui-btn:active{
+	background-color: #fff;
+	color: #e3457d;
+}
+.choose .mui-btn:last-child{
+	margin: 7px 0 0 0;
+}
+.choose .choosein_btn{
+	color: #e3457d;
+	background-color: #fff;
+	border: 1px solid #e3457d;
+}
+.mui-input-group:before{
+	background-color: #fff;
+}
+.choose .mui-input-row:after{
+	left: 0
+}
+li.mui-table-view-cell.mui-media{
+	padding-right: 35px
+}
+.mui-table-view-chevron .mui-table-view-cell>a:not(.mui-btn){
+	margin-right: -35px;
+}
+.nurses_list ul li span{
+	font-size: 14px;
+}
+.mui-ellipsis{
+	font-size: 12px;
+}
+.xz_m{height: 24px;line-height: 24px;font-size: 12px;}
+.mui-table-view .mui-media-object{
+	width: 80px;
+	max-width: 80px;
+	height: 100%;
+	margin-right: 20px
+}

@@ -73,6 +73,8 @@ ul{list-style:none}
 
 .icon-pingjia1:before { content: "\e69a"; }
 
+.icon-renwufangtanfuben4:before { content: "\e647"; }
+
 .icon-mingpian:before { content: "\e6b4"; }
 
 .icon-gouwuchetianjia:before { content: "\e640"; }
@@ -216,6 +218,14 @@ ul{list-style:none}
 .icon-mingpian1:before { content: "\e645"; }
 
 .icon-zhengshu:before { content: "\e664"; }
+
+.icon-yduijia:before { content: "\e63d"; }
+
+.icon-yduijian:before { content: "\e63e"; }
+
+.icon-zhaofuwu:before { content: "\e656"; }
+
+.icon-zhaofuwu1:before { content: "\e659"; }
 
 .icon-yduijia:before { content: "\e63d"; }
 
@@ -396,37 +406,22 @@ ul{list-style:none}
 				z-index: 20;
 				background-color: #000;
 			}
-			.mui-ios .mui-navbar .mui-bar .mui-title {
-				position: static;
-			}
-			/*问题反馈在setting页面单独的css*/
-			#feedback .mui-popover{
-				position: fixed;
-			}
-			#feedback .mui-table-view:last-child {
-			    margin-bottom: 0px;
-			}
-			#feedback .mui-table-view:first-child {
-			    margin-top: 0px;
-			}
-			/*问题反馈在setting页面单独的css==end*/
 .kbd_div{margin-top: 0.5em}
 .kbd {
 	display: inline-block;
-	padding: .25em .5em ;
 	margin-right: .5em;
-	font: 75%/1 monaco, menlo, consolas, 'courier new', courier, monospace;
-	border: solid 1px #ccc;
+	border: solid 1px #e3457d;
 	border-radius: 3px;
-	white-space: nowrap;
 	word-wrap: normal;
-	/*text-transform: capitalize;*/
-	color: #555;
-	background-color: #fefefe;
-	cursor: pointer;
+	color: #e3457d;
+
+	font: 50%/1 monaco, menlo, consolas, 'courier new', courier, monospace;
+	font-size:.5em !important;
+	padding: 0.2em 0.3em;
+	background-color: #fff;
 }
 .mui-title{font-size: 16px;}
-.mui-bar-nav{box-shadow: none;border-bottom: 1px solid #ccc;}
+.mui-bar-nav{box-shadow: none;border-bottom: 1px solid #c8c7cc;}
 .mui-views, .mui-view, .mui-pages, .mui-page, .mui-page-content{background-color: #f0f2f5}
 .mui-table-view.mui-grid-view{background-color: #fff;margin-top: 5px}
 .mui-navbar{background-color: #fff;}

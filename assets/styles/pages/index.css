@@ -1,38 +1,37 @@
-.mui-card-content-inner{
+#slider{
+	height: 100px;
+}
+.mui-slider .mui-slider-group.mui-slider-loop{
+	height: 100px
+}
+.menu{
+	width: 100%;
+	margin: 30px auto;
 	text-align: center;
 }
-.card_title{
-	color: #007aff
+.menu .menu_list{
+	width: 100px;
+	height: 150px;
+	text-align: center;
+	margin: 0 auto;
+	display: inline-block;
+	padding-top: 40px;
+	border-radius: 10px;
+	background: -webkit-radial-gradient(#fac13d, #fabb28); /* Safari 5.1 - 6.0 */
+    background: -o-radial-gradient(#fac13d, #fabb28); /* Opera 11.6 - 12.0 */
+    background: -moz-radial-gradient(#fac13d, #fabb28); /* Firefox 3.6 - 15 */
+    background: radial-gradient(#fac13d, #fabb28); /* 标准的语法（必须放在最后） */
 }
-.card_content{
-	width: 100%;
-	text-align: left;
-	font-size: .8em;
-	color: #ccc;
+.menu .menu_list:first-child{
+	margin-right: 10px;
+	background: radial-gradient(#26c7fc, #00abf3);
 }
-.card_content .mui-icon{
-	font-size: .8em;
+.menu .menu_list p{
+	font-size: 1em;
+	color: #fff;
+	margin-top: 8px;
 }
-.mui-input-group:first-child {
-	margin-top: 20px;
+.menu .menu_list .mui-icon{
+	font-size: 36px;
+	color: #fff
 }
-.mui-input-group label {
-	width: 26%;
-}
-.mui-input-row label~input,
-.mui-input-row label~select,
-.mui-input-row label~textarea {
-	width: 74%;
-}
-.mui-checkbox input[type=checkbox],
-.mui-radio input[type=radio] {
-	top: 6px;
-}
-.mui-content-padded {
-	margin-top: 25px;
-}
-.mui-btn {
-	padding: 10px;
-}
-#code{width: 37%;float: left;}
-.mui-input-row .code{width: auto !important;padding: 8px;margin-right: 10px;margin-top: 3px;}
