@@ -15,7 +15,7 @@ module.exports = {
     //获取参数
     var opts = {
       code : req.param('code',''),
-      stat : req.param('state',''),
+      userType : req.param('state',0),
     };
     // 1,从微信获取openid 2，根据openid查是否注册，若没有注册则拉取用户资料然后再写入，3若成功，重定向url带openid
     async.waterfall([

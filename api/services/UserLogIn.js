@@ -6,7 +6,7 @@
 var async = require('async');
 var https = require('https');
 var util = require('util');
-
+var weixin= require('../../config/Weixin');
 
 module.exports = {
   /**
@@ -16,8 +16,10 @@ module.exports = {
    */
   getUserByCode: function (opts,cb) {
     //发起hpttps 请求
+
+
     var hostname = util.format('https://api.weixin.qq.com/sns/oauth2/access_token?appid=%s&secret=%s&code=%s' +
-      '&grant_type=authorization_code','wx8306afd398ab31e5','8241fcf80a1271ab62715838c66fec41',opts.code);
+      '&grant_type=authorization_code','wx63ace09080406d46','ef65f9b655db88606885742d5e2c41d7',opts.code);
     console.log('hostname',hostname);
     https.get(hostname, function(res) {
       var buffers = [];
@@ -50,7 +52,7 @@ module.exports = {
     };
     console.log(queryObj);
     User.find(queryObj).exec(function(err,result){
-      console.log('ssssssssssssss',result);
+
       if (err) return cb(err);
       if (result == ''){
         //如果沒有註冊，先拉取拉取用户信息再写入
@@ -62,6 +64,7 @@ module.exports = {
             console.log("dataObj+++++++++++",dataObj);
             var updateUser = dataObj;
             updateUser.phone=opts.phone;
+            updateUser.userType=opts.userType;
             console.log(updateUser);
             cb(null,updateUser);
           },
