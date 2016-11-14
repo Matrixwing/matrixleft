@@ -32,6 +32,7 @@ module.exports = {
         data=wholeData;
         data=JSON.parse(data);
         data.phone=opts.phone || null;
+        data.userType=opts.userType;
         if(data.errcode) return cb(data);
         cb(null,data);
       })
@@ -47,6 +48,7 @@ module.exports = {
    * @param cb 回调函数 cb(err,result)  err为错误信息  result为拉取的用户信息
    */
   validateRegisterByOpenID : function (opts,cb){
+    console.log('opts',opts);
     var queryObj ={
       openid:opts.openid
     };
@@ -74,6 +76,10 @@ module.exports = {
           return cb(null,result);
         });
       }else{
+        console.log(result[0].userType);
+        console.log(opts.userType);
+        if (result[0].userType!=opts.userType) return cb('toUser');
+
         cb(null,result[0]);}
 
     });

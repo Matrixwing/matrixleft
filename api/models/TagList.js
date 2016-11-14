@@ -14,7 +14,7 @@ module.exports = {
 
   },
   getAllTagList : function(cb){
-    TagList.query('SELECT t.tagID,t.tagName,tl.level,tl.sonID FROM  tagLevel tl LEFT JOIN tag t ON t.tagID=tl.tagID; ',function(err,allList){
+    TagList.query('SELECT t.tagID,t.tagName,tl.level,tl.sonID FROM  tagLevel tl RIGHT JOIN tag t ON t.tagID=tl.tagID; ',function(err,allList){
       if(err) return cb(err);
       return cb(null,allList)
     })

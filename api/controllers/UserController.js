@@ -17,6 +17,7 @@ module.exports = {
       code : req.param('code',''),
       userType : req.param('state',0),
     };
+    console.log(opts);
     // 1,从微信获取openid 2，根据openid查是否注册，若没有注册则拉取用户资料然后再写入，3若成功，重定向url带openid
     async.waterfall([
       function(cb){
@@ -26,11 +27,20 @@ module.exports = {
       UserLogIn.validateRegisterByOpenID,
     ],function (err,result){
 
-      if (err != null ) {sails.log.error(err); return res.send(500,'服务暂不可用:'+err);}
+      if (err != null ) {
+        if(err=='toUser') {
+         return res.view('toUser');
+        }
+        sails.log.error(err);
+        return res.send(500,'服务暂不可用:'+err);
+      }
       console.log('result1',result);
       console.log('result1',result.openid);
       req.session.userID=result.userID;
-      var redirectUrl = '/index.html?userID='+result.userID+'&tab=index';
+      if(opts.userType==0)
+        var redirectUrl = '/index.html?userID='+result.userID+'&tab=index';
+      else
+        var redirectUrl = '/nurse_home.html?userID='+result.userID+'&tab=index';
       res.redirect(302,redirectUrl);
     })
 
