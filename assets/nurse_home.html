@@ -59,34 +59,6 @@
 				</div>
 			</div>
 		</div>
-		<div id="reg_phone" class="mui-page">
-			<div class="mui-navbar-inner mui-bar mui-bar-nav">
-				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
-					<span class="mui-icon mui-icon-left-nav"></span>
-				</button>
-				<h1 class="mui-center mui-title">完善资料</h1>
-			</div>
-			<div class="mui-page-content">
-				<div class="mui-scroll-wrapper">
-					<div class="mui-scroll">
-						<form class="mui-input-group">
-							<div class="mui-input-row">
-								<label>手机号</label>
-								<input id='phone' type="number" class="mui-input-clear mui-input" placeholder="请输入手机号" maxlength="11">
-							</div>
-							<div class="mui-input-row">
-								<label>验证码</label>
-								<input id='code' type="number" class="mui-input" placeholder="请输入验证码" maxlength="6">
-								<button type="button" class="mui-btn code" id="getcode">获取验证码</button>
-							</div>
-						</form>
-						<div class="mui-content-padded">
-							<button id='reg' class="mui-btn mui-btn-block mui-btn-primary">绑定</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
 		<div id="information" class="mui-page">
 			<div class="mui-navbar-inner mui-bar mui-bar-nav">
 				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
@@ -232,9 +204,18 @@
 						</form>
 
 						<p class="imgtips">最后一步，请上传您的身份证正反面图片。</p>
-						<form class="mui-input-group" id="feedback">
+						<form class="mui-input-group" id="form">
 							<div id="image-list" class="row image-list">
-
+								<div class="image-item space">
+									<div class="image-close">X</div>
+									<img src="" class="image-item uploadimg">
+									<input type="file" class="file" accept="image/*" id="image-1">
+								</div>
+								<div class="image-item space">
+									<div class="image-close">X</div>
+									<img src="" class="image-item uploadimg">
+									<input type="file" class="file" accept="image/*" id="image-1">
+								</div>
 							</div>
 						</form>
 						<div class="mui-content-padded">
@@ -314,7 +295,7 @@
 	<script src="js/jquery.min.js"></script>
 	<script src="js/mui/mui.min.js"></script>
 	<script src="js/mui/mui.view.js "></script>
-	<script src="js/page/nurse_home.js "></script>
+	<script src="js/uploadimg/lrz.bundle.js "></script>
 	<script src="js/base.js"></script>
 	<script>
 		mui.init({
@@ -322,7 +303,7 @@
 		});
 		//初始化单页view
 		var viewApi = mui('#app').view({
-			defaultPage: '#myhome'
+			defaultPage: '#information'
 		});
 		//初始化单页的区域滚动
 		mui('.mui-scroll-wrapper').scroll();
@@ -434,6 +415,28 @@
 			$('#skill').val(h);
 			$('#skill').attr('data',s);
 			$('#skill_div').hide();
+		})
+
+		/*uploadimg*/
+		$('.file').on('change', function () {
+			var p =$(this);
+		    lrz(this.files[0],{width: 640,quality:0.3})
+		        .then(function (rst) {
+		        	p.prev().show();
+		            p.prev().attr('src',rst.base64);
+		            p.parent().removeClass('space')
+		            return rst;
+		        })
+		        .catch(function (err) {
+		        	alert(err);
+		        })
+		        .always(function () {
+		        });
+		});
+		$('.image-close').on('tap',function(){
+			$(this).next().hide();
+			$(this).nextAll('input').val('');
+			$(this).parent().addClass('space')
 		})
 		base.tabbarHtml();
 	</script>

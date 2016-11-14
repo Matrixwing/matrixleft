@@ -259,6 +259,7 @@ ul{list-style:none}
 }
 
 .mui-toast-container{top: 50%;bottom: 50%}
+.mui-toast-message{background-color: #000;color: #fff;}
 .mui-grid-view.mui-grid-9 .mui-media .mui-icon {
     font-size: 1.6em;
     position: relative
