@@ -105,4 +105,9 @@
 			_czc.push(["_trackEvent", "个人主页", "名片", "", "", ""]);
 			window.location.href='user_card.html?userID='+userID;
 		})
+		$('#share').on('tap',function(){
+			_czc.push(["_trackEvent", "个人主页", "分享", "", "", ""]);
+			var avatarUrl=$('.avatarUrl').attr('src');
+			window.location.href='share.html?userID='+userID+'&avatarUrl='+avatarUrl;
+		})
 		base.tabbarHtml();
