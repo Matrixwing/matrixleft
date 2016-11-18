@@ -10,7 +10,7 @@ var util = require('util');
 
 module.exports = {
   getTagList : function(req,res){
-    TagList.getAllTagList(function(err,tagList){
+    TagList.getAllListGoupByType(function(err,tagList){
       if (err) {return res.send(500,'{"msgNo":"9999","msgInfo":"failed"}');}
       var str = JSON.stringify(tagList) ;
       tagList = util.format('{"msgNo":"0000","msgInfo":"success","data":%s}',str);
