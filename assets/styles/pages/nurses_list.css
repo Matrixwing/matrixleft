@@ -5,24 +5,24 @@
 .choose .mui-btn{
 	float: left;
 	width: auto;
+	width: 30%;
 	padding: 5px 15px;
 	margin: 7px 15px 0 0;
 	background-color: #f0f2f5;
 	border: 1px solid #f0f2f5;
 	border-radius: 5px;
-	font-size: 12px;
+	font-size: 13px;
 }
-@media screen and (max-width: 320px) { 
-	.choose .mui-btn{
-		padding: 5px 10px;
-	}
-} 
+
 .choose .mui-btn:active{
 	background-color: #fff;
 	color: #e3457d;
 }
 .choose .mui-btn:last-child{
 	margin: 7px 0 0 0;
+}
+.choose .mui-btn:nth-child(3n+0) {
+	margin-right: 0
 }
 .choose .choosein_btn{
 	color: #e3457d;
@@ -54,3 +54,175 @@ li.mui-table-view-cell.mui-media{
 	height: 100%;
 	margin-right: 20px
 }
+.mui-input-row{overflow: inherit;}
+#pullrefresh{
+	top: 142px;
+	height: 100%;
+	padding-bottom: 100px
+}
+#pullrefresh .mui-table-view{
+	margin-top: 0
+}
+.mui-bar-nav~.mui-content .mui-pull-top-pocket{
+	top: 0
+}
+#offCanvasSideScroll{
+	background-color: #fff;
+}
+#offCanvasSideScroll .mui-scroll{
+	background-color: #fff;
+}
+#offCanvasSideScroll .title{
+	height: 44px;
+	text-align: center;
+	line-height: 44px;
+	font-size: 16px;
+	color: #e3457d;
+	border-bottom: 1px solid #c8c7cc
+}
+.load_tag{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 44px;
+	left: 0;
+	background-color: #fff;
+	z-index: 9999;
+}
+.load_tag .mui-pull-loading{
+  overflow: auto;  
+  margin: auto;  
+  position: absolute;  
+  top: 40%; left: 0;right: 0; 
+}
+.tag_type{
+	width: 100%;
+}
+.tag_div{
+	width: 100%;
+	padding: 10px 15px 50px 15px;
+	background-color: #fff;
+	font-size: 14px;
+	float: left;
+
+}
+.tag_row .pipcker{
+	padding: 6px  !important;
+	font-size: 14px;
+	float: left;
+	border: 1px solid #f0f2f5;
+	border-radius: 5px;
+	background-color: #f0f2f5;
+	font-family: '微软雅黑';
+	width: 90px;
+}
+.tag_row .pipcker:active{
+	background-color: #fff !important;
+	color: #000;
+}
+.tag_row .onselect{
+	border-color: #f15353 !important;
+	background-color: #fff;
+}
+#child_tag,#old_tag{
+	margin-right: 10px !important
+}
+.tag_row{
+	margin: 8px 0;
+	font-size: 14px;
+	overflow: hidden;
+}
+.tag_right{
+	width: 100%;
+}
+.child .icon-yduijia,.old .icon-yduijia{
+	font-size: 14px;
+	display: inline-block;
+	text-align: center;
+	line-height: 33px;
+	width: 33px;
+	height: 33px;
+}
+/*.tag_arr{
+	position: relative;
+}
+.mui-icon-arrowdown{
+	font-size: 14px;
+    position: absolute;
+    right: 18px;
+    top: 10px;
+}
+.child_tag2_div .mui-icon-arrowdown,.old_tag2_div .mui-icon-arrowdown{
+	right: 8px !important
+}*/
+.mui-numbox .mui-input-numbox, .mui-numbox .mui-numbox-input{
+	font-size: 14px;
+}
+.mui-btn-block{
+	margin: 0 !important
+}
+.child a{
+	display: inline-block;
+	font-size: 12px;
+	color: #007aff;
+	line-height: 33px;
+}
+.tag_left span{
+	display: inline-block;
+	height: 31px;
+	line-height: 31px;
+	color: #e3457d;
+	font-size:16px;
+}
+.line{
+	width: 100%;
+	height: 1px;
+	background-color: #f0f2f5;
+	margin: 8px 0
+}
+.tag_btn .mui-btn{
+	padding: 5px 12px !important;
+    float: left;
+    width: auto;
+    margin: 7px 10px 0 0;
+    background-color: #f0f2f5;
+    border: 1px solid #f0f2f5;
+    border-radius: 5px;
+    font-size: 12px;
+}
+.tag_over{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+}
+.tag_over div{
+	width: 50%;
+	float: left;
+	height: 44px;
+	line-height: 44px;
+	text-align: center;
+}
+#reset{
+	background-color: #D4D4D4;
+}
+#tag_sure{
+	background-color: #e3457d;
+	color: #fff;
+}
+.mui-off-canvas-left, .mui-off-canvas-right{
+	width: 80%
+}
+/*兼容性*/
+@media screen and (max-width: 320px) { 
+	.choose .mui-btn{
+		padding: 5px 10px;
+		width: 29%;
+	}
+	.tag_btn .mui-btn{
+		padding: 5px 8px !important;
+	    float: left;
+	    width: auto;
+	    margin: 7px 7px 0 0;
+	}
+} 
