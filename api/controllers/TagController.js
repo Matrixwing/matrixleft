@@ -10,7 +10,7 @@ var util = require('util');
 
 module.exports = {
   getTagList : function(req,res){
-    TagList.getAllListGoupByType(function(err,tagList){
+    Tag.getAllListGoupByType(function(err,tagList){
       if (err) {return res.send(500,'{"msgNo":"9999","msgInfo":"failed"}');}
       var str = JSON.stringify(tagList) ;
       tagList = util.format('{"msgNo":"0000","msgInfo":"success","data":%s}',str);
@@ -38,7 +38,7 @@ module.exports = {
     //  res.send(tagList);
     //})
     //
-    Tag.getServantByTag(tag,function(err,tagList){
+    Tag.getServantSortByWight(tag,function(err,tagList){
       if (err) {return res.send(500,'{"msgNo":"9999","msgInfo":"failed"}');}
       var str = JSON.stringify(tagList) ;
       tagList = util.format('{"msgNo":"0000","msgInfo":"success","data":%s}',str);
