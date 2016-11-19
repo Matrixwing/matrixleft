@@ -2,12 +2,9 @@ mui.init({
 	swipeBack:false, //启用右滑关闭功能
 	pullRefresh: {
 			container: '#pullrefresh',
-			down: {
-				callback: pulldownRefresh
-			},
 			up: {
 				contentrefresh: '正在加载...',
-				callback: pullupRefresh
+				callback: getServentList
 			}
 		}
 });
@@ -24,6 +21,7 @@ $(document).ready(function(){
 		var _this = $(this);
 		old_tag.show(function(items) {
 			_this.html(items[0].text);
+			_this.attr('tagID',items[0].value);
 			if (items[0].value=='200') {
 				_this.removeClass('onselect')
 			}else{
@@ -44,6 +42,7 @@ $(document).ready(function(){
 		var _this = $(this);
 		child_tag.show(function(items) {
 			_this.html(items[0].text);
+			_this.attr('tagID',items[0].value);
 			if (items[0].value=='100') {
 				_this.removeClass('onselect')
 			}else{
@@ -51,33 +50,15 @@ $(document).ready(function(){
 			};
 		});
 	});
+	//延迟获取tag
+	setTimeout("getTagList()",1500)
 })
- //侧滑容器父节点
-var offCanvasWrapper = mui('#offCanvasWrapper');
- //主界面容器
-var offCanvasInner = offCanvasWrapper[0].querySelector('.mui-inner-wrap');
- //菜单容器
-var offCanvasSide = document.getElementById("offCanvasSide");
-document.getElementById('offCanvasShow').addEventListener('tap', function() {
-	offCanvasWrapper.offCanvas('show');
-	getTagList();
-});
-document.getElementById('tag_sure').addEventListener('tap', function() {
-	offCanvasWrapper.offCanvas('close');
-});
- //主界面和侧滑菜单界面均支持区域滚动；
-mui('#offCanvasSideScroll').scroll();
-mui('#offCanvasContentScroll').scroll();
 
 
-$('.choose .mui-btn').on('tap',function(){
-	$('.choose .mui-btn').removeClass('choosein_btn')
-	$(this).addClass('choosein_btn')
-})
 /**
  * 下拉刷新具体业务实现
  */
-function pulldownRefresh() {
+/*function pulldownRefresh() {
 	setTimeout(function() {
 		var table = document.body.querySelector('.mui-table-view');
 		var cells = document.body.querySelectorAll('.mui-table-view-cell');
@@ -90,23 +71,23 @@ function pulldownRefresh() {
 		}
 		mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
 	}, 1500);
-}
+}*/
 var count = 0;
 /**
  * 上拉加载具体业务实现
  */
 function pullupRefresh() {
 	setTimeout(function() {
-		mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > 2)); //参数为true代表没有更多数据了。
+		mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > 5)); //参数为true代表没有更多数据了。
 		var table = document.body.querySelector('.mui-table-view');
 		var cells = document.body.querySelectorAll('.mui-table-view-cell');
-		for (var i = cells.length, len = i + 20; i < len; i++) {
+		for (var i = cells.length, len = i + 3; i < len; i++) {
 			var li = document.createElement('li');
 			li.className = 'mui-table-view-cell';
 			li.innerHTML = '<a class="mui-navigate-right">Item ' + (i + 1) + '</a>';
 			table.appendChild(li);
 		}
-	}, 1500);
+	}, 2500);
 }
 if (mui.os.plus) {
 	mui.plusReady(function() {
@@ -120,6 +101,24 @@ if (mui.os.plus) {
 		mui('#pullrefresh').pullRefresh().pullupLoading();
 	});
 }
+
+ //侧滑容器父节点
+var offCanvasWrapper = mui('#offCanvasWrapper');
+ //菜单容器
+var offCanvasSide = document.getElementById("offCanvasSide");
+$('#offCanvasShow .ready').on('tap', function() {
+	$('.choose .mui-btn').removeClass('choosein_btn')
+	$(this).addClass('choosein_btn')
+	offCanvasWrapper.offCanvas('show');
+	//getTagList();
+});
+
+ //主界面和侧滑菜单界面均支持区域滚动；
+mui('#offCanvasSideScroll').scroll();
+mui('#offCanvasContentScroll').scroll();
+
+
+
 function getTagList(){
 	$.get('/getTagList',function(data,status){
     	var data = JSON.parse(data);
@@ -130,7 +129,7 @@ function getTagList(){
 				var t = d[2];
 				var thtml =[];
 				for(var i=0;i<d.length;i++){
-					thtml.push('<button type="button" class="mui-btn mui-pull-left" "tagID='+t[i].tagID+'">'+t[i].tagName+'</button>')
+					thtml.push('<button type="button" class="mui-btn mui-pull-left" tagID='+t[i].tagID+'">'+t[i].tagName+'</button>')
 				}
 				var html=thtml.join('');
 				$('#tese').empty();
@@ -140,7 +139,7 @@ function getTagList(){
 				var c = d[3];
 				var thtml =[];
 				for(var i=0;i<c.length;i++){
-					thtml.push('<button type="button" class="mui-btn mui-pull-left" "tagID='+c[i].tagID+'">'+c[i].tagName+'</button>')
+					thtml.push('<button type="button" class="mui-btn mui-pull-left" tagID='+c[i].tagID+'">'+c[i].tagName+'</button>')
 				}
 				var html=thtml.join('')
 				$('#cer').empty();
@@ -152,14 +151,7 @@ function getTagList(){
 			
 	});
 }
-$('.tag_row select').on('change',function(){
-	if ($(this).find("option:selected").index()=='0') {
-		$(this).removeClass('onselect')
-	}else{
-		$(this).addClass('onselect')
-	};
 
-})
 $('#add_old').on('tap',function(){
 	$('#old_tag2').show()
 	$(this).hide()
@@ -167,4 +159,85 @@ $('#add_old').on('tap',function(){
 $('#add_child').on('tap',function(){
 	$('#child_tag2').show()
 	$(this).hide()
+})
+$('#full_tag').on('tap','button',function(){
+	$(this).addClass('onselect')
+})
+
+/*getServentList*/
+$('#tag_sure').on('tap',function(){
+	offCanvasWrapper.offCanvas('close');
+	var dataList=[];
+	dataList.push('{"tagID":'+$('#people').attr('tagID')+',"value":'+$('#people').val()+'}')
+	dataList.push('{"tagID":'+$('#forests').attr('tagID')+',"value":'+$('#forests').val()+'}')
+	for(var i =0;i<$('.onselect').length;i++){
+		if ($('.onselect').eq(i).attr('tagID')) {
+			dataList.push('{"tagID":'+$('.onselect').eq(i).attr('tagID')+',"value":"1"}')
+		};
+	}
+	console.log(dataList)
+	getServentList(dataList)
+})
+function getServentList(dataList){
+	mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > 5));
+	if (!dataList) {
+		dataList = '';
+	};
+	$.ajax({
+	    type: 'post',
+	    url: '/getServentList',
+	    data: {
+	    	'tag':dataList,
+	    	'start':count,
+	    	'limit':5
+	    },
+	    dataType: 'json',
+	    success: function(data) {
+	    	
+	    },
+	    error: function(data) {
+	    	mui.toast('请重试');
+	    	var a=2;
+	    	var serventList = [];
+	    	for(var i =0;i<a;i++){
+	    		serventList.push('<li class="mui-table-view-cell mui-media">')
+	    			serventList.push('<a class="mui-navigate-right" href="user_card.html">')
+	    				serventList.push('<img class="mui-media-object mui-pull-left" src="../images/timg.jpg">')
+	    				serventList.push('<div class="mui-media-body">')
+	    					serventList.push('<div class="mui-row">')
+								serventList.push('<span class="mui-pull-left">王二小</span>')
+								serventList.push('<div class="qwxz  mui-pull-right">期望薪资：<font>3000</font>/月</div>')
+							serventList.push('</div>')
+							serventList.push('<div class="mui-row">')
+								serventList.push('<div class="mui-row">')
+									serventList.push('<div class="kbd_div mui-pull-left">')
+										serventList.push('<div class="kbd">小元实名</div>')
+									serventList.push('</div>')
+									serventList.push('<div class="kbd_div mui-pull-left">')
+										serventList.push('<div class="kbd">小元体检</div>')
+									serventList.push('</div>')
+								serventList.push('</div>')
+								serventList.push('<div class="ckxz">小元参考薪资：<font>3000-4000</font>/月</div>')
+							serventList.push('</div>')
+	    				serventList.push('</div>')
+	    				serventList.push('<p class="mui-ellipsis">小元评价：改服务员态度好，服务号，做饭好，什么都好</p>')
+	    			serventList.push('</a>')
+    			serventList.push('</li>')
+	    	}
+	    	var serventList = serventList.join('')
+	    	$('#getServentList').append(serventList)
+	    }
+	});
+}
+function reset(){
+	$('#people').val('1');
+	$('#forests').val('100');
+	$('#old_tag2').hide();
+	$('#child_tag2').hide();
+	$('#add_old').show();
+	$('#add_child').show();
+	$('#full_tag button').removeClass('onselect')
+}
+$('#reset').on('tap',function(){
+	reset()
 })
