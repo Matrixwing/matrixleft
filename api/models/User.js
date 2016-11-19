@@ -44,7 +44,7 @@ module.exports = {
     phone: {
       type: 'string'
     },
-    userType: {
+    role: {
       type: 'int'
     },
     selfEvaluation : {
@@ -84,7 +84,7 @@ module.exports = {
       avatarUrl: options.avatarUrl || null,
       gender: options.gender || null,
       phone: options.phone || null,
-      userType: options.phone || 0,
+      role: options.role || 0,
     };
 
     User.create(userWaitForCreate).exec(function (err, newUser) {
@@ -144,7 +144,7 @@ module.exports = {
       avatarUrl: options.avatarUrl || null,
       gender: options.gender || null,
       phone: options.phone || null,
-      userType: options.userType || 0,
+      role: options.role || 0,
     };
 
     User.update(condition, updateRecords).exec(function (err, result) {

@@ -22,7 +22,7 @@ module.exports = {
     var tag = req.param('tag','');
 
 
-    var tag = [{tagID:1},{tagID:2},{tagID:3,value:4}];
+    //var tag = [{tagID:1},{tagID:2},{tagID:3,value:4}];
 
 
     //todo price

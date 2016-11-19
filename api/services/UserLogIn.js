@@ -32,7 +32,7 @@ module.exports = {
         data=wholeData;
         data=JSON.parse(data);
         data.phone=opts.phone || null;
-        data.userType=opts.userType;
+        data.role=opts.role;
         if(data.errcode) return cb(data);
         cb(null,data);
       })
@@ -66,7 +66,7 @@ module.exports = {
             console.log("dataObj+++++++++++",dataObj);
             var updateUser = dataObj;
             updateUser.phone=opts.phone;
-            updateUser.userType=opts.userType;
+            updateUser.role=opts.role;
             console.log(updateUser);
             cb(null,updateUser);
           },
@@ -76,9 +76,9 @@ module.exports = {
           return cb(null,result);
         });
       }else{
-        console.log(result[0].userType);
-        console.log(opts.userType);
-        if (result[0].userType!=opts.userType) return cb('toUser');
+        console.log(result[0].role);
+        console.log(opts.role);
+        if (result[0].role!=opts.role) return cb('toUser');
 
         cb(null,result[0]);}
 
