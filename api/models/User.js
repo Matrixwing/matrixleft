@@ -47,7 +47,7 @@ module.exports = {
     role: {
       type: 'int'
     },
-    selfEvaluation : {
+    selfEval : {
       type:'string',
       size : 512,
     },
