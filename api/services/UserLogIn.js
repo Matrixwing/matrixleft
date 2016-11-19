@@ -19,7 +19,7 @@ module.exports = {
 
 
     var hostname = util.format('https://api.weixin.qq.com/sns/oauth2/access_token?appid=%s&secret=%s&code=%s' +
-      '&grant_type=authorization_code','wx63ace09080406d46','ef65f9b655db88606885742d5e2c41d7',opts.code);
+      '&grant_type=authorization_code','wx8306afd398ab31e5','8241fcf80a1271ab62715838c66fec41',opts.code);
     console.log('hostname',hostname);
     https.get(hostname, function(res) {
       var buffers = [];
