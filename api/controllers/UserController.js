@@ -15,7 +15,7 @@ module.exports = {
     //获取参数
     var opts = {
       code : req.param('code',''),
-      role : req.param('state',0),
+      role : req.param('state',1),
     };
     console.log(opts);
     // 1,从微信获取openid 2，根据openid查是否注册，若没有注册则拉取用户资料然后再写入，3若成功，重定向url带openid
@@ -37,7 +37,7 @@ module.exports = {
       console.log('result1',result);
       console.log('result1',result.openid);
       req.session.userID=result.userID;
-      if(opts.role==0)
+      if(opts.role==1)
         var redirectUrl = '/index.html?userID='+result.userID+'&tab=index';
       else
         var redirectUrl = '/nurse_home.html?userID='+result.userID+'&tab=index';
