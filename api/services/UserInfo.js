@@ -49,10 +49,7 @@ module.exports = {
       }
 
     ],function(err,results){
-      console.log(err);
-      console.log(results);
       if(err) return cb(err);
-      console.log('parallel執行完了');
       return cb(null,'');
     });
 

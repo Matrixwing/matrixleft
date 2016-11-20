@@ -4,27 +4,9 @@
 
 
 //价格算法和筛选请参照设计文档
-
+async = require('async');
 
 module.exports = {
-  //getSumPrice : function(opts,cb){
-  //  var queryString = 'select sum(price) from tag where tagID=';
-  //  console.log(opts.length);
-  //  for(tag in opts){
-  //    console.log(tag);
-  //    if(opts[tag].tagID!=''){
-  //      queryString+=opts[tag].tagID;
-  //      if(tag<opts.length-1)
-  //      queryString+=' or tagID=';
-  //    }
-  //  }
-  //  console.log(queryString);
-  //  TagList.query(queryString,function(err,result){
-  //    if(err) return cb(err);
-  //    return cb(null,result);
-  //  })
-  //},
-
 
   //查询出所有的标签，并且把type不同的标签区分开。返回一个二维的对象数组：
   //返回的结果：tagList = [[type=0的对象组成的对象数组],[type=1的对象组成的对象数组],[type=2的对象组成的对象数组],........]
@@ -77,23 +59,69 @@ module.exports = {
   },
 
 
+  //把通过getServantSortByWight和getWorkTagPrice拼接成：
+  //含有userID，用户姓名，avaterUrl，小元推荐薪资，服务员期望薪资，系统标签属性，小元评价属性的对象
+  getServantList : function(opts,cb) {
+    async.parallel([
+      function(next) {
+        Tag.getServantSortByWight(opts,function(err,results){
+          if(err) return cb(err);
+          next(null,results)
+        })
+      },
+      function(next){
+        Tag.getWorkTagPrice(opts,function(err,results){
+          if(err) return cb(err);
+          next(null,results)
+        })
+      }
+    ],function(err,results){
+      if(err) return cb(err);
+      var tag;
+      var tagList = results[0];
+      for(tag in tagList){
+        tagList[tag].downPrice+=results[1].workPrice;
+        tagList[tag].upPrice+=results[1].workPrice;
+        tagList[tag].price=tagList[tag].downPrice+'到'+tagList[tag].upPrice;
+        delete tagList[tag].upPrice;
+        delete tagList[tag].downPrice;
+        delete tagList[tag].sumweight;
+      }
+      return cb(null,tagList);
+    });
+  },
+
+
   //通过用户选择的标签筛选出服务员。并且通过标签的权重之和进行重高到低的排序
-  //查询出来的信息有：用户姓名，用户id，用户头像，用户期待薪水，工种特色证书三种类型价格之和
+  //查询出来的信息有：用户姓名，用户id，用户头像，用户期待薪水，除去工作内容价格的价格下限和价格上限。
+  //工作内容价格需要用共事进行计算
   getServantSortByWight : function (opts,cb){
-    var queryString = "SELECT a.userID,ur.userName,IFNULL(ur.`avatarUrl`,'') AS avatarUrl,IFNULL(ur.salary,'') AS salary,SUM(weight) sumweight  , SUM(ta.`price`) AS Price,"+
-    " ifnull((SELECT GROUP_CONCAT(tagName) FROM tag t   LEFT JOIN taguserre tur ON tur.tagID=t.tagID WHERE t.type=4 AND tur.`userID`=a.userID ),'') AS sysTag FROM "+
-    " (SELECT ta.tagName,t.userID,t.tagID FROM `taguserre` t LEFT JOIN `tag` ta ON t.tagID=ta.tagID  WHERE t.tagID=";
+
+    //拼接出查询语句
+    var tag;
+    var tagStr='';
     for(tag in opts){
 
-      if(opts[tag].tagID!=''){
-        queryString+=opts[tag].tagID;
+      //if(opts[tag].tagID){
+        tagStr+=opts[tag].tagID;
+
         if(tag<opts.length-1)
-          queryString+=' or t.tagID=';
-      }
+          tagStr+=' or t.tagID=';
+      //}
     }
-    queryString+=' OR ta.type=2) AS a LEFT JOIN `tag` ta ON a.tagID=ta.`tagID` LEFT JOIN user ur  ON ur.`userID`=a.userID GROUP BY a.userID ORDER BY sumweight  DESC;';
-    console.log(queryString);
-    Tag.getWorkTagPrice(opts,function(){});
+    sails.log.debug(tagStr);
+
+    var queryString = "SELECT a.userID,IFNULL(ur.userName,'') AS userName,IFNULL(ur.`avatarUrl`,'') AS avatarUrl,IFNULL(ur.expectSalary,'') AS expectSalary,SUM(weight) sumweight  ," +
+      "ifnull((SELECT SUM(ta.`price`) FROM tag ta LEFT JOIN taguserre t ON t.tagID=ta.tagID WHERE ta.type!=1 AND (t.tagID=" ;
+    queryString += tagStr ;
+    queryString +=') AND t.`userID`=a.userID ),0)AS downPrice,ifnull((SELECT SUM(ta.`price`) FROM tag ta LEFT JOIN taguserre t ON t.tagID=ta.tagID WHERE ta.type!=1  AND t.`userID`=a.userID ),0)AS upPrice,' +
+      'IFNULL((SELECT GROUP_CONCAT(tagName) FROM tag t   LEFT JOIN taguserre tur ON tur.tagID=t.tagID WHERE t.type=4 AND tur.`userID`=a.userID ),"") AS sysTag FROM  (SELECT ta.tagName,t.userID,t.tagID ' +
+    'FROM `taguserre` t LEFT JOIN `tag` ta ON t.tagID=ta.tagID  WHERE (t.tagID=';
+    queryString += tagStr ;
+    queryString +=') OR ta.type=4 OR ta.type=3) AS a LEFT JOIN `tag` ta ON a.tagID=ta.`tagID` LEFT JOIN `user` ur  ON ur.`userID`=a.userID GROUP BY a.userID ORDER BY sumweight  DESC; ';
+
+
+    //Tag.getWorkTagPrice(opts,function(){});
     TagList.query(queryString,function(err,result){
       if(err) return cb(err);
       return cb(null,result);
@@ -106,7 +134,7 @@ module.exports = {
     var workPrice = 0;//工作内容需要的价格
     var queryString = 'select * from tag t where (t.tagID=' ;
     for(tag in opts){
-      console.log(tag);
+
       if(opts[tag].tagID){
         queryString+=opts[tag].tagID;
         if(tag<opts.length-1)
@@ -122,7 +150,10 @@ module.exports = {
            workPrice +=  tagInfo[x].price*(1+(opts[y].value-tagInfo[x].minValue)/tagInfo[x].precision*tagInfo[x].coefficient);//计算公示请参照设计文档3.1.3便签价格算法
         }
       }
-      console.log(workPrice);
+
+      var result ={
+        workPrice:workPrice
+      };
       if(err) {
         sails.log.error(err);
         return cb(err);
