@@ -34,9 +34,9 @@ module.exports = {
         sails.log.error(err);
         return res.send(500,'服务暂不可用:'+err);
       }
-      console.log('result1',result);
-      console.log('result1',result.openid);
+
       req.session.userID=result.userID;
+      req.session.role=result.role;
       if(opts.role==1)
         var redirectUrl = '/index.html?userID='+result.userID+'&tab=index';
       else
