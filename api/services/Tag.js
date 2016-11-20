@@ -77,7 +77,6 @@ module.exports = {
       }
     ],function(err,results){
       if(err) return cb(err);
-      console.log(results);
       var tag;
       var tagList = results[0];
       for(tag in tagList){
@@ -121,7 +120,7 @@ module.exports = {
     queryString += tagStr ;
     queryString +=') OR ta.type=4 OR ta.type=3) AS a LEFT JOIN `tag` ta ON a.tagID=ta.`tagID` LEFT JOIN `user` ur  ON ur.`userID`=a.userID GROUP BY a.userID ORDER BY sumweight  DESC; ';
 
-    console.log(queryString);
+
     //Tag.getWorkTagPrice(opts,function(){});
     TagList.query(queryString,function(err,result){
       if(err) return cb(err);
@@ -135,7 +134,7 @@ module.exports = {
     var workPrice = 0;//工作内容需要的价格
     var queryString = 'select * from tag t where (t.tagID=' ;
     for(tag in opts){
-      console.log(tag);
+
       if(opts[tag].tagID){
         queryString+=opts[tag].tagID;
         if(tag<opts.length-1)
@@ -151,7 +150,7 @@ module.exports = {
            workPrice +=  tagInfo[x].price*(1+(opts[y].value-tagInfo[x].minValue)/tagInfo[x].precision*tagInfo[x].coefficient);//计算公示请参照设计文档3.1.3便签价格算法
         }
       }
-      console.log(workPrice);
+
       var result ={
         workPrice:workPrice
       };
