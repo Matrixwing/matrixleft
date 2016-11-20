@@ -84,7 +84,7 @@ module.exports = {
     " ifnull((SELECT GROUP_CONCAT(tagName) FROM tag t   LEFT JOIN taguserre tur ON tur.tagID=t.tagID WHERE t.type=4 AND tur.`userID`=a.userID ),'') AS sysTag FROM "+
     " (SELECT ta.tagName,t.userID,t.tagID FROM `taguserre` t LEFT JOIN `tag` ta ON t.tagID=ta.tagID  WHERE t.tagID=";
     for(tag in opts){
-      console.log(tag);
+
       if(opts[tag].tagID!=''){
         queryString+=opts[tag].tagID;
         if(tag<opts.length-1)
@@ -93,6 +93,7 @@ module.exports = {
     }
     queryString+=' OR ta.type=2) AS a LEFT JOIN `tag` ta ON a.tagID=ta.`tagID` LEFT JOIN user ur  ON ur.`userID`=a.userID GROUP BY a.userID ORDER BY sumweight  DESC;';
     console.log(queryString);
+    Tag.getWorkTagPrice(opts,function(){});
     TagList.query(queryString,function(err,result){
       if(err) return cb(err);
       return cb(null,result);
@@ -103,17 +104,16 @@ module.exports = {
   //工作内容的价格需要公示进行计算
   getWorkTagPrice : function (opts,cb){
     var workPrice = 0;//工作内容需要的价格
-    var queryString = 'select * from tag where (tagID=' ;
+    var queryString = 'select * from tag t where (t.tagID=' ;
     for(tag in opts){
       console.log(tag);
-      if(opts[tag].tagID!=''){
+      if(opts[tag].tagID){
         queryString+=opts[tag].tagID;
         if(tag<opts.length-1)
-          queryString+=' or t.tagID=';
+          queryString +=' or t.tagID=';
       }
     }
-    var queryString = ' ) and t.type=1;';
-    console.log(queryString);
+    queryString += ' ) and t.type=1;';
     //计算出工作内容的价格
     TagList.query(queryString,function(err,tagInfo){
       for(x in tagInfo){
@@ -122,7 +122,11 @@ module.exports = {
            workPrice +=  tagInfo[x].price*(1+(opts[y].value-tagInfo[x].minValue)/tagInfo[x].precision*tagInfo[x].coefficient);//计算公示请参照设计文档3.1.3便签价格算法
         }
       }
-      if(err) return cb(err);
+      console.log(workPrice);
+      if(err) {
+        sails.log.error(err);
+        return cb(err);
+      }
       return cb(null,result);
     })
   }

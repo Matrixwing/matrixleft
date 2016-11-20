@@ -20,9 +20,9 @@ module.exports = {
 
   getServantList : function (req,res) {
     var tag = req.param('tag','');
+    console.log(tag);
 
-
-    //var tag = [{tagID:1},{tagID:2},{tagID:3,value:4}];
+    var tag = [{tagID:0},{tagID:21,value:166}];
 
 
     //todo price
