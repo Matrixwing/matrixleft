@@ -140,25 +140,20 @@ $('#getServentList').on('tap','li',function(){
 $('#tag_sure').on('tap',function(){
 	offCanvasWrapper.offCanvas('close');
 	var dataList=[];
-	var p={
+	dataList.push({
 	   tagID:$('#people').attr('tagID'),
 	   value:$('#people').val()
-	}
-	var c={
+	})
+	dataList.push({
 	   tagID:$('#forests').attr('tagID'),
 	   value:$('#forests').val()
-	}
-	//dataList.push('{"tagID":'+$('#people').attr('tagID')+',"value":'+$('#people').val()+'}')
-	dataList.push(p)
-	dataList.push(c)
-	//dataList.push('{"tagID":'+$('#forests').attr('tagID')+',"value":'+$('#forests').val()+'}')
+	})
 	for(var i =0;i<$('.onselect').length;i++){
 		if ($('.onselect').eq(i).attr('tagID')) {
-			var t={
+			dataList.push({
 			   tagID:$('.onselect').eq(i).attr('tagID'),
 			   value:'1'
-			}
-			dataList.push(t)
+			})
 		};
 	}
 	console.log(dataList)
