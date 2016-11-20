@@ -118,7 +118,7 @@ function getTagList(){
 		}else{
 			mui.toast(data.msgInfo);
 		};
-			
+
 	});
 }
 
@@ -168,13 +168,13 @@ function getServentList(dataList){
 	    type: 'post',
 	    url: '/getServantList',
 	    data: {
-	    	'tag':dataList,
+	    	'tag':JSON.stringify(dataList),
 	    	'start':count,
 	    	'limit':5
 	    },
 	    dataType: 'json',
 	    success: function(data) {
-	    	
+
 	    },
 	    error: function(data) {
 	    	mui.toast('请重试');

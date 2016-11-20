@@ -53,7 +53,7 @@ module.exports.routes = {
   "get /updateUserInfo": {controller: "UserInfoController" , action : "updateUserInfo"},
 
   "get /getTagList" : {controller: "TagController" , action : "getTagList"},
-  "get /getServantList": {controller: "TagController" , action : "getServantList"},
+  "post /getServantList": {controller: "TagController" , action : "getServantList"},
    /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *
