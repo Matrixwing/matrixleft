@@ -93,9 +93,16 @@
                     });
             return encrypted;
         }
-       
+       function isWeiXin(){
+            var ua = window.navigator.userAgent.toLowerCase();
+            if(ua.match(/MicroMessenger/i) == 'micromessenger'){
+                return true;
+            }else{
+                return false;
+            }
+        }
 		$(document).ready(function(){
-			if(!base.isWeiXin()){
+			if(!isWeiXin()){
 				$('#weui-footer').removeClass('weui-footer_ab')
 		        $('.qr_div').show();
 		    }
