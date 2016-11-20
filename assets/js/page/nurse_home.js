@@ -3,7 +3,7 @@
 		});
 		//初始化单页view
 		var viewApi = mui('#app').view({
-			defaultPage: '#information'
+			defaultPage: '#information_one'
 		});
 		//初始化单页的区域滚动
 		mui('.mui-scroll-wrapper').scroll();
@@ -37,9 +37,6 @@
 		    };
 		    $('.reg_phone').show();
 		});
-		/*$('.mui-media').on('tap', function() {
-				mui.toast('敬请期待...');
-			});*/
 		/*getcode*/
 		$('#getcode').on('tap',function(){
 			var phone = $('#phone').val();
@@ -86,7 +83,7 @@
 		$('#type_sure').on('tap',function(){
 			var s='';
 			var h='';
-			var obj = $('.mui-input-group input');
+			var obj = $('#type_div input');
 			for(var i=0; i<obj.length; i++){
 				if(obj[i].checked) {
 					s+=obj[i].value+',' ;
@@ -105,7 +102,7 @@
 		$('#skill_sure').on('tap',function(){
 			var s='';
 			var h='';
-			var obj = $('.mui-input-group input');
+			var obj = $('#skill_div input');
 			for(var i=0; i<obj.length; i++){
 				if(obj[i].checked) {
 					s+=obj[i].value+',' ;
@@ -140,6 +137,10 @@
 		})
 		base.tabbarHtml();
 
+$('#reg').on('tap',function(){
+	window.location.href='#information_sec'
+})
+/*link*/
 $('#user_card').on('tap',function(){
 	_czc.push(["_trackEvent", "个人主页", "名片", "", "", ""]);
 	window.location.href='user_card.html?userID='+userID;

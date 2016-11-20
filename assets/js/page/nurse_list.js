@@ -140,11 +140,25 @@ $('#getServentList').on('tap','li',function(){
 $('#tag_sure').on('tap',function(){
 	offCanvasWrapper.offCanvas('close');
 	var dataList=[];
-	dataList.push('{"tagID":'+$('#people').attr('tagID')+',"value":'+$('#people').val()+'}')
-	dataList.push('{"tagID":'+$('#forests').attr('tagID')+',"value":'+$('#forests').val()+'}')
+	var p={
+	   tagID:$('#people').attr('tagID'),
+	   value:$('#people').val()
+	}
+	var c={
+	   tagID:$('#forests').attr('tagID'),
+	   value:$('#forests').val()
+	}
+	//dataList.push('{"tagID":'+$('#people').attr('tagID')+',"value":'+$('#people').val()+'}')
+	dataList.push(p)
+	dataList.push(c)
+	//dataList.push('{"tagID":'+$('#forests').attr('tagID')+',"value":'+$('#forests').val()+'}')
 	for(var i =0;i<$('.onselect').length;i++){
 		if ($('.onselect').eq(i).attr('tagID')) {
-			dataList.push('{"tagID":'+$('.onselect').eq(i).attr('tagID')+',"value":"1"}')
+			var t={
+			   tagID:$('.onselect').eq(i).attr('tagID'),
+			   value:'1'
+			}
+			dataList.push(t)
 		};
 	}
 	console.log(dataList)
@@ -157,7 +171,7 @@ function getServentList(dataList){
 	};
 	$.ajax({
 	    type: 'post',
-	    url: '/getServentList',
+	    url: '/getServantList',
 	    data: {
 	    	'tag':dataList,
 	    	'start':count,

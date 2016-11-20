@@ -35,13 +35,13 @@
 	padding: 10px;
 }
 #code{width: 37% !important;float: left;}
-#reg{width: 100% !important;margin-bottom: 70px}
-#getcode{width: auto !important;padding: 8px;margin-right: 10px;margin-top: 3px;float: right !important;color: #e3457d}
-#information select,#information input,#information button{width: 72%;float: left;font-size: 14px;line-height: 14px;}
-#information .select_icon{line-height: 44px;margin-right: 10px;position: relative;top:-40px;color: #ccc;font-size: 20px;}
-#information label{font-size: 14px;width: 28%}
-#information .mui-input-row label{line-height: 14px;}
-#information .mui-input-row label{padding: 13px 15px}
+#reg{width: 100% !important;margin-bottom: 70px;font-size: 14px;line-height: 14px;}
+#getcode{width: auto !important;padding: 8px;margin-right: 10px;margin-top: 3px;float: right !important;color: #e3457d;background-color: #f0f2f5;border: 1px solid #f0f2f5;border-radius: 6px;}
+.information select,.information input,.information button{width: 72% !important;;float: left;font-size: 14px;line-height: 14px;}
+.information .select_icon{line-height: 44px;margin-right: 10px;position: relative;top:-40px;color: #ccc;font-size: 20px;}
+.information label{font-size: 14px;width: 28%}
+.information .mui-input-row label{line-height: 14px;}
+.information .mui-input-row label{padding: 13px 15px}
 .choose_div{background-color: #FFF;width: 100%;clear: left;position: relative;}
 .choose_div .mui-btn{width: 20% !important;margin:auto;height: 30px;line-height: 30px;padding: 0 !important;margin-top: 5px;float: inherit;}
 .choose_div label{width: 100% !important;padding: 13px 15px 13px 58px !important;}

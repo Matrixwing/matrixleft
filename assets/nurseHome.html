@@ -59,7 +59,7 @@
 				</div>
 			</div>
 		</div>
-		<div id="information" class="mui-page">
+		<div id="information_one" class="mui-page information">
 			<div class="mui-navbar-inner mui-bar mui-bar-nav">
 				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
 					<span class="mui-icon mui-icon-left-nav"></span>
@@ -82,12 +82,33 @@
 								<input id='code' type="number" class="mui-input" placeholder="请输入验证码" maxlength="6"   oninput="if(value.length>6)value=value.slice(0,6)">
 								<button type="button" class="mui-btn code" id="getcode">获取验证码</button>
 							</div>
-						</form>
-						<form class="mui-input-group">
 							<div class="mui-input-row">
 								<label>身份证号</label>
 								<input id='' type="text" class="mui-input" placeholder="请输入身份证号">
 							</div>
+						</form>
+						<div class="mui-content-padded">
+							<a id='reg' class="mui-btn mui-btn-block mui-btn-primary">确定</a>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="information_sec" class="mui-page information">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>
+				</button>
+				<h1 class="mui-center mui-title">服务员资料完善</h1>
+			</div>
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+					<div class="dotips">
+						<span class="mui-icon iconfont icon-yduigantanhaokongxin"></span>完善资料后，我们可为您提供优质工作。
+					</div>
+						<form class="mui-input-group">
 							<div class="mui-input-row">
 								<label>籍贯</label>
 								<input id='' type="text" class="mui-input" placeholder="请输入籍贯" value="四川省">
@@ -141,31 +162,41 @@
 								<span class="mui-icon mui-icon-arrowdown mui-pull-right select_icon"></span>
 							</div>
 							<div class="mui-input-row">
-								<label>类型选择</label>
+								<label>服务类型</label>
 								<input  type="text" class="mui-input" placeholder="点击选择" id="type">
 								<span class="mui-icon mui-icon-arrowdown mui-pull-right select_icon"></span>
 							</div>
 							<div id="type_div" class="choose_div" style="display:none">
 								<div class="mui-input-row mui-checkbox mui-left">
-									<div class="mui-pull-left mui-col-xs-5">
+									<div class="mui-pull-left mui-col-xs-6">
 										<label>不住家保姆</label>
-										<input name="n_type" value="1" type="checkbox">
+										<input name="n_type" value="0" type="checkbox">
 									</div>
 									<div class="mui-pull-left mui-col-xs-5">
 										<label>住家保姆</label>
+										<input name="n_type" value="1" type="checkbox">
+									</div>
+								</div>
+								<div class="mui-input-row mui-checkbox mui-left">
+									<div class="mui-pull-left mui-col-xs-6">
+										<label>半天钟点工</label>
 										<input name="n_type" value="2" type="checkbox">
+									</div>
+									<div class="mui-pull-left mui-col-xs-5">
+										<label>全天钟点工</label>
+										<input name="n_type" value="3" type="checkbox">
 									</div>
 								</div>
 								<div class="mui-input-row mui-checkbox mui-left">
 									<label>月嫂</label>
-									<input name="n_type" value="3" type="checkbox">
+									<input name="n_type" value="300" type="checkbox">
 								</div>
 								<div class="mui-input-row" style="text-align: center;">
 									<a id='type_sure' class="mui-btn ">确定</a>
 								</div>
 							</div>
 							<div class="mui-input-row">
-								<label>技能选择</label>
+								<label>特长选择</label>
 								<input  type="text" class="mui-input" placeholder="点击选择" id="skill">
 								<span class="mui-icon mui-icon-arrowdown mui-pull-right select_icon"></span>
 							</div>
@@ -222,7 +253,7 @@
 							</div>
 						</form>
 						<div class="mui-content-padded">
-							<button id='reg' class="mui-btn mui-btn-block mui-btn-primary">确定</button>
+							<button id='reg_add' class="mui-btn mui-btn-block mui-btn-primary">确定</button>
 						</div>
 
 					</div>
@@ -300,148 +331,6 @@
 	<script src="js/mui/mui.view.js "></script>
 	<script src="js/uploadimg/lrz.bundle.js "></script>
 	<script src="js/base.js"></script>
-	<script>
-		mui.init({
-			swipeBack:true //启用右滑关闭功能
-		});
-		//初始化单页view
-		var viewApi = mui('#app').view({
-			defaultPage: '#information'
-		});
-		//初始化单页的区域滚动
-		mui('.mui-scroll-wrapper').scroll();
-		var view = viewApi.view;
-		(function($) {
-			//处理view的后退与webview后退
-			var oldBack = $.back;
-			$.back = function() {
-				if (viewApi.canBack()) { //如果view可以后退，则执行view的后退
-					viewApi.back();
-				} else { //执行webview后退
-					oldBack();
-				}
-			};
-			
-		})(mui);
-	    var userID=base.getQueryString('userID');
-		$.get("/getUser?userID="+userID,function(data,status){
-			var data = JSON.parse(data).data[0];
-		    $('.avatarUrl').attr('src', data.avatarUrl);
-		    if (data.userName) {
-		   		$('.nickname').html(data.userName);
-		    }else{
-		    	$('.nickname').html(data.nickname);
-		    };
-		    $('.gender').html(data.gender);
-		    if (data.phone) {
-		    	$('.phone').html(data.phone);
-		    }else{
-		    	$('.reg_phone').show();
-		    };
-		    $('.reg_phone').show();
-		});
-		/*$('.mui-media').on('tap', function() {
-				mui.toast('敬请期待...');
-			});*/
-		/*getcode*/
-		$('#getcode').on('tap',function(){
-			var phone = $('#phone').val();
-			if (!base.phoneCheck(phone)) {
-				mui.toast('请输入正确的手机号');
-				return;
-			}else{
-				var _this = this;
-				$.get("/sendNumToPhone?phone="+phone,function(data,status){
-					if (JSON.parse(data).msgNo == '0000' ) {
-						mui.toast(JSON.parse(data).msgInfo);
-						settime(_this);
-					}else{
-						mui.toast(JSON.parse(data).msgInfo);
-					};
-					
-				});
-				
-			};
-			_czc.push(["_trackEvent", "个人主页", "获取验证码", "", "", ""]);
-		})
-		/*倒计时*/
-		var countdown=60; 
-		function settime(obj) { 
-		    if (countdown == 0) { 
-		        obj.removeAttribute("disabled");    
-		        obj.innerHTML ="获取验证码"; 
-		        countdown = 60; 
-		        return;
-		    } else { 
-		        obj.setAttribute("disabled", true); 
-		        obj.innerHTML ="重新发送(" + countdown + "s)"; 
-		        countdown--; 
-		    } 
-		setTimeout(function() { 
-		    settime(obj) }
-		    ,1000) 
-		}
-
-		$('#type').on('tap',function(){
-			$('#type_div').show()
-		})
-
-		$('#type_sure').on('tap',function(){
-			var s='';
-			var h='';
-			var obj = $('.mui-input-group input');
-			for(var i=0; i<obj.length; i++){
-				if(obj[i].checked) {
-					s+=obj[i].value+',' ;
-					h+=obj[i].previousElementSibling.innerText+',' ;
-				}
-			}
-			$('#type').val(h);
-			$('#type').attr('data',s);
-			$('#type_div').hide();
-		})
-
-		$('#skill').on('tap',function(){
-			$('#skill_div').show()
-		})
-
-		$('#skill_sure').on('tap',function(){
-			var s='';
-			var h='';
-			var obj = $('.mui-input-group input');
-			for(var i=0; i<obj.length; i++){
-				if(obj[i].checked) {
-					s+=obj[i].value+',' ;
-					h+=obj[i].previousElementSibling.innerText+',' ;
-				}
-			}
-			$('#skill').val(h);
-			$('#skill').attr('data',s);
-			$('#skill_div').hide();
-		})
-
-		/*uploadimg*/
-		$('.file').on('change', function () {
-			var p =$(this);
-		    lrz(this.files[0],{width: 640,quality:0.3})
-		        .then(function (rst) {
-		        	p.prev().show();
-		            p.prev().attr('src',rst.base64);
-		            p.parent().removeClass('space')
-		            return rst;
-		        })
-		        .catch(function (err) {
-		        	alert(err);
-		        })
-		        .always(function () {
-		        });
-		});
-		$('.image-close').on('tap',function(){
-			$(this).next().hide();
-			$(this).nextAll('input').val('');
-			$(this).parent().addClass('space')
-		})
-		base.tabbarHtml();
-	</script>
+	<script src="js/page/nurse_home.js"></script>
 	<script src="https://s4.cnzz.com/z_stat.php?id=1260604409&web_id=1260604409" language="JavaScript"></script>
 </html>
