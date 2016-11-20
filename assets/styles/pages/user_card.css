@@ -1,38 +1,24 @@
-.mui-card-content-inner{
-	text-align: center;
-}
-.card_title{
-	color: #007aff
-}
-.card_content{
-	width: 100%;
-	text-align: left;
-	font-size: .8em;
-	color: #ccc;
-}
-.card_content .mui-icon{
-	font-size: .8em;
-}
-.mui-input-group:first-child {
-	margin-top: 20px;
-}
-.mui-input-group label {
-	width: 26%;
-}
-.mui-input-row label~input,
-.mui-input-row label~select,
-.mui-input-row label~textarea {
-	width: 74%;
-}
-.mui-checkbox input[type=checkbox],
-.mui-radio input[type=radio] {
-	top: 6px;
-}
-.mui-content-padded {
-	margin-top: 25px;
-}
-.mui-btn {
-	padding: 10px;
-}
-#code{width: 37%;float: left;}
-.mui-input-row .code{width: auto !important;padding: 8px;margin-right: 10px;margin-top: 3px;}
+
+.card_main{margin: 15px;}
+img{width: 100%}
+.mui-pull-right{margin-left: 5%}
+.card_main .mui-card-footer{padding: 0}
+.mui-table-view{margin: 0;width: 100%}
+.mui-page .mui-table-view:last-child{margin-bottom: 0}
+.mui-icon{color: #e3457d;margin: 4px 5px 0 0}
+.cardbar{background: #fff;border-bottom: 1px solid #ccc;text-align: right;padding: 0 15px}
+
+.card_info span{font-size: 14px;}
+.card_info .cardbar span{font-size: 24px;}
+.card_info .cardbar a{display:block;margin: 0 5px !important;padding: 9px 10px}
+/*.card_info .cardbar a:first-child{margin-right: 0;padding-right: 0}*/
+#card_more{display: none}
+.cer_info .mui-table-view-cell{padding: 11px 0px !important;}
+.cer_info .mui-table-view{margin: 0 !important;}
+.cer_info .mui-table-view-cell:after{left: 0 !important;}
+.rated_info .mui-card-header{font-size: 14px;}
+.rated_info .mui-card-link{color: #6d6d72}
+
+.rated_info .mui-card-link span{color: #e3457d;font-size: 16px}
+#qcode_div{position: absolute;top: 0;bottom: 0;left: 0;right: 0;width: 270px;height: 270px;background-color: #fff;z-index: 999;margin: auto;overflow: hidden;}
+#qcode_div canvas{padding: 10px}

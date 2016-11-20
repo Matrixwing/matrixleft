@@ -103,7 +103,7 @@
 		})
 		$('#user_card').on('tap',function(){
 			_czc.push(["_trackEvent", "个人主页", "名片", "", "", ""]);
-			window.location.href='user_card.html?userID='+userID;
+			window.location.href='userCard.html?userID='+userID;
 		})
 		$('#share').on('tap',function(){
 			_czc.push(["_trackEvent", "个人主页", "分享", "", "", ""]);

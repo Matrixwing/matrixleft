@@ -47,7 +47,7 @@
 .choose_div label{width: 100% !important;padding: 13px 15px 13px 58px !important;}
 #skill,#type{padding-right: 35px !important}
 .choose_div .mui-checkbox input[type=checkbox]:before, .mui-radio input[type=radio]:before{font-size: 24px;line-height: 30px}
-.mui-input-group{margin-top: 15px !important;}
+.mui-input-group{margin-top: 10px !important;}
 .mui-input-group:last-child{margin-top: 10px !important;}
 #image-list {
 	width:180px;

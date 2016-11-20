@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>微元汇</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="styles/mui.min.css">
+		<link rel="stylesheet" href="styles/mui.picker.min.css">
+		<link rel="stylesheet" type="text/css" href="styles/main.css"/>
+		<link rel="stylesheet" type="text/css" href="styles/pages/nurses_list.css"/>
+	</head>
+
+	<body>
+		<div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable mui-slide-in">
+			<!--菜单部分-->
+			<aside id="offCanvasSide" class="mui-off-canvas-right">
+				<div id="offCanvasSideScroll" class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<div class="title">请选择</div>
+						<div class="content mui-pull-left">
+							<div class="tag_div">
+								<div class="tag_type">
+									<div class="tag_left">
+										<span>需求：</span>
+									</div>
+									<div class="tag_right" id="needs">
+										<div class="people tag_row">
+											服务人数：
+											<div class="mui-numbox" data-numbox-min="1">
+												<button class="mui-btn mui-btn-numbox-minus" type="button">-</button>
+												<input id="people" class="mui-input-numbox" type="number" tagID='22'>
+												<button class="mui-btn mui-btn-numbox-plus" type="button">+</button>
+											</div>
+										</div>
+										<div class="mianji tag_row">
+											房屋面积：
+											<div class="mui-numbox" data-numbox-min="100" data-numbox-step='10'>
+												<button class="mui-btn mui-btn-numbox-minus" type="button">-</button>
+												<input id="forests" class="mui-input-numbox" type="number" tagID='21'>
+												<button class="mui-btn mui-btn-numbox-plus" type="button">+</button>
+											</div>
+										</div>
+										<div class="line"></div>
+										<div class="child tag_row">
+											<div class="tagg"  id="old_tag" >
+												<button class="mui-btn mui-btn-block pipcker old_tag" id="old_num" type="button">照顾老人</button>
+											</div>
+											<div class="tagg" id="old_tag2"   style="display:none">
+												<button class="mui-btn mui-btn-block pipcker old_tag" id="old_num2" type="button">照顾老人</button>
+											</div>
+											<span class="mui-icon iconfont icon-yduijia" id='add_old'></span>
+										</div>
+										<div class="old tag_row">
+											<div class="tagg" id="child_tag" >
+												<button class="mui-btn mui-btn-block pipcker child_tag" id="child_num" type="button">照顾小孩</button>
+											</div>
+											<div class="tagg" id="child_tag2"   style="display:none">
+												<button class="mui-btn mui-btn-block pipcker child_tag" id="child_num2" type="button">照顾小孩</button>
+											</div>
+											<span class="mui-icon iconfont icon-yduijia" id='add_child'></span>
+										</div>
+										<div class="line"></div>
+									</div>
+								</div>
+								<div id="full_tag">
+									<div class="tag_type tag_btn">
+										<div class="tag_left">
+											<span>特色：</span>
+										</div>
+										<div class="tag_right">
+											<div class="mui-row" id="tese">
+												
+											</div>
+										</div>
+										<div class="line"></div>
+									</div>
+									<div class="tag_type tag_btn">
+										<div class="tag_left">
+											<span>证书：</span>
+										</div>
+										<div class="tag_right">
+											<div class="mui-row" id="cer">
+												
+											</div>
+										</div>
+										<div class="line"></div>
+									</div>
+								</div>
+							</div>
+							<div class="load_tag  mui-pull-left">
+								<div class="mui-pull-loading mui-icon mui-spinner"></div>
+							</div>
+						</div>
+
+							
+					</div>
+					<div class="tag_over  mui-pull-left">
+								<div id="reset" class="">重置</div>
+								<div id="tag_sure" class="">确定</div>
+							</div>
+
+				</div>
+			</aside>
+			<div class="mui-inner-wrap">
+				<header class="mui-bar mui-bar-nav">
+					<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+						<span class="mui-icon mui-icon-left-nav"></span>
+					</button>
+					<h1 class="mui-center mui-title">服务列表</h1>
+					<button type="button" class="mui-left mui-btn  mui-btn-link mui-pull-right" id="txt">服务内容</button>
+				</header>
+				<div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
+						<div class="choose mui-input-group">
+							<div class="mui-row" id="offCanvasShow">
+								<button type="button" class="mui-btn mui-pull-left ready" tagID='0'>不住家保姆</button>
+								<button type="button" class="mui-btn mui-pull-left ready" tagID='1'>住家保姆</button>
+								<button type="button" class="mui-btn mui-pull-left ready" tagID='2'>半天钟点工</button>
+								<button type="button" class="mui-btn mui-pull-left ready" tagID='3'>全天钟点工</button>
+								<button type="button" class="mui-btn mui-pull-left" tagID='300'>月嫂</button>
+								<button type="button" class="mui-btn mui-pull-left" tagID='301'>家电维修</button>
+							</div>
+						</div>
+						<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<!--数据列表-->
+								<ul class="mui-table-view mui-table-view-chevron" id="getServentList">
+								</ul>
+							</div>
+						</div>
+				</div>
+				<!-- off-canvas backdrop -->
+				<div class="mui-off-canvas-backdrop"></div>
+			</div>
+		</div>
+
+	</body>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/mui/mui.min.js"></script>
+	<script src="js/mui/mui.view.js "></script>
+	<script src="js/mui/mui.picker.min.js "></script>
+	<script src="js/base.js"></script>
+	<script src="js/page/nurse_list.js"></script>
+	<script>
+		
+	</script>
+	<script src="https://s4.cnzz.com/z_stat.php?id=1260604409&web_id=1260604409" language="JavaScript"></script>
+</html>

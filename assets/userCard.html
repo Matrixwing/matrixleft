@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>微元汇</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="styles/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="styles/main.css"/>
+		<link rel="stylesheet" type="text/css" href="styles/pages/user_card.css"/>
+	</head>
+
+	<body>
+		<!--页面主结构开始-->
+		<div id="app" class="mui-views">
+			<div class="mui-view">
+				<div class="mui-navbar">
+				</div>
+				<div class="mui-pages">
+				</div>
+			</div>
+		</div>
+		<!--页面主结构结束-->
+		<!--单页面开始-->
+        <div id="card" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>
+				</button>
+				<h1 class="mui-center mui-title" id="name_card">名片</h1>
+
+				<button type="button" class="mui-left mui-btn  mui-btn-link mui-btn-nav mui-pull-right" id="qcode">二维码</button>
+			</div>
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper" id="returnup">
+					<div class="mui-scroll">
+						<div class="mui-row card_main">
+							<div class="mui-pull-left mui-col-xs-4">
+								<img src="images/timg.jpg" id="avatarUrl">
+							</div>
+							<div class="mui-pull-right mui-col-xs-7 ">
+								<span class="mui-icon iconfont icon-personalcenter mui-pull-left"></span><p id="userName">--</p>
+								<span class="mui-icon iconfont icon-mingpian mui-pull-left"></span><p id="IDCard">--</p>
+								<span class="mui-icon iconfont icon-tishi mui-pull-left"></span><p id="workstatus">--</p>
+								<span class="mui-icon iconfont icon-shouhuodizhi mui-pull-left"></span><p id="serveCity">--</p>
+							</div>
+						</div>
+						<div class="mui-row card_info">
+							<ul class="mui-table-view">
+								 <li class="mui-table-view-cell">
+								 	<p class="mui-pull-left mui-col-xs-3">当前住址：</p>
+								 	<span id="address">--</span>
+								 </li>
+								 <li class="mui-table-view-cell">
+								 	<p class="mui-pull-left mui-col-xs-3">类&#12288;&#12288;型：</p>
+								 	<span id="servantTypeName">--</span>
+								 </li>
+								 <li class="mui-table-view-cell">
+								 	<p class="mui-pull-left mui-col-xs-3">专&#12288;&#12288;长：</p>
+								 	<span id="skillName">--</span>
+								 </li>
+								 <li class="mui-table-view-cell">
+								 	<p class="mui-pull-left mui-col-xs-3">服务经验：</p>
+								 	<span id="workExp">--</span>
+								 </li>
+								 <li class="mui-table-view-cell">
+								 	<p class="mui-pull-left mui-col-xs-3">每月休息：</p>
+								 	<span id='mouthRest'>--</span>
+								 </li>
+								 <li class="mui-table-view-cell">
+								 	<p class="mui-pull-left mui-col-xs-3">小元实名：</p>
+								 	<span id="identityAuth">--</span>
+								 </li>
+								 <li class="mui-table-view-cell">
+								 	<p class="mui-pull-left mui-col-xs-3">小元体检：</p>
+								 	<span id="examination">--</span>
+								 </li>
+								 <li class="mui-table-view-cell">
+								 	<p class="mui-pull-left mui-col-xs-3">小元评价：</p>
+								 	<span id="assessment">--</span>
+								 </li>
+							</ul>
+							<ul class="mui-table-view" id="card_more">
+								 <li class="mui-table-view-cell">
+								 	<p class="mui-pull-left mui-col-xs-3">手机号码：</p>
+								 	<span  id="phone">--</span>
+								 </li>
+								 <li class="mui-table-view-cell">
+								 	<p class="mui-pull-left mui-col-xs-3">籍&#12288;&#12288;贯：</p>
+								 	<span id='homeTown'>--</span>
+								 </li>
+								 <li class="mui-table-view-cell">
+								 	<p class="mui-pull-left mui-col-xs-3">民&#12288;&#12288;族：</p>
+								 	<span id='folk'>--</span>
+								 </li>
+								 <li class="mui-table-view-cell">
+								 	<p class="mui-pull-left mui-col-xs-3">婚&#12288;&#12288;姻：</p>
+								 	<span id='marriage'>--</span>
+								 </li>
+								 <li class="mui-table-view-cell">
+								 	<p class="mui-pull-left mui-col-xs-3">学&#12288;&#12288;历：</p>
+								 	<span id='eduName'>--</span>
+								 </li>
+								 <li class="mui-table-view-cell">
+								 	<p class="mui-pull-left mui-col-xs-3">年&#12288;&#12288;龄：</p>
+								 	<span id='niandai'>--</span>
+								 </li>
+								 <li class="mui-table-view-cell">
+								 	<p class="mui-pull-left mui-col-xs-3">属&#12288;&#12288;相：</p>
+								 	<span id='shengxiao'>--</span>
+								 </li>
+								 <li class="mui-table-view-cell">
+								 	<p class="mui-pull-left mui-col-xs-3">星&#12288;&#12288;座：</p>
+								 	<span id='xingzuo'>--</span>
+								 </li>
+								 <li class="mui-table-view-cell">
+								 	<p class="mui-pull-left mui-col-xs-3">自我介绍：</p>
+								 	<span id='selfEvaluation'>--</span>
+								 </li>
+								 <input id='certID' type="hidden" >
+							</ul>
+							<div class="mui-row cardbar">
+
+							 	<a href="javascript:;" class="mui-pull-right" id="card_up"><span class="mui-icon iconfont icon-xiangxiajiantou mui-pull-left"></span></a>
+							 	<a href="javascript:;" class="mui-pull-right" id="card_down"  style="display:none"><span class="mui-icon iconfont icon-xiangshangjiantou mui-pull-left"></span></a>
+							 	<a href="#cer" class="mui-pull-right"><span class="mui-icon iconfont icon-zhengshu mui-pull-left"></span></a>
+								<!-- <a href="#rated" class="mui-pull-right"><span class="mui-icon iconfont icon-pingjia1 mui-pull-left"></span></a> -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="rated" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>
+				</button>
+				<h1 class="mui-center mui-title">XX的评价</h1>
+			</div>
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<div class="mui-card rated_info">
+							<div class="mui-card-content">
+								<div class="mui-card-content-inner">
+									包含页眉页脚的卡片，页眉常用来显示面板标题，页脚用来显示额外信息或支持的操作（比如点赞、评论等）
+								</div>
+							</div>
+							<div class="mui-card-footer">
+								<a class="mui-card-link">综合评分：<span>4.5分</span></a>
+								<a class="mui-card-link">2016年11月3日</a>
+							</div>
+						</div>
+						<div class="mui-card rated_info">
+							<div class="mui-card-content">
+								<div class="mui-card-content-inner">
+									包含页眉页脚的卡片，页眉常用来显示面板标题，页脚用来显示额外信息或支持的操作（比如点赞、评论等）
+								</div>
+							</div>
+							<div class="mui-card-footer">
+								<a class="mui-card-link">综合评分：<span>4.5分</span></a>
+								<a class="mui-card-link">2016年11月3日</a>
+							</div>
+						</div>
+						<div class="mui-card rated_info">
+							<div class="mui-card-content">
+								<div class="mui-card-content-inner">
+									包含页眉页脚的卡片，页眉常用来显示面板标题，页脚用来显示额外信息或支持的操作（比如点赞、评论等）
+								</div>
+							</div>
+							<div class="mui-card-footer">
+								<a class="mui-card-link">综合评分：<span>4.5分</span></a>
+								<a class="mui-card-link">2016年11月3日</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="cer" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>
+				</button>
+				<h1 class="mui-center mui-title" id="cer_title">证书</h1>
+			</div>
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll" id="card_main">
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery.qrcode.min.js"></script>
+	<script src="js/mui/mui.min.js"></script>
+	<script src="js/mui/mui.view.js "></script>
+	<script src="js/base.js"></script>
+	<script src="js/page/user_card.js"></script>
+	
+
+	<script src="https://s4.cnzz.com/z_stat.php?id=1260604409&web_id=1260604409" language="JavaScript"></script>
+</html>

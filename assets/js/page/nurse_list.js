@@ -11,7 +11,7 @@ mui.init({
 $(document).ready(function(){
   	var old_tag = new mui.PopPicker();
  	old_tag.setData([
- 		{value:'200',text:'照顾老人'},
+ 		{value:'200',text:'不选择'},
  		{value:'201',text:'老人自理'},
  		{value:'202',text:'老人半自理'},
  		{value:'203',text:'老人不自理'},
@@ -24,6 +24,7 @@ $(document).ready(function(){
 			_this.attr('tagID',items[0].value);
 			if (items[0].value=='200') {
 				_this.removeClass('onselect')
+				_this.html('照顾老人')
 			}else{
 				_this.addClass('onselect')
 			};
@@ -32,7 +33,7 @@ $(document).ready(function(){
 	//
 	var child_tag = new mui.PopPicker();
  	child_tag.setData([
- 		{value:'100',text:'照顾小孩'},
+ 		{value:'100',text:'不选择'},
  		{value:'101',text:'小孩小于1岁'},
  		{value:'102',text:'小孩1到3岁'},
  		{value:'103',text:'小孩大于1岁'},
@@ -45,6 +46,7 @@ $(document).ready(function(){
 			_this.attr('tagID',items[0].value);
 			if (items[0].value=='100') {
 				_this.removeClass('onselect')
+				_this.html('照顾小孩')
 			}else{
 				_this.addClass('onselect')
 			};
@@ -55,40 +57,8 @@ $(document).ready(function(){
 })
 
 
-/**
- * 下拉刷新具体业务实现
- */
-/*function pulldownRefresh() {
-	setTimeout(function() {
-		var table = document.body.querySelector('.mui-table-view');
-		var cells = document.body.querySelectorAll('.mui-table-view-cell');
-		for (var i = cells.length, len = i + 3; i < len; i++) {
-			var li = document.createElement('li');
-			li.className = 'mui-table-view-cell';
-			li.innerHTML = '<a class="mui-navigate-right">Item ' + (i + 1) + '</a>';
-			//下拉刷新，新纪录插到最前面；
-			table.insertBefore(li, table.firstChild);
-		}
-		mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
-	}, 1500);
-}*/
+
 var count = 0;
-/**
- * 上拉加载具体业务实现
- */
-function pullupRefresh() {
-	setTimeout(function() {
-		mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > 5)); //参数为true代表没有更多数据了。
-		var table = document.body.querySelector('.mui-table-view');
-		var cells = document.body.querySelectorAll('.mui-table-view-cell');
-		for (var i = cells.length, len = i + 3; i < len; i++) {
-			var li = document.createElement('li');
-			li.className = 'mui-table-view-cell';
-			li.innerHTML = '<a class="mui-navigate-right">Item ' + (i + 1) + '</a>';
-			table.appendChild(li);
-		}
-	}, 2500);
-}
 if (mui.os.plus) {
 	mui.plusReady(function() {
 		setTimeout(function() {
@@ -163,7 +133,9 @@ $('#add_child').on('tap',function(){
 $('#full_tag').on('tap','button',function(){
 	$(this).addClass('onselect')
 })
-
+$('#getServentList').on('tap','li',function(){
+	window.location.href='userCard.html?userID='+$(this).attr('userID')
+})
 /*getServentList*/
 $('#tag_sure').on('tap',function(){
 	offCanvasWrapper.offCanvas('close');
@@ -200,8 +172,8 @@ function getServentList(dataList){
 	    	var a=2;
 	    	var serventList = [];
 	    	for(var i =0;i<a;i++){
-	    		serventList.push('<li class="mui-table-view-cell mui-media">')
-	    			serventList.push('<a class="mui-navigate-right" href="user_card.html">')
+	    		serventList.push('<li class="mui-table-view-cell mui-media" userID="6">')
+	    			serventList.push('<a class="mui-navigate-right">')
 	    				serventList.push('<img class="mui-media-object mui-pull-left" src="../images/timg.jpg">')
 	    				serventList.push('<div class="mui-media-body">')
 	    					serventList.push('<div class="mui-row">')
@@ -237,6 +209,7 @@ function reset(){
 	$('#add_old').show();
 	$('#add_child').show();
 	$('#full_tag button').removeClass('onselect')
+	old_tag.pickers.setSelectedIndex(1, 2000);
 }
 $('#reset').on('tap',function(){
 	reset()
