@@ -3,12 +3,15 @@ mui.init({
 	pullRefresh: {
 			container: '#pullrefresh',
 			up: {
+				height:80,
 				contentrefresh: '正在加载...',
-				callback: getServentList
+				contentnomore:'没有更多数据了',
+				callback: getServantList
 			}
 		}
 });
 $(document).ready(function(){
+	getTagList();
   	var old_tag = new mui.PopPicker();
  	old_tag.setData([
  		{value:'200',text:'不选择'},
@@ -53,12 +56,12 @@ $(document).ready(function(){
 		});
 	});
 	//延迟获取tag
-	setTimeout("getTagList()",1500)
+	//setTimeout("getTagList()",1500)
 })
 
 
 
-var count = 0;
+
 if (mui.os.plus) {
 	mui.plusReady(function() {
 		setTimeout(function() {
@@ -68,7 +71,9 @@ if (mui.os.plus) {
 	});
 } else {
 	mui.ready(function() {
-		mui('#pullrefresh').pullRefresh().pullupLoading();
+		setTimeout(function() {
+			mui('#pullrefresh').pullRefresh().pullupLoading();
+		}, 1500);
 	});
 }
 
@@ -76,7 +81,7 @@ if (mui.os.plus) {
 var offCanvasWrapper = mui('#offCanvasWrapper');
  //菜单容器
 var offCanvasSide = document.getElementById("offCanvasSide");
-$('#offCanvasShow .ready').on('tap', function() {
+$('#offCanvasShow').on('tap','.ready',function() {
 	$('.choose .mui-btn').removeClass('choosein_btn')
 	$(this).addClass('choosein_btn')
 	offCanvasWrapper.offCanvas('show');
@@ -95,10 +100,25 @@ function getTagList(){
     	var d = data.data;
 		if (data.msgNo == '0000' ) {
 			$('.load_tag').hide();
+			//工种填充
+			if (d[0]) {
+				var g = d[0];
+				var thtml =[];
+				for(var i=0;i<g.length;i++){
+					if (g[i].tagID=='300' || g[i].tagID=='301') {
+						thtml.push('<button type="button" class="mui-btn mui-pull-left" tagID='+g[i].tagID+'">'+g[i].tagName+'</button>')
+					}else{
+						thtml.push('<button type="button" class="mui-btn mui-pull-left ready" tagID='+g[i].tagID+'">'+g[i].tagName+'</button>')
+					}
+				}
+				var html=thtml.join('');
+				$('#offCanvasShow').empty();
+				$('#offCanvasShow').append(html)
+			};
 			if (d[2]) {
 				var t = d[2];
 				var thtml =[];
-				for(var i=0;i<d.length;i++){
+				for(var i=0;i<t.length;i++){
 					thtml.push('<button type="button" class="mui-btn mui-pull-left" tagID='+t[i].tagID+'">'+t[i].tagName+'</button>')
 				}
 				var html=thtml.join('');
@@ -133,10 +153,10 @@ $('#add_child').on('tap',function(){
 $('#full_tag').on('tap','button',function(){
 	$(this).addClass('onselect')
 })
-$('#getServentList').on('tap','li',function(){
+$('#getServantList').on('tap','li',function(){
 	window.location.href='userCard.html?userID='+$(this).attr('userID')
 })
-/*getServentList*/
+/*getServantList*/
 $('#tag_sure').on('tap',function(){
 	offCanvasWrapper.offCanvas('close');
 	var dataList=[];
@@ -157,10 +177,10 @@ $('#tag_sure').on('tap',function(){
 		};
 	}
 	console.log(dataList)
-	getServentList(dataList)
+	getServantList(dataList,'clear')
 })
-function getServentList(dataList){
-	mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > 5));
+var count = 1;
+function getServantList(dataList,clear){
 	if (!dataList) {
 		dataList = '';
 	};
@@ -174,39 +194,48 @@ function getServentList(dataList){
 	    },
 	    dataType: 'json',
 	    success: function(data) {
+	    	if (data.msgNo=='0000') {
+	    		var serventList = [];
+		    	for(var i =0;i<data.data.length;i++){
+		    		serventList.push('<li class="mui-table-view-cell mui-media" userID="'+data.data[i].userID+'">')
+		    			serventList.push('<a class="mui-navigate-right">')
+		    				serventList.push('<img class="mui-media-object mui-pull-left" src="'+data.data[i].avatarUrl+'">')
+		    				serventList.push('<div class="mui-media-body">')
+		    					serventList.push('<div class="mui-row">')
+									serventList.push('<span class="mui-pull-left">'+data.data[i].userName+'</span>')
+									serventList.push('<div class="qwxz  mui-pull-right">期望薪资：<font>'+data.data[i].expectSalary+'</font>/月</div>')
+								serventList.push('</div>')
+								serventList.push('<div class="mui-row">')
+									serventList.push('<div class="mui-row">')
+										
+											serventList.push('<div class="kbd_div mui-pull-left">')
+											if (data.data[i].sysTag) {
+												serventList.push('<div class="kbd">小元实名</div>')
+											};
+											serventList.push('</div>')
+										
+										/*serventList.push('<div class="kbd_div mui-pull-left">')
+											serventList.push('<div class="kbd">小元体检</div>')
+										serventList.push('</div>')*/
+									serventList.push('</div>')
+									serventList.push('<div class="ckxz">小元参考薪资：<font>'+data.data[i].price+'</font>/月</div>')
+								serventList.push('</div>')
+		    				serventList.push('</div>')
+		    				serventList.push('<p class="mui-ellipsis">小元评价：改服务员态度好，服务号，做饭好，什么都好</p>')
+		    			serventList.push('</a>')
+	    			serventList.push('</li>')
+		    	}
+		    	var serventList = serventList.join('')
+		    	if (clear) {
+		    		$('#getServantList').empty();
+		    	};
+		    	$('#getServantList').append(serventList)
+	    	};
 
+			mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > 5));
 	    },
 	    error: function(data) {
 	    	mui.toast('请重试');
-	    	var a=2;
-	    	var serventList = [];
-	    	for(var i =0;i<a;i++){
-	    		serventList.push('<li class="mui-table-view-cell mui-media" userID="6">')
-	    			serventList.push('<a class="mui-navigate-right">')
-	    				serventList.push('<img class="mui-media-object mui-pull-left" src="../images/timg.jpg">')
-	    				serventList.push('<div class="mui-media-body">')
-	    					serventList.push('<div class="mui-row">')
-								serventList.push('<span class="mui-pull-left">王二小</span>')
-								serventList.push('<div class="qwxz  mui-pull-right">期望薪资：<font>3000</font>/月</div>')
-							serventList.push('</div>')
-							serventList.push('<div class="mui-row">')
-								serventList.push('<div class="mui-row">')
-									serventList.push('<div class="kbd_div mui-pull-left">')
-										serventList.push('<div class="kbd">小元实名</div>')
-									serventList.push('</div>')
-									serventList.push('<div class="kbd_div mui-pull-left">')
-										serventList.push('<div class="kbd">小元体检</div>')
-									serventList.push('</div>')
-								serventList.push('</div>')
-								serventList.push('<div class="ckxz">小元参考薪资：<font>3000-4000</font>/月</div>')
-							serventList.push('</div>')
-	    				serventList.push('</div>')
-	    				serventList.push('<p class="mui-ellipsis">小元评价：改服务员态度好，服务号，做饭好，什么都好</p>')
-	    			serventList.push('</a>')
-    			serventList.push('</li>')
-	    	}
-	    	var serventList = serventList.join('')
-	    	$('#getServentList').append(serventList)
 	    }
 	});
 }
