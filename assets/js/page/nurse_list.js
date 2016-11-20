@@ -151,7 +151,7 @@ $('#add_child').on('tap',function(){
 	$(this).hide()
 })
 $('#full_tag').on('tap','button',function(){
-	$(this).addClass('onselect')
+	$(this).toggleClass('onselect')
 })
 $('#getServantList').on('tap','li',function(){
 	window.location.href='userCard.html?userID='+$(this).attr('userID')
@@ -228,6 +228,8 @@ function getServantList(dataList,clear){
 		    	var serventList = serventList.join('')
 		    	if (clear) {
 		    		$('#getServantList').empty();
+		    		count=0;
+		    		mui('#pullrefresh').scroll().scrollTo(0,0,1000);
 		    	};
 		    	$('#getServantList').append(serventList)
 	    	};
