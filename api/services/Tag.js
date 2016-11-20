@@ -92,7 +92,7 @@ module.exports = {
       }
     }
     queryString+=' OR ta.type=2) AS a LEFT JOIN `tag` ta ON a.tagID=ta.`tagID` LEFT JOIN user ur  ON ur.`userID`=a.userID GROUP BY a.userID ORDER BY sumweight  DESC;';
-    //console.log(queryString);
+    console.log(queryString);
     Tag.getWorkTagPrice(opts,function(){});
     TagList.query(queryString,function(err,result){
       if(err) return cb(err);
@@ -114,7 +114,6 @@ module.exports = {
       }
     }
     queryString += ' ) and t.type=1;';
-    console.log(queryString);
     //计算出工作内容的价格
     TagList.query(queryString,function(err,tagInfo){
       for(x in tagInfo){

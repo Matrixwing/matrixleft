@@ -38,7 +38,7 @@ module.exports = {
       req.session.userID=result.userID;
       req.session.role=result.role;
       if(opts.role==1)
-        var redirectUrl = '/index.html?userID='+result.userID+'&tab=index';
+        var redirectUrl = '/nurseList.html?userID='+result.userID+'&tab=index';
       else
         var redirectUrl = '/nurse_home.html?userID='+result.userID+'&tab=index';
       res.redirect(302,redirectUrl);
