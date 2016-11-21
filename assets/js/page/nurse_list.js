@@ -108,7 +108,7 @@ function getTagList(){
 					if (g[i].tagID=='300' || g[i].tagID=='301') {
 						thtml.push('<button type="button" class="mui-btn mui-pull-left" tagID='+g[i].tagID+'">'+g[i].tagName+'</button>')
 					}else{
-						thtml.push('<button type="button" class="mui-btn mui-pull-left ready" tagID='+g[i].tagID+'">'+g[i].tagName+'</button>')
+						thtml.push('<button type="button" class="mui-btn mui-pull-left ready" tagID='+g[i].tagID+'>'+g[i].tagName+'</button>')
 					}
 				}
 				var html=thtml.join('');
@@ -160,10 +160,25 @@ $('#getServantList').on('tap','li',function(){
 $('#tag_sure').on('tap',function(){
 	offCanvasWrapper.offCanvas('close');
 	var dataList=[];
+
+	//工种
 	dataList.push({
-	   tagID:$('#people').attr('tagID'),
-	   value:$('#people').val()
+	   tagID:$('.choosein_btn').attr('tagID'),
+	   value:'1'
 	})
+	console.log($('.choosein_btn').attr('tagID'))
+	if ($('.choosein_btn').attr('tagID')=='0' || $('.choosein_btn').attr('tagID')=='2') {
+		dataList.push({
+		   tagID:'22',
+		   value:$('#people').val()
+		})
+	}else{
+		dataList.push({
+		   tagID:'23',
+		   value:$('#people').val()
+		})
+	};
+	
 	dataList.push({
 	   tagID:$('#forests').attr('tagID'),
 	   value:$('#forests').val()
@@ -229,11 +244,10 @@ function getServantList(dataList,clear){
 		    	if (clear) {
 		    		$('#getServantList').empty();
 		    		count=0;
-		    		mui('#pullrefresh').scroll().scrollTo(0,0,1000);
+		    		mui('#pullrefresh').pullRefresh().scrollTo(0,0,1000)
 		    	};
 		    	$('#getServantList').append(serventList)
 	    	};
-
 			mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > 5));
 	    },
 	    error: function(data) {

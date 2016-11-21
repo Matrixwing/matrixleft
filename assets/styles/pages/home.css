@@ -35,9 +35,9 @@
 	padding: 10px;
 }
 #code{width: 37% !important;float: left;}
-#reg{width: 100% !important;margin-bottom: 70px;font-size: 14px;line-height: 14px;}
+#reg,#reg_add{width: 100% !important;margin-bottom: 70px;font-size: 14px;line-height: 14px;background-color: #e3457d;border-color: #F11764}
 #getcode{width: auto !important;padding: 8px;margin-right: 10px;margin-top: 3px;float: right !important;color: #e3457d;background-color: #f0f2f5;border: 1px solid #f0f2f5;border-radius: 6px;}
-.information select,.information input,.information button{width: 72% !important;;float: left;font-size: 14px;line-height: 14px;}
+.information select,.information input,.information button{width: 72% !important;;float: left;font-size: 14px;line-height: 14px;margin-bottom: 70px}
 .information .select_icon{line-height: 44px;margin-right: 10px;position: relative;top:-40px;color: #ccc;font-size: 20px;}
 .information label{font-size: 14px;width: 28%}
 .information .mui-input-row label{line-height: 14px;}
@@ -105,4 +105,3 @@
 #image-list .uploadimg{display: none }
 .dotips{padding-left: 10px;font-size: 14px;color: #000;margin-top: 10px}
 .dotips .mui-icon{color: #e3457d;margin-right: 3px}
-#reg{background-color: #e3457d;border-color: #F11764}

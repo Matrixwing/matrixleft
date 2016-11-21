@@ -94,7 +94,7 @@ li.mui-table-view-cell.mui-media {
 }
 
 #pullrefresh {
-	top: 142px;
+	top: 138px;
 	height: 100%;
 	padding-bottom: 140px
 }
@@ -274,7 +274,7 @@ li.mui-table-view-cell.mui-media {
 	background-color: #f0f2f5;
 	margin: 8px 0
 }
-
+.zlgz{padding:5px 8px !important;margin-top: 0 !important}
 .tag_btn .mui-btn {
 	padding: 5px 12px !important;
 	float: left;
