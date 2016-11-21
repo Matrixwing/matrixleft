@@ -350,6 +350,7 @@ ul{list-style:none}
 			.mui-navbar .mui-bar .mui-title {
 				display: inline-block;
 				width: auto;
+				position: static;
 			}
 			.mui-page-shadow {
 				position: absolute;

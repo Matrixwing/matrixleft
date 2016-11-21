@@ -3,7 +3,7 @@ mui.init({
 });
 //初始化单页view
 var viewApi = mui('#app').view({
-	defaultPage: '#information_one'
+	defaultPage: '#information_sec'
 });
 //初始化单页的区域滚动
 mui('.mui-scroll-wrapper').scroll();
@@ -91,7 +91,7 @@ $('#type_sure').on('tap',function(){
 			h+=obj[i].previousElementSibling.innerText+',' ;
 		}
 	}
-	$('#type').val(h);
+	$('#type').html(h);
 	$('#type').attr('data',s);
 	$('#type_div').hide();
 })
@@ -110,7 +110,7 @@ $('#skill_sure').on('tap',function(){
 			h+=obj[i].previousElementSibling.innerText+',' ;
 		}
 	}
-	$('#skill').val(h);
+	$('#skill').html(h);
 	$('#skill').attr('data',s);
 	$('#skill_div').hide();
 })
@@ -139,30 +139,21 @@ $('.image-close').on('tap',function(){
 
 
 $('#reg').on('tap',function(){
-	alert()
 	$(this).attr('href','#information_sec')
 })
 $(document).ready(function(){
 	base.tabbarHtml();
 	var hy = new mui.PopPicker();
  	hy.setData([
- 		{value:'200',text:'不选择'},
- 		{value:'201',text:'老人自理'},
- 		{value:'202',text:'老人半自理'},
- 		{value:'203',text:'老人不自理'},
+ 		{value:'200',text:'已婚'},
+ 		{value:'201',text:'未婚'},
+ 		{value:'202',text:'保密'}
 	]);
-	hy.pickers[0].setSelectedIndex(1, 2000);
-	$('.old_tag').on('tap', function(event) {
+	$('#hy').on('tap', function(event) {
 		var _this = $(this);
 		hy.show(function(items) {
 			_this.html(items[0].text);
 			_this.attr('tagID',items[0].value);
-			if (items[0].value=='200') {
-				_this.removeClass('onselect')
-				_this.html('照顾老人')
-			}else{
-				_this.addClass('onselect')
-			};
 		});
 	});
 })

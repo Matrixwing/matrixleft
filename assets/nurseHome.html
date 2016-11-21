@@ -9,6 +9,7 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 
 		<link rel="stylesheet" href="styles/mui.min.css">
+		<link rel="stylesheet" href="styles/mui.picker.min.css">
 		<link rel="stylesheet" type="text/css" href="styles/main.css"/>
 		<link rel="stylesheet" type="text/css" href="styles/pages/home.css"/>
 	</head>
@@ -69,8 +70,8 @@
 			<div class="mui-page-content">
 				<div class="mui-scroll-wrapper">
 					<div class="mui-scroll">
-					<div class="dotips">
-						<span class="mui-icon iconfont icon-yduigantanhaokongxin"></span>完善资料后，我们可为您提供优质工作。
+					<div class="step">
+						<img src="../images/step1.png">
 					</div>
 						<form class="mui-input-group">
 							<div class="mui-input-row">
@@ -105,9 +106,27 @@
 			<div class="mui-page-content">
 				<div class="mui-scroll-wrapper">
 					<div class="mui-scroll">
-					<div class="dotips">
+					<!-- <div class="dotips">
 						<span class="mui-icon iconfont icon-yduigantanhaokongxin"></span>完善资料后，我们可为您提供优质工作。
+					</div> -->
+					<div class="step">
+						<img src="../images/step2.png">
 					</div>
+						<p class="imgtips">请上传您的身份证正反面图片。</p>
+						<form class="mui-input-group" id="form">
+							<div id="image-list" class="row image-list">
+								<div class="image-item space">
+									<div class="image-close">X</div>
+									<img src="" class="image-item uploadimg">
+									<input type="file" class="file" accept="image/*" id="image-1">
+								</div>
+								<div class="image-item space">
+									<div class="image-close">X</div>
+									<img src="" class="image-item uploadimg">
+									<input type="file" class="file" accept="image/*" id="image-1">
+								</div>
+							</div>
+						</form>
 						<form class="mui-input-group">
 							<div class="mui-input-row">
 								<label>籍贯</label>
@@ -119,51 +138,35 @@
 							</div>
 							<div class="mui-input-row">
 								<label>婚姻</label>
-								<select class="mui-btn-block">
-									<option value="item-1">已婚</option>
-									<option value="item-2">未婚</option>
-									<option value="item-2">保密</option>
-								</select>
+								<div class="mui-row s_selcet" id="hy" type="button">已婚</div>
 								<span class="mui-icon mui-icon-arrowdown mui-pull-right select_icon"></span>
 							</div>
 						</form>
 						<form class="mui-input-group">
 							<div class="mui-input-row">
-								<label>当前状态</label>
-								<select class="mui-btn-block">
-									<option value="item-1">待岗</option>
-									<option value="item-2">在岗</option>
-								</select>
-								<span class="mui-icon mui-icon-arrowdown mui-pull-right select_icon"></span>
+								<label >当前状态</label>
+								<div class="mui-row s_selcet" id="hy">
+									<div class="s_radio mui-radio">
+										<input name="radio1" type="radio">
+										<label>待岗</label>
+									</div>
+									<div class="s_radio mui-radio">
+										<input name="radio1" type="radio">
+										<label>在岗</label>
+									</div>
+								</div>
 							</div>
 							<div class="mui-input-row">
 								<label>当前住址</label>
 								<input id='' type="text" class="mui-input" placeholder="请输入当前住址">
 							</div>
 							<div class="mui-input-row">
-								<label>每月休息</label>
-								<select class="mui-btn-block">
-									<option value="item-1">1天</option>
-									<option value="item-2">2天</option>
-									<option value="item-2">3天</option>
-									<option value="item-2">4天</option>
-									<option value="item-2">5天</option>
-								</select>
-								<span class="mui-icon mui-icon-arrowdown mui-pull-right select_icon"></span>
-							</div>
-							<div class="mui-input-row">
 								<label>服务经验</label>
-								<select class="mui-btn-block">
-									<option value="item-1">1-2年</option>
-									<option value="item-2">3-5年</option>
-									<option value="item-2">6-8年</option>
-									<option value="item-2">8年以上</option>
-								</select>
-								<span class="mui-icon mui-icon-arrowdown mui-pull-right select_icon"></span>
+								<input id="" type="text" class="mui-input fwjy" placeholder="请输入您的工作经验，按月数计" value="">
 							</div>
 							<div class="mui-input-row">
 								<label>服务类型</label>
-								<input  type="text" class="mui-input" placeholder="点击选择" id="type">
+								<div class="mui-row s_selcet" id="type">点击选择</div>
 								<span class="mui-icon mui-icon-arrowdown mui-pull-right select_icon"></span>
 							</div>
 							<div id="type_div" class="choose_div" style="display:none">
@@ -197,7 +200,7 @@
 							</div>
 							<div class="mui-input-row">
 								<label>特长选择</label>
-								<input  type="text" class="mui-input" placeholder="点击选择" id="skill">
+								<div class="mui-row s_selcet" id="skill">点击选择</div>
 								<span class="mui-icon mui-icon-arrowdown mui-pull-right select_icon"></span>
 							</div>
 							<div id="skill_div" class="choose_div" style="display:none">
@@ -237,21 +240,6 @@
 							</div>
 						</form>
 
-						<p class="imgtips">最后一步，请上传您的身份证正反面图片。</p>
-						<form class="mui-input-group" id="form">
-							<div id="image-list" class="row image-list">
-								<div class="image-item space">
-									<div class="image-close">X</div>
-									<img src="" class="image-item uploadimg">
-									<input type="file" class="file" accept="image/*" id="image-1">
-								</div>
-								<div class="image-item space">
-									<div class="image-close">X</div>
-									<img src="" class="image-item uploadimg">
-									<input type="file" class="file" accept="image/*" id="image-1">
-								</div>
-							</div>
-						</form>
 						<div class="mui-content-padded">
 							<button id='reg_add' class="mui-btn mui-btn-block mui-btn-primary">确定</button>
 						</div>
@@ -329,6 +317,7 @@
 	<script src="js/jquery.min.js"></script>
 	<script src="js/mui/mui.min.js"></script>
 	<script src="js/mui/mui.view.js "></script>
+	<script src="js/mui/mui.picker.min.js "></script>
 	<script src="js/uploadimg/lrz.bundle.js "></script>
 	<script src="js/base.js"></script>
 	<script src="js/page/nurse_home.js"></script>
