@@ -79,7 +79,6 @@ module.exports = {
     ],function(err,results){
       if(err) return cb(err);
       var tag;
-      console.log(results[2]);
       var tagList = results[0];
       for(tag in tagList){
         tagList[tag].downPrice+=results[1].workPrice;
@@ -89,8 +88,11 @@ module.exports = {
         delete tagList[tag].downPrice;
         delete tagList[tag].sumweight;
       }
-
-      return cb(null,tagList);
+      var servants = {
+        servantList:tagList,
+        totalPages:results[2].totalPages
+      };
+      return cb(null,servants);
     });
   },
 
@@ -110,8 +112,8 @@ module.exports = {
           tagStr+=' or t.tagID=';
       //}
     }
-    sails.log.debug(tagStr);
-    var queryString = "SELECT a.userID,IFNULL(ur.userName,'') AS userName,IFNULL(ur.`avatarUrl`,'') AS avatarUrl,IFNULL(ur.expectSalary,'') AS expectSalary,SUM(weight) sumweight  ," +
+    //sails.log.debug(tagStr);
+    var queryString = "SELECT a.userID,IFNULL(ur.userName,'') AS userName,IFNULL(ur.`avatarUrl`,'') AS avatarUrl,(select '') as sysComment,IFNULL(ur.expectSalary,'') AS expectSalary,SUM(weight) sumweight  ," +
       "ifnull((SELECT SUM(ta.`price`) FROM tag ta LEFT JOIN taguserre t ON t.tagID=ta.tagID WHERE ta.type!=1 AND (t.tagID=" ;
     queryString += tagStr ;
     queryString +=') AND t.`userID`=a.userID ),0)AS downPrice,ifnull((SELECT SUM(ta.`price`) FROM tag ta LEFT JOIN taguserre t ON t.tagID=ta.tagID WHERE ta.type!=1  AND t.`userID`=a.userID ),0)AS upPrice,' +
@@ -120,7 +122,7 @@ module.exports = {
     queryString += tagStr ;
     queryString +=') OR ta.type=4 OR ta.type=3) AS a LEFT JOIN `tag` ta ON a.tagID=ta.`tagID` LEFT JOIN `user` ur  ON ur.`userID`=a.userID GROUP BY a.userID ORDER BY sumweight  DESC ';
     queryString +='limit '+opts.start +', '+opts.limit+';';
-    sails.log.debug(queryString);
+    //sails.log.debug(queryString);
     //Tag.getWorkTagPrice(opts,function(){});
     TagList.query(queryString,function(err,result){
       if(err) {
@@ -151,8 +153,10 @@ module.exports = {
         sails.log.error(err);
         return cb(err);
       }
-
-      return cb(null,result);
+      var  totalPages ={
+        totalPages:Math.ceil(result[0].totalRow/opts.limit)
+      };
+      return cb(null,totalPages);
     })
   },
 
@@ -176,14 +180,12 @@ module.exports = {
         for(y in opts){
          if(opts[y].tagID== tagInfo[x].tagID)
            workPrice +=  tagInfo[x].price*(1+(opts[y].value-tagInfo[x].minValue)/tagInfo[x].precision*tagInfo[x].coefficient);//计算公示请参照设计文档3.1.3便签价格算法
-          sails.log.debug(workPrice);
         }
       }
 
       var result ={
         workPrice:workPrice
       };
-      sails.log.debug(result);
       if(err) {
         sails.log.error(err);
         return cb(err);

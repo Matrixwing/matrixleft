@@ -19,7 +19,6 @@ module.exports = {
   },
 
   getServantList : function (req,res) {
-
     var limit = req.param('limit',0);
     var start = (req.param('start',1)-1)*limit;
     var tagParam={
