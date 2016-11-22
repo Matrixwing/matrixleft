@@ -73,7 +73,7 @@ if (mui.os.plus) {
 	mui.ready(function() {
 		setTimeout(function() {
 			mui('#pullrefresh').pullRefresh().pullupLoading();
-		}, 1500);
+		}, 100);
 	});
 }
 
@@ -84,13 +84,14 @@ var offCanvasSide = document.getElementById("offCanvasSide");
 $('#offCanvasShow').on('tap','.ready',function() {
 	$('.choose .mui-btn').removeClass('choosein_btn')
 	$(this).addClass('choosein_btn')
+	$('.title').html($(this).html())
 	offCanvasWrapper.offCanvas('show');
 	//getTagList();
 });
 
  //主界面和侧滑菜单界面均支持区域滚动；
 mui('#offCanvasSideScroll').scroll();
-mui('#offCanvasContentScroll').scroll();
+//mui('#offCanvasContentScroll').scroll();
 
 
 
@@ -242,19 +243,25 @@ $('#tag_sure').on('tap',function(){
 			})
 		};
 	}
-	console.log(dataList)
+	d_e = dataList;
 	getServantList(dataList,'clear')
 })
 var count = 1;
+var d_e='';
 function getServantList(dataList,clear){
 	if (!dataList) {
-		dataList = '';
+		dataList = d_e;
 	};
+	if (clear) {
+		count=1;
+    	mui('#pullrefresh').pullRefresh().refresh(true);
+	}
+	var dataList = JSON.stringify(dataList)
 	$.ajax({
 	    type: 'post',
 	    url: '/getServantList',
 	    data: {
-	    	'tag':JSON.stringify(dataList),
+	    	'tag':dataList,
 	    	'start':count,
 	    	'limit':5
 	    },
@@ -294,25 +301,28 @@ function getServantList(dataList,clear){
 		    	var serventList = serventList.join('')
 		    	if (clear) {
 		    		$('#getServantList').empty();
-		    		count=0;
 		    		var scroll = mui('#pullrefresh').scroll(); 
 		    		if (scroll.y!='0') {
-		    			mui('#pullrefresh').pullRefresh().scrollTo(0,0,1000)
+		    			mui('#pullrefresh').pullRefresh().scrollTo(0,0,0)
+		    			console.log(scroll.y);
+		    			//mui('#pullrefresh').pullRefresh().disablePullupToRefresh();
+		    			//mui('#pullrefresh').pullRefresh().enablePullupToRefresh();
 		    		};
 		    	};
 		    	$('#getServantList').append(serventList)
+				mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > data.data.totalPages));
 	    	};
-			mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > 5));
 	    },
 	    error: function(data) {
 	    	mui.toast('请重试');
 	    }
 	});
 }
-/*
-    		document.getElementById('pullrefresh' ).addEventListener('scroll', function (e) { 
-      console.log(); 
-    }) */
+var scroll = mui('#pullrefresh').scroll(); 
+
+    		document.getElementById('pullrefresh' ).addEventListener('scroll', function () { 
+      console.log(scroll.y); 
+    }) 
 function reset(){
 	$('#people').val('1');
 	$('#forests').val('100');
