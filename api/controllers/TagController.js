@@ -42,10 +42,6 @@ module.exports = {
       tagList = util.format('{"msgNo":"0000","msgInfo":"成功","data":%s}',str);
       res.send(tagList);
     })
-
-
   }
-
-
 };
 

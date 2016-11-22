@@ -83,7 +83,7 @@ module.exports = {
       for(tag in tagList){
         tagList[tag].downPrice+=results[1].workPrice;
         tagList[tag].upPrice+=results[1].workPrice;
-        tagList[tag].price=tagList[tag].downPrice+'—'+tagList[tag].upPrice;
+        tagList[tag].price=tagList[tag].downPrice+'-'+tagList[tag].upPrice;
         delete tagList[tag].upPrice;
         delete tagList[tag].downPrice;
         delete tagList[tag].sumweight;
@@ -117,7 +117,7 @@ module.exports = {
       "ifnull((SELECT SUM(ta.`price`) FROM tag ta LEFT JOIN taguserre t ON t.tagID=ta.tagID WHERE ta.type!=1 AND (t.tagID=" ;
     queryString += tagStr ;
     queryString +=') AND t.`userID`=a.userID ),0)AS downPrice,ifnull((SELECT SUM(ta.`price`) FROM tag ta LEFT JOIN taguserre t ON t.tagID=ta.tagID WHERE ta.type!=1  AND t.`userID`=a.userID ),0)AS upPrice,' +
-      'IFNULL((SELECT GROUP_CONCAT(tagName) FROM tag t   LEFT JOIN taguserre tur ON tur.tagID=t.tagID WHERE t.type=4 AND tur.`userID`=a.userID ),"") AS sysTag FROM  (SELECT ta.tagName,t.userID,t.tagID ' +
+      'IFNULL((SELECT GROUP_CONCAT(tagName SEPARATOR "|") FROM tag t   LEFT JOIN taguserre tur ON tur.tagID=t.tagID WHERE t.type=4 AND tur.`userID`=a.userID ),"") AS sysTag FROM  (SELECT ta.tagName,t.userID,t.tagID ' +
     'FROM `taguserre` t LEFT JOIN `tag` ta ON t.tagID=ta.tagID  WHERE (t.tagID=';
     queryString += tagStr ;
     queryString +=') OR ta.type=4 OR ta.type=3) AS a LEFT JOIN `tag` ta ON a.tagID=ta.`tagID` LEFT JOIN `user` ur  ON ur.`userID`=a.userID GROUP BY a.userID ORDER BY sumweight  DESC ';
