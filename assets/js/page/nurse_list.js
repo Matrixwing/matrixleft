@@ -106,7 +106,7 @@ function getTagList(){
 				var thtml =[];
 				for(var i=0;i<g.length;i++){
 					if (g[i].tagID=='300' || g[i].tagID=='301') {
-						thtml.push('<button type="button" class="mui-btn mui-pull-left" tagID='+g[i].tagID+'">'+g[i].tagName+'</button>')
+						thtml.push('<button type="button" class="mui-btn mui-pull-left" tagID='+g[i].tagID+'>'+g[i].tagName+'</button>')
 					}else{
 						thtml.push('<button type="button" class="mui-btn mui-pull-left ready" tagID='+g[i].tagID+'>'+g[i].tagName+'</button>')
 					}
@@ -119,7 +119,7 @@ function getTagList(){
 				var t = d[2];
 				var thtml =[];
 				for(var i=0;i<t.length;i++){
-					thtml.push('<button type="button" class="mui-btn mui-pull-left" tagID='+t[i].tagID+'">'+t[i].tagName+'</button>')
+					thtml.push('<button type="button" class="mui-btn mui-pull-left" tagID='+t[i].tagID+'>'+t[i].tagName+'</button>')
 				}
 				var html=thtml.join('');
 				$('#tese').empty();
@@ -129,7 +129,7 @@ function getTagList(){
 				var c = d[3];
 				var thtml =[];
 				for(var i=0;i<c.length;i++){
-					thtml.push('<button type="button" class="mui-btn mui-pull-left" tagID='+c[i].tagID+'">'+c[i].tagName+'</button>')
+					thtml.push('<button type="button" class="mui-btn mui-pull-left" tagID='+c[i].tagID+'>'+c[i].tagName+'</button>')
 				}
 				var html=thtml.join('')
 				$('#cer').empty();
