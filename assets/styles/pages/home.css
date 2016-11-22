@@ -45,7 +45,9 @@
 .choose_div{background-color: #FFF;width: 100%;clear: left;position: relative;}
 .choose_div .mui-btn{width: 20% !important;margin:auto;height: 30px;line-height: 30px;padding: 0 !important;margin-top: 5px;float: inherit;}
 .choose_div label{width: 100% !important;padding: 13px 15px 13px 58px !important;}
-#skill,#type{padding-right: 35px !important}
+#skill,#type{padding-right: 35px !important;overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;}
 .choose_div .mui-checkbox input[type=checkbox]:before, .mui-radio input[type=radio]:before{font-size: 24px;line-height: 30px}
 .mui-input-group{margin-top: 10px !important;}
 .mui-input-group:last-child{margin-top: 10px !important;}
@@ -57,9 +59,10 @@
 	overflow: hidden;
 }
 #image-list .image-item {
-	width: 65px;
+	width: 115px;
 	height: 65px;
-	background-image: url(../../images/iconfont-tianjia.png);
+	float: left;
+	background-image: url(../../images/upload_bg.png);
 	background-size: 100% 100%;
 	display: inline-block;
 	position: relative;
@@ -98,6 +101,9 @@
 	font-weight: 200;
 	z-index: 1;
 }
+#image-list .image-item input[type="file"]{
+	width: 100% !important
+}
 #image-list .image-item.space .image-close {
 	display: none;
 }
@@ -119,7 +125,7 @@
 	font-size: 14px;
 	line-height: 40px;
 	float: right;
-	width: 72%
+	width: 72%;
 }
 .s_radio{
 	width: 40%;
@@ -144,3 +150,21 @@
 	font-size: 14px;
 	line-height: 40px;
 }*/
+.upload_tips{
+	width: 48px;
+	line-height: 65px;
+	height: 65px;
+	float: left;
+	font-size: 14px;
+}
+
+/*兼容性*/
+
+@media screen and (max-width: 320px) {
+	#image-list .image-item {
+		width: 90px;
+	}
+	.mui-checkbox input[type=checkbox], .mui-radio input[type=radio] {
+	    right: 28px;
+	}
+}
