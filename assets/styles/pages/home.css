@@ -59,7 +59,7 @@
 	overflow: hidden;
 }
 #image-list .image-item {
-	width: 115px;
+	width: 100px;
 	height: 65px;
 	float: left;
 	background-image: url(../../images/upload_bg.png);

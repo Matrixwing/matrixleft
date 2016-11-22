@@ -228,7 +228,7 @@ function getServantList(dataList,clear){
 												serventList.push('<div class="kbd">小元实名</div>')
 											};
 											serventList.push('</div>')
-										
+											
 										/*serventList.push('<div class="kbd_div mui-pull-left">')
 											serventList.push('<div class="kbd">小元体检</div>')
 										serventList.push('</div>')*/
@@ -236,7 +236,7 @@ function getServantList(dataList,clear){
 									serventList.push('<div class="ckxz">小元参考薪资：<font>'+data.data[i].price+'</font>/月</div>')
 								serventList.push('</div>')
 		    				serventList.push('</div>')
-		    				serventList.push('<p class="mui-ellipsis">小元评价：改服务员态度好，服务号，做饭好，什么都好</p>')
+		    				/*serventList.push('<p class="mui-ellipsis">小元评价：改服务员态度好，服务号，做饭好，什么都好</p>')*/
 		    			serventList.push('</a>')
 	    			serventList.push('</li>')
 		    	}
@@ -244,7 +244,10 @@ function getServantList(dataList,clear){
 		    	if (clear) {
 		    		$('#getServantList').empty();
 		    		count=0;
-		    		mui('#pullrefresh').pullRefresh().scrollTo(0,0,1000)
+		    		var scroll = mui('#pullrefresh').scroll(); 
+		    		if (scroll.y!='0') {
+		    			mui('#pullrefresh').pullRefresh().scrollTo(0,0,1000)
+		    		};
 		    	};
 		    	$('#getServantList').append(serventList)
 	    	};
@@ -255,6 +258,10 @@ function getServantList(dataList,clear){
 	    }
 	});
 }
+/*
+    		document.getElementById('pullrefresh' ).addEventListener('scroll', function (e) { 
+      console.log(); 
+    }) */
 function reset(){
 	$('#people').val('1');
 	$('#forests').val('100');

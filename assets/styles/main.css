@@ -347,11 +347,6 @@ ul{list-style:none}
 				-webkit-transition-duration: .0s;
 				transition-duration: .0s;
 			}
-			.mui-navbar .mui-bar .mui-title {
-				display: inline-block;
-				width: auto;
-				position: static;
-			}
 			.mui-page-shadow {
 				position: absolute;
 				right: 100%;
