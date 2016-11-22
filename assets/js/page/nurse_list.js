@@ -26,10 +26,10 @@ $(document).ready(function(){
 			_this.html(items[0].text);
 			_this.attr('tagID',items[0].value);
 			if (items[0].value=='200') {
-				_this.removeClass('onselect')
+				_this.removeClass('onselect_l')
 				_this.html('照顾老人')
 			}else{
-				_this.addClass('onselect')
+				_this.addClass('onselect_l')
 			};
 		});
 	});
@@ -48,10 +48,10 @@ $(document).ready(function(){
 			_this.html(items[0].text);
 			_this.attr('tagID',items[0].value);
 			if (items[0].value=='100') {
-				_this.removeClass('onselect')
+				_this.removeClass('onselect_c')
 				_this.html('照顾小孩')
 			}else{
-				_this.addClass('onselect')
+				_this.addClass('onselect_c')
 			};
 		});
 	});
@@ -166,7 +166,6 @@ $('#tag_sure').on('tap',function(){
 	   tagID:$('.choosein_btn').attr('tagID'),
 	   value:'1'
 	})
-	console.log($('.choosein_btn').attr('tagID'))
 	if ($('.choosein_btn').attr('tagID')=='0' || $('.choosein_btn').attr('tagID')=='2') {
 		dataList.push({
 		   tagID:'22',
@@ -183,6 +182,58 @@ $('#tag_sure').on('tap',function(){
 	   tagID:$('#forests').attr('tagID'),
 	   value:$('#forests').val()
 	})
+	//old
+	if ($('.onselect_l').length!=0) {
+		if ($('.onselect_l').length==1) {
+			dataList.push({
+			   tagID:$('.onselect_l').attr('tagID'),
+			   value:1
+			})
+		}else{
+			if ($('.onselect_l').eq(0).attr('tagID')==$('.onselect_l').eq(1).attr('tagID')) {
+				dataList.push({
+				   tagID:$('.onselect_l').eq(0).attr('tagID'),
+				   value:2
+				})
+			}else{
+				dataList.push({
+				   tagID:$('.onselect_l').eq(0).attr('tagID'),
+				   value:1
+				})
+				dataList.push({
+				   tagID:$('.onselect_l').eq(1).attr('tagID'),
+				   value:1
+				})
+			};
+		}
+		
+	};
+	//child
+	if ($('.onselect_c').length!=0) {
+		if ($('.onselect_c').length==1) {
+			dataList.push({
+			   tagID:$('.onselect_c').attr('tagID'),
+			   value:1
+			})
+		}else{
+			if ($('.onselect_c').eq(0).attr('tagID')==$('.onselect_c').eq(1).attr('tagID')) {
+				dataList.push({
+				   tagID:$('.onselect_c').eq(0).attr('tagID'),
+				   value:2
+				})
+			}else{
+				dataList.push({
+				   tagID:$('.onselect_c').eq(0).attr('tagID'),
+				   value:1
+				})
+				dataList.push({
+				   tagID:$('.onselect_c').eq(1).attr('tagID'),
+				   value:1
+				})
+			};
+		}
+		
+	};
 	for(var i =0;i<$('.onselect').length;i++){
 		if ($('.onselect').eq(i).attr('tagID')) {
 			dataList.push({
@@ -211,20 +262,20 @@ function getServantList(dataList,clear){
 	    success: function(data) {
 	    	if (data.msgNo=='0000') {
 	    		var serventList = [];
-		    	for(var i =0;i<data.data.length;i++){
-		    		serventList.push('<li class="mui-table-view-cell mui-media" userID="'+data.data[i].userID+'">')
+		    	for(var i =0;i<data.data.servantList.length;i++){
+		    		serventList.push('<li class="mui-table-view-cell mui-media" userID="'+data.data.servantList[i].userID+'">')
 		    			serventList.push('<a class="mui-navigate-right">')
-		    				serventList.push('<img class="mui-media-object mui-pull-left" src="'+data.data[i].avatarUrl+'">')
+		    				serventList.push('<img class="mui-media-object mui-pull-left" src="'+data.data.servantList[i].avatarUrl+'">')
 		    				serventList.push('<div class="mui-media-body">')
 		    					serventList.push('<div class="mui-row">')
-									serventList.push('<span class="mui-pull-left">'+data.data[i].userName+'</span>')
-									serventList.push('<div class="qwxz  mui-pull-right">期望薪资：<font>'+data.data[i].expectSalary+'</font>/月</div>')
+									serventList.push('<span class="mui-pull-left">'+data.data.servantList[i].userName+'</span>')
+									serventList.push('<div class="qwxz  mui-pull-right">期望薪资：<font>'+data.data.servantList[i].expectSalary+'</font>/月</div>')
 								serventList.push('</div>')
 								serventList.push('<div class="mui-row">')
 									serventList.push('<div class="mui-row">')
 										
 											serventList.push('<div class="kbd_div mui-pull-left">')
-											if (data.data[i].sysTag) {
+											if (data.data.servantList[i].sysTag) {
 												serventList.push('<div class="kbd">小元实名</div>')
 											};
 											serventList.push('</div>')
@@ -233,7 +284,7 @@ function getServantList(dataList,clear){
 											serventList.push('<div class="kbd">小元体检</div>')
 										serventList.push('</div>')*/
 									serventList.push('</div>')
-									serventList.push('<div class="ckxz">小元参考薪资：<font>'+data.data[i].price+'</font>/月</div>')
+									serventList.push('<div class="ckxz">小元参考薪资：<font>'+data.data.servantList[i].price+'</font>/月</div>')
 								serventList.push('</div>')
 		    				serventList.push('</div>')
 		    				/*serventList.push('<p class="mui-ellipsis">小元评价：改服务员态度好，服务号，做饭好，什么都好</p>')*/

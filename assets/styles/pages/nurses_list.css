@@ -193,7 +193,7 @@ li.mui-table-view-cell.mui-media {
 	color: #000;
 }
 
-.onselect {
+.onselect,.onselect_l,.onselect_c {
 	border-color: #f15353 !important;
 	background-color: #fff !important;
 	border-collapse: collapse;
