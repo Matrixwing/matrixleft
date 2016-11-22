@@ -22,8 +22,7 @@ module.exports = {
       var childTag,oldTag;
       var tagList = [] ;
       for (tag in allTag){
-        console.log(allTag[tag]);
-        console.log(allTag[tag].tagID);
+
         if(!tagList[allTag[tag].type]) {
           tagList[allTag[tag].type] = [];
         }
@@ -32,14 +31,14 @@ module.exports = {
         if(allTag[tag].tagID == 100){
           childTag=tag
           allTag[tag].sonTag=[];
-          console.log(allTag[tag]);
+
         }
         if(allTag[tag].tagID == 101 || allTag[tag].tagID == 102 || allTag[tag].tagID == 103) {
-          console.log(allTag[childTag]);
+
           allTag[childTag].sonTag.push(allTag[tag]);
-          console.log(allTag[childTag]);
+
           allTag[tag]=null;
-          console.log(allTag[tag]);
+
         }
         //约定‘照顾老人’的tagID为200，其子选项tagID为201，202，203
         if(allTag[tag]&&allTag[tag].tagID == 200){
