@@ -22,21 +22,16 @@ module.exports = {
       var childTag,oldTag;
       var tagList = [] ;
       for (tag in allTag){
-
         if(!tagList[allTag[tag].type]) {
           tagList[allTag[tag].type] = [];
         }
-
         //约定‘照顾小孩’的tagID为100，其子选项tagID为101，102，103
         if(allTag[tag].tagID == 100){
           childTag=tag
           allTag[tag].sonTag=[];
-
         }
         if(allTag[tag].tagID == 101 || allTag[tag].tagID == 102 || allTag[tag].tagID == 103) {
-
           allTag[childTag].sonTag.push(allTag[tag]);
-
           allTag[tag]=null;
 
         }
@@ -69,7 +64,14 @@ module.exports = {
         })
       },
       function(next){
-        Tag.getWorkTagPrice(opts,function(err,results){
+
+        Tag.getWorkTagPrice(opts.tag,function(err,results){
+          if(err) return cb(err);
+          next(null,results)
+        })
+      },
+      function(next){
+        Tag.getTotalRowNum(opts,function(err,results){
           if(err) return cb(err);
           next(null,results)
         })
@@ -77,15 +79,17 @@ module.exports = {
     ],function(err,results){
       if(err) return cb(err);
       var tag;
+      console.log(results[2]);
       var tagList = results[0];
       for(tag in tagList){
         tagList[tag].downPrice+=results[1].workPrice;
         tagList[tag].upPrice+=results[1].workPrice;
-        tagList[tag].price=tagList[tag].downPrice+'到'+tagList[tag].upPrice;
+        tagList[tag].price=tagList[tag].downPrice+'—'+tagList[tag].upPrice;
         delete tagList[tag].upPrice;
         delete tagList[tag].downPrice;
         delete tagList[tag].sumweight;
       }
+
       return cb(null,tagList);
     });
   },
@@ -93,23 +97,20 @@ module.exports = {
 
   //通过用户选择的标签筛选出服务员。并且通过标签的权重之和进行重高到低的排序
   //查询出来的信息有：用户姓名，用户id，用户头像，用户期待薪水，除去工作内容价格的价格下限和价格上限。
-  //工作内容价格需要用共事进行计算
+  //工作内容价格需要用公示进行计算
   getServantSortByWight : function (opts,cb){
-
     //拼接出查询语句
-    var tag;
+    var tag = opts.tag;
+    var tagNum;
     var tagStr='';
-    for(tag in opts){
-
+    for(tagNum in tag){
       //if(opts[tag].tagID){
-        tagStr+=opts[tag].tagID;
-
-        if(tag<opts.length-1)
+        tagStr+=tag[tagNum].tagID;
+        if(tagNum<tag.length-1)
           tagStr+=' or t.tagID=';
       //}
     }
     sails.log.debug(tagStr);
-
     var queryString = "SELECT a.userID,IFNULL(ur.userName,'') AS userName,IFNULL(ur.`avatarUrl`,'') AS avatarUrl,IFNULL(ur.expectSalary,'') AS expectSalary,SUM(weight) sumweight  ," +
       "ifnull((SELECT SUM(ta.`price`) FROM tag ta LEFT JOIN taguserre t ON t.tagID=ta.tagID WHERE ta.type!=1 AND (t.tagID=" ;
     queryString += tagStr ;
@@ -117,12 +118,40 @@ module.exports = {
       'IFNULL((SELECT GROUP_CONCAT(tagName) FROM tag t   LEFT JOIN taguserre tur ON tur.tagID=t.tagID WHERE t.type=4 AND tur.`userID`=a.userID ),"") AS sysTag FROM  (SELECT ta.tagName,t.userID,t.tagID ' +
     'FROM `taguserre` t LEFT JOIN `tag` ta ON t.tagID=ta.tagID  WHERE (t.tagID=';
     queryString += tagStr ;
-    queryString +=') OR ta.type=4 OR ta.type=3) AS a LEFT JOIN `tag` ta ON a.tagID=ta.`tagID` LEFT JOIN `user` ur  ON ur.`userID`=a.userID GROUP BY a.userID ORDER BY sumweight  DESC; ';
-
-
+    queryString +=') OR ta.type=4 OR ta.type=3) AS a LEFT JOIN `tag` ta ON a.tagID=ta.`tagID` LEFT JOIN `user` ur  ON ur.`userID`=a.userID GROUP BY a.userID ORDER BY sumweight  DESC ';
+    queryString +='limit '+opts.start +', '+opts.limit+';';
+    sails.log.debug(queryString);
     //Tag.getWorkTagPrice(opts,function(){});
     TagList.query(queryString,function(err,result){
-      if(err) return cb(err);
+      if(err) {
+        sails.log.error(err);
+        return cb(err);
+      }
+
+      return cb(null,result);
+    })
+  },
+
+  getTotalRowNum : function (opts,cb){
+    var tag = opts.tag;
+    var tagNum;
+    var tagStr='';
+    for(tagNum in tag){
+      //if(opts[tag].tagID){
+      tagStr+=tag[tagNum].tagID;
+      if(tagNum<tag.length-1)
+        tagStr+=' or t.tagID=';
+      //}
+    }
+    var queryString = "select count(*) totalRow FROM ( SELECT COUNT(a.userID) FROM (SELECT  t.userID, t.tagID FROM `taguserre` t  LEFT JOIN `tag` ta ON t.tagID = ta.tagID WHERE ( ";
+    queryString += tagStr ;
+    queryString += " )  OR ta.type = 4 OR ta.type = 3) AS a GROUP BY a.userID ) AS b" ;
+    TagList.query(queryString,function(err,result){
+      if(err) {
+        sails.log.error(err);
+        return cb(err);
+      }
+
       return cb(null,result);
     })
   },
@@ -147,12 +176,14 @@ module.exports = {
         for(y in opts){
          if(opts[y].tagID== tagInfo[x].tagID)
            workPrice +=  tagInfo[x].price*(1+(opts[y].value-tagInfo[x].minValue)/tagInfo[x].precision*tagInfo[x].coefficient);//计算公示请参照设计文档3.1.3便签价格算法
+          sails.log.debug(workPrice);
         }
       }
 
       var result ={
         workPrice:workPrice
       };
+      sails.log.debug(result);
       if(err) {
         sails.log.error(err);
         return cb(err);
