@@ -130,7 +130,8 @@ module.exports = {
 
   getNiandai : function(year){
     var niandai = year.substring(2,3);
-    console.log(niandai);
-    return (niandai+'0后')
+    console.log('niandai1111',niandai);
+    if(niandai) return (niandai+'0后')
+    return(null);
   },
 }

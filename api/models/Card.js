@@ -25,7 +25,7 @@ module.exports = {
     gender : {
       type:'string'
     },
-    serveCity : {
+    serviceCity : {
       type:'string'
     },
 
@@ -76,16 +76,14 @@ module.exports = {
     eduName : {
       type:'string'
     },
-    selfEvaluation : {
+    selfEval : {
       type:'string',
       size:256
     },
-    certID : {
+    certificate : {
       type:'string',
-    },
-    certInfo : {
-      type:'string',
-    },
+      size:512
+    }
   },
 
 
