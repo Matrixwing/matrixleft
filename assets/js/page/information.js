@@ -143,7 +143,6 @@ $('#reg').on('tap',function(){
 })
 
 $(document).ready(function(){
-	base.tabbarHtml();
 	var hy = new mui.PopPicker();
  	hy.setData([
  		{value:'200',text:'已婚'},

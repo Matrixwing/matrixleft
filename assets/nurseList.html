@@ -32,7 +32,7 @@
 											服务人数：
 											<div class="mui-numbox" data-numbox-min="1">
 												<button class="mui-btn mui-btn-numbox-minus" type="button">-</button>
-												<input id="people" class="mui-input-numbox" type="number" tagID='22'>
+												<input id="people" class="mui-input-numbox" type="number" tagID='22' readonly="readonly">
 												<button class="mui-btn mui-btn-numbox-plus" type="button">+</button>
 											</div>
 										</div>
@@ -40,7 +40,7 @@
 											房屋面积：
 											<div class="mui-numbox" data-numbox-min="100" data-numbox-step='10'>
 												<button class="mui-btn mui-btn-numbox-minus" type="button">-</button>
-												<input id="forests" class="mui-input-numbox" type="number" tagID='21'>
+												<input id="forests" class="mui-input-numbox" type="number" tagID='21' readonly="readonly">
 												<button class="mui-btn mui-btn-numbox-plus" type="button">+</button>
 											</div>
 										</div>
@@ -145,6 +145,20 @@
 				<!-- off-canvas backdrop -->
 				<div class="mui-off-canvas-backdrop"></div>
 				<input id="dataList" type="hidden" value="1">
+			</div>
+			<div class="tips">
+				<div class="tips_title">服务内容</div>
+				<div class="tipsList">
+					<span>不住家保姆：</span>
+					<p>不住家保姆主要负责卫生清扫、做饭、照顾老人小孩、家务收拾等工作。</p>
+				</div>
+				<div class="tipsList">
+					<span>住家保姆：</span>
+					<p>住家保姆主要负责卫生清扫、做饭、照顾老人小孩、家务收拾等工作，此外，您需要给保姆提供住所。</p>
+				</div>
+				<div class="tips_close">
+					<span class="mui-icon iconfont icon-yduicuowukongxin" id='add_child'></span>
+				</div>
 			</div>
 		</div>
 

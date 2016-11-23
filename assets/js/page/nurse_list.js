@@ -106,8 +106,10 @@ function getTagList(){
 				var g = d[0];
 				var thtml =[];
 				for(var i=0;i<g.length;i++){
-					if (g[i].tagID=='300' || g[i].tagID=='301') {
-						thtml.push('<button type="button" class="mui-btn mui-pull-left" tagID='+g[i].tagID+'>'+g[i].tagName+'</button>')
+					if (g[i].tagID=='300') {
+						thtml.push('<a class="mui-btn mui-pull-left" id="MaternityMatron" tagID='+g[i].tagID+'>'+g[i].tagName+'</a>')
+					}else if(g[i].tagID=='301'){
+						thtml.push('<a class="mui-btn mui-pull-left" tagID='+g[i].tagID+'>'+g[i].tagName+'</a>')
 					}else{
 						thtml.push('<button type="button" class="mui-btn mui-pull-left ready" tagID='+g[i].tagID+'>'+g[i].tagName+'</button>')
 					}
@@ -335,4 +337,13 @@ function reset(){
 }
 $('#reset').on('tap',function(){
 	reset()
+})
+$('.tips_close').on('tap',function(){
+	$('.tips').fadeOut("fast")
+})
+$('#txt').on('tap',function(){
+	$('.tips').fadeIn("fast")
+})
+$('#offCanvasShow').on('tap','#MaternityMatron',function(){
+	window.location.href='MaternityMatron.html'
 })

@@ -318,7 +318,50 @@ li.mui-table-view-cell.mui-media {
 	width: 80%
 }
 
-
+.tips{
+	position: absolute;
+	z-index: 999999;
+	background-color: rgba(0,0,0,0.9);
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	padding: 40px 20px 20px 20px;
+	color: #fff;
+	display: none
+}
+.tips span{
+	font-size: 14px;
+}
+.tips p{
+	font-size: 12px;
+	text-indent: 2em;
+}
+.tips p,.tips span{
+	color: #fff;
+}
+.tips_title{
+	display: inline-block;
+	font-size: 16px;
+	color: #fff;
+	margin: 0 auto;
+	width: 100%;
+	margin-bottom: 10px;
+	text-align: center;
+}
+.tips_close{
+	text-align: center;
+	width: 100%;
+	position: absolute;
+	bottom: 20px;
+	left: 0;
+	right: 0
+}
+.tips_close .mui-icon{
+	color: #e3457d;
+	font-size: 36px;
+}
 /*兼容性*/
 
 @media screen and (max-width: 320px) {
