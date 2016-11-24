@@ -320,11 +320,7 @@ function getServantList(dataList,clear){
 	    }
 	});
 }
-var scroll = mui('#pullrefresh').scroll(); 
 
-    		document.getElementById('pullrefresh' ).addEventListener('scroll', function () { 
-      console.log(scroll.y); 
-    }) 
 function reset(){
 	$('#people').val('1');
 	$('#forests').val('100');

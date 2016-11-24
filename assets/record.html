@@ -10,7 +10,8 @@
 		<link rel="stylesheet" href="styles/mui.min.css">
 		<link rel="stylesheet" type="text/css" href="styles/main.css"/>
 		<style>
-		
+			.mui-card-header{font-size: 14px;}
+			.mui-card-link{color: #e3457d;position: absolute !important;right: 15px;}
 		</style>
 	</head>
 
@@ -21,14 +22,24 @@
 				</button>
 			<h1 class="mui-title">我的记录</h1>
 		</header>
-		
-
 		<div class="mui-content">
+			<div class="mui-card rated_info">
+				<div class="mui-card-header">
+					订单编号：89767
+				</div>
+				<div class="mui-card-content">
+					<div class="mui-card-content-inner">
+						<p>订单金额：0.01元</p>
+					</div>
+				</div>
+				<div class="mui-card-footer">
+					<a class="mui-card-link" id="pay">去支付</a>
+				</div>
+			</div>
 		</div>
 	</body>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/mui/mui.min.js"></script>
-	 <script src="js/starrr.js"></script>
 	<script src="js/base.js"></script>
 	<script>
 		mui.init({
@@ -36,6 +47,49 @@
 		});
 		/*追加tabbar*/
 		base.tabbarHtml();
+		$('#pay').on('tap',function(){
+			var orderId='89757';
+			var servicePrice='0.01';
+			var salary='0.01';
+			var link='pay?orderId='+orderId+'&servicePrice='+servicePrice+'&salary='+salary;
+			$.get(link,function(data,status){
+		    	var data= JSON.parse(data);
+				if (data.msgNo == '0000' ) {
+					var paydata={
+						appId:data.appId,
+						timeStamp:data.timeStamp,
+						nonceStr:data.nonceStr,
+						package:data.package,
+						signType:data.signType,
+						paySign:data.paySign,
+					}
+				}else{
+					mui.toast('请重试');
+				}	
+			});
+		})
+		function pay(paydata){
+		    wx.config({
+		        debug: false, 
+		        appId: paydata.appId, 
+		        timestamp:paydata.timeStamp,
+		        nonceStr:paydata.nonceStr,
+		        signature:paydata.signature,
+		        jsApiList: ['chooseWXPay']
+		    });
+		    wx.ready(function(){
+		        wx.chooseWXPay({
+		            timestamp: paydata.timestamp, 
+		            nonceStr: paydata.nonceStr,
+		            package: paydata.package, 
+		            signType: paydata.signType,
+		            paySign: paydata.paySign,
+		            success: function (res) {
+		                
+		            }
+		        });
+		    });
+		}
 	</script>
 
 	<script src="https://s4.cnzz.com/z_stat.php?id=1260604409&web_id=1260604409" language="JavaScript"></script>

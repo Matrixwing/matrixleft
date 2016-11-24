@@ -36,36 +36,80 @@
 		$(document).ready(function(){
 		    var userID=base.getQueryString('userID');
 		    //var userID= '6';
-		    var mask = mui.createMask();
-			mask.show()
 		    $.get('getUserCard?userID='+userID,function(data,status){
 		    	var data= JSON.parse(data);
 				if (data.msgNo == '0000' ) {
-					mask.close()
-					$('#avatarUrl').attr('src',data.data.avatarUrl)
-					$('#userName').html(data.data.userName)
-					$('#name_card').html(data.data.userName+'的名片')
-					$('#IDCard').html(data.data.IDCard)
+					if (data.data.avatarUrl) {
+						$('#avatarUrl').attr('src',data.data.avatarUrl)
+					}
 					$('#workstatus').html(data.data.workstatus)
-					$('#serveCity').html(data.data.serveCity)
-					$('#address').html(data.data.address)
-					$('#servantTypeName').html(data.data.servantTypeName)
-					$('#skillName').html(data.data.skillName)
-					$('#workExp').html(data.data.workExp+'年')
-					$('#mouthRest').html(data.data.mouthRest+'天')
-					$('#identityAuth').html(data.data.identityAuth)
-					$('#examination').html(data.data.examination)
-					$('#assessment').html(data.data.assessment)
-					$('#phone').html(data.data.phone)
-					$('#homeTown').html(data.data.homeTown)
-					$('#folk').html(data.data.folk)
-					$('#marriage').html(data.data.marriage)
-					$('#eduName').html(data.data.eduName)
-					$('#niandai').html(data.data.niandai)
-					$('#shengxiao').html(data.data.shengxiao)
-					$('#xingzuo').html(data.data.xingzuo)
-					$('#selfEvaluation').html(data.data.selfEvaluation)
-					$('#zhengshuid').val(data.data.certID)
+					if (data.data.serviceCity) {
+						$('#serveCity').html('服务于'+data.data.serviceCity)
+					}else{
+						$('#serveCity').html('服务于成都市')
+					};
+					$('#userName').html('我是'+data.data.userName)
+					//$('#name_card').html(data.data.userName+'的名片')
+					var cardHtml=[];
+					if (data.data.address) {
+						cardHtml.push('<li class="mui-table-view-cell"><p class="mui-pull-left mui-col-xs-3">当前住址：</p><span>'+data.data.address+'</span></li>')
+					};
+					if (data.data.servantTypeName) {
+						cardHtml.push('<li class="mui-table-view-cell"><p class="mui-pull-left mui-col-xs-3">类&#12288;&#12288;型：</p><span>'+data.data.servantTypeName+'</span></li>')
+					};
+					if (data.data.skillName) {
+						cardHtml.push('<li class="mui-table-view-cell"><p class="mui-pull-left mui-col-xs-3">专&#12288;&#12288;长：</p><span>'+data.data.skillName+'</span></li>')
+					};
+					if (data.data.workExp) {
+						cardHtml.push('<li class="mui-table-view-cell"><p class="mui-pull-left mui-col-xs-3">服务经验：</p><span>'+data.data.workExp+'年</span></li>')
+					};
+					if (data.data.mouthRest) {
+						cardHtml.push('<li class="mui-table-view-cell"><p class="mui-pull-left mui-col-xs-3">每月休息：</p><span>'+data.data.mouthRest+'天</span></li>')
+					};
+					if (data.data.identityAuth) {
+						cardHtml.push('<li class="mui-table-view-cell"><p class="mui-pull-left mui-col-xs-3">小元实名：</p><span>'+data.data.identityAuth+'</span></li>')
+					};
+					if (data.data.examination) {
+						cardHtml.push('<li class="mui-table-view-cell"><p class="mui-pull-left mui-col-xs-3">小元体检：</p><span>'+data.data.examination+'</span></li>')
+					};
+					if (data.data.assessment) {
+						cardHtml.push('<li class="mui-table-view-cell"><p class="mui-pull-left mui-col-xs-3">小元评价：</p><span>'+data.data.assessment+'</span></li>')
+					};
+					cardHtml = cardHtml.join('');
+					$('#getUserCard').append(cardHtml)
+					var cardHtml_t=[];
+					if (data.data.IDCard) {
+						cardHtml_t.push('<li class="mui-table-view-cell"><p class="mui-pull-left mui-col-xs-3">身份证号：</p><span>'+data.data.IDCard+'</span></li>')
+					};
+					if (data.data.phone) {
+						cardHtml_t.push('<li class="mui-table-view-cell"><p class="mui-pull-left mui-col-xs-3">手机号码：</p><span>'+data.data.phone+'</span></li>')
+					};
+					if (data.data.homeTown) {
+						cardHtml_t.push('<li class="mui-table-view-cell"><p class="mui-pull-left mui-col-xs-3">籍&#12288;&#12288;贯：</p><span>'+data.data.homeTown+'</span></li>')
+					};
+					if (data.data.folk) {
+						cardHtml_t.push('<li class="mui-table-view-cell"><p class="mui-pull-left mui-col-xs-3">民&#12288;&#12288;族：</p><span>'+data.data.folk+'</span></li>')
+					};
+					if (data.data.marriage) {
+						cardHtml_t.push('<li class="mui-table-view-cell"><p class="mui-pull-left mui-col-xs-3">婚&#12288;&#12288;姻：</p><span>'+data.data.marriage+'</span></li>')
+					};
+					if (data.data.eduName) {
+						cardHtml_t.push('<li class="mui-table-view-cell"><p class="mui-pull-left mui-col-xs-3">学&#12288;&#12288;历：</p><span>'+data.data.eduName+'</span></li>')
+					};
+					if (data.data.niandai) {
+						cardHtml_t.push('<li class="mui-table-view-cell"><p class="mui-pull-left mui-col-xs-3">年&#12288;&#12288;龄：</p><span>'+data.data.niandai+'</span></li>')
+					};
+					if (data.data.shengxiao) {
+						cardHtml_t.push('<li class="mui-table-view-cell"><p class="mui-pull-left mui-col-xs-3">生&#12288;&#12288;肖：</p><span>'+data.data.shengxiao+'</span></li>')
+					};
+					if (data.data.xingzuo) {
+						cardHtml_t.push('<li class="mui-table-view-cell"><p class="mui-pull-left mui-col-xs-3">星&#12288;&#12288;座：</p><span>'+data.data.xingzuo+'</span></li>')
+					};
+					if (data.data.selfEvaluation) {
+						cardHtml_t.push('<li class="mui-table-view-cell"><p class="mui-pull-left mui-col-xs-3">自我介绍：</p><span>'+data.data.selfEvaluation+'</span></li>')
+					};
+					cardHtml_t = cardHtml_t.join('');
+					$('#card_more').append(cardHtml_t)
 				}else{
 					mui.toast(JSON.parse(data).msgInfo);
 				};
