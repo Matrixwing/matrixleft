@@ -19,5 +19,5 @@ module.exports = function(req, res, next) {
 
   //todo 还需要个选择登陆方式的页面
 
-  return res.redirect('https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8306afd398ab31e5&redirect_uri=http%3a%2f%2f1k5x895985.iask.in%2fweixinLogIn&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect');
+  return res.redirect('https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8306afd398ab31e5&redirect_uri=http%3a%2f%2fwyh.matrixwing.com%2fweixinLogIn&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect');
 };
