@@ -12,6 +12,19 @@
 		<style>
 			.mui-card-header{font-size: 14px;}
 			.mui-card-link{color: #e3457d;position: absolute !important;right: 15px;}
+			.tips{
+				position: absolute;
+				z-index: 999999;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+				color: #fff;
+				text-align: center;
+				display: none;
+			}
+			.tips .mui-spinner{width: 48px;height: 48px;margin-top: 50%}
 		</style>
 	</head>
 
@@ -37,9 +50,11 @@
 				</div>
 			</div>
 		</div>
+		<div class="tips"><div class=" mui-icon mui-spinner"></div></div>
 	</body>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/mui/mui.min.js"></script>
+	<script type="text/javascript" charset="UTF-8" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 	<script src="js/base.js"></script>
 	<script>
 		mui.init({
@@ -48,21 +63,26 @@
 		/*追加tabbar*/
 		base.tabbarHtml();
 		$('#pay').on('tap',function(){
+			$('.tips').show();
 			var orderId='89757';
 			var servicePrice='0.01';
 			var salary='0.01';
 			var link='pay?orderId='+orderId+'&servicePrice='+servicePrice+'&salary='+salary;
 			$.get(link,function(data,status){
+				$('.tips').hide();
 		    	var data= JSON.parse(data);
 				if (data.msgNo == '0000' ) {
 					var paydata={
-						appId:data.appId,
-						timeStamp:data.timeStamp,
-						nonceStr:data.nonceStr,
-						package:data.package,
-						signType:data.signType,
-						paySign:data.paySign,
+						'appId':data.data.appId,
+						'timeStamp':data.data.timeStamp,
+						'nonceStr':data.data.nonceStr,
+						'package':data.data.package,
+						'signature':data.data.signature,
+						'signType':data.data.signType,
+						'paySign':data.data.paySign,
 					}
+				console.log(paydata)
+				pay(paydata)
 				}else{
 					mui.toast('请重试');
 				}	
