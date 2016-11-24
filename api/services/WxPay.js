@@ -1,11 +1,13 @@
 var WXPay = require('weixin-pay');
 
+var weixinConfig = require('../../config/wyhConfig.js').Weixin;
+
 var async = require('async');
 
 var wxpay = WXPay({
-  appid: 'wx8306afd398ab31e5',
-  mch_id: '1402095402',
-  partner_key: 'qd20160725scfkilejlmatrix7u8x0kd', //微信商户平台API密钥
+  appid:weixinConfig.appid,
+  mch_id:weixinConfig.mch_id,
+  partner_key: weixinConfig.partner_key, //微信商户平台API密钥
 
 });
 
@@ -34,6 +36,7 @@ module.exports = {
   },
 
   wxPay : function (opts,cb) {
+    console.log(weixinConfig);
     async.waterfall([
       function(next){
         sails.log.debug(opts);

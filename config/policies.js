@@ -20,21 +20,15 @@
 
 module.exports.policies = {
 
+  //  '*': 'isAuthenticated',
   //
-    '*': 'isAuthenticated',
+  //  UserController : {
+  //    '*':"isAuthenticated",
+  //    logIn:true
+  //
+  //},
 
-    UserController : {
-      '*':"isAuthenticated",
-      logIn:true
-
-  },
-
-
-
-
-
-
-  //一下是sails说明
+  //sails说明
   /***************************************************************************
   *                                                                          *
   * Default policy for all controllers and actions (`true` allows public     *

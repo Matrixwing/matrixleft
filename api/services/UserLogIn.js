@@ -6,7 +6,7 @@
 var async = require('async');
 var https = require('https');
 var util = require('util');
-var weixin= require('../../config/Weixin');
+var weixinConfig= require('../../config/wyhConfig').Weixin;
 
 module.exports = {
   /**
@@ -19,7 +19,7 @@ module.exports = {
 
 
     var hostname = util.format('https://api.weixin.qq.com/sns/oauth2/access_token?appid=%s&secret=%s&code=%s' +
-      '&grant_type=authorization_code','wx8306afd398ab31e5','8241fcf80a1271ab62715838c66fec41',opts.code);
+      '&grant_type=authorization_code',weixinConfig.appid,weixinConfig.appsecret,opts.code);
     console.log('hostname',hostname);
     https.get(hostname, function(res) {
       var buffers = [];

@@ -8,24 +8,24 @@ var util = require('util');
 module.exports = {
 	pay : function(req,res){
 
-    var opts = {
-      userID:req.session.userID,
-     // totalfee:req.getParams('totalFee',null),
-      salary:req.param('salary',0),
-      servicePrice:req.param('servicePrice',null),
-      body:'微元汇-测试支付',                           //暂时写死
-      outTradeNo:req.param('orderId',null),
-    };
+    //var opts = {
+    //  userID:req.session.userID,
+    // // totalfee:req.getParams('totalFee',null),
+    //  salary:req.param('salary',0),
+    //  servicePrice:req.param('servicePrice',null),
+    //  body:'微元汇-测试支付',                           //暂时写死
+    //  outTradeNo:req.param('orderId',null),
+    //};
 
     //测试数据
-    //var opts = {
-    //  userID:243,
-    //  // totalfee:req.getParams('totalFee',null),
-    //  salary:0,
-    //  servicePrice:1,
-    //  body:'微元汇-测试支付',
-    //  outTradeNo:'99999999'
-    //};
+    var opts = {
+      userID:242,
+      // totalfee:req.getParams('totalFee',null),
+      salary:0,
+      servicePrice:1,
+      body:'微元汇-测试支付',
+      outTradeNo:'99999999'
+    };
 
     if(!(opts.outTradeNo&&opts.servicePrice)){
       return res.send('{"msgNo":"9999","msgInfo":"参数错误"}');
