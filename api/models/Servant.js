@@ -34,29 +34,12 @@ module.exports = {
     },
 
 
-    workTypeName: {
+
+
+    grade: {
       type:'string'
     },
 
-    rank: {
-      type:'string'
-    },
-
-    score1: {
-      type:'string'
-    },
-
-    score2: {
-      type:'string'
-    },
-
-    score3: {
-      type:'string'
-    },
-
-    score4: {
-      type:'string'
-    },
 
     assessment: {
       type:'string'
