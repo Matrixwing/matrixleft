@@ -67,7 +67,8 @@
 			var orderId='89757';
 			var servicePrice='0.01';
 			var salary='0.01';
-			var link='pay?orderId='+orderId+'&servicePrice='+servicePrice+'&salary='+salary;
+			var payUrl=window.location.href;
+			var link='pay?orderId='+orderId+'&servicePrice='+servicePrice+'&salary='+salary+'&payUrl='+payUrl;
 			$.get(link,function(data,status){
 				$('.tips').hide();
 		    	var data= JSON.parse(data);
