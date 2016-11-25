@@ -7,7 +7,6 @@
 var util = require('util');
 module.exports = {
 	pay : function(req,res){
-
     //var opts = {
     //  userID:req.session.userID,
     // // totalfee:req.getParams('totalFee',null),
@@ -16,7 +15,6 @@ module.exports = {
     //  body:'微元汇-测试支付',                           //暂时写死
     //  outTradeNo:req.param('orderId',null),
     //};
-
     //测试数据
     var opts = {
       userID:242,
@@ -25,7 +23,7 @@ module.exports = {
       servicePrice:1,
       body:'微元汇-测试支付',
       outTradeNo:'99999999',
-      payUrl:req.originalUrl//当前网页的URL
+      payUrl:req.param('payUrl',req.originalUrl)//当前支付网页的URL
     };
 
     if(!(opts.outTradeNo&&opts.servicePrice)){
