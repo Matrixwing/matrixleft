@@ -8,7 +8,6 @@ var wxpay = WXPay({
   appid:weixinConfig.appid,
   mch_id:weixinConfig.mch_id,
   partner_key: weixinConfig.partner_key, //微信商户平台API密钥
-
 });
 
 module.exports = {
@@ -52,22 +51,22 @@ module.exports = {
 
   wxPay : function (opts,cb) {
     async.waterfall([
-      function(next){
-        sails.log.debug(opts);
-        User.findOne({userID:opts.userID}).exec(function(err,user){
-          if(err)  next(err);
-          //sails.log.debug(user);
-          opts.openid=user.openid;
-          //sails.log.debug(opts);
-          next(null,opts)
-        })
-      },
-      WxPay.getBrandWCPay
+        function(next){
+          sails.log.debug(opts);
+          User.findOne({userID:opts.userID}).exec(function(err,user){
+            if(err)  next(err);
+            //sails.log.debug(user);
+            opts.openid=user.openid;
+            sails.log.debug(opts);
+            next(null,opts)
+          })
+        },
+        WxPay.getBrandWCPay
       ],
-    function(err,result){
-      if (err) return cb(err);
-      return cb(null,result);
-    });
+      function(err,result){
+        if (err) return cb(err);
+        return cb(null,result);
+      });
   }
 
 }
