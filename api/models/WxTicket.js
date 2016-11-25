@@ -34,7 +34,7 @@ module.exports = {
       if(err) return cb(err);
       var hostname = util.format('https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=%s' +
         '&type=jsapi',token.access_token);
-      console.log('hostname',hostname);
+      //console.log('hostname',hostname);
       https.get(hostname, function(res) {
         var buffers = [];
         res.on('data', function(d) {
@@ -49,8 +49,8 @@ module.exports = {
             return cb(data);
           }else{
             var updateString =util.format( 'update wxticket set ticket="%s",expires_in=%s,updatedAt=NOW();',data.ticket,data.expires_in);
-            console.log('updateString',updateString);
-            console.log('data',data);
+            //console.log('updateString',updateString);
+            //console.log('data',data);
             WxTicket.query(updateString,function(err,result){
               if(err) return cb(err);
               return cb(null,result);
@@ -73,9 +73,9 @@ module.exports = {
       ticket=ticket[0];
       var isExpired;
       var updatedTime=(new Date(ticket.updatedAt).getTime());
-      console.log('validateTicket',ticket);
+      //console.log('validateTicket',ticket);
       var timeDiff = Date.now() - updatedTime;
-      console.log(timeDiff);
+      //console.log(timeDiff);
       if(timeDiff>=ticket.expires_in*1000||ticket==''){
         //ticket，更新ticket
         WxTicket.updataTicket(function(err,result){

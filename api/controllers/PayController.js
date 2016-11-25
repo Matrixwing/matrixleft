@@ -24,7 +24,8 @@ module.exports = {
       salary:0,
       servicePrice:1,
       body:'微元汇-测试支付',
-      outTradeNo:'99999999'
+      outTradeNo:'99999999',
+      payUrl:req.originalUrl//当前网页的URL
     };
 
     if(!(opts.outTradeNo&&opts.servicePrice)){
@@ -32,7 +33,7 @@ module.exports = {
     }
     WxPay.wxPay(opts,function(err,result){
       if (err) return res.send('{"msgNo":"9999","msgInfo":"服务出错，请您稍后再试","data":'+JSON.stringify(err) +'}');
-      sails.log.debug(result);
+      //sails.log.debug(result);
       var result = JSON.stringify(result) ;
       result = util.format('{"msgNo":"0000","msgInfo":"","data":%s}',result);
       return res.send(result);

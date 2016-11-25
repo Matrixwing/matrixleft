@@ -9,7 +9,7 @@ module.exports.Weixin = {
   access_token:'',
   mch_id:'1402095402',
   partner_key:'qd20160725scfkilejlmatrix7u8x0kd',//微信商户平台API密钥
-  pay_url:'',//支付页面的url
+  url:'wyh.matrixwing.com',//公众号的域名
   notify_url : 'http://1k5x895985.iask.in/ok',
 
   //appid : 'wx63ace09080406d46',
