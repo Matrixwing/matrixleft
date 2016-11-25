@@ -35,10 +35,11 @@ module.exports = {
       }else{
         //前端调用微信jsapi需要signature
         WxTicket.validateTicket(function(err,tickect){
-          var  signString=util.format('jsapi_ticket=%s&noncestr=%s&timestamp=%s&url=%s',tickect.ticket,result.nonceStr,result.timeStamp,weixinConfig.pay_url);
+          var  signString=util.format('jsapi_ticket=%s&noncestr=%s&timestamp=%s&url=%s',tickect.ticket,result.nonceStr,result.timeStamp,weixinConfig.url+opts.payUrl);
           var sha1=crypto.createHash("sha1");
           var signature=sha1.update(signString);
           signature = sha1.digest('hex');
+          console.log('signString',signString);
           result.signature=signature;
           return cb(null,result);
         })
