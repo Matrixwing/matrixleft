@@ -30,7 +30,7 @@ module.exports = {
       return res.send('{"msgNo":"9999","msgInfo":"参数错误"}');
     }
     WxPay.wxPay(opts,function(err,result){
-      if (err) return res.send('{"msgNo":"9999","msgInfo":"服务出错，请您稍后再试","data":'+JSON.stringify(err) +'}');
+      if (err) return res.send('{"msgNo":"9999","msgInfo":"'+err+'"}');
       //sails.log.debug(result);
       var result = JSON.stringify(result) ;
       result = util.format('{"msgNo":"0000","msgInfo":"","data":%s}',result);
