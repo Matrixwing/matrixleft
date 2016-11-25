@@ -62,9 +62,10 @@
 		});
 		/*追加tabbar*/
 		base.tabbarHtml();
+
+		var orderId=1000;
 		$('#pay').on('tap',function(){
 			$('.tips').show();
-			var orderId='89757';
 			var servicePrice='0.01';
 			var salary='0.01';
 			var payUrl=window.location.href;
@@ -88,6 +89,7 @@
 					mui.toast('请重试');
 				}	
 			});
+			orderId++;
 		})
 		function pay(paydata){
 		    wx.config({
