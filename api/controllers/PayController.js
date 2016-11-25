@@ -24,7 +24,8 @@ module.exports = {
       salary:0,
       servicePrice:1,
       body:'微元汇-测试支付',
-      outTradeNo:req.param('orderId','null'),
+      //outTradeNo:req.param('orderId','null'),
+      outTradeNo:'8888887',
       payUrl:req.param('payUrl',req.originalUrl)//当前支付网页的URL
     };
 
