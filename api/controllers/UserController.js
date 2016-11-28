@@ -72,10 +72,10 @@ module.exports = {
         result = util.format('{"msgNo":"0000","msgInfo":"查询到了信息","data":%s}',str);
         res.send(result);
       })
-    }else{//更具userid查询
-      console.log(req.param('userID'));
+    }else{//userid查询
+
       var opts = {
-        userID : req.param ('userID','') ,
+        userID : req.session.userID ,
       };
       if(opts.userID == '') return res.send(500,'{"msgNo":"9999","msgInfo":"参数错误"}');
       UserLogIn.getUserInfoFromDBByuserID(opts,function(err,result){
