@@ -7,6 +7,7 @@
 var util = require('util');
 module.exports = {
 	pay : function(req,res){
+    console.log('orderId',req.param('orderId',null));
     var opts = {
       userID:req.session.userID,
      // totalfee:req.getParams('totalFee',null),
