@@ -78,7 +78,7 @@ module.exports = {
       }else{
         console.log(result[0].role);
         console.log(opts.role);
-        if (result[0].role!=opts.role) return cb('toUser');
+        //if (result[0].role!=opts.role) return cb('toUser');
 
         cb(null,result[0]);}
 

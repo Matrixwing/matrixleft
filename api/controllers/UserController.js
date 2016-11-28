@@ -28,9 +28,9 @@ module.exports = {
     ],function (err,result){
 
       if (err != null ) {
-        if(err=='toUser') {
-         return res.view('toUser');
-        }
+        //if(err=='toUser') {
+        // return res.view('toUser');
+        //}
         sails.log.error(err);
         return res.send(500,'服务暂不可用:'+err);
       }
