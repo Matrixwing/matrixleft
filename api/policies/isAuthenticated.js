@@ -9,7 +9,7 @@
 module.exports = function(req, res, next) {
   // If `req.session.userID` 则表示已经登录过了
 
-  req.session.page=req.originalUrl;
+  req.session.page=req.headers['referer'];
   if (req.session.userID){
     return next();
   };
