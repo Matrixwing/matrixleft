@@ -22,6 +22,10 @@ module.exports.policies = {
 
     '*': 'isAuthenticated',
 
+    TagController : {
+      '*' :true
+    },
+
     UserController : {
       '*':"isAuthenticated",
       logIn:true
