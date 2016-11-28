@@ -68,24 +68,34 @@
 			var salary=1;
 			var payUrl=window.location.href;
 			var link='pay?orderId='+orderId+'&servicePrice='+servicePrice+'&salary='+salary+'&payUrl='+payUrl;
-			$.get(link,function(data,status){
-				$('.tips').hide();
-		    	var data= JSON.parse(data);
-				if (data.msgNo == '0000' ) {
-					var paydata={
-						'appId':data.data.appId,
-						'timeStamp':data.data.timeStamp,
-						'nonceStr':data.data.nonceStr,
-						'package':data.data.package,
-						'signature':data.data.signature,
-						'signType':data.data.signType,
-						'paySign':data.data.paySign,
-					}
-				console.log(paydata)
-				pay(paydata)
-				}else{
-					mui.toast(data.msgInfo);
-				}	
+			$.ajax({
+			    type: 'get',
+			    url: link,
+			    dataType: 'json',
+			    success: function(data) {
+			    	$('.tips').hide();
+			    	var data= JSON.parse(data);
+					if (data.msgNo == '0000' ) {
+						var paydata={
+							'appId':data.data.appId,
+							'timeStamp':data.data.timeStamp,
+							'nonceStr':data.data.nonceStr,
+							'package':data.data.package,
+							'signature':data.data.signature,
+							'signType':data.data.signType,
+							'paySign':data.data.paySign,
+						}
+					pay(paydata)
+					}else{
+						mui.toast(data.msgInfo);
+					}	
+			    },
+			    error: function(xhr, textStatus, errorThrown) {
+			    	$('.tips').hide();
+			    	if (xhr.status == 401) {
+			    		window.location.href='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8306afd398ab31e5&redirect_uri=http%3a%2f%2fwyh.matrixwing.com%2fweixinLogIn&response_type=code&scope=snsapi_userinfo&state=needlogin#wechat_redirect'
+			    	};
+			    }
 			});
 			orderId++;
 		})
