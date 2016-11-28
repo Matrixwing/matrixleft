@@ -20,8 +20,8 @@
 			};
 			
 		})(mui);
-	    var userID=base.getQueryString('userID');
-		$.get("/getUser?userID="+userID,function(data,status){
+	    //var userID=base.getQueryString('userID');
+		/*$.get("/getUser?",function(data,status){
 			var data = JSON.parse(data).data[0];
 		    $('.avatarUrl').attr('src', data.avatarUrl);
 		    if (data.userName) {
@@ -35,8 +35,60 @@
 		    }else{
 		    	$('.reg_phone').show();
 		    };
-		});
-		
+		    alert(status)
+		});*/
+		/*$(document).reday(function(){
+			$.ajax({
+			    type: 'get',
+			    url: '/getUser',
+			    dataType: 'json',
+			    success: function(data) {
+			    	var data = JSON.parse(data).data[0];
+				    $('.avatarUrl').attr('src', data.avatarUrl);
+				    if (data.userName) {
+				   		$('.nickname').html(data.userName);
+				    }else{
+				    	$('.nickname').html(data.nickname);
+				    };
+				    $('.gender').html(data.gender);
+				    if (data.phone) {
+				    	$('.phone').html(data.phone);
+				    }else{
+				    	$('.reg_phone').show();
+				    };
+			    },
+			    error: function(data) {
+			    	alert()
+			    }
+			});
+		})*/
+		$(function(){
+			$.ajax({
+			    type: 'get',
+			    url: '/getUser',
+			    dataType: 'json',
+			    success: function(data) {
+			    	var data = JSON.parse(data).data[0];
+				    $('.avatarUrl').attr('src', data.avatarUrl);
+				    if (data.userName) {
+				   		$('.nickname').html(data.userName);
+				    }else{
+				    	$('.nickname').html(data.nickname);
+				    };
+				    $('.gender').html(data.gender);
+				    if (data.phone) {
+				    	$('.phone').html(data.phone);
+				    }else{
+				    	$('.reg_phone').show();
+				    };
+			    },
+			    error: function(xhr, textStatus, errorThrown) {
+			    	if (xhr.status == 401) {
+			    		window.location.href='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8306afd398ab31e5&redirect_uri=http%3a%2f%2fwyh.matrixwing.com%2fweixinLogIn&response_type=code&scope=snsapi_userinfo&state=needlogin#wechat_redirect'
+			    	};
+			    }
+			});
+		}) 
 		/*$('.mui-media').on('tap', function() {
 				mui.toast('敬请期待...');
 			});*/
