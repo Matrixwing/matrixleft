@@ -8,9 +8,9 @@
  */
 module.exports = function(req, res, next) {
   // If `req.session.userID` 则表示已经登录过了
-  console.log('req.session.userID',req.session.userID);
+
+  req.session.page=req.originalUrl;
   if (req.session.userID){
-    req.session.page=req.originalUrl;
     return next();
   };
 
