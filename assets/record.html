@@ -61,8 +61,9 @@
 			swipeBack:true //启用右滑关闭功能
 		});
 		base.tabbarHtml();
-		var orderId=1000;
 		$('#pay').on('tap',function(){
+
+			var orderId=parseInt(4000000*Math.random());
 			$('.tips').show();
 			var servicePrice='1';
 			var salary=1;
@@ -93,11 +94,11 @@
 			    error: function(xhr, textStatus, errorThrown) {
 			    	$('.tips').hide();
 			    	if (xhr.status == 401) {
-			    		window.location.href='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8306afd398ab31e5&redirect_uri=http%3a%2f%2fwyh.matrixwing.com%2fweixinLogIn&response_type=code&scope=snsapi_userinfo&state=needlogin#wechat_redirect'
+			    		//window.location.href='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8306afd398ab31e5&redirect_uri=http%3a%2f%2fwyh.matrixwing.com%2fweixinLogIn&response_type=code&scope=snsapi_userinfo&state=needlogin#wechat_redirect'
 			    	};
 			    }
 			});
-			orderId++;
+			//orderId++;
 		})
 		function pay(paydata){
 		    wx.config({
