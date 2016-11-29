@@ -1,5 +1,6 @@
 var weixinConfig = require('../../config/wyhConfig.js').Weixin;
 var https = require('https');
+var request = require('request');
 module.exports = {
   sendPayMsgToUser: function (opts,cb) {
     WxAccess.validateToken(function(err,token){
