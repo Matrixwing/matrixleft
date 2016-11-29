@@ -21,8 +21,7 @@ module.exports = {
       }
       console.log("idcard",idcard);
       IDImage.find({userID:opts.userID}).limit(1).exec(function(err,result) {
-        console.log(err);
-        console.log(result);
+
         if(result==''){
           IDImage.create(idcard).exec(function(err,card){
             if(err) return cb(err)
@@ -30,8 +29,7 @@ module.exports = {
           })
         }else{
           IDImage.update({userID:opts.userID},idcard).exec(function(err,card){
-            console.log(err);
-            console.log(card);
+
             if(err) return cb(err)
             return cb(null,card);
           })

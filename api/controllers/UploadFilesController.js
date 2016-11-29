@@ -4,7 +4,7 @@
  * @description :: 上传文件到服务器
  *
  */
-
+var util = require('util');
 module.exports = {
   uploadFiles : function (req,res){
     //todo 这里是测试数据后面要修改

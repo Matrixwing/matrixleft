@@ -43,5 +43,8 @@ module.exports = {
     })
   },
 
+  notice : function(req,res){
+
+  }
 };
 
