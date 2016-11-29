@@ -19,7 +19,6 @@ module.exports = {
           reverse:opts.files
         };
       }
-      console.log("idcard",idcard);
       IDImage.find({userID:opts.userID}).limit(1).exec(function(err,result) {
 
         if(result==''){
