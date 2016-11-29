@@ -27,7 +27,7 @@ module.exports = {
       out_trade_no: opts.outTradeNo, //微元汇系统订单号
       total_fee: opts.salary+opts.servicePrice,
       spbill_create_ip: '112.193.91.16',
-      notify_url: 'http://1k5x895985.iask.in/ok'
+      notify_url: weixinConfig.notify_url
     }, function(err, result){
       if (err){
         return cb(err);

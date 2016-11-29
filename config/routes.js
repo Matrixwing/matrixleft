@@ -55,6 +55,7 @@ module.exports.routes = {
   "get /getTagList" : {controller: "TagController" , action : "getTagList"},
   "post /getServantList": {controller: "TagController" , action : "getServantList"},
   "get /pay": {controller: "PayController" , action : "pay"},
+  "get /notice" : {controller: "PayController" , action : "notice"},
   "get /sendMessageToUser" : {controller : "MessageController", action : "sendMessageToUser"},
   "post /uploadFiles": {controller : "UploadFilesController", action : "uploadFiles"}
    /***************************************************************************
