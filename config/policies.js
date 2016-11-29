@@ -31,6 +31,10 @@ module.exports.policies = {
 
     },
 
+    CardController : {
+      getUserCard:true
+    },
+
     UserController : {
       '*':"isAuthenticated",
       logIn:true

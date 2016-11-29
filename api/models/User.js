@@ -155,11 +155,10 @@ module.exports = {
   },
 
 
-  updateUserBaseInfoByUserID: function (userID, userBaseInfo, cb) {
-    console.log(userID);
-    User.update(userID,userBaseInfo).exec(function (err, result) {
+  updateUserInfoByUserID: function (userInfo, cb) {
+    console.log(userInfo.userID);
+    User.update(userInfo.userID,userInfo).exec(function (err, result) {
       if (err) return cb(err);
-
       return cb(null, result);
     });
 }

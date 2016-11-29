@@ -6,6 +6,7 @@
  */
 
 module.exports = {
+
   connection: 'localMysqlServer',
   autoCreatedAt: false,
   autoUpdatedAt: false,

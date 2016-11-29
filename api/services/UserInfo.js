@@ -13,7 +13,7 @@ module.exports = {
 
   },
 
-  updateUserInfo : function (userBaseInfo,userSkill,userServantType,cb){
+  updateUserInfo : function (userInfo,UserTag,cb){
     //todo 完善用户信息
     //var userBaseInfo = {
     //  userName : opts.userName,
@@ -21,7 +21,7 @@ module.exports = {
     //}
 
     var userID = {
-      userID : userBaseInfo.userID
+      userID : userInfo.userID
     };
 
     // 更新用户基本信息
@@ -30,24 +30,23 @@ module.exports = {
 
     async.parallel([
       function(next){
-        User.updateUserBaseInfoByUserID(userID, userBaseInfo,function(err,results){
-          if(err) return cb(err);
-          next(null,results)
-        })
-      },
-      function(next){
-        Skill.updateUserSkillByUserID(userSkill,userID,function(err,results){
-          if(err) return cb(err);
-          next(null,results)
-        })
-      },
-      function(next){
-        ServantType.updateServantTypeByUserID(userServantType,userID,function(err,results){
+        User.updateUserInfoByUserID(userInfo,function(err,results){
           if(err) return cb(err);
           next(null,results)
         })
       }
-
+      //function(next){
+      //  Skill.updateUserSkillByUserID(userSkill,userID,function(err,results){
+      //    if(err) return cb(err);
+      //    next(null,results)
+      //  })
+      //},
+      //function(next){
+      //  ServantType.updateServantTypeByUserID(userServantType,userID,function(err,results){
+      //    if(err) return cb(err);
+      //    next(null,results)
+      //  })
+      //}
     ],function(err,results){
       if(err) return cb(err);
       return cb(null,'');

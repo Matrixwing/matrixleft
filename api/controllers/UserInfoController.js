@@ -7,14 +7,14 @@
 
 module.exports = {
 	updateUserInfo : function (req,res) {
-    var userBaseInfo  = req.allParams();
-    var userSkill = req.allParams();
-    var userServantType = req.allParams();
-    var userID={
-      userID:req.param('userID'),
-    };
-    console.log('userBaseInfo',userBaseInfo);
-    console.log('userBaseInfo',req.param.all);
+    var userInfo  = req.param('userInfo');
+    //var userSkill = req.allParams();
+    //var userServantType = req.allParams();
+    //var userID={
+    //  userID:req.param('userID'),
+    //};
+    userInfo.userID = req.session.userID;
+
     UserInfo.updateUserInfo(userBaseInfo,userSkill,userServantType,function(err,reslut){
       res.send(reslut);
     })
