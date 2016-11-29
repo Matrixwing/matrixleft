@@ -49,7 +49,6 @@
 					<a class="mui-card-link" id="pay">去支付</a>
 				</div>
 			</div>
-			<a id="send" class="mui-btn">发送</a>
 		</div>
 		<div class="tips"><div class=" mui-icon mui-spinner"></div></div>
 	</body>
@@ -123,55 +122,6 @@
 		        });
 		    });
 		}
-	</script>
-	<script type="text/javascript">
-	$('#send').on('tap',function(){
-		var user =["ovSs8w80wR9UoqpP5oROHe84QcqM","ovSs8w7mUy1j1SkeLBsmWpjVpkGM"]
-		for(var i=0;i<user.length;i++ ){
-		var data = {
-           "touser":user[i],
-           "template_id":"ocGJIHW7voLu_sC3Hxo98MYddqQoLUaMKvpZq8XnvQ8",
-           "url":"http://15898oq619.iok.la/record.html",            
-           "data":{
-                   "first": {
-                       "value":"恭喜你购买成功！",
-                       "color":"#173177"
-                   },
-                   "keynote1":{
-                       "value":"巧克力",
-                       "color":"#173177"
-                   },
-                   "keynote2": {
-                       "value":"39.8元",
-                       "color":"#173177"
-                   },
-                   "keynote3": {
-                       "value":"2014年9月22日",
-                       "color":"#173177"
-                   },
-                   "remark":{
-                       "value":"欢迎再次购买！",
-                       "color":"#173177"
-                   }
-           }
-       }
-       var a = JSON.stringify(data)
-		$.ajax({
-			    type: 'post',
-			    url: 'https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=oYYvyvIIxYmj8S47BCkBk78sUF7w57_oK1KhfY0JAwA57-5ohdL6ARUCIOfQcC3S9A9c0zQ7MHPC7jjyTdW9GEggMY_6XJ7XmnohtlVIHPkGCScAEALHX',
-			    dataType: 'json',
-			    data:a,
-			    success: function(data) {
-			    	
-					
-			    },
-			    error: function(xhr, textStatus, errorThrown) {
-			    }
-			});
-
-
-		}
-	})
 	</script>
 	<script src="https://s4.cnzz.com/z_stat.php?id=1260604409&web_id=1260604409" language="JavaScript"></script>
 </html>
