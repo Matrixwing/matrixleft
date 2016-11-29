@@ -1,0 +1,27 @@
+/**
+ * IDImage.js
+ *
+ * @description :: TODO: You might write a short summary of how this model works and what it represents here.
+ * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
+ */
+
+module.exports = {
+  tablename:"IDImage",
+  autoCreatedAt: false,
+  autoUpdatedAt: false,
+  autoid: false,
+  attributes: {
+    userID:{
+      type:"string",
+    },
+    front:{
+      type:"string",
+      size:65535
+    },
+    reverse : {
+      type:"string",
+      size:65535
+    }
+  }
+};
+
