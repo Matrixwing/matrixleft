@@ -20,17 +20,17 @@
 
 module.exports.policies = {
 
-    '*': 'isAuthenticated',
-
-    TagController : {
-      '*' :true
-    },
-
-    UserController : {
-      '*':"isAuthenticated",
-      logIn:true
-
-  },
+  //  '*': 'isAuthenticated',
+  //
+  //  TagController : {
+  //    '*' :true
+  //  },
+  //
+  //  UserController : {
+  //    '*':"isAuthenticated",
+  //    logIn:true
+  //
+  //},
 
   //sails说明
   /***************************************************************************
