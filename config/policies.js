@@ -25,6 +25,11 @@ module.exports.policies = {
     TagController : {
       '*' :true
     },
+     PayController : {
+       '*':"isAuthenticated",
+       notice:true
+
+    },
 
     UserController : {
       '*':"isAuthenticated",
