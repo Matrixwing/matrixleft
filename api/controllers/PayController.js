@@ -44,7 +44,9 @@ module.exports = {
   },
 
   notice : function(req,res){
-
+    console.log(req);
+    console.log(req.body);
+    WxMessage.sendPayMsgToUser()
   }
 };
 
