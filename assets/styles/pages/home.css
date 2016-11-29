@@ -127,6 +127,10 @@
 #image-list .image-item.space .image-close {
 	display: none;
 }
+.load_tag{width: 100px;height: 65px;text-align: center;display: none;background-color: #fff;border-radius: 5px;border: 1px solid #ccc}
+.load_tag span{margin-top: 20px;}
+.load_tag span:after{color: #fff}
+.mui-pull-loading{margin-right: 0}
 .imgtips{margin: 10px 0 0 15px !important}
 #image-list .uploadimg{display: none }
 .dotips{padding-left: 10px;font-size: 14px;color: #000;margin-top: 10px}
@@ -184,6 +188,7 @@
 	#image-list .image-item {
 		width: 90px;
 	}
+	.load_tag{width: 90px;}
 	.mui-checkbox input[type=checkbox], .mui-radio input[type=radio] {
 	    right: 28px;
 	}

@@ -141,12 +141,28 @@ $('#cer_sure').on('tap',function(){
 /*uploadimg*/
 $('.file').on('change', function () {
 	var p =$(this);
-    lrz(this.files[0],{width: 640,quality:0.8})
+    lrz(this.files[0],{width: 640,quality:0.3})
         .then(function (rst) {
-        	p.prev().show();
-            p.prev().attr('src',rst.base64);
-            p.parent().removeClass('space')
-            return rst;
+        	p.next().show();
+            $.ajax({
+			    type: 'post',
+			    url: '/uploadFiles',
+			    data: {'files':rst.base64,'filesType':1},
+			    dataType: 'json',
+			    success: function(data) {
+			    	p.next().hide();
+			    	if (data.msgNo==0000) {
+			        	p.prev().show();
+			            p.prev().attr('src',rst.base64);
+			            p.parent().removeClass('space')
+			    	}else{
+			    		mui.toast(data.msgInfo);
+			    	};
+			    },
+			    error: function(data) {
+			    }
+			});
+            //return rst;
         })
         .catch(function (err) {
         	alert(err);
@@ -181,6 +197,7 @@ $(document).ready(function(){
 		});
 	});
 })
+
 /*link*/
 $('#user_card').on('tap',function(){
 	_czc.push(["_trackEvent", "个人主页", "名片", "", "", ""]);
