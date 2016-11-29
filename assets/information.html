@@ -54,8 +54,11 @@
 								<input id='' type="text" class="mui-input" placeholder="请输入身份证号">
 							</div>
 						</form>
+						<div class="xieyi">
+							<span class="mui-icon iconfont icon-icon162"></span>我已阅读并同意<a href="nurseNotice.html">《服务员注册须知》</a>
+						</div>
 						<div class="mui-content-padded">
-							<a id='reg' class="mui-btn mui-btn-block mui-btn-primary">确定</a>
+							<a id='reg' class="mui-btn mui-btn-primary" data-loading-text="下一步">下一步</a>
 						</div>
 
 					</div>
@@ -207,9 +210,24 @@
 									<a id='skill_sure' class="mui-btn ">确定</a>
 								</div>
 							</div>
+							<div class="mui-input-row">
+								<label>证书选择</label>
+								<div class="mui-row s_selcet" id="cer">点击选择</div>
+								<span class="mui-icon mui-icon-arrowdown mui-pull-right select_icon"></span>
+							</div>
+							<div id="cer_div" class="choose_div" style="display:none">
+								<div class="mui-input-row mui-checkbox mui-left">
+									<div class="mui-pull-left mui-col-xs-5">
+										<label>做饭</label>
+										<input name="n_type" value="1" type="checkbox">
+									</div>
+								</div>
+								<div class="mui-input-row" style="text-align: center;">
+									<a id='cer_sure' class="mui-btn ">确定</a>
+								</div>
+							</div>
 						</form>
 						<p class="imgtips">请上传您的育婴师证书图片。</p>
-						只填写证书编号？
 						<form class="mui-input-group" id="form">
 							<div id="image-list" class="row image-list">
 								<div class="image-item space">

@@ -30,12 +30,32 @@
 }
 .mui-content-padded {
 	margin-top: 25px;
+	margin-bottom: 70px;
 }
 .mui-btn {
 	padding: 10px;
 }
 #code{width: 37% !important;float: left;}
-#reg,#reg_add{width: 100% !important;margin-bottom: 70px;font-size: 14px;line-height: 14px;background-color: #e3457d;border-color: #F11764}
+#reg,#reg_add{width: 100% !important;font-size: 14px;background-color: #e3457d;border-color: #F11764}
+#reg .mui-spinner{
+	width: 19px;
+	height: 19px;
+    margin-top: -5px;
+    position: relative;
+    top: 5px;
+}
+.xieyi{
+	width: 100%;padding: 15px;
+	font-size: 14px;
+}
+.xieyi .mui-icon{
+	font-size: 16px;
+	line-height: 16px;
+	color: #e3457d;
+	position: relative;
+	top: 1px;
+	margin-right: 5px;
+}
 #getcode{width: auto !important;padding: 8px;margin-right: 10px;margin-top: 3px;float: right !important;color: #e3457d;background-color: #f0f2f5;border: 1px solid #f0f2f5;border-radius: 6px;}
 .information select,.information input,.information button{width: 72% !important;;float: left;font-size: 14px;line-height: 14px;}
 .information .select_icon{line-height: 44px;margin-right: 10px;position: relative;top:-40px;color: #ccc;font-size: 20px;}

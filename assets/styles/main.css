@@ -32,6 +32,10 @@ ul{list-style:none}
 
 .icon-qianbao:before { content: "\e63f"; }
 
+.icon-dengdai:before { content: "\e652"; }
+
+.icon-gouxuan:before { content: "\e6b1"; }
+
 .icon-cart:before { content: "\e601"; }
 
 .icon-home:before { content: "\e602"; }
@@ -224,11 +228,16 @@ ul{list-style:none}
 
 .icon-jiangli2:before { content: "\e64b"; }
 
+.icon-gouxuan1:before { content: "\e658"; }
+
+.icon-icon162:before { content: "\e6a0"; }
+
 .icon-zhaofuwu:before { content: "\e656"; }
 
 .icon-zhaofuwu1:before { content: "\e659"; }
 
 .icon-iconfontjiangli1:before { content: "\e517"; }
+
 
 
 .fa-star-o:before {content: "\e636"; }

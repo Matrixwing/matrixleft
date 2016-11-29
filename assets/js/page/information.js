@@ -20,7 +20,7 @@ var view = viewApi.view;
 	};
 	
 })(mui);
-
+/*
 var userID=base.getQueryString('userID');
 $.get("/getUser?userID="+userID,function(data,status){
 	var data = JSON.parse(data).data[0];
@@ -37,7 +37,7 @@ $.get("/getUser?userID="+userID,function(data,status){
     	$('.reg_phone').show();
     };
     $('.reg_phone').show();
-});
+});*/
 /*getcode*/
 $('#getcode').on('tap',function(){
 	var phone = $('#phone').val();
@@ -91,8 +91,10 @@ $('#type_sure').on('tap',function(){
 			h+=obj[i].previousElementSibling.innerText+',' ;
 		}
 	}
-	$('#type').html(h);
-	$('#type').attr('data',s);
+	if (h) {
+		$('#type').html(h);
+		$('#type').attr('data',s);
+	}
 	$('#type_div').hide();
 })
 
@@ -110,11 +112,32 @@ $('#skill_sure').on('tap',function(){
 			h+=obj[i].previousElementSibling.innerText+',' ;
 		}
 	}
-	$('#skill').html(h);
-	$('#skill').attr('data',s);
+	if (h) {
+		$('#skill').html(h);
+		$('#skill').attr('data',s);
+	}
 	$('#skill_div').hide();
 })
+$('#cer').on('tap',function(){
+	$('#cer_div').show()
+})
 
+$('#cer_sure').on('tap',function(){
+	var s='';
+	var h='';
+	var obj = $('#cer_div input');
+	for(var i=0; i<obj.length; i++){
+		if(obj[i].checked) {
+			s+=obj[i].value+',' ;
+			h+=obj[i].previousElementSibling.innerText+',' ;
+		}
+	}
+	if (h) {
+		$('#cer').html(h);
+		$('#cer').attr('data',s);
+	}
+	$('#cer_div').hide();
+})
 /*uploadimg*/
 $('.file').on('change', function () {
 	var p =$(this);
@@ -139,6 +162,7 @@ $('.image-close').on('tap',function(){
 
 
 $('#reg').on('tap',function(){
+	mui(this).button('loading');
 	$(this).attr('href','#information_sec')
 })
 
