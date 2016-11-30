@@ -8,13 +8,8 @@ module.exports = {
     })
   },
 
-  uploadIDCard : function (opts,cb){
-  //todo 上传身份证
-
-  },
 
   updateUserInfo : function (userInfo,userTag,cb){
-    //todo 完善用户信息
     //var userBaseInfo = {
     //  userName : opts.userName,
     //  gender : opts.gender
@@ -28,14 +23,14 @@ module.exports = {
     async.parallel([
       function(next){
         User.updateUserInfoByUserID(userInfo,function(err,results){
-          if(err)  next(err);
-          next(null,results)
+          if(err) return next(err);
+          return next(null,results)
         })
       },
       function(next){
         TagUserRe.updataTagUserRe(userInfo.userID,userTag,function(err,results){
-          if(err) next(err);
-          next(null,results)
+          if(err) return next(err);
+          return next(null,results)
         })
       }
     ],function(err,results){
@@ -49,24 +44,32 @@ module.exports = {
       function(next){
         User.find({userID:opts.userID}).exec(function(err,results){
           var user =results[0];
-
+          for(var x in user){
+            if(!user[x]) user[x]='';
+          }
+          console.log(err);
           console.log(user);
-          if(err)  next(err);
-          next(null,user);
+          if(err) return next(err);
+          return next(null,user);
         })
       },
       function(next){
         //查出非系统和证书的tags
         TagUserRe.query('select tur.tagID from taguserre tur left join tag t on tur.tagID=t.tagID where(t.`type`=0 OR t.`type`=1 OR t.`type`=2) and tur.userID='+opts.userID,function(err,results){
+          console.log(err);
           console.log(results);
-          if(err) next(err);
-          next(null,results);
+          if(err) return next(err);
+          return  next(null,results);
         })
       }
     ],function(err,results){
       console.log(results);
       if(err) return cb(err);
-      return cb(null,results);
+      var servantDetail = {
+        userInfo : results[0],
+        userTags  : results[1]
+      };
+      return cb(null,servantDetail);
     });
   }
 };
