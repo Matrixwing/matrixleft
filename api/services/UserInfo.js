@@ -48,6 +48,7 @@ module.exports = {
     async.parallel([
       function(next){
         User.find({userID:opts.userID}).exec(function(err,results){
+          console.log(results);
           if(err)  next(err);
           next(null,results);
         })
@@ -55,11 +56,13 @@ module.exports = {
       function(next){
         //查出非系统和证书的tags
         TagUserRe.query('select tur.tagID from taguserre tur left join tag t on tur.tagID=t.tagID where(t.`type`=0 OR t.`type`=1 OR t.`type`=2) and tur.userID='+opts.userID,function(err,results){
+          console.log(results);
           if(err) next(err);
           next(null,results);
         })
       }
     ],function(err,results){
+      console.log(results);
       if(err) return cb(err);
       return cb(null,err,results);
     });
