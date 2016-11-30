@@ -43,6 +43,7 @@ module.exports = {
         var redirectUrl=req.session.page;
       else
         var redirectUrl = '/nurseHome.html';
+      console.log(redirectUrl);
       res.redirect(302,redirectUrl);
     })
 
