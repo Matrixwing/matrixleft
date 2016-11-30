@@ -21,7 +21,7 @@ module.exports = {
       homeTown:'成都',
       mouthRest:20
     };
-    var userTag =[{tagID:1},{tagID:2},{tagID:3}]
+    var userTag =[{tagID:1},{tagID:2},{tagID:3},{tagID:4}]
     userInfo.userID = 245;
     //userInfo.userID = req.session.userID;
 
