@@ -48,9 +48,11 @@ module.exports = {
     async.parallel([
       function(next){
         User.find({userID:opts.userID}).exec(function(err,results){
-          console.log(results);
+          var user =results[0];
+
+          console.log(user);
           if(err)  next(err);
-          next(null,results);
+          next(null,user);
         })
       },
       function(next){
@@ -64,7 +66,7 @@ module.exports = {
     ],function(err,results){
       console.log(results);
       if(err) return cb(err);
-      return cb(null,err,results);
+      return cb(null,results);
     });
   }
 };

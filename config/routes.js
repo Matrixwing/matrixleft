@@ -57,7 +57,9 @@ module.exports.routes = {
   "get /pay": {controller: "PayController" , action : "pay"},
   "get /notice" : {controller: "PayController" , action : "notice"},
   "get /sendMessageToUser" : {controller : "MessageController", action : "sendMessageToUser"},
-  "post /uploadFiles": {controller : "UploadFilesController", action : "uploadFiles"}
+  "post /uploadFiles": {controller : "UploadFilesController", action : "uploadFiles"},
+  "get /getSevantDetail": {controller : "UserInfoController", action : "getSevantDetail"},
+
    /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *
