@@ -26,6 +26,19 @@ module.exports = {
       res.send(result);
     })
   },
-
+ getSevantDetail : function(req,res){
+   var userID  = req.param('userID');
+   if(!userID){
+     userID = req.session.userID;
+   }
+   var opts = {
+     userID:userID
+   }
+   UserInfo.getSevantDetail(opts,function(err,reslut){
+     if (err) return res.send('{"msgNo":"9999","msgInfo":"修改失败"}');
+     result = '{"msgNo":"0000","msgInfo":"修改成功"}';
+     res.send(result);
+   })
+ }
 };
 

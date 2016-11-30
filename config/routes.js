@@ -50,7 +50,7 @@ module.exports.routes = {
   "get /weixinLogInTest" : {controller: "UserController" , action : "logInTest"},
 
   "get /getAllSkill" : {controller: "SkillController" , action : "getAllSkill"},
-  "get /updateUserInfo": {controller: "UserInfoController" , action : "updateUserInfo"},
+  "post /updateUserInfo": {controller: "UserInfoController" , action : "updateUserInfo"},
 
   "get /getTagList" : {controller: "TagController" , action : "getTagList"},
   "post /getServantList": {controller: "TagController" , action : "getServantList"},

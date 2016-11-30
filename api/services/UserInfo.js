@@ -23,11 +23,8 @@ module.exports = {
     var userID = {
       userID : userInfo.userID
     };
-
     // 更新用户基本信息
-    // 更新特长
     // 更新类型
-
     async.parallel([
       function(next){
         User.updateUserInfoByUserID(userInfo,function(err,results){
@@ -41,16 +38,30 @@ module.exports = {
           next(null,results)
         })
       }
-      //function(next){
-      //  ServantType.updateServantTypeByUserID(userServantType,userID,function(err,results){
-      //    if(err) return cb(err);
-      //    next(null,results)
-      //  })
-      //}
     ],function(err,results){
       if(err) return cb(err);
       return cb(null,'');
     });
+  },
 
+  getSevantDetail:function(opts,cb){
+    async.parallel([
+      function(next){
+        User.find({userID:opts.userID}).exec(function(err,results){
+          if(err)  next(err);
+          next(null,results);
+        })
+      },
+      function(next){
+        //查出非系统和证书的tags
+        TagUserRe.query('select tur.tagID from taguserre tur left join tag t on tur.tagID=t.tagID where(t.`type`=0 OR t.`type`=1 OR t.`type`=2) and tur.userID='+opts.userID,function(err,results){
+          if(err) next(err);
+          next(null,results);
+        })
+      }
+    ],function(err,results){
+      if(err) return cb(err);
+      return cb(null,err,results);
+    });
   }
 };
