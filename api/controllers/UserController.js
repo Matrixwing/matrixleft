@@ -38,11 +38,11 @@ module.exports = {
       req.session.userID=result.userID;
       req.session.role=result.role;
       if(opts.role==1)
-        var redirectUrl = '/nurseList.html?userID='+result.userID+'&tab=index';
+        var redirectUrl = '/nurseList.html';
       if (opts.role=='needlogin')
         var redirectUrl=req.session.page;
       else
-        var redirectUrl = '/nurse_home.html?userID='+result.userID+'&tab=index';
+        var redirectUrl = '/nurseHome.html';
       res.redirect(302,redirectUrl);
     })
 
