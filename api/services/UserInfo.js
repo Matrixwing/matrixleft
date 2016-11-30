@@ -31,13 +31,13 @@ module.exports = {
     async.parallel([
       function(next){
         User.updateUserInfoByUserID(userInfo,function(err,results){
-          if(err) return cb(err);
+          if(err)  next(err);
           next(null,results)
         })
       },
       function(next){
-        UserTagRe.updataUserTagRe(userInfo.userID,userTag,function(err,results){
-          if(err) return cb(err);
+        TagUserRe.updataTagUserRe(userInfo.userID,userTag,function(err,results){
+          if(err) next(err);
           next(null,results)
         })
       }
