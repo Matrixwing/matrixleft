@@ -195,7 +195,7 @@ $(document).ready(function(){
  		{value:'1',text:'未婚'},
  		{value:'2',text:'保密'}
 	]);
-	$('#hy').on('tap', function(event) {
+	$('#marriage').on('tap', function(event) {
 		var _this = $(this);
 		hy.show(function(items) {
 			_this.html(items[0].text);
@@ -228,7 +228,7 @@ $('#reg_add').on('tap',function(){
 	var address = $('#address').val();
 	var workExp = $('#workExp').val();
 	var serviceCity = $('#serviceCity').val();
-	/*if (userName=='') {
+	if (userName=='') {
 		mui.toast('请输入您的姓名')
 		return;
 	};
@@ -240,15 +240,26 @@ $('#reg_add').on('tap',function(){
 		mui.toast('请输入您的民族')
 		return;
 	};
-	if (marriage=='') {
+	if (marriage==undefined) {
 		mui.toast('请选择您的婚姻状况')
 		return;
 	};
 	if (expectSalary=='') {
 		mui.toast('请选择您的期望月薪')
 		return;
-	};*/
-
+	};
+	if (address=='') {
+		mui.toast('请选择您的当前住址')
+		return;
+	};
+	if (workExp=='') {
+		mui.toast('请选择您的服务经验')
+		return;
+	};
+	if (serviceCity=='') {
+		mui.toast('请选择您的服务城市')
+		return;
+	};
 	var userInfo=[
 		{'userName':userName},
 		{'homeTown':homeTown},
