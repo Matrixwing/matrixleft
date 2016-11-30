@@ -8,8 +8,11 @@
 var util = require('util');
 module.exports = {
 	updateUserInfo : function (req,res) {
-    var userInfo  = req.param('userInfo');
-    var userTag  = req.param('userTag');
+
+    var userInfo  = JSON.parse(req.param('userInfo'));
+    var userTag  = JSON.parse(req.param('userTags'));
+    //var userInfo  = req.param('userInfo');
+    //var userTag  =req.param('userTags');
     //var userInfo = {
     //  userName : '哇哇哇',
     //  //gender:1,
@@ -17,11 +20,9 @@ module.exports = {
     //  mouthRest:20
     //};
    // var userTag =[{tagID:1},{tagID:2},{tagID:3}]
-    console.log(userInfo);
-    console.log(req.allParams());
-    userInfo=JSON.parse(userInfo);
-    userTag=JSON.parse(userTag);
-    userInfo.userID = 245;                                   //为了测试方便，暂时写成245
+
+
+    //userInfo.userID = 245;                                   //为了测试方便，暂时写成245
     //userInfo.userID = req.session.userID;                   //正式坏境用session的
 
     UserInfo.updateUserInfo(userInfo,userTag,function(err,reslut){

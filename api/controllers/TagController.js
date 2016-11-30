@@ -19,6 +19,7 @@ module.exports = {
   },
 
   getServantList : function (req,res) {
+    console.log('req.body',req.body);
     var tag = JSON.parse(req.param('tag','')) ;
     if(tag=='') {
       tag = [{tagID: 0}, {tagID: 1}, {tagID: 2}, {tagID: 3}];
