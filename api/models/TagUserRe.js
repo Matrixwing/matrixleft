@@ -21,8 +21,9 @@ module.exports = {
   },
 
   updataTagUserRe : function(userID,tags,cb) {
-    //先删除有的tag
-    TagUserRe.destroy({userID:userID}).exec(function(err,result){
+    //TagUserRe.destroy({userID:userID}).exec(function(err,result){
+    //删除不是系统标签和证书的tag
+    TagUserRe.query('DELETE tur.* FROM `taguserre` tur LEFT JOIN tag  t ON tur.tagID=t.tagID WHERE tur.userID= '+userID+' AND (t.`type`=0 OR t.`type`=1 OR t.`type`=2)').exec(function(err,result){
       //删除重复的tag
       var uniqueTags = [];
       for(var i = 0, l = tags.length; i < l; i++) {
@@ -38,15 +39,11 @@ module.exports = {
         TagUserRe.create({userID:userID,tagID:uniqueTags[x].tagID}).exec(function(err,result) {
           console.log(err);
           if(err) return cb(err);
-          //if (x == uniqueTags.length - 1) {
-          //  console.log("111111111111111");
-          //  console.log(uniqueTags.length - 1);
-          //  console.log(result);
-          //}
         })
       }
       cb(null,result);
     })
+    //})
   }
 };
 
