@@ -3,7 +3,7 @@ mui.init({
 });
 //初始化单页view
 var viewApi = mui('#app').view({
-	defaultPage: '#information_one'
+	defaultPage: '#information_sec'
 });
 //初始化单页的区域滚动
 mui('.mui-scroll-wrapper').scroll();
@@ -82,6 +82,7 @@ $('#type').on('tap',function(){
 })
 
 $('#type_sure').on('tap',function(){
+	$('#type').attr('data','');
 	var s='';
 	var h='';
 	var obj = $('#type_div input');
@@ -103,6 +104,7 @@ $('#skill').on('tap',function(){
 })
 
 $('#skill_sure').on('tap',function(){
+	$('#skill').attr('data','');
 	var s='';
 	var h='';
 	var obj = $('#skill_div input');
@@ -123,13 +125,14 @@ $('#cer').on('tap',function(){
 })
 
 $('#cer_sure').on('tap',function(){
+	$('#cer').attr('data','');
 	var s='';
 	var h='';
 	var obj = $('#cer_div input');
 	for(var i=0; i<obj.length; i++){
 		if(obj[i].checked) {
-			s+=obj[i].value+',' ;
-			h+=obj[i].previousElementSibling.innerText+',' ;
+			s+=obj[i].value+',';
+			h+=obj[i].previousElementSibling.innerText+',';
 		}
 	}
 	if (h) {
@@ -188,9 +191,9 @@ $('#reg').on('tap',function(){
 $(document).ready(function(){
 	var hy = new mui.PopPicker();
  	hy.setData([
- 		{value:'200',text:'已婚'},
- 		{value:'201',text:'未婚'},
- 		{value:'202',text:'保密'}
+ 		{value:'0',text:'已婚'},
+ 		{value:'1',text:'未婚'},
+ 		{value:'2',text:'保密'}
 	]);
 	$('#hy').on('tap', function(event) {
 		var _this = $(this);
@@ -205,4 +208,92 @@ $(document).ready(function(){
 $('#user_card').on('tap',function(){
 	_czc.push(["_trackEvent", "个人主页", "名片", "", "", ""]);
 	window.location.href='user_card.html?userID='+userID;
+})
+
+$('#reg_add').on('tap',function(){
+	/*if ($('#idcard_img1').attr('src')=='') {
+		mui.toast('请上传您的身份证正面照片')
+		return
+	};
+	if ($('#idcard_img2').attr('src')=='') {
+		mui.toast('请上传您的身份证反面照片')
+		return
+	};*/
+	var userName = $('#userName').val();
+	var homeTown = $('#homeTown').val();
+	var folk = $('#folk').val();
+	var marriage = $('#marriage').attr('tagID');
+	var expectSalary = $('#expectSalary').val();
+	var workstatus = $('input:radio[name="workstatus"]:checked').val()
+	var address = $('#address').val();
+	var workExp = $('#workExp').val();
+	var serviceCity = $('#serviceCity').val();
+	/*if (userName=='') {
+		mui.toast('请输入您的姓名')
+		return;
+	};
+	if (homeTown=='') {
+		mui.toast('请输入您的籍贯')
+		return;
+	};
+	if (folk=='') {
+		mui.toast('请输入您的民族')
+		return;
+	};
+	if (marriage=='') {
+		mui.toast('请选择您的婚姻状况')
+		return;
+	};
+	if (expectSalary=='') {
+		mui.toast('请选择您的期望月薪')
+		return;
+	};*/
+
+	var userInfo=[
+		{'userName':userName},
+		{'homeTown':homeTown},
+		{'folk':folk},
+		{'marriage':marriage},
+		{'expectSalary':expectSalary},
+		{'workstatus':workstatus},
+		{'address':address},
+		{'workExp':workExp},
+		{'serviceCity':serviceCity},
+
+	];
+
+	var userTags=[];
+	if ($('#type').attr('data')==undefined) {
+		mui.toast('请选择您的工作类型')
+		return
+	}else{
+		var type = $('#type').attr('data').split(',')
+		for(var i=0;i<type.length-1;i++){
+			userTags.push({'tagID':type[i]})
+		}
+	};
+	if ($('#skill').attr('data')==undefined) {
+		//mui.toast('请选择您的工作类型')
+	}else{
+		var skill = $('#skill').attr('data').split(',')
+		for(var i=0;i<skill.length-1;i++){
+			userTags.push({'tagID':skill[i]})
+		}
+	};
+	$.ajax({
+	    type: 'post',
+	    url: '/updateUserInfo',
+	    data: {
+	    	'userInfo':JSON.stringify(userInfo),
+	    	'userTags':JSON.stringify(userTags)
+	    },
+	    dataType: 'json',
+	    success: function(data) {
+	    	if (data.msgNo=='0000') {}
+	   
+	    },
+	    error: function(data) {
+	    	mui.toast('请重试');
+	    }
+	});
 })
