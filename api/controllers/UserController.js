@@ -41,7 +41,7 @@ module.exports = {
         var redirectUrl = '/nurseList.html';
       if (opts.role=='needlogin')
         var redirectUrl=req.session.page;
-      else
+      if(opts.role==2)
         var redirectUrl = '/nurseHome.html';
       console.log(redirectUrl);
       res.redirect(302,redirectUrl);
