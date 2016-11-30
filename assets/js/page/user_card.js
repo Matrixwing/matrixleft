@@ -214,3 +214,9 @@
 		function closeqcode(){
 			$('#qcode_div').remove()
 		}
+		$('#shi').on('tap',function(){
+			mui.toast('已通过小元实名认证')
+		})
+		$('#jian').on('tap',function(){
+			mui.toast('已通过小元体检认证')
+		})

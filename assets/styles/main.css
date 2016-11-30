@@ -418,12 +418,8 @@ ul{list-style:none}
 				z-index: 20;
 				background-color: #000;
 			}
-.kbd_div{
-	width: 3.3em;
-	height: 1em;
-	margin: .2em .5em .2em 0;
-}
-.kbd {
+
+/*.kbd {
 	display: inline-block;
 	padding:.2em .3em;
 	border: solid 1px #f15353 ;
@@ -442,6 +438,13 @@ ul{list-style:none}
     -ms-transform-origin: 0 0;
     -webkit-transform-origin: 0 0;
     transform-origin: 0 0;
+}*/
+.kbd {
+	display: inline-block;
+	margin-right: .5em;
+}
+.kbd img{
+	width: 24px;
 }
 .mui-title{font-size: 16px;margin: 0 !important;}
 .mui-bar-nav{box-shadow: none;border-bottom: 1px solid #c8c7cc;}

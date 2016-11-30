@@ -282,10 +282,21 @@ function getServantList(dataList,clear){
 								serventList.push('</div>')
 								serventList.push('<div class="mui-row">')
 									serventList.push('<div class="mui-row">')
-										
+											
+											serventList.push('<div class="ckxz">小元参考薪资：<font>'+data.data.servantList[i].price+'</font>/月</div>')
 											serventList.push('<div class="kbd_div mui-pull-left">')
 											if (data.data.servantList[i].sysTag) {
-												serventList.push('<div class="kbd">小元实名</div>')
+												var sysTag=data.data.servantList[i].sysTag.split('|')
+												if (sysTag[0]=='小元认证') {
+													serventList.push('<div class="kbd mui-pull-left"><img src="images/shi.png"/></div>')
+												};
+												if (sysTag[0]=='小元体检') {
+													serventList.push('<div class="kbd mui-pull-left"><img src="images/jian.png"/></div>')
+												};
+												if (sysTag[1]=='小元体检') {
+													serventList.push('<div class="kbd mui-pull-left"><img src="images/jian.png"/></div>')
+												};
+												console.log(sysTag[1])
 											};
 											serventList.push('</div>')
 											
@@ -293,9 +304,11 @@ function getServantList(dataList,clear){
 											serventList.push('<div class="kbd">小元体检</div>')
 										serventList.push('</div>')*/
 									serventList.push('</div>')
-									serventList.push('<div class="ckxz">小元参考薪资：<font>'+data.data.servantList[i].price+'</font>/月</div>')
 								serventList.push('</div>')
 		    				serventList.push('</div>')
+		    				if (data.data.servantList[i].sysComment) {
+		    					serventList.push('<p class="mui-ellipsis">'+data.data.servantList[i].sysComment+'</p>')
+		    				};
 		    				/*serventList.push('<p class="mui-ellipsis">小元评价：改服务员态度好，服务号，做饭好，什么都好</p>')*/
 		    			serventList.push('</a>')
 	    			serventList.push('</li>')

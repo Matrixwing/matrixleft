@@ -53,8 +53,27 @@ img{width: 100%}
 .mui-table-view-cell:last-child:after{
     height: 1px;
 }
+.yy_bar{
+    position: fixed;
+    bottom: 0;
+    height: 44px;
+    width: 100%;
+    background-color: #e3457d;
+    color: #fff;
+    text-align: center;
+    line-height: 44px;
+    z-index: 99
+
+}
+#returnup{
+    margin-bottom: 50px;
+}
+.mui-bar .mui-btn-nav.mui-pull-right{
+    margin-right: 0
+}
+.mui-toast-message{width: 150px;}
 @media screen and (max-width: 320px) {
-	img{
+	#avatarUrl{
 		width: 90px !important;
 		height: 90px !important;
 	}

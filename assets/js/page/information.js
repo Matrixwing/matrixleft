@@ -3,7 +3,7 @@ mui.init({
 });
 //初始化单页view
 var viewApi = mui('#app').view({
-	defaultPage: '#information_sec'
+	defaultPage: '#information_one'
 });
 //初始化单页的区域滚动
 mui('.mui-scroll-wrapper').scroll();
@@ -159,7 +159,10 @@ $('.file').on('change', function () {
 			    		mui.toast(data.msgInfo);
 			    	};
 			    },
-			    error: function(data) {
+			    error: function(xhr, textStatus, errorThrown) {
+			    	/*if (xhr.status == 401) {
+			    		window.location.href='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8306afd398ab31e5&redirect_uri=http%3a%2f%2fwyh.matrixwing.com%2fweixinLogIn&response_type=code&scope=snsapi_userinfo&state=needlogin#wechat_redirect'
+			    	};*/
 			    }
 			});
             //return rst;
