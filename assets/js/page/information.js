@@ -260,19 +260,17 @@ $('#reg_add').on('tap',function(){
 		mui.toast('请选择您的服务城市')
 		return;
 	};
-	var userInfo=[
-		{'userName':userName},
-		{'homeTown':homeTown},
-		{'folk':folk},
-		{'marriage':marriage},
-		{'expectSalary':expectSalary},
-		{'workstatus':workstatus},
-		{'address':address},
-		{'workExp':workExp},
-		{'serviceCity':serviceCity},
-
-	];
-
+	var userInfo={
+		'userName':userName,
+		'homeTown':homeTown,
+		'folk':folk,
+		'marriage':marriage,
+		'expectSalary':expectSalary,
+		'workstatus':workstatus,
+		'address':address,
+		'workExp':workExp,
+		'serviceCity':serviceCity
+	}
 	var userTags=[];
 	if ($('#type').attr('data')==undefined) {
 		mui.toast('请选择您的工作类型')
