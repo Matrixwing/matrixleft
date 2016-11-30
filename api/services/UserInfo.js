@@ -23,12 +23,14 @@ module.exports = {
     async.parallel([
       function(next){
         User.updateUserInfoByUserID(userInfo,function(err,results){
+          console.log(err);
           if(err) return next(err);
           return next(null,results)
         })
       },
       function(next){
         TagUserRe.updataTagUserRe(userInfo.userID,userTag,function(err,results){
+          console.log(err);
           if(err) return next(err);
           return next(null,results)
         })

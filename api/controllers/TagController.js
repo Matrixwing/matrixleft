@@ -36,7 +36,6 @@ module.exports = {
     if(tagParam.tag==''){
       return res.send('{"msgNo":"9999","msgInfo":"参数不正确"}');
     }
-
     Tag.getServantList(tagParam,function(err,tagList){
       if (err) {return res.send(500,'{"msgNo":"9999","msgInfo":"服务出错"}');}
       var str = JSON.stringify(tagList) ;
