@@ -87,7 +87,7 @@
 								<div class="upload_tips">正面：</div>
 								<div class="image-item space">
 									<div class="image-close">X</div>
-									<img src="" class="image-item uploadimg">
+									<img src="" class="image-item uploadimg" id="idcard_img1">
 									<input type="file" class="file" accept="image/*" id="image-1">
 									<div class="load_tag  mui-pull-left">
 										<span class="mui-pull-loading mui-icon mui-spinner"></span>
@@ -96,7 +96,7 @@
 								<div class="upload_tips">反面：</div>
 								<div class="image-item space">
 									<div class="image-close">X</div>
-									<img src="" class="image-item uploadimg">
+									<img src="" class="image-item uploadimg" id="idcard_img2">
 									<input type="file" class="file" accept="image/*" id="image-1">
 									<div class="load_tag  mui-pull-left">
 										<span class="mui-pull-loading mui-icon mui-spinner"></span>
@@ -106,40 +106,52 @@
 						</form>
 						<form class="mui-input-group">
 							<div class="mui-input-row">
+								<label>姓名</label>
+								<input id='userName' type="text" class="mui-input" placeholder="请输入姓名" value="">
+							</div>
+							<div class="mui-input-row">
 								<label>籍贯</label>
-								<input id='' type="text" class="mui-input" placeholder="请输入籍贯" value="四川省">
+								<input id='homeTown' type="text" class="mui-input" placeholder="请输入籍贯" value="四川省">
 							</div>
 							<div class="mui-input-row">
 								<label>民族</label>
-								<input id='' type="text" class="mui-input" placeholder="请输入民族" value="汉族">
+								<input id='folk' type="text" class="mui-input" placeholder="请输入民族" value="汉族">
 							</div>
 							<div class="mui-input-row">
 								<label>婚姻</label>
-								<div class="mui-row s_selcet" id="hy" type="button">请选择</div>
+								<div class="mui-row s_selcet" id="marriage" type="button">请选择</div>
 								<span class="mui-icon mui-icon-arrowdown mui-pull-right select_icon"></span>
 							</div>
 						</form>
 						<form class="mui-input-group">
 							<div class="mui-input-row">
+								<label>期望薪资</label>
+								<input id="expectSalary" type="number" class="mui-input fwjy" placeholder="请输入您的期望月薪" value="">
+							</div>
+							<div class="mui-input-row">
 								<label >当前状态</label>
 								<div class="mui-row s_selcet" id="hy">
 									<div class="s_radio mui-radio">
-										<input name="radio1" type="radio">
+										<input name="workstatus" type="radio" checked value="1">
 										<label>待岗</label>
 									</div>
 									<div class="s_radio mui-radio">
-										<input name="radio1" type="radio">
+										<input name="workstatus" type="radio" value="0">
 										<label>在岗</label>
 									</div>
 								</div>
 							</div>
 							<div class="mui-input-row">
 								<label>当前住址</label>
-								<input id='' type="text" class="mui-input" placeholder="请输入当前住址">
+								<input id='address' type="text" class="mui-input" placeholder="请输入当前住址">
 							</div>
 							<div class="mui-input-row">
 								<label>服务经验</label>
-								<input id="" type="number" class="mui-input fwjy" placeholder="请输入您的工作月数" value="">
+								<input id="workExp" type="number" class="mui-input fwjy" placeholder="请输入您的工作月数" value="">
+							</div>
+							<div class="mui-input-row">
+								<label>服务城市</label>
+								<input id="serviceCity" type="text" class="mui-input fwjy" placeholder="请输入您要服务的城市" value="成都市">
 							</div>
 							<div class="mui-input-row">
 								<label>服务类型</label>
@@ -183,33 +195,34 @@
 							<div id="skill_div" class="choose_div" style="display:none">
 								<div class="mui-input-row mui-checkbox mui-left">
 									<div class="mui-pull-left mui-col-xs-5">
-										<label>做饭</label>
-										<input name="n_type" value="1" type="checkbox">
+										<label>面食</label>
+										<input name="n_type" value="11" type="checkbox">
 									</div>
 									<div class="mui-pull-left mui-col-xs-5">
-										<label>洗衣服</label>
-										<input name="n_type" value="2" type="checkbox">
+										<label>照顾过外国人</label>
+										<input name="n_type" value="12" type="checkbox">
 									</div>
 								</div>
 								<div class="mui-input-row mui-checkbox mui-left">
 									<div class="mui-pull-left mui-col-xs-5">
-										<label>做卫生</label>
-										<input name="n_type" value="3" type="checkbox">
+										<label>英语</label>
+										<input name="n_type" value="13" type="checkbox">
 									</div>
 									<div class="mui-pull-left mui-col-xs-5">
-										<label>照顾老人</label>
-										<input name="n_type" value="4" type="checkbox">
+										<label>早教</label>
+										<input name="n_type" value="14" type="checkbox">
 									</div>
 								</div>
 								<div class="mui-input-row mui-checkbox mui-left">
 									<div class="mui-pull-left mui-col-xs-5">
-										<label>照顾病人</label>
-										<input name="n_type" value="5" type="checkbox">
+										<label>插花</label>
+										<input name="n_type" value="15" type="checkbox">
 									</div>
 									<div class="mui-pull-left mui-col-xs-5">
-										<label>照顾小孩</label>
-										<input name="n_type" value="6" type="checkbox">
+										<label>西餐</label>
+										<input name="n_type" value="16" type="checkbox">
 									</div>
+									
 								</div>
 								<div class="mui-input-row" style="text-align: center;">
 									<a id='skill_sure' class="mui-btn ">确定</a>
@@ -236,7 +249,7 @@
 								</div>
 							</div>
 						</form>
-						<div class="cer_div">
+						<!-- <div class="cer_div">
 							<p class="imgtips">请上传您的育婴师证书图片。</p>
 							<form class="mui-input-group" id="form">
 								<div id="image-list" class="row image-list">
@@ -248,7 +261,7 @@
 								</div>
 							</form>
 						</div>
-						
+						 -->
 						<div class="mui-content-padded">
 							<a id='reg_add' href="#" class="mui-btn mui-btn-block mui-btn-primary">确定</a>
 						</div>
