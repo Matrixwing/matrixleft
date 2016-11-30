@@ -73,7 +73,7 @@
 			        	$('#data_input').val('');
 			        	$('#idcard_input').val('');
 			        	var encrypted = getAesString(data.data[0].IDCard,'1234567812345678','Pkcs7')
-			        	window.location.href='/cer_result.html?queryInfo='+encrypted;
+			        	window.location.href='/cerResult.html?queryInfo='+encrypted;
 			        }else{
 			        	$('.result_empty').show();
 			        };
