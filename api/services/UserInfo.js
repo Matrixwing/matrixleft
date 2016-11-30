@@ -51,6 +51,10 @@ module.exports = {
           }
           console.log(err);
           console.log(user);
+          delete user.avatarUrl;
+          delete user.userID;
+          delete user.role;
+          delete user.openid;
           if(err) return next(err);
           return next(null,user);
         })
