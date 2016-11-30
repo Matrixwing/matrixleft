@@ -20,39 +20,39 @@
 
 module.exports.policies = {
 
-    '*': 'isAuthenticated',
-
-    TagController : {
-      '*' :true
-    },
-     PayController : {
-       '*':"isAuthenticated",
-       notice:true
-
-    },
-
-    CardController : {
-      getUserCard:true
-    },
-
-    UserController : {
-      '*':"isAuthenticated",
-      logIn:true,
-      sendNumToPhone:true
-
-  },
+//    '*': 'isAuthenticated',
 //
-  UserController : {
-    '*':"isAuthenticated",
-    logIn:true,
-    sendNumToPhone:true
-
-  },
-
-  ServantController : {
-    getCertInfo:true
-
-  },
+//    TagController : {
+//      '*' :true
+//    },
+//     PayController : {
+//       '*':"isAuthenticated",
+//       notice:true
+//
+//    },
+//
+//    CardController : {
+//      getUserCard:true
+//    },
+//
+//    UserController : {
+//      '*':"isAuthenticated",
+//      logIn:true,
+//      sendNumToPhone:true
+//
+//  },
+////
+//  UserController : {
+//    '*':"isAuthenticated",
+//    logIn:true,
+//    sendNumToPhone:true
+//
+//  },
+//
+//  ServantController : {
+//    getCertInfo:true
+//
+//  },
   //sails说明
   /***************************************************************************
   *                                                                          *
