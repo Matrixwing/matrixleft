@@ -155,9 +155,9 @@ module.exports = {
   },
 
 
-  updateUserInfoByUserID: function (userInfo, cb) {
+  updateUserInfoByUserID: function (userInfo,cb) {
     console.log(userInfo.userID);
-    User.update(userInfo.userID,userInfo).exec(function (err, result) {
+    User.update(userInfo.userID,userInfo).exec(function (err,result) {
       if (err) return cb(err);
       return cb(null, result);
     });

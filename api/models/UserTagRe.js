@@ -7,7 +7,7 @@
 
 module.exports = {
   connection: 'localMysqlServer',
-  table:'usertagre',
+  tablename:'taguserre',
   autoCreatedAt: false,
   autoUpdatedAt: false,
   autoid: false,
@@ -24,21 +24,25 @@ module.exports = {
     //先删除有的tag
     UserTagRe.destroy({userID:userID}).exec(function(err,result){
       //删除重复的tag
-      for(a in tags){
-        for(b in tags){
-          if(tags[a].tagID==tags[b].tagID){
-
-          }
-        }
+      var uniqueTags = [];
+      for(var i = 0, l = tags.length; i < l; i++) {
+        for(var j = i + 1; j < l; j++)
+          if (tags[i] === tags[j]) j = ++i;
+        uniqueTags.push(tags[i]);
       }
+      console.log(uniqueTags);
       //添加tag
       var x;
-      for(x in tags){
-        UserTagRe.create({userID:userID,tagID:tags[x].tagID}).exec(function(err,result) {
-          if (x == tags.length - 1) {
-            return cb(null,result);
+      for(x in uniqueTags){
+        UserTagRe.create({userID:userID,tagID:uniqueTags[x].tagID}).exec(function(err,result) {
+          console.log(err);
+          if(err) return cb(err);
+          if (x == uniqueTags.length - 1) {
+            console.log("111111111111111");
+            console.log(x == uniqueTags.length - 1);
+            console.log(result);
+            cb(null,result);
           }
-          if (err) return cb(err);
         })
       }
     })

@@ -13,7 +13,7 @@ module.exports = {
 
   },
 
-  updateUserInfo : function (userInfo,UserTag,cb){
+  updateUserInfo : function (userInfo,userTag,cb){
     //todo 完善用户信息
     //var userBaseInfo = {
     //  userName : opts.userName,
@@ -34,13 +34,13 @@ module.exports = {
           if(err) return cb(err);
           next(null,results)
         })
+      },
+      function(next){
+        UserTagRe.updataUserTagRe(userInfo.userID,userTag,function(err,results){
+          if(err) return cb(err);
+          next(null,results)
+        })
       }
-      //function(next){
-      //  Skill.updateUserSkillByUserID(userSkill,userID,function(err,results){
-      //    if(err) return cb(err);
-      //    next(null,results)
-      //  })
-      //},
       //function(next){
       //  ServantType.updateServantTypeByUserID(userServantType,userID,function(err,results){
       //    if(err) return cb(err);

@@ -37,9 +37,11 @@ module.exports.policies = {
 
     UserController : {
       '*':"isAuthenticated",
-      logIn:true
+      logIn:true,
+      sendNumToPhone:true
 
   },
+
 
   //sails说明
   /***************************************************************************
