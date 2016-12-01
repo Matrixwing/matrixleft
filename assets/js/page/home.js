@@ -31,9 +31,11 @@
 						$('.avatarUrl').attr('src', data.data[0].avatarUrl);
 					    if (data.data[0].userName) {
 					   		$('.nickname').html(data.data[0].userName);
-					   		$('.nickname').attr('userID',data.data[0].userID);
 					    }else{
 					    	$('.nickname').html(data.data[0].nickname);
+					    };
+					    if (data.data[0].userID) {
+					   		$('.nickname').attr('userID',data.data[0].userID);
 					    };
 					    if (data.data[0].gender==1) {
 					    	$('.gender').html('女');
