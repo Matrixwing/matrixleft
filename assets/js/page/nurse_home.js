@@ -21,29 +21,53 @@ var view = viewApi.view;
 	
 })(mui);
 
-var userID=base.getQueryString('userID');
-$.get("/getUser?userID="+userID,function(data,status){
-	var data = JSON.parse(data).data[0];
-    $('.avatarUrl').attr('src', data.avatarUrl);
-    if (data.userName) {
-   		$('.nickname').html(data.userName);
-    }else{
-    	$('.nickname').html(data.nickname);
-    };
-    $('.gender').html(data.gender);
-    if (data.phone) {
-    	$('.phone').html(data.phone);
-    }else{
-    	$('.reg_phone').show();
-    };
-    $('.reg_phone').show();
-});
+$(function(){
+	$.ajax({
+	    type: 'get',
+	    url: '/getUser',
+	    dataType: 'json',
+	    success: function(data) {
+	    	var data = JSON.parse(data);
+			if (data.msgNo=='0000') {
+				$('.avatarUrl').attr('src', data.data[0].avatarUrl);
+			    if (data.data[0].userName) {
+			   		$('.nickname').html(data.data[0].userName);
+			   		$('.nickname').attr('userID',data.data[0].userID);
+			    }else{
+			    	$('.nickname').html(data.data[0].nickname);
+			    };
+			    if (data.data[0].gender==1) {
+			    	$('.gender').html('女');
+			    }else{
+			    	$('.gender').html('男');
+			    };
+			    
+			    if (data.data[0].phone) {
+			    	$('.phone').html(data.data[0].phone);
+			    }else{
+			    	$('.reg_phone').show();
+			    };
+			    //$('.reg_phone').show();
+			}else{
+				mui.toast(data.msgInfo)
+			};
+	    },
+	    error: function(xhr, textStatus, errorThrown) {
+	    	if (xhr.status == 401) {
+	    		window.location.href='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8306afd398ab31e5&redirect_uri=http%3a%2f%2fwyh.matrixwing.com%2fweixinLogIn&response_type=code&scope=snsapi_userinfo&state=needlogin#wechat_redirect'
+	    	}else{
+				mui.toast(textStatus)
+			};
+	    }
+	});
+}) 
 
 $(document).ready(function(){
-	base.tabbarHtml();
+	base.tabbarHtml(2);
 })
 /*link*/
 $('#user_card').on('tap',function(){
+	var userID=$('.nickname').attr('userID');
 	_czc.push(["_trackEvent", "个人主页", "名片", "", "", ""]);
-	window.location.href='user_card.html?userID='+userID;
+	window.location.href='userCard.html?userID='+userID;
 })

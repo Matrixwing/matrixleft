@@ -8,48 +8,59 @@ var base = {
         mui('#tab-bar').on('tap', 'a', function() {
             var id = this.getAttribute('id');
             var data_click = this.getAttribute('data-click');
-            var userID = base.getQueryString('userID');
-            //var nsukey = base.getQueryString('nsukey');
-            var src = id + '.html?tab='+id+'&userID='+userID;
+            var type = this.getAttribute('type')
+            if (type) {
+                var src = id + '.html?tab='+id+'&type='+type
+            }else{
+                var src = id + '.html?tab='+id
+            };
             _czc.push(["_trackEvent", "", data_click, "", "", ""]);
             window.location.href = src;
-            /*if (id != currentSubWebview){
-                if (id != 'home' && id != 'me') {
-                    if (!is_login) {
-                        var frame = document.createElement('iframe');
-                        frame.id = 'sub_login';
-                        frame.className = 'sub';
-                        frame.src = '../me/login.html';
-                        mui('body')[0].appendChild(frame);
-
-                        return false;
-                    };
-                };
-                window.location.href = src;
-            }*/
         })
     },
-    tabbarHtml:function(){
+    tabbarHtml:function(type){
         var tabbarHtml = [];
         tabbarHtml.push('<nav class="mui-bar mui-bar-tab" id="tab-bar">')
-            tabbarHtml.push('<a class="mui-tab-item mui-active" id="index"  data-click="首页">')
-                tabbarHtml.push('<span class="mui-icon iconfont icon-yduizhuye"></span>')
-                tabbarHtml.push('<span class="mui-tab-label">首页</span>')
-            tabbarHtml.push('</a>')
-            tabbarHtml.push('<a class="mui-tab-item" id="life"   data-click="生活圈">')
-                tabbarHtml.push('<span class="mui-icon iconfont icon-yduifaxian"></span>')
-                tabbarHtml.push('<span class="mui-tab-label">生活圈</span>')
-            tabbarHtml.push('</a>')
-            tabbarHtml.push('<a class="mui-tab-item" id="home"   data-click="个人中心">')
-                tabbarHtml.push('<span class="mui-icon iconfont icon-personalcenter"></span>')
-                tabbarHtml.push('<span class="mui-tab-label">我的</span>')
-            tabbarHtml.push('</a> ')
+            //type==1 普通用户  type==2 服务员
+            if (type==2) {
+                tabbarHtml.push('<a class="mui-tab-item mui-active" id="findJob"  data-click="找工作">')
+                    tabbarHtml.push('<span class="mui-icon iconfont icon-yduizhuye"></span>')
+                    tabbarHtml.push('<span class="mui-tab-label">找工作</span>')
+                tabbarHtml.push('</a>')
+                tabbarHtml.push('<a class="mui-tab-item" id="life"   data-click="生活圈" type="2">')
+                    tabbarHtml.push('<span class="mui-icon iconfont icon-yduifaxian"></span>')
+                    tabbarHtml.push('<span class="mui-tab-label">生活圈</span>')
+                tabbarHtml.push('</a>')
+                tabbarHtml.push('<a class="mui-tab-item" id="nurseHome"   data-click="个人中心">')
+                    tabbarHtml.push('<span class="mui-icon iconfont icon-personalcenter"></span>')
+                    tabbarHtml.push('<span class="mui-tab-label">我的</span>')
+                tabbarHtml.push('</a> ')
+            }else{
+                tabbarHtml.push('<a class="mui-tab-item mui-active" id="index"  data-click="首页">')
+                    tabbarHtml.push('<span class="mui-icon iconfont icon-yduizhuye"></span>')
+                    tabbarHtml.push('<span class="mui-tab-label">首页</span>')
+                tabbarHtml.push('</a>')
+                tabbarHtml.push('<a class="mui-tab-item" id="life"   data-click="生活圈">')
+                    tabbarHtml.push('<span class="mui-icon iconfont icon-yduifaxian"></span>')
+                    tabbarHtml.push('<span class="mui-tab-label">生活圈</span>')
+                tabbarHtml.push('</a>')
+
+                tabbarHtml.push('<a class="mui-tab-item" id="home"   data-click="个人中心">')
+                    tabbarHtml.push('<span class="mui-icon iconfont icon-personalcenter"></span>')
+                    tabbarHtml.push('<span class="mui-tab-label">我的</span>')
+                tabbarHtml.push('</a> ')
+            };
+            
         tabbarHtml.push('</nav> ')
         tabbarHtml = tabbarHtml.join('');
         mui('body')[0].insertAdjacentHTML('beforeend', tabbarHtml);
         var tabid= base.getQueryString('tab')
         if (!tabid) {
-            tabid='index'
+            if (type==2) {
+                tabid='nurseHome';
+            }else{
+                tabid='index';
+            };
         };
         var lastActiveElem = document.querySelector('#tab-bar a.mui-active');
         lastActiveElem&&lastActiveElem.classList.remove('mui-active');

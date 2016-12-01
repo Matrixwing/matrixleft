@@ -1,43 +1,8 @@
 mui.init({
 	swipeBack:true //启用右滑关闭功能
 });
-//初始化单页view
-var viewApi = mui('#app').view({
-	defaultPage: '#information_sec'
-});
-//初始化单页的区域滚动
-mui('.mui-scroll-wrapper').scroll();
-var view = viewApi.view;
-(function($) {
-	//处理view的后退与webview后退
-	var oldBack = $.back;
-	$.back = function() {
-		if (viewApi.canBack()) { //如果view可以后退，则执行view的后退
-			viewApi.back();
-		} else { //执行webview后退
-			oldBack();
-		}
-	};
-	
-})(mui);
-/*
-var userID=base.getQueryString('userID');
-$.get("/getUser?userID="+userID,function(data,status){
-	var data = JSON.parse(data).data[0];
-    $('.avatarUrl').attr('src', data.avatarUrl);
-    if (data.userName) {
-   		$('.nickname').html(data.userName);
-    }else{
-    	$('.nickname').html(data.nickname);
-    };
-    $('.gender').html(data.gender);
-    if (data.phone) {
-    	$('.phone').html(data.phone);
-    }else{
-    	$('.reg_phone').show();
-    };
-    $('.reg_phone').show();
-});*/
+
+
 /*getcode*/
 $('#getcode').on('tap',function(){
 	var phone = $('#phone').val();
@@ -120,27 +85,7 @@ $('#skill_sure').on('tap',function(){
 	}
 	$('#skill_div').hide();
 })
-$('#cer').on('tap',function(){
-	$('#cer_div').show()
-})
 
-$('#cer_sure').on('tap',function(){
-	$('#cer').attr('data','');
-	var s='';
-	var h='';
-	var obj = $('#cer_div input');
-	for(var i=0; i<obj.length; i++){
-		if(obj[i].checked) {
-			s+=obj[i].value+',';
-			h+=obj[i].previousElementSibling.innerText+',';
-		}
-	}
-	if (h) {
-		$('#cer').html(h);
-		$('#cer').attr('data',s);
-	}
-	$('#cer_div').hide();
-})
 /*uploadimg*/
 $('.file').on('change', function () {
 	var p =$(this);
@@ -184,10 +129,6 @@ $('.image-close').on('tap',function(){
 })
 
 
-$('#reg').on('tap',function(){
-	mui(this).button('loading');
-	$(this).attr('href','#information_sec')
-})
 
 $(document).ready(function(){
 	var hy = new mui.PopPicker();
@@ -203,12 +144,29 @@ $(document).ready(function(){
 			_this.attr('tagID',items[0].value);
 		});
 	});
+	$('input').attr('readonly','readonly');
+	$.ajax({
+	    type: 'post',
+	    url: '/getSevantDetail',
+	    data: {
+	    	'userID':6
+	    },
+	    dataType: 'json',
+	    success: function(data) {
+	    	if (data.msgNo=='0000') {
+	    		
+	    	}else{
+	    		mui.toast(data.msgInfo);
+	    	}
+	    },
+	    error: function(data) {
+	    	mui.toast('请重试');
+	    }
+	});
 })
-
-/*link*/
-$('#user_card').on('tap',function(){
-	_czc.push(["_trackEvent", "个人主页", "名片", "", "", ""]);
-	window.location.href='user_card.html?userID='+userID;
+$('#edit').on('tap',function(){
+	$('input').removeAttr('readonly')
+	$('#sure_btn').show();
 })
 
 $('#reg_add').on('tap',function(){

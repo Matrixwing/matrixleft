@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>微元汇</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="styles/mui.min.css">
+		<link rel="stylesheet" href="styles/mui.picker.min.css">
+		<link rel="stylesheet" type="text/css" href="styles/main.css"/>
+		<link rel="stylesheet" type="text/css" href="styles/pages/home.css"/>
+	</head>
+
+	<body>
+			<header class="mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+						<span class="mui-icon mui-icon-left-nav"></span>
+					</button>
+				<h1 class="mui-title">我的资料</h1>
+				<button type="button" class="mui-left mui-btn  mui-btn-link mui-btn-nav mui-pull-right" id="edit">修改</button>
+			</header>
+			<div class="mui-content">
+
+				<div id="information_sec" class="information editInfo">
+					<form class="mui-input-group">
+						<div class="mui-input-row">
+							<label>姓名</label>
+							<input id='userName' type="text" class="mui-input" placeholder="请输入姓名" value="">
+						</div>
+						<div class="mui-input-row">
+							<label>身份证</label>
+							<input id='userName' type="text" class="mui-input" placeholder="请输入您的身份证号" value="">
+						</div>
+						<div class="mui-input-row">
+							<label>籍贯</label>
+							<input id='homeTown' type="text" class="mui-input" placeholder="请输入籍贯" value="四川省">
+						</div>
+						<div class="mui-input-row">
+							<label>民族</label>
+							<input id='folk' type="text" class="mui-input" placeholder="请输入民族" value="汉族">
+						</div>
+						<div class="mui-input-row">
+							<label>婚姻</label>
+							<div class="mui-row s_selcet" id="marriage" type="button">请选择</div>
+							<span class="mui-icon mui-icon-arrowdown mui-pull-right select_icon"></span>
+						</div>
+					</form>
+					<form class="mui-input-group">
+						<div class="mui-input-row">
+							<label>期望薪资</label>
+							<input id="expectSalary" type="number" class="mui-input fwjy" placeholder="请输入您的期望月薪" value="">
+						</div>
+						<div class="mui-input-row">
+							<label >当前状态</label>
+							<div class="mui-row s_selcet" id="hy">
+								<div class="s_radio mui-radio">
+									<input name="workstatus" type="radio" checked value="1">
+									<label>待岗</label>
+								</div>
+								<div class="s_radio mui-radio">
+									<input name="workstatus" type="radio" value="0">
+									<label>在岗</label>
+								</div>
+							</div>
+						</div>
+						<div class="mui-input-row">
+							<label>当前住址</label>
+							<input id='address' type="text" class="mui-input" placeholder="请输入当前住址">
+						</div>
+						<div class="mui-input-row">
+							<label>服务经验</label>
+							<input id="workExp" type="number" class="mui-input fwjy" placeholder="请输入您的工作月数" value="">
+						</div>
+						<div class="mui-input-row">
+							<label>服务城市</label>
+							<input id="serviceCity" type="text" class="mui-input fwjy" placeholder="请输入您要服务的城市" value="成都市">
+						</div>
+						<div class="mui-input-row">
+							<label>服务类型</label>
+							<div class="mui-row s_selcet" id="type">点击选择</div>
+							<span class="mui-icon mui-icon-arrowdown mui-pull-right select_icon"></span>
+						</div>
+						<div id="type_div" class="choose_div" style="display:none">
+							<div class="mui-input-row mui-checkbox mui-left">
+								<div class="mui-pull-left mui-col-xs-6">
+									<label>不住家保姆</label>
+									<input name="n_type" value="0" type="checkbox">
+								</div>
+								<div class="mui-pull-left mui-col-xs-5">
+									<label>住家保姆</label>
+									<input name="n_type" value="1" type="checkbox">
+								</div>
+							</div>
+							<div class="mui-input-row mui-checkbox mui-left">
+								<div class="mui-pull-left mui-col-xs-6">
+									<label>半天钟点工</label>
+									<input name="n_type" value="2" type="checkbox">
+								</div>
+								<div class="mui-pull-left mui-col-xs-5">
+									<label>全天钟点工</label>
+									<input name="n_type" value="3" type="checkbox">
+								</div>
+							</div>
+							<div class="mui-input-row mui-checkbox mui-left">
+								<label>月嫂</label>
+								<input name="n_type" value="300" type="checkbox">
+							</div>
+							<div class="mui-input-row" style="text-align: center;">
+								<a id='type_sure' class="mui-btn ">确定</a>
+							</div>
+						</div>
+						<div class="mui-input-row">
+							<label>特长选择</label>
+							<div class="mui-row s_selcet" id="skill">点击选择</div>
+							<span class="mui-icon mui-icon-arrowdown mui-pull-right select_icon"></span>
+						</div>
+						<div id="skill_div" class="choose_div" style="display:none">
+							<div class="mui-input-row mui-checkbox mui-left">
+								<div class="mui-pull-left mui-col-xs-5">
+									<label>面食</label>
+									<input name="n_type" value="11" type="checkbox">
+								</div>
+								<div class="mui-pull-left mui-col-xs-5">
+									<label>照顾过外国人</label>
+									<input name="n_type" value="12" type="checkbox">
+								</div>
+							</div>
+							<div class="mui-input-row mui-checkbox mui-left">
+								<div class="mui-pull-left mui-col-xs-5">
+									<label>英语</label>
+									<input name="n_type" value="13" type="checkbox">
+								</div>
+								<div class="mui-pull-left mui-col-xs-5">
+									<label>早教</label>
+									<input name="n_type" value="14" type="checkbox">
+								</div>
+							</div>
+							<div class="mui-input-row mui-checkbox mui-left">
+								<div class="mui-pull-left mui-col-xs-5">
+									<label>插花</label>
+									<input name="n_type" value="15" type="checkbox">
+								</div>
+								<div class="mui-pull-left mui-col-xs-5">
+									<label>西餐</label>
+									<input name="n_type" value="16" type="checkbox">
+								</div>
+								
+							</div>
+							<div class="mui-input-row" style="text-align: center;">
+								<a id='skill_sure' class="mui-btn ">确定</a>
+							</div>
+						</div>
+						<!-- <div class="mui-input-row">
+							<label>证书选择</label>
+							<div class="mui-row s_selcet" id="cer">点击选择</div>
+							<span class="mui-icon mui-icon-arrowdown mui-pull-right select_icon"></span>
+						</div>
+						<div id="cer_div" class="choose_div" style="display:none">
+							<div class="mui-input-row mui-checkbox mui-left">
+								<div class="mui-pull-left mui-col-xs-5">
+									<label>育婴师证</label>
+									<input name="n_type" value="1" type="checkbox">
+								</div>
+								<div class="mui-pull-left mui-col-xs-5">
+									<label>催乳师证</label>
+									<input name="n_type" value="1" type="checkbox">
+								</div>
+							</div>
+							<div class="mui-input-row" style="text-align: center;">
+								<a id='cer_sure' class="mui-btn ">确定</a>
+							</div>
+						</div> -->
+					</form>
+				</div>
+				<div class="mui-content-padded" style="display:none" id="sure_btn">
+					<a id='reg_add' href="#" class="mui-btn mui-btn-block mui-btn-primary">保存</a>
+				</div>
+
+			</div>
+
+	</body>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/mui/mui.min.js"></script>
+	<script src="js/mui/mui.picker.min.js "></script>
+	<script src="js/base.js"></script>
+	<script src="js/page/editInfo.js"></script>
+	<script src="https://s4.cnzz.com/z_stat.php?id=1260604409&web_id=1260604409" language="JavaScript"></script>
+</html>

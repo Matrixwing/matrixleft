@@ -71,6 +71,7 @@
 .choose_div .mui-checkbox input[type=checkbox]:before, .mui-radio input[type=radio]:before{font-size: 24px;line-height: 30px}
 .mui-input-group{margin-top: 10px !important;}
 .mui-input-group:last-child{margin-top: 10px !important;}
+.editInfo{margin-bottom: 25px;}
 #image-list {
 	width:100%;
 	height: 85px;
