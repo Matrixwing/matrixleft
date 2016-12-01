@@ -26,7 +26,7 @@
 			    url: '/getUser',
 			    dataType: 'json',
 			    success: function(data) {
-			    	var data = JSON.parse(data);
+			    	//var data = JSON.parse(data);
 					if (data.msgNo=='0000') {
 						$('.avatarUrl').attr('src', data.data[0].avatarUrl);
 					    if (data.data[0].userName) {
