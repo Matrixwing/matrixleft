@@ -149,12 +149,33 @@ $(document).ready(function(){
 	    type: 'post',
 	    url: '/getSevantDetail',
 	    data: {
-	    	'userID':6
+	    	'userID':245
 	    },
 	    dataType: 'json',
 	    success: function(data) {
 	    	if (data.msgNo=='0000') {
-	    		
+	    		var d = data.data[0];
+	    		$('#userName').val(d.userInfo.userName)
+	    		$('#homeTown').val(d.userInfo.homeTown)
+	    		$('#folk').val(d.userInfo.folk)
+	    		if (d.userInfo.marriage==1) {
+	    			$('#marriage').html("未婚")
+	    			$('#marriage').attr('tagID',1)
+	    		}else if(d.userInfo.marriage==2){
+	    			$('#marriage').html("保密")
+	    			$('#marriage').attr('tagID',2)
+	    		}else if (d.userInfo.marriage==0) {
+	    			$('#marriage').html("已婚")
+	    			$('#marriage').attr('tagID',0)
+	    		};
+	    		$('#expectSalary').val(d.userInfo.expectSalary)
+	    		if (d.userInfo.workstatus==2) {
+	    			$('#workstatus2').attr('checked','checked')
+	    		}else{
+	    			$('#workstatus1').attr('checked','checked')
+	    		};
+	    		$('#address').val(d.userInfo.address)
+	    		$('#workExp').val(d.userInfo.workExp)
 	    	}else{
 	    		mui.toast(data.msgInfo);
 	    	}
@@ -170,14 +191,6 @@ $('#edit').on('tap',function(){
 })
 
 $('#reg_add').on('tap',function(){
-	if ($('#idcard_img1').attr('src')=='') {
-		mui.toast('请上传您的身份证正面照片')
-		return
-	};
-	if ($('#idcard_img2').attr('src')=='') {
-		mui.toast('请上传您的身份证反面照片')
-		return
-	};
 	var userName = $('#userName').val();
 	var homeTown = $('#homeTown').val();
 	var folk = $('#folk').val();
@@ -260,7 +273,7 @@ $('#reg_add').on('tap',function(){
 	    dataType: 'json',
 	    success: function(data) {
 	    	if (data.msgNo=='0000') {
-	    		mui.toast('恭喜您，注册成功');
+	    		mui.toast('恭喜您，资料修改成功');
 	    		setTimeout(function(){
 	    			window.location.href='nurseHome.html'
 	    		},1500)

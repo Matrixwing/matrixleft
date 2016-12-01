@@ -10,9 +10,9 @@ var base = {
             var data_click = this.getAttribute('data-click');
             var type = this.getAttribute('type')
             if (type) {
-                var src = id + '.html?tab='+id+'&type='+type
+                var src = id + '.html?type='+type
             }else{
-                var src = id + '.html?tab='+id
+                var src = id + '.html'
             };
             _czc.push(["_trackEvent", "", data_click, "", "", ""]);
             window.location.href = src;
@@ -54,17 +54,17 @@ var base = {
         tabbarHtml.push('</nav> ')
         tabbarHtml = tabbarHtml.join('');
         mui('body')[0].insertAdjacentHTML('beforeend', tabbarHtml);
-        var tabid= base.getQueryString('tab')
-        if (!tabid) {
+        var path = window.location.pathname.slice(1,-5)
+        /*if (!tabid) {
             if (type==2) {
                 tabid='nurseHome';
             }else{
                 tabid='index';
             };
-        };
+        };*/
         var lastActiveElem = document.querySelector('#tab-bar a.mui-active');
         lastActiveElem&&lastActiveElem.classList.remove('mui-active');
-        document.getElementById(tabid).classList.add('mui-active');
+        document.getElementById(path).classList.add('mui-active');
         base.tabbar();
     },
         //手机
