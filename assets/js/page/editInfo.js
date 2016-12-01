@@ -178,7 +178,7 @@ $(document).ready(function(){
 	    		$('#address').val(d.userInfo.address)
 	    		$('#workExp').val(d.userInfo.workExp)
 	    		//$('#serviceCity').val(d.userInfo.serviceCity)
-	    		if (d.severTags) {
+	    		if (d.severTags.length!=0) {
 	    			var tagName='',tagID='';
 	    			for(var i = 0;i<d.severTags.length;i++){
 		    			tagName += d.severTags[i].tagName+',';
@@ -187,7 +187,7 @@ $(document).ready(function(){
 		    		$('#type').html(tagName)
 		    		$('#type').attr('data',tagID)
 	    		};
-	    		if (d.skillTags) {
+	    		if (d.skillTags.length!=0) {
 	    			var tagName='',tagID='';
 	    			for(var i = 0;i<d.skillTags.length;i++){
 		    			tagName += d.skillTags[i].tagName+',';
