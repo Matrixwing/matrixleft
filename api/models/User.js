@@ -74,6 +74,12 @@ module.exports = {
     folk : {
       type : 'string',
       size : 32
+    },
+    expectSalary : {
+      type : 'int'
+    },
+    serviceCity:{
+      type : 'int'
     }
 
     //user表里余额这字段没有写在这。因为余额如果写在这，可能通过orm提供的update方法改掉

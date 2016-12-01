@@ -40,7 +40,7 @@ module.exports.routes = {
 
   "post /getCert": {controller: "ServantController", action: "getCertInfo"},
   "get /weixinLogIn": {controller: "UserController", action: "logIn" },
-  "/test": {controller: "ServantController", action: "getCertInfo"},
+
   "get /getUser" : {controller: "UserController" , action : "getUserInfo"},
   "get /sendNumToPhone" :  {controller: "UserController" , action : "sendNumToPhone"},
   "get /register" : {controller: "UserController" , action : "register"},
