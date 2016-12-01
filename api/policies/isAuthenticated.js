@@ -8,7 +8,7 @@
  */
 module.exports = function(req, res, next) {
   // If `req.session.userID` 则表示已经登录过了
-
+  console.log('isAuthenticated',req.session.userID);
   req.session.page=req.headers['referer'];
   if (req.session.userID){
     return next();
