@@ -8,7 +8,6 @@
 var util = require('util');
 module.exports = {
 	updateUserInfo : function (req,res) {
-
     var userInfo  = JSON.parse(req.param('userInfo'));
     var userTag  = JSON.parse(req.param('userTags'));
     //var userInfo  = req.param('userInfo');
@@ -21,8 +20,6 @@ module.exports = {
     //};
    // var userTag =[{tagID:1},{tagID:2},{tagID:3}]
     userInfo.workExp=parseInt(userInfo.workExp);
-    console.log('typeof(workExp)',typeof(userInfo.workExp));
-
     userInfo.userID = req.session.userID;                   //正式坏境用session的
     UserInfo.updateUserInfo(userInfo,userTag,function(err,reslut){
       if (err) return res.send('{"msgNo":"9999","msgInfo":"修改失败"}');
@@ -30,7 +27,6 @@ module.exports = {
       res.send(result);
     })
   },
-
 
  getSevantDetail : function(req,res){
    var userID  = req.param('userID');

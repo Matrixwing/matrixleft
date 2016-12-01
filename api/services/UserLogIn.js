@@ -65,7 +65,7 @@ module.exports = {
             var updateUser = dataObj;
             updateUser.phone=opts.phone;
             updateUser.role=opts.role;
-            console.log(updateUser);
+
             cb(null,updateUser);
           },
           User.createUser
@@ -315,8 +315,9 @@ module.exports = {
           if(phoneReslut[0].openid){return cb('这手机已经被注册了');}
           else{//有手机号但没有openid。表示这是个我们导入的用户。更新到我们的数据库
             //更新信息
-            User.find({}).exec(function(err,user){
-
+            User.find({userID:req.session.userID}).exec(function(err,user){
+              if(err) return cb(err);
+              console.log(user);
             })
             //
           }
