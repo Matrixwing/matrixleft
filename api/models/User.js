@@ -136,7 +136,6 @@ module.exports = {
 
   //验证手机号是否存在
   isPhoneExisted: function (opts, cb) {
-    console.log(opts);
     User.find({phone: opts.phone}).exec(function (err, result) {
       if (err) return cb(err);
       return cb(null, result);

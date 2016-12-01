@@ -20,7 +20,6 @@ module.exports = {
 
     var hostname = util.format('https://api.weixin.qq.com/sns/oauth2/access_token?appid=%s&secret=%s&code=%s' +
       '&grant_type=authorization_code',weixinConfig.appid,weixinConfig.appsecret,opts.code);
-    console.log('hostname',hostname);
     https.get(hostname, function(res) {
       var buffers = [];
       res.on('data', function(d) {
@@ -63,7 +62,6 @@ module.exports = {
             cb(null,opts);
           },UserLogIn.getUserInfoFromWeiXin,
           function(dataObj,cb){
-            console.log("dataObj+++++++++++",dataObj);
             var updateUser = dataObj;
             updateUser.phone=opts.phone;
             updateUser.role=opts.role;
@@ -76,10 +74,6 @@ module.exports = {
           return cb(null,result);
         });
       }else{
-        console.log(result[0].role);
-        console.log(opts.role);
-        //if (result[0].role!=opts.role) return cb('toUser');
-
         cb(null,result[0]);}
 
     });
@@ -281,7 +275,6 @@ module.exports = {
           //又有手机号又有openid，这个号码已经被注册过了
           console.log('openid+++++++',phoneReslut[0].openid);
           if(phoneReslut[0].openid){return cb('这手机已经被注册了');}
-
           //有手机号但没有openid。表示这是个我们导入的用户。拉取这个人的微信信息，更新到我们的数据库
           console.log('有手机号但没有openid。表示这是个我们导入的用户。拉取这个人的微信信息，更新到我们的数据库');
           async.waterfall([
@@ -320,8 +313,15 @@ module.exports = {
            */
             //又有手机号又有openid，这个号码已经被注册过了
           if(phoneReslut[0].openid){return cb('这手机已经被注册了');}
-          //有手机号但没有openid。表示这是个我们导入的用户。拉取这个人的微信信息，更新到我们的数据库
-          //todo 更新信息
+          else{//有手机号但没有openid。表示这是个我们导入的用户。更新到我们的数据库
+            //更新信息
+            User.find({}).exec(function(err,user){
+
+            })
+            //
+          }
+
+
         }
       })
     })
