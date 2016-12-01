@@ -49,8 +49,6 @@ module.exports = {
           for(var x in user){
             if(!user[x]) user[x]='';
           }
-          console.log(err);
-          console.log(user);
           delete user.avatarUrl;
           delete user.userID;
           delete user.role;
@@ -62,7 +60,14 @@ module.exports = {
       },
       function(next){
         //查出非系统和证书的tags
-        TagUserRe.query('select tur.tagID from taguserre tur left join tag t on tur.tagID=t.tagID where(t.`type`=0 OR t.`type`=1 OR t.`type`=2) and tur.userID='+opts.userID,function(err,results){
+        TagUserRe.query('select tur.tagID ,t.tagName from taguserre tur left join tag t on tur.tagID=t.tagID where t.`type`=0 and tur.userID='+opts.userID,function(err,results){
+          if(err) return next(err);
+          return  next(null,results);
+        })
+      },
+      function(next){
+        //查出非系统和证书的tags
+        TagUserRe.query('select tur.tagID ,t.tagName from taguserre tur left join tag t on tur.tagID=t.tagID where t.`type`=2 and tur.userID='+opts.userID,function(err,results){
           if(err) return next(err);
           return  next(null,results);
         })
@@ -71,7 +76,8 @@ module.exports = {
       if(err) return cb(err);
       var servantDetail = {
         userInfo : results[0],
-        userTags  : results[1]
+        severTags  : results[1],
+        skillTags  : results[2]
       };
       return cb(null,servantDetail);
     });
