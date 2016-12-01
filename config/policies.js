@@ -39,7 +39,6 @@ module.exports.policies = {
       '*':"isAuthenticated",
       logIn:true,
       sendNumToPhone:true
-
   },
 //
   UserController : {

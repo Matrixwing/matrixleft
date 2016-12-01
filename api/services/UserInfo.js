@@ -8,7 +8,6 @@ module.exports = {
     })
   },
 
-
   updateUserInfo : function (userInfo,userTag,cb){
     //var userBaseInfo = {
     //  userName : opts.userName,

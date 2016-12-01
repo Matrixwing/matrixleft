@@ -74,9 +74,11 @@ module.exports = {
         res.send(result);
       })
     }else{//userid查询
+
       var opts = {
         userID : req.session.userID ,
       };
+      console.log('opts',opts.userID);
       if(opts.userID == '') return res.send(500,'{"msgNo":"9999","msgInfo":"参数错误"}');
       UserLogIn.getUserInfoFromDBByuserID(opts,function(err,result){
         if (err) return res.send(500,'{"msgNo":"9999","msgInfo":"服务出错，请您稍后再试"}');
