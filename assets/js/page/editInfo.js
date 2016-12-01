@@ -176,6 +176,25 @@ $(document).ready(function(){
 	    		};
 	    		$('#address').val(d.userInfo.address)
 	    		$('#workExp').val(d.userInfo.workExp)
+	    		$('#serviceCity').val(d.userInfo.serviceCity)
+	    		if (d.severTags) {
+	    			var tagName='',tagID='';
+	    			for(var i = 0;i<d.severTags.length;i++){
+		    			tagName += d.severTags[i].tagName+',';
+		    			tagID += d.severTags[i].tagID+',';
+		    		}
+		    		$('#type').html(tagName)
+		    		$('#type').attr('data',tagID)
+	    		};
+	    		if (d.skillTags) {
+	    			var tagName='',tagID='';
+	    			for(var i = 0;i<d.skillTags.length;i++){
+		    			tagName += d.skillTags[i].tagName+',';
+		    			tagID += d.skillTags[i].tagID+',';
+		    		}
+		    		$('#skill').html(tagName)
+		    		$('#skill').attr('data',tagID)
+	    		};
 	    	}else{
 	    		mui.toast(data.msgInfo);
 	    	}
