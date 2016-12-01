@@ -7,8 +7,6 @@
 var util = require('util');
 module.exports = {
   uploadFiles : function (req,res){
-    //todo 这里是测试数据后面要修改
-    req.session.userID=245;
 
     var opts = {
       userID:req.session.userID,
