@@ -21,6 +21,7 @@ module.exports = {
    // var userTag =[{tagID:1},{tagID:2},{tagID:3}]
     userInfo.workExp=parseInt(userInfo.workExp);
     userInfo.userID = req.session.userID;                   //正式坏境用session的
+    console.log(userInfo.userID);
     UserInfo.updateUserInfo(userInfo,userTag,function(err,reslut){
       if (err) return res.send('{"msgNo":"9999","msgInfo":"修改失败"}');
       result = '{"msgNo":"0000","msgInfo":"修改成功"}';

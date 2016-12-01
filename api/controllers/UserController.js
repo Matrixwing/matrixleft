@@ -74,7 +74,6 @@ module.exports = {
         res.send(result);
       })
     }else{//userid查询
-
       var opts = {
         userID : req.session.userID ,
       };
