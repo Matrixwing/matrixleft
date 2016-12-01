@@ -145,11 +145,12 @@ $(document).ready(function(){
 		});
 	});
 	$('input').attr('readonly','readonly');
+	var userID = base.getQueryString('userID')
 	$.ajax({
 	    type: 'post',
 	    url: '/getSevantDetail',
 	    data: {
-	    	'userID':245
+	    	'userID':userID
 	    },
 	    dataType: 'json',
 	    success: function(data) {

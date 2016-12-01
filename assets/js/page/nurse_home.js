@@ -68,6 +68,11 @@ $(document).ready(function(){
 /*link*/
 $('#user_card').on('tap',function(){
 	var userID=$('.nickname').attr('userID');
-	_czc.push(["_trackEvent", "个人主页", "名片", "", "", ""]);
+	_czc.push(["_trackEvent", "服务员主页", "名片", "", "", ""]);
 	window.location.href='userCard.html?userID='+userID;
+})
+$('#editInfo').on('tap',function(){
+	var userID=$('.nickname').attr('userID');
+	_czc.push(["_trackEvent", "服务员主页", "资料", "", "", ""]);
+	window.location.href='editInfo.html?userID='+userID;
 })
