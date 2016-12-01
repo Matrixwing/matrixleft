@@ -176,7 +176,7 @@ $(document).ready(function(){
 	    		};
 	    		$('#address').val(d.userInfo.address)
 	    		$('#workExp').val(d.userInfo.workExp)
-	    		$('#serviceCity').val(d.userInfo.serviceCity)
+	    		//$('#serviceCity').val(d.userInfo.serviceCity)
 	    		if (d.severTags) {
 	    			var tagName='',tagID='';
 	    			for(var i = 0;i<d.severTags.length;i++){
@@ -218,7 +218,7 @@ $('#reg_add').on('tap',function(){
 	var workstatus = $('input:radio[name="workstatus"]:checked').val()
 	var address = $('#address').val();
 	var workExp = $('#workExp').val();
-	var serviceCity = $('#serviceCity').val();
+	//var serviceCity = $('#serviceCity').val();
 	var gender = 1;
 	if (userName=='') {
 		mui.toast('请输入您的姓名')
@@ -248,10 +248,10 @@ $('#reg_add').on('tap',function(){
 		mui.toast('请选择您的服务经验')
 		return;
 	};
-	if (serviceCity=='') {
+	/*if (serviceCity=='') {
 		mui.toast('请选择您的服务城市')
 		return;
-	};
+	};*/
 	var userInfo={
 		'userName':userName,
 		'homeTown':homeTown,
@@ -261,7 +261,6 @@ $('#reg_add').on('tap',function(){
 		'workstatus':workstatus,
 		'address':address,
 		'workExp':workExp,
-		'serviceCity':serviceCity,
 		'gender':gender
 	}
 	var userTags=[];
