@@ -181,7 +181,7 @@ $('#reg').on('tap',function(){
 
 	mui('#reg').button('loading');
 	$.ajax({
-	    type: 'post',
+	    type: 'get',
 	    url: '/bindingPhone',
 	    data: {'phone':phone,'num':num},
 	    dataType: 'json',
