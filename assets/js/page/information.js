@@ -168,8 +168,34 @@ $('.image-close').on('tap',function(){
 
 
 $('#reg').on('tap',function(){
-	mui(this).button('loading');
-	$(this).attr('href','#information_sec')
+	var phone = $('#phone').val();
+	var num = $('#code').val();
+	if (base.phoneCheck(phone)) {
+		mui.toast('请输入正确的手机号');
+		return;
+	}
+	if (num=='') {
+		mui.toast('请输入验证码');
+		return;
+	}
+
+	mui('#reg').button('loading');
+	$.ajax({
+	    type: 'post',
+	    url: '/bindingPhone',
+	    data: {'phone':phone,'num':num},
+	    dataType: 'json',
+	    success: function(data) {
+	    	if (data.msgNo==0000) {
+	        	mui('#reg').button('reset');
+				$(this).attr('href','#information_sec')
+	    	}else{
+	    		mui.toast(data.msgInfo);
+	    	};
+	    },
+	    error: function(xhr, textStatus, errorThrown) {
+	    }
+	});
 })
 
 $(document).ready(function(){
