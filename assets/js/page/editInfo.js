@@ -43,7 +43,9 @@ setTimeout(function() {
 }
 
 $('#type').on('tap',function(){
-	$('#type_div').show()
+	if ($(this).attr('data')=='c') {
+		$('#type_div').show()
+	};
 })
 
 $('#type_sure').on('tap',function(){
@@ -65,7 +67,9 @@ $('#type_sure').on('tap',function(){
 })
 
 $('#skill').on('tap',function(){
-	$('#skill_div').show()
+	if ($(this).attr('data')=='c') {
+		$('#skill_div').show()
+	};
 })
 
 $('#skill_sure').on('tap',function(){
@@ -209,6 +213,8 @@ $(document).ready(function(){
 $('#edit').on('tap',function(){
 	$('input').removeAttr('readonly')
 	$('#sure_btn').show();
+	$('#type').attr('data','c');
+	$('#skill').attr('data','c');
 })
 
 $('#reg_add').on('tap',function(){
