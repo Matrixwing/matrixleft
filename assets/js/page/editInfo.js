@@ -43,7 +43,7 @@ setTimeout(function() {
 }
 
 $('#type').on('tap',function(){
-	if ($(this).attr('data')=='c') {
+	if ($(this).attr('close')=='c') {
 		$('#type_div').show()
 	};
 })
@@ -67,7 +67,7 @@ $('#type_sure').on('tap',function(){
 })
 
 $('#skill').on('tap',function(){
-	if ($(this).attr('data')=='c') {
+	if ($(this).attr('close')=='c') {
 		$('#skill_div').show()
 	};
 })
@@ -213,8 +213,8 @@ $(document).ready(function(){
 $('#edit').on('tap',function(){
 	$('input').removeAttr('readonly')
 	$('#sure_btn').show();
-	$('#type').attr('data','c');
-	$('#skill').attr('data','c');
+	$('#type').attr('close','c');
+	$('#skill').attr('close','c');
 })
 
 $('#reg_add').on('tap',function(){
