@@ -188,7 +188,7 @@ $('#reg').on('tap',function(){
 	    success: function(data) {
 	    	if (data.msgNo==0000) {
 	        	mui('#reg').button('reset');
-				$(this).attr('href','#information_sec')
+				$('#reg').attr('href','#information_sec')
 	    	}else{
 	    		mui.toast(data.msgInfo);
 	    	};
