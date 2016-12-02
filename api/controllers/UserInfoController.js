@@ -22,6 +22,10 @@ module.exports = {
   },
 
  getSevantDetail : function(req,res){
+
+   //todo 需要删除
+   req.session.userID=239
+
    var userID  = req.param('userID');
    console.log(userID);
    if(!userID){
