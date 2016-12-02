@@ -170,7 +170,7 @@ $('.image-close').on('tap',function(){
 $('#reg').on('tap',function(){
 	var phone = $('#phone').val();
 	var num = $('#code').val();
-	if (base.phoneCheck(phone)) {
+	if (!base.phoneCheck(phone)) {
 		mui.toast('请输入正确的手机号');
 		return;
 	}
@@ -186,12 +186,12 @@ $('#reg').on('tap',function(){
 	    data: {'phone':phone,'num':num},
 	    dataType: 'json',
 	    success: function(data) {
-	    	if (data.msgNo==0000) {
+	    	/*if (data.msgNo==0000) {*/
 	        	mui('#reg').button('reset');
 				$('#reg').attr('href','#information_sec')
-	    	}else{
+	    	/*}else{
 	    		mui.toast(data.msgInfo);
-	    	};
+	    	};*/
 	    },
 	    error: function(xhr, textStatus, errorThrown) {
 	    }
