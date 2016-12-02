@@ -204,7 +204,7 @@ $('#reg_add').on('tap',function(){
 		return
 	};
 	var userName = $('#userName').val();
-	var idCard = $('#idCard').val();
+	var IDCard = $('#idCard').val();
 	var homeTown = $('#homeTown').val();
 	var folk = $('#folk').val();
 	var marriage = $('#marriage').attr('tagID');
@@ -218,7 +218,7 @@ $('#reg_add').on('tap',function(){
 		mui.toast('请输入您的姓名')
 		return;
 	};
-	if (!base.IdCheck(idCard)) {
+	if (!base.IdCheck(IDCard)) {
 		mui.toast('请输入正确的身份证号码')
 		return;
 	};
@@ -252,6 +252,7 @@ $('#reg_add').on('tap',function(){
 	};*/
 	var userInfo={
 		'userName':userName,
+		'IDCard':IDCard,
 		'homeTown':homeTown,
 		'folk':folk,
 		'marriage':marriage,
