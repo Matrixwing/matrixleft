@@ -55,6 +55,7 @@ var base = {
         tabbarHtml = tabbarHtml.join('');
         mui('body')[0].insertAdjacentHTML('beforeend', tabbarHtml);
         var path = window.location.pathname.slice(1,-5)
+        console.log(path);
         if (!path) {
             path= 'index'
         };
