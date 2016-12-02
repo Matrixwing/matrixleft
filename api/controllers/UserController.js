@@ -146,7 +146,7 @@ module.exports = {
       return res.send('{"msgNo":"9999","msgInfo":"'+err+'"}');
     }
     var str = JSON.stringify(result) ;
-    result = util.format('{"msgNo":"0000","msgInfo":"注册成功","data":%s}',str);
+    result = util.format('{"msgNo":"0000","msgInfo":"验证成功"}');
     res.send(result);
   });
 },
