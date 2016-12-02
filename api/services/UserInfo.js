@@ -48,6 +48,7 @@ module.exports = {
           for(var x in user){
             if(!user[x]) user[x]='';
           }
+          //
           delete user.avatarUrl;
           delete user.userID;
           delete user.role;
