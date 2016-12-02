@@ -20,24 +20,7 @@ var view = viewApi.view;
 	};
 	
 })(mui);
-/*
-var userID=base.getQueryString('userID');
-$.get("/getUser?userID="+userID,function(data,status){
-	var data = JSON.parse(data).data[0];
-    $('.avatarUrl').attr('src', data.avatarUrl);
-    if (data.userName) {
-   		$('.nickname').html(data.userName);
-    }else{
-    	$('.nickname').html(data.nickname);
-    };
-    $('.gender').html(data.gender);
-    if (data.phone) {
-    	$('.phone').html(data.phone);
-    }else{
-    	$('.reg_phone').show();
-    };
-    $('.reg_phone').show();
-});*/
+
 /*getcode*/
 $('#getcode').on('tap',function(){
 	var phone = $('#phone').val();
@@ -221,6 +204,7 @@ $('#reg_add').on('tap',function(){
 		return
 	};
 	var userName = $('#userName').val();
+	var idCard = $('#idCard').val();
 	var homeTown = $('#homeTown').val();
 	var folk = $('#folk').val();
 	var marriage = $('#marriage').attr('tagID');
@@ -232,6 +216,10 @@ $('#reg_add').on('tap',function(){
 	var gender = 1;
 	if (userName=='') {
 		mui.toast('请输入您的姓名')
+		return;
+	};
+	if (!base.IdCheck(idCard)) {
+		mui.toast('请输入正确的身份证号码')
 		return;
 	};
 	if (homeTown=='') {

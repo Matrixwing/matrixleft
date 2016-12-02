@@ -55,6 +55,9 @@ var base = {
         tabbarHtml = tabbarHtml.join('');
         mui('body')[0].insertAdjacentHTML('beforeend', tabbarHtml);
         var path = window.location.pathname.slice(1,-5)
+        if (!path) {
+            path= 'index'
+        };
         /*if (!tabid) {
             if (type==2) {
                 tabid='nurseHome';

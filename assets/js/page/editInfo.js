@@ -157,6 +157,7 @@ $(document).ready(function(){
 	    	if (data.msgNo=='0000') {
 	    		var d = data.data[0];
 	    		$('#userName').val(d.userInfo.userName)
+	    		$('#idCard').val(d.userInfo.idCard)
 	    		$('#homeTown').val(d.userInfo.homeTown)
 	    		$('#folk').val(d.userInfo.folk)
 	    		if (d.userInfo.marriage==1) {
@@ -212,6 +213,7 @@ $('#edit').on('tap',function(){
 
 $('#reg_add').on('tap',function(){
 	var userName = $('#userName').val();
+	var idCard = $('#idCard').val();
 	var homeTown = $('#homeTown').val();
 	var folk = $('#folk').val();
 	var marriage = $('#marriage').attr('tagID');
@@ -223,6 +225,10 @@ $('#reg_add').on('tap',function(){
 	var gender = 1;
 	if (userName=='') {
 		mui.toast('请输入您的姓名')
+		return;
+	};
+	if (!base.IdCheck(idCard)) {
+		mui.toast('请输入正确的身份证号码')
 		return;
 	};
 	if (homeTown=='') {
