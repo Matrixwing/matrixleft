@@ -134,12 +134,13 @@ module.exports = {
   var opts = {
     phone : req.param('phone',''),
     num: req.param('num',''),
-    userID: req.session.userID
+    userID: req.session.userID||req.param('userID','')
   };
-    opts.userID=245;
+
+
 
   if(opts.phone==''||opts.num==''||opts.userID=='') return res.send('{"msgNo":"9999","msgInfo":"参数错误"}');//还需要一个code参数
-  UserLogIn.bindingPhone(opts,function(err,result){
+  UserLogIn.bindingPhone(opts,req,function(err,result){
     if(err){
       sails.log.error(err);
       return res.send('{"msgNo":"9999","msgInfo":"'+err+'"}');

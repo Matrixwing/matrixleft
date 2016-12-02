@@ -220,7 +220,8 @@ module.exports = {
         result.num=rnd;
         SendMsg.sendValidaNumToPhone(result,function(err,infoFormaili){
           console.log(infoFormaili);
-          if(err) cb(err);
+
+          if(err) return cb(err);
          return cb(null,result);
         })
        // return cb(null,result);
@@ -296,13 +297,19 @@ module.exports = {
 
   },
 
-  bindingPhone : function(opts,cb){
+
+  //绑定手机号
+  bindingPhone : function(opts,req,cb){
+    //var req = this.req;
+    //var res = this.res;
+    ////var sails = req._sails;
     ValidatePhone.validateNum(opts,function(err,optPassedOn){
       if(err) return cb(err);
       User.isPhoneExisted(optPassedOn,function(err,phoneReslut){
         if(err) return cb(err);
         if(phoneReslut==''){
-          //todo 手机号不存在
+          //服务员不光更新手机还更新身份证
+          //
           User.update({userID:opts.userID},{phone:opts.phone}).exec(function(err,result){
             if (err) return cb(err);
             cb(null,result);
@@ -313,15 +320,36 @@ module.exports = {
            */
             //又有手机号又有openid，这个号码已经被注册过了
           if(phoneReslut[0].openid){return cb('这手机已经被注册了');}
-          //else{//有手机号但没有openid。表示这是个我们导入的用户。更新到我们的数据库
-          //  //更新信息
-          //  User.find({userID:opts.userID}).exec(function(err,user){
-          //    if(err) return cb(err);
-          //    console.log(user);
-          //    User.update()
-          //  })
-          //  //
-          //}
+          else{//有手机号但没有openid。表示这是个我们导入的用户。更新到我们的数据库
+            //更新信息
+            User.find({userID:opts.userID}).exec(function(err,user){
+              if(err) return cb(err);
+              console.log(user[0]);
+              var data ={
+                avatarUrl:user[0].avatarUrl,
+                nickname:user[0].nickname,
+                gender:user[0].gender,
+                openid:user[0].openid,
+                role:2
+                };
+              console.log('data',data);
+              User.update({userID:phoneReslut[0].userID},data).exec(function(err,newuser){
+                console.log('err',err);
+                if(err) return cb(err)
+                User.update({userID:opts.userID},{openid:null}).exec(function(err,olduser){
+                  console.log('err',err);
+                  if(err) return cb(err)
+                  console.log(newuser);
+                  console.log(phoneReslut[0].userID);
+                  req.session.userID=phoneReslut[0].userID;
+                  console.log(req.session.userID);
+                  cb(null,newuser)
+                })
+
+              })
+            })
+            //
+          }
 
 
         }

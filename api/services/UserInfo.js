@@ -52,7 +52,6 @@ module.exports = {
           delete user.userID;
           delete user.role;
           delete user.openid;
-          delete user.IDCard;
           if(err) return next(err);
           return next(null,user);
         })
