@@ -288,13 +288,13 @@ function getServantList(dataList,clear){
 											if (data.data.servantList[i].sysTag) {
 												var sysTag=data.data.servantList[i].sysTag.split('|')
 												if (sysTag[0]=='小元认证') {
-													serventList.push('<div class="kbd mui-pull-left"><img src="images/shi.png"/></div>')
+													serventList.push('<div class="kbd"><img src="images/shi.png"/></div>')
 												};
 												if (sysTag[0]=='小元体检') {
-													serventList.push('<div class="kbd mui-pull-left"><img src="images/jian.png"/></div>')
+													serventList.push('<div class="kbd"><img src="images/jian.png"/></div>')
 												};
 												if (sysTag[1]=='小元体检') {
-													serventList.push('<div class="kbd mui-pull-left"><img src="images/jian.png"/></div>')
+													serventList.push('<div class="kbd"><img src="images/jian.png"/></div>')
 												};
 												console.log(sysTag[1])
 											};

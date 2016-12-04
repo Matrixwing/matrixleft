@@ -445,6 +445,9 @@ ul{list-style:none}
 	width: 24px;
 	height: 24px;
 }
+#getServantList .kbd{
+	margin-right: .3em
+}
 .kbd img{
 	width: 24px;
 }
