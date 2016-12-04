@@ -118,7 +118,9 @@
 					};
 					cardHtml_t = cardHtml_t.join('');
 					$('#card_more').append(cardHtml_t)
-					//if (data.data.certificate) {};
+					if (data.data.certificate) {
+						$('#cer').show();
+					};
 				}else{
 					mui.toast(JSON.parse(data).msgInfo);
 				};
