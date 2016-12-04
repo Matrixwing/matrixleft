@@ -27,10 +27,8 @@ module.exports = {
     }
   },
   updataToken:function(cb){
-
     //更新accesstoken的文档在
     // http://mp.weixin.qq.com/wiki/15/54ce45d8d30b6bf6758f68d2e95bc627.html
-
     var hostname = util.format('https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s' +
       '&secret=%s',wxConfig.appid,wxConfig.appsecret);
     console.log('hostname',hostname);
@@ -48,11 +46,12 @@ module.exports = {
           return cb(data);
         }else{
           var updateString =util.format( 'update wxaccess set access_token="%s",expires_in=%s,updatedAt=NOW();',data.access_token,data.expires_in);
-          console.log('updateString',updateString);
-          console.log('data',data);
+          //console.log('updateString',updateString);
+          //console.log('data',data);
           WxAccess.query(updateString,function(err,result){
+            console.log('result',result);
             if(err) return cb(err);
-            return cb(null,result);
+            return cb(null,data);
           });
         }
       })
@@ -65,8 +64,10 @@ module.exports = {
       if(err) return cb(err);
       token=token[0];
       var isExpired
-      console.log('token',token);
+      //console.log('token',token);
+
       var timeDiff = Date.now() - (new Date(token.updatedAt).getTime());
+      //console.log('timeDiff',timeDiff>=token.expires_in*1000||token=='');
       if(timeDiff>=token.expires_in*1000||token==''){
         //token过期了，更新token
         WxAccess.updataToken(function(err,result){

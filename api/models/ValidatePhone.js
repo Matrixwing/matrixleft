@@ -8,6 +8,7 @@
 module.exports = {
   tablename:"validatePhone",
   autoUpdatedAt: false,//忽略表中updated属性
+  autoid: false,
   attributes: {
     num:{
       type:"string"
@@ -21,6 +22,10 @@ module.exports = {
     },
     stauts:{
       type:"int",
+    },
+    id:{
+      type:'int',
+      primaryKey: true
     }
   },
 
@@ -42,7 +47,7 @@ module.exports = {
   /**
    * 手机和验证码是否匹配？
    * @param opts js对象，需要包含该用户的手机和该手机的验证码
-   * @param cb 回调函数 cb(err,result)  err为错误信息  opts继续传递参数
+   * @param cb 回调函数 cb(err,result)  err为错误信息
    */
   validateNum : function (opts,cb) {
     var query ={
@@ -59,10 +64,11 @@ module.exports = {
       console.log("result",result);
       if(err) return cb(err);
       if(result=='') return cb('验证码错误');
-      //todo 把这条验证码的状态改为0
-
+      //把这条验证码的状态改为0
+      ValidatePhone.update({phone:result[0].id},{stauts:0}).exec(function(err,result){
+        return cb(null,opts);
+      })
       //
-      return cb(null,opts);
     });
   }
 };

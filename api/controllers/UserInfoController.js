@@ -22,9 +22,6 @@ module.exports = {
   },
 
  getSevantDetail : function(req,res){
-
-
-
    var userID  = req.param('userID');
    console.log(userID);
    if(!userID){

@@ -25,10 +25,8 @@ module.exports = {
     }
   },
   updataTicket:function(cb){
-
     //更新tikect的文档在
     //http://mp.weixin.qq.com/wiki/7/aaa137b55fb2e0456bf8dd9148dd613f.html#.E9.99.84.E5.BD.951-JS-SDK.E4.BD.BF.E7.94.A8.E6.9D.83.E9.99.90.E7.AD.BE.E5.90.8D.E7.AE.97.E6.B3.95
-
     //获取tikect前需要先获取token
     WxAccess.validateToken(function(err,token){
       if(err) return cb(err);
@@ -52,18 +50,16 @@ module.exports = {
             //console.log('updateString',updateString);
             //console.log('data',data);
             WxTicket.query(updateString,function(err,result){
+              //console.log('result',result);
               if(err) return cb(err);
-              return cb(null,result);
+              return cb(null,data);
             });
           }
         })
       }).on('error', function(e) {
         cb(e.errmsg);
       });
-
     })
-
-
   },
 
   //检查ticket是否过期，会返回一个可用ticket
@@ -75,7 +71,7 @@ module.exports = {
       var updatedTime=(new Date(ticket.updatedAt).getTime());
       //console.log('validateTicket',ticket);
       var timeDiff = Date.now() - updatedTime;
-      //console.log(timeDiff);
+      //console.log(timeDiff>=ticket.expires_in*1000||ticket=='');
       if(timeDiff>=ticket.expires_in*1000||ticket==''){
         //ticket，更新ticket
         WxTicket.updataTicket(function(err,result){
