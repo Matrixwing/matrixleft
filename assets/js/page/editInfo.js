@@ -148,7 +148,7 @@ $(document).ready(function(){
 			_this.attr('tagID',items[0].value);
 		});
 	});
-	$('input').attr('readonly','readonly');
+	//$('input').attr('readonly','readonly');
 	var userID = base.getQueryString('userID')
 	$.ajax({
 	    type: 'post',
