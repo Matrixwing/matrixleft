@@ -26,7 +26,7 @@ module.exports = {
       //detail: '{"goods_detail": [{"goods_id": "iphone6s_16G","wxpay_goods_id": "1001","goods_name": "iPhone6s 16G","quantity": 1,"price": 528800,"goods_category": "123456","body": "苹果手机"}]}',
       out_trade_no: opts.outTradeNo, //微元汇系统订单号
       total_fee: opts.salary+opts.servicePrice,
-      spbill_create_ip: '112.193.91.16',
+      //spbill_create_ip: '112.193.91.16',
       notify_url: weixinConfig.notify_url
     }, function(err, result){
       if (err){
@@ -34,6 +34,8 @@ module.exports = {
       }else{
         //前端调用微信jsapi需要signature
         WxTicket.validateTicket(function(err,tickect){
+          if(err) return cb(err);
+          console.log('result',result);
           var  signString=util.format('jsapi_ticket=%s&noncestr=%s&timestamp=%s&url=%s',tickect.ticket,result.nonceStr,result.timeStamp,weixinConfig.url+opts.payUrl);
           var sha1=crypto.createHash("sha1");
           var signature=sha1.update(signString);

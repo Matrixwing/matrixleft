@@ -17,8 +17,7 @@ module.exports = {
       code : req.param('code',''),
       role : req.param('state',1),
     };
-    console.log(opts);
-    // 1,从微信获取openid 2，根据openid查是否注册，若没有注册则拉取用户资料然后再写入，3若成功，重定向url带openid
+    // 1,从微信获取openid 2，根据openid查是否注册，若没有注册则拉取用户资料然后再写入
     async.waterfall([
       function(cb){
         cb(null,opts);
@@ -37,6 +36,7 @@ module.exports = {
 
       req.session.userID=result.userID;
       req.session.role=result.role;
+     // req.session.openid=result.openid;
       if(opts.role==1)
         var redirectUrl = '/nurseList.html';
       if (opts.role=='needlogin')

@@ -7,8 +7,7 @@
 var util = require('util');
 module.exports = {
 	pay : function(req,res){
-    //console.log(req);
-    console.log(res.referrer);
+
     var opts = {
       userID:req.session.userID,
      // totalfee:req.getParams('totalFee',null),
@@ -19,7 +18,9 @@ module.exports = {
       payUrl:req.param('payUrl',req.originalUrl)//当前支付网页的URL
     };
 
-    //测试数据
+
+
+    ////-------------测试数据-----------------
     //var opts = {
     //  userID:req.session.userID,
     //  // totalfee:req.getParams('totalFee',null),
@@ -27,10 +28,12 @@ module.exports = {
     //  servicePrice:1,
     //  body:'微元汇-测试支付',
     //  outTradeNo:req.param('orderId','null'),
-    //  outTradeNo:'8888887',
+    //  outTradeNo:'8888447',
     //  payUrl:req.param('payUrl',req.originalUrl)//当前支付网页的URL
     //};
-    console.log(opts);
+    //opts.userID=249;   //todo 测试时使用 正式坏境删除
+    ////--------------------------------------
+    //console.log(opts);
     if(!(opts.outTradeNo&&opts.servicePrice)){
       return res.send('{"msgNo":"9999","msgInfo":"参数错误"}');
     }
