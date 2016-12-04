@@ -35,6 +35,10 @@
 		})
 		$(document).ready(function(){
 		    var userID=base.getQueryString('userID');
+		    var own=base.getQueryString('own');
+		    if (own==1) {
+		    	$('#yy_bar').show()
+		    };
 		    //var userID= '6';
 		    $.get('getUserCard?userID='+userID,function(data,status){
 		    	var data= JSON.parse(data);
@@ -61,7 +65,7 @@
 						cardHtml.push('<li class="mui-table-view-cell"><p class="mui-pull-left mui-col-xs-3">专&#12288;&#12288;长：</p><span>'+data.data.skillName+'</span></li>')
 					};
 					if (data.data.workExp) {
-						cardHtml.push('<li class="mui-table-view-cell"><p class="mui-pull-left mui-col-xs-3">服务经验：</p><span>'+data.data.workExp+'年</span></li>')
+						cardHtml.push('<li class="mui-table-view-cell"><p class="mui-pull-left mui-col-xs-3">服务经验：</p><span>'+data.data.workExp+'月</span></li>')
 					};
 					if (data.data.mouthRest) {
 						cardHtml.push('<li class="mui-table-view-cell"><p class="mui-pull-left mui-col-xs-3">每月休息：</p><span>'+data.data.mouthRest+'天</span></li>')
@@ -79,11 +83,11 @@
 					$('#getUserCard').append(cardHtml)
 					var cardHtml_t=[];
 					if (data.data.IDCard) {
-						cardHtml_t.push('<li class="mui-table-view-cell"><p class="mui-pull-left mui-col-xs-3">身份证号：</p><span>'+data.data.IDCard+'</span></li>')
+						cardHtml_t.push('<li class="mui-table-view-cell"><p class="mui-pull-left mui-col-xs-3">身份证号：</p><span>'+data.data.IDCard.replace(data.data.IDCard.substr(6,8), "******")+'</span></li>')
 						$('#IDCard').val(data.data.IDCard);
 					};
 					if (data.data.phone) {
-						cardHtml_t.push('<li class="mui-table-view-cell"><p class="mui-pull-left mui-col-xs-3">手机号码：</p><span>'+data.data.phone+'</span></li>')
+						cardHtml_t.push('<li class="mui-table-view-cell"><p class="mui-pull-left mui-col-xs-3">手机号码：</p><span>'+data.data.phone.replace(data.data.phone.substr(3,4), "******")+'</span></li>')
 					};
 					if (data.data.homeTown) {
 						cardHtml_t.push('<li class="mui-table-view-cell"><p class="mui-pull-left mui-col-xs-3">籍&#12288;&#12288;贯：</p><span>'+data.data.homeTown+'</span></li>')

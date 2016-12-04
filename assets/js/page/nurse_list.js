@@ -157,7 +157,7 @@ $('#full_tag').on('tap','button',function(){
 	$(this).toggleClass('onselect')
 })
 $('#getServantList').on('tap','li',function(){
-	window.location.href='userCard.html?userID='+$(this).attr('userID')
+	window.location.href='userCard.html?userID='+$(this).attr('userID')+'&own=1'
 })
 /*getServantList*/
 $('#tag_sure').on('tap',function(){

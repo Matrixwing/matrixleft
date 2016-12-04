@@ -257,8 +257,7 @@ $('#reg_add').on('tap',function(){
 		return;
 	};
 	if (marriage==undefined) {
-		mui.toast('请选择您的婚姻状况')
-		return;
+		marriage=2;
 	};
 	if (expectSalary=='') {
 		mui.toast('请选择您的期望月薪')
@@ -268,10 +267,10 @@ $('#reg_add').on('tap',function(){
 		mui.toast('请选择您的当前住址')
 		return;
 	};
-	if (workExp=='') {
+	/*if (workExp=='') {
 		mui.toast('请选择您的服务经验')
 		return;
-	};
+	};*/
 	/*if (serviceCity=='') {
 		mui.toast('请选择您的服务城市')
 		return;
