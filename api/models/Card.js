@@ -80,6 +80,9 @@ module.exports = {
       type:'string',
       size:256
     },
+    expectSalary:{
+      type:'int'
+    },
     certificate : {
       type:'string',
       size:512
