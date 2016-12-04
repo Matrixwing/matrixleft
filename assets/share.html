@@ -112,7 +112,7 @@
 		$('.copy').on('tap',function(e){
 			e.detail.gesture.preventDefault(); 
 				var btnArray = ['好的'];
-				mui.prompt('请复制您的邀请链接：', '凄凄切切', '小元提示', btnArray, function(e) {
+				mui.prompt('请复制您的邀请链接：', '', '小元提示', btnArray, function(e) {
 					if (e.index == 0) {
 						//info.innerText = '谢谢你的评语：' + e.value;
 					} else {
