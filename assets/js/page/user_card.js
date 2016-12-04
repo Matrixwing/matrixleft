@@ -42,7 +42,7 @@
 					if (data.data.avatarUrl) {
 						$('#avatarUrl').attr('src',data.data.avatarUrl)
 					}
-					$('#workstatus').html(data.data.workstatus)
+					$('#workstatus').html('目前'+data.data.workstatus)
 					if (data.data.serviceCity) {
 						$('#serveCity').html('服务于'+data.data.serviceCity)
 					}else{
@@ -80,6 +80,7 @@
 					var cardHtml_t=[];
 					if (data.data.IDCard) {
 						cardHtml_t.push('<li class="mui-table-view-cell"><p class="mui-pull-left mui-col-xs-3">身份证号：</p><span>'+data.data.IDCard+'</span></li>')
+						$('#IDCard').val(data.data.IDCard);
 					};
 					if (data.data.phone) {
 						cardHtml_t.push('<li class="mui-table-view-cell"><p class="mui-pull-left mui-col-xs-3">手机号码：</p><span>'+data.data.phone+'</span></li>')
@@ -110,6 +111,7 @@
 					};
 					cardHtml_t = cardHtml_t.join('');
 					$('#card_more').append(cardHtml_t)
+					//if (data.data.certificate) {};
 				}else{
 					mui.toast(JSON.parse(data).msgInfo);
 				};
@@ -119,7 +121,7 @@
 		$('.icon-zhengshu').on('tap',function(){
 			/*var certID = $('#certID').val();
 			var certID =$('#certID').val(base.getAesString(certID,'1234567812345678','Pkcs7'));*/
-			var certID = $('#IDCard').html();
+			var certID = $('#IDCard').val();
 			var mask = mui.createMask();
 			mask.show()
 			$.ajax({
@@ -136,7 +138,7 @@
 			        	for(var i =0;i<certInfo.length;i++){
 			        		listHtml.push('<div class="mui-card">')
 								listHtml.push('<ul class="mui-table-view">')
-									listHtml.push('<li class="mui-table-view-cell mui-collapse mui-active" id="card_main">')
+									listHtml.push('<li class="mui-table-view-cell mui-collapse mui-active">')
 										listHtml.push('<a class="mui-navigate-right" href="#">'+certInfo[i].workTypeName+'证</a>')
 										listHtml.push('<div class="mui-collapse-content cer_info">')
 											listHtml.push('<ul class="mui-table-view">')
@@ -182,11 +184,12 @@
 									listHtml.push('</li>')
 								listHtml.push('</ul>')
 							listHtml.push('</div>')
+				        }
+				        
 			        	listHtml = listHtml.join('');
 			        	$('#card_main').empty();
 			        	$('#card_main').append(listHtml);
-			        }
-			    }
+				    }
 			    },
 			    error: function(data) {
 			    }

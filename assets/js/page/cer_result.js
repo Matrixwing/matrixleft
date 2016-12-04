@@ -29,7 +29,7 @@
 			        	var listHtml = [],
 			        	certInfo = data.data[0].certInfo;
 			        	$('.certInfo_bd').empty();
-			        	if (data.data[0].avatarUrl==null) {
+			        	if (data.data[0].avatarUrl=='') {
 			        		$('.avatarUrl_div').hide()
 			        	}else{
 			        		$('.avatarUrl img').attr('src',data.data[0].avatarUrl)

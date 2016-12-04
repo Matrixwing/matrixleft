@@ -442,7 +442,8 @@ ul{list-style:none}
 }*/
 .kbd {
 	display: inline-block;
-	margin-right: .5em;
+	width: 24px;
+	height: 24px;
 }
 .kbd img{
 	width: 24px;
