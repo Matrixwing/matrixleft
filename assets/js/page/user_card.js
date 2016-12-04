@@ -37,7 +37,7 @@
 		    var userID=base.getQueryString('userID');
 		    var own=base.getQueryString('own');
 		    if (own==1) {
-		    	$('#yy_bar').show()
+		    	$('.yy_bar').show()
 		    };
 		    //var userID= '6';
 		    $.get('getUserCard?userID='+userID,function(data,status){
