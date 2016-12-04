@@ -46,7 +46,9 @@
 					if (data.data.avatarUrl) {
 						$('#avatarUrl').attr('src',data.data.avatarUrl)
 					}
-					$('#workstatus').html('目前'+data.data.workstatus)
+					if (data.data.workstatus) {
+						$('#workstatus').html('目前'+data.data.workstatus)
+					};
 					if (data.data.serviceCity) {
 						$('#serveCity').html('服务于'+data.data.serviceCity)
 					}else{
