@@ -47,14 +47,19 @@
 						$('#avatarUrl').attr('src',data.data.avatarUrl)
 					}
 					if (data.data.workstatus) {
-						$('#workstatus').html('目前'+data.data.workstatus)
-					};
+						$('#userName').html('我是'+data.data.userName+'，'+data.data.workstatus)
+					}else{
+						$('#userName').html('我是'+data.data.userName)
+					}
+					if (data.data.expectSalary) {
+						$('#expectSalary').html('期望薪资：'+data.data.expectSalary+'元')
+					}
 					if (data.data.serviceCity) {
 						$('#serveCity').html('服务于'+data.data.serviceCity)
 					}else{
 						$('#serveCity').html('服务于成都市')
 					};
-					$('#userName').html('我是'+data.data.userName)
+					//$('#userName').html('我是'+data.data.userName+'目前'+data.data.workstatus)
 					//$('#name_card').html(data.data.userName+'的名片')
 					var cardHtml=[];
 					if (data.data.address) {
@@ -72,15 +77,15 @@
 					if (data.data.mouthRest) {
 						cardHtml.push('<li class="mui-table-view-cell"><p class="mui-pull-left mui-col-xs-3">每月休息：</p><span>'+data.data.mouthRest+'天</span></li>')
 					};
-					if (data.data.identityAuth) {
+					if (data.data.identityAuth==1) {
 						//cardHtml.push('<li class="mui-table-view-cell"><p class="mui-pull-left mui-col-xs-3">小元实名：</p><span>'+data.data.identityAuth+'</span></li>')
 						$('#shi').show();
 					};
-					if (data.data.examination) {
+					if (data.data.examination==1) {
 						//cardHtml.push('<li class="mui-table-view-cell"><p class="mui-pull-left mui-col-xs-3">小元体检：</p><span>'+data.data.examination+'</span></li>')
 						$('#jian').show();
 					};
-					if (data.data.assessment) {
+					if (data.data.assessment==1) {
 						cardHtml.push('<li class="mui-table-view-cell"><p class="mui-pull-left mui-col-xs-3">小元评价：</p><span>'+data.data.assessment+'</span></li>')
 						$('#ping').show();
 					};
@@ -88,11 +93,11 @@
 					$('#getUserCard').append(cardHtml)
 					var cardHtml_t=[];
 					if (data.data.IDCard) {
-						cardHtml_t.push('<li class="mui-table-view-cell"><p class="mui-pull-left mui-col-xs-3">身份证号：</p><span>'+data.data.IDCard.replace(data.data.IDCard.substr(6,8), "******")+'</span></li>')
+						cardHtml_t.push('<li class="mui-table-view-cell"><p class="mui-pull-left mui-col-xs-3">身份证号：</p><span>'+data.data.IDCard.replace(data.data.IDCard.substr(6,8), "********")+'</span></li>')
 						$('#IDCard').val(data.data.IDCard);
 					};
 					if (data.data.phone) {
-						cardHtml_t.push('<li class="mui-table-view-cell"><p class="mui-pull-left mui-col-xs-3">手机号码：</p><span>'+data.data.phone.replace(data.data.phone.substr(3,4), "******")+'</span></li>')
+						cardHtml_t.push('<li class="mui-table-view-cell"><p class="mui-pull-left mui-col-xs-3">手机号码：</p><span>'+data.data.phone.replace(data.data.phone.substr(3,4), "****")+'</span></li>')
 					};
 					if (data.data.homeTown) {
 						cardHtml_t.push('<li class="mui-table-view-cell"><p class="mui-pull-left mui-col-xs-3">籍&#12288;&#12288;贯：</p><span>'+data.data.homeTown+'</span></li>')
