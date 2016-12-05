@@ -189,13 +189,13 @@ module.exports = {
         cb(null,opts);
       },User.isPhoneRegistered,//验证这个手机是不是已经注册了
       function(opts,cb){//验证上一次短信是否在60秒内，并且该是否已经超出10条
-        console.log(opts);
+        //console.log(opts);
         ValidatePhone.find({where:opts,sort:'createdAt DESC'}).exec(function(err,validateNum){
-          console.log('validateNum',validateNum);
+          //console.log('validateNum',validateNum);
           if(err) return cb(err);
 
           if(validateNum!=''){
-            console.log('validateNum[0]1111',validateNum[0]);
+            //console.log('validateNum[0]1111',validateNum[0]);
             var timeDiff = Date.now() - (new Date(validateNum[0].createdAt).getTime());
             if(timeDiff<=60*1000){
               //时间没有超过60秒
@@ -219,7 +219,7 @@ module.exports = {
         var result = opts;
         result.num=rnd;
         SendMsg.sendValidaNumToPhone(result,function(err,infoFormaili){
-          console.log(infoFormaili);
+          //console.log(infoFormaili);
 
           if(err) return cb(err);
          return cb(null,result);
@@ -319,6 +319,7 @@ module.exports = {
            *手机号存在，接下来判断是否有openid。有则表示手机号被占用。无则拉取用户信息
            */
             //又有手机号又有openid，这个号码已经被注册过了
+          console.log(phoneReslut[0]);
           if(phoneReslut[0].openid){return cb('这手机已经被注册了');}
           else{//有手机号但没有openid。表示这是个我们导入的用户。更新到我们的数据库
             //更新信息
