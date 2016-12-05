@@ -157,7 +157,7 @@ $('#full_tag').on('tap','button',function(){
 	$(this).toggleClass('onselect')
 })
 $('#getServantList').on('tap','li',function(){
-	window.location.href='userCard.html?userID='+$(this).attr('userID')+'&own=1'
+	window.location.href='appointment.html?userID='+$(this).attr('userID')+'&own=1'
 })
 /*getServantList*/
 $('#tag_sure').on('tap',function(){
@@ -296,6 +296,7 @@ $('#tag_sure').on('tap',function(){
 	}
 	d_e = dataList;
 	getServantList(dataList,'clear')
+	console.log(JSON.stringify(needs));
 	base.setCookie('needs',JSON.stringify(needs))
 })
 var count = 1;

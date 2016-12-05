@@ -6,11 +6,11 @@ img{width: 100%}
 .mui-table-view{margin: 0;width: 100%}
 .mui-page .mui-table-view:last-child{margin-bottom: 0}
 .mui-icon{color: #e3457d;margin: 4px 5px 0 0}
-.cardbar{background: #fff;border-bottom: 1px solid #ccc;text-align: right;padding: 0 15px}
+.cardbar{background: #fff;text-align: right;padding: 0 15px}
 
 .card_info span{font-size: 14px;}
 .card_info .cardbar span{font-size: 24px;}
-.card_info .cardbar a{display:block;margin: 0 5px !important;padding: 9px 10px}
+.card_info .cardbar a{display:block;margin: 0 5px !important;padding: 7px 10px}
 /*.card_info .cardbar a:first-child{margin-right: 0;padding-right: 0}*/
 #card_more{display: none}
 .cer_info .mui-table-view-cell{padding: 11px 0px !important;}
@@ -88,10 +88,18 @@ img{width: 100%}
 /*yuyue*/
 .needs{
     background-color: #fff;
-    margin: 5px 0;
+    margin-top: 5px;
     padding: 10px 15px;
     font-size: 14px;
 }
+.needs span{
+    color: #e3457d;
+}
+.needs p{
+    margin-bottom: 0 !important;
+    margin-top: 5px;
+}
+.appointment{margin-top: 5px;}
 .appointment .select_icon {
     line-height: 40px;
     margin: 0 15px 0 0 !important;
@@ -104,7 +112,7 @@ img{width: 100%}
     line-height: 1
 }
 .s_selcet {
-    font-size: 16px;
+    font-size: 14px;
     line-height: 40px;
     float: right;
     width: 72%;
@@ -112,3 +120,11 @@ img{width: 100%}
 .appointment label{font-size: 14px;width: 28%}
 .appointment .mui-input-row label{line-height: 14px;}
 .appointment .mui-input-row label{padding: 13px 15px}
+#next {
+    width: 100% !important;
+    font-size: 14px;
+    background-color: #e3457d;
+    border-color: #F11764;
+    margin-top: 20px;
+    padding: 10px;
+}

@@ -30,7 +30,7 @@
 				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
 					<span class="mui-icon mui-icon-left-nav"></span>
 				</button>
-				<h1 class="mui-center mui-title" id="name_card">预约面试</h1>
+				<h1 class="mui-center mui-title" id="name_card">名片</h1>
 			</div>
 			<div class="mui-page-content">
 				<div class="mui-scroll-wrapper" id="returnup">
@@ -55,25 +55,71 @@
 							</div>
 						</div>
 						<div class="needs">
-							需求清单：60平米、5人、1位不能自理老人、1位小于1岁小孩。
+							<span>需求清单：</span><p>60平米、5人、1位不能自理老人、1位小于1岁小孩。</p>
+						</div>
+						<div class="mui-row card_info">
+							<ul class="mui-table-view" id="getUserCard">
+								 
+							</ul>
+							<ul class="mui-table-view" id="card_more">
+							</ul>
+							<div class="mui-row cardbar">
+
+							 	<a href="javascript:;" class="mui-pull-right" id="card_up"><span class="mui-icon iconfont icon-xiangxiajiantou mui-pull-left"></span></a>
+							 	<a href="javascript:;" class="mui-pull-right" id="card_down"  style="display:none"><span class="mui-icon iconfont icon-xiangshangjiantou mui-pull-left"></span></a>
+							 	<a href="#cer" class="mui-pull-right" style="display:none"><span class="mui-icon iconfont icon-zhengshu mui-pull-left"></span></a>
+								<!-- <a href="#rated" class="mui-pull-right"><span class="mui-icon iconfont icon-pingjia1 mui-pull-left"></span></a> -->
+								<input type="hidden" id="IDCard" />
+							</div>
 						</div>
 						<form class="mui-input-group appointment">
 							<div class="mui-input-row">
-								<label>面试时间</label>
+								<label>面试地点</label>
 								<div class="mui-row s_selcet" id="local" type="button" tagid="0">选择地点</div>
 								<span class="mui-icon mui-icon-arrowdown mui-pull-right select_icon"></span>
 							</div>
 							<div class="mui-input-row">
-								<label>面试地点</label>
+								<label>面试时间</label>
 								<div class="mui-row s_selcet" id="time" type="button" tagid="0">选择时间</div>
 								<span class="mui-icon mui-icon-arrowdown mui-pull-right select_icon"></span>
 							</div>
 						</form>
+						<div class="mui-content-padded">
+							<a id="next" href="#pay" class="mui-btn mui-btn-primary" data-loading-text="下一步">下一步</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="pay" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>
+				</button>
+				<h1 class="mui-center mui-title" id="cer_title">支付</h1>
+			</div>
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll" id="card_main">
 					</div>
 				</div>
 			</div>
 		</div>
 		<div id="cer" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>
+				</button>
+				<h1 class="mui-center mui-title" id="cer_title">证书</h1>
+			</div>
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll" id="card_main">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="jian" class="mui-page">
 			<div class="mui-navbar-inner mui-bar mui-bar-nav">
 				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
 					<span class="mui-icon mui-icon-left-nav"></span>
@@ -93,32 +139,6 @@
 	<script src="js/mui/mui.picker.min.js "></script>
 	<script src="js/mui/mui.view.js "></script>
 	<script src="js/base.js"></script>
-	<script src="js/page/user_card.js"></script>
-	<script type="text/javascript">
-	var local = new mui.PopPicker();
- 	local.setData([
- 		{value:'1',text:'翔宇苑'},
- 		{value:'2',text:'东苑'}
-	]);
-	$('#local').on('tap', function(event) {
-		var _this = $(this);
-		local.show(function(items) {
-			_this.html(items[0].text);
-			_this.attr('tagID',items[0].value);
-			
-		});
-	});
-	var time = new mui.DtPicker({
-	    type: "hour",//设置日历初始视图模式 
-	});
-	$('#time').on('tap', function(event) {
-		var _this = $(this);
-		time.show(function(items) {
-			$('#time').html(items.value)
-		});
-	});
-	console.log((base.getCookie('needs')))
-	</script>
-
+	<script src="js/page/appointment.js"></script>
 	<script src="https://s4.cnzz.com/z_stat.php?id=1260604409&web_id=1260604409" language="JavaScript"></script>
 </html>
