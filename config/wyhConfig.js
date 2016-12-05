@@ -11,7 +11,8 @@ module.exports.Weixin = {
   partner_key:'qd20160725scfkilejlmatrix7u8x0kd',//微信商户平台API密钥
   url:'http://wyh.matrixwing.com',//公众号的域名
   notify_url : 'http://wyh.matrixwing.com/notice',
-
+  loginPage : 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8306afd398ab31e5&redirect_uri=' +
+  'http%3a%2f%2fwyh.matrixwing.com%2fweixinLogIn&response_type=code&scope=snsapi_userinfo&state=needlogin#wechat_redirect',//通过微信的授权登录的页面
   //appid : 'wx63ace09080406d46',
   //appsecret:'ef65f9b655db88606885742d5e2c41d7',
   //access_token:'',

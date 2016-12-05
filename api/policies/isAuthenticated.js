@@ -6,6 +6,8 @@
  * @docs        :: http://sailsjs.org/#!documentation/policies
  *
  */
+var wyhCon= require('../../config/wyhConfig').Weixin;
+
 module.exports = function(req, res, next) {
   // If `req.session.userID` 则表示已经登录过了
   console.log('isAuthenticated',req.session.userID);
@@ -16,7 +18,7 @@ module.exports = function(req, res, next) {
 
   //  异步处理请求比如ajax
   if (req.wantsJSON) {
-    return res.send(401);
+    return res.send(401,"{'loginPage':'"+wyhCon.loginPage+"'}'");
 
   }
 
