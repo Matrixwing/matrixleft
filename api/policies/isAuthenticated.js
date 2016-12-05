@@ -18,7 +18,7 @@ module.exports = function(req, res, next) {
 
   //  异步处理请求比如ajax
   if (req.wantsJSON) {
-    return res.send(401,"{'loginPage':'"+wyhCon.loginPage+"'}'");
+    return res.send(401,"{'loginPage':'"+wyhCon.loginPage+"'}");
 
   }
 
