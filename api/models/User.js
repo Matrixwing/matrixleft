@@ -129,6 +129,7 @@ module.exports = {
         console.log(result);
         for(x in result){
           //没有openid的说明这是导入的数据，需要后续做匹配
+          console.log('result[x]',result[x]);
           if(result[x].openid){
             return cb('这个手机号已经注册过了');
           }
