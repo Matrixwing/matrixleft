@@ -108,10 +108,13 @@
 			
 		});
 	});
-	var time = new mui.DtPicker('hour');
+	var time = new mui.DtPicker({
+	    type: "hour",//设置日历初始视图模式 
+	});
 	$('#time').on('tap', function(event) {
 		var _this = $(this);
 		time.show(function(items) {
+			$('#time').html(items.value)
 		});
 	});
 	console.log((base.getCookie('needs')))

@@ -195,10 +195,8 @@ $('#reg').on('tap',function(){
 	    },
 	    error: function(xhr, textStatus, errorThrown) {
 	    	if (xhr.status == 401) {
-	    		console.log(xhr.responseText);
-	    		console.log(xhr.responseText.loginPage);
-	    		var href =xhr.responseText.loginPage;
-	    		//window.location.href=href;
+	    		var href =eval('(' + xhr.responseText + ')');
+	    		window.location.href=href.loginPage;
 	    	}
 	    }
 	});
