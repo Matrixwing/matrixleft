@@ -84,3 +84,31 @@ img{width: 100%}
 		margin-bottom: 5px;
 	}
 }
+
+/*yuyue*/
+.needs{
+    background-color: #fff;
+    margin: 5px 0;
+    padding: 10px 15px;
+    font-size: 14px;
+}
+.appointment .select_icon {
+    line-height: 40px;
+    margin: 0 15px 0 0 !important;
+    position: relative;
+    top: -40px;
+    color: #ccc;
+    font-size: 20px;
+}
+.appointment label{
+    line-height: 1
+}
+.s_selcet {
+    font-size: 16px;
+    line-height: 40px;
+    float: right;
+    width: 72%;
+}
+.appointment label{font-size: 14px;width: 28%}
+.appointment .mui-input-row label{line-height: 14px;}
+.appointment .mui-input-row label{padding: 13px 15px}

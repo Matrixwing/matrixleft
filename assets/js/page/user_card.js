@@ -239,3 +239,8 @@
 		$('#jian').on('tap',function(){
 			mui.toast('已通过小元体检认证')
 		})
+
+		$('.yy_bar').on('tap',function(){
+			var userID=base.getQueryString('userID');
+			window.location.href='appointment.html?userID='+userID
+		})

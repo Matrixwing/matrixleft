@@ -163,11 +163,19 @@ $('#getServantList').on('tap','li',function(){
 $('#tag_sure').on('tap',function(){
 	offCanvasWrapper.offCanvas('close');
 	var dataList=[];
-
+	var needs=[];
 	//工种
 	dataList.push({
 	   tagID:$('.choosein_btn').attr('tagID'),
 	   value:'1'
+	})
+	needs.push({
+	   tagName:$('.choosein_btn').html(),
+	   value:'1'
+	})
+	needs.push({
+	   tagName:'服务人数',
+	   value:$('#people').val()
 	})
 	if ($('.choosein_btn').attr('tagID')=='0' || $('.choosein_btn').attr('tagID')=='2') {
 		dataList.push({
@@ -185,11 +193,20 @@ $('#tag_sure').on('tap',function(){
 	   tagID:$('#forests').attr('tagID'),
 	   value:$('#forests').val()
 	})
+
+	needs.push({
+	   tagName:'房屋面积',
+	   value:$('#forests').val()
+	})
 	//old
 	if ($('.onselect_l').length!=0) {
 		if ($('.onselect_l').length==1) {
 			dataList.push({
 			   tagID:$('.onselect_l').attr('tagID'),
+			   value:1
+			})
+			needs.push({
+			   tagName:$('.onselect_l').html(),
 			   value:1
 			})
 		}else{
@@ -198,13 +215,25 @@ $('#tag_sure').on('tap',function(){
 				   tagID:$('.onselect_l').eq(0).attr('tagID'),
 				   value:2
 				})
+				needs.push({
+				   tagName:$('.onselect_l').eq(0).html(),
+				   value:2
+				})
 			}else{
 				dataList.push({
 				   tagID:$('.onselect_l').eq(0).attr('tagID'),
 				   value:1
 				})
+				needs.push({
+				   tagName:$('.onselect_l').eq(0).html(),
+				   value:1
+				})
 				dataList.push({
 				   tagID:$('.onselect_l').eq(1).attr('tagID'),
+				   value:1
+				})
+				needs.push({
+				   tagName:$('.onselect_l').eq(1).html(),
 				   value:1
 				})
 			};
@@ -218,10 +247,18 @@ $('#tag_sure').on('tap',function(){
 			   tagID:$('.onselect_c').attr('tagID'),
 			   value:1
 			})
+			needs.push({
+			   tagName:$('.onselect_c').html(),
+			   value:1
+			})
 		}else{
 			if ($('.onselect_c').eq(0).attr('tagID')==$('.onselect_c').eq(1).attr('tagID')) {
 				dataList.push({
 				   tagID:$('.onselect_c').eq(0).attr('tagID'),
+				   value:2
+				})
+				needs.push({
+				   tagName:$('.onselect_c').eq(0).html(),
 				   value:2
 				})
 			}else{
@@ -229,8 +266,16 @@ $('#tag_sure').on('tap',function(){
 				   tagID:$('.onselect_c').eq(0).attr('tagID'),
 				   value:1
 				})
+				needs.push({
+				   tagName:$('.onselect_c').eq(0).html(),
+				   value:1
+				})
 				dataList.push({
 				   tagID:$('.onselect_c').eq(1).attr('tagID'),
+				   value:1
+				})
+				needs.push({
+				   tagName:$('.onselect_c').eq(1).html(),
 				   value:1
 				})
 			};
@@ -243,10 +288,15 @@ $('#tag_sure').on('tap',function(){
 			   tagID:$('.onselect').eq(i).attr('tagID'),
 			   value:'1'
 			})
+			needs.push({
+			   tagName:$('.onselect').eq(i).html(),
+			   value:1
+			})
 		};
 	}
 	d_e = dataList;
 	getServantList(dataList,'clear')
+	base.setCookie('needs',JSON.stringify(needs))
 })
 var count = 1;
 var d_e='';
@@ -296,7 +346,6 @@ function getServantList(dataList,clear){
 												if (sysTag[1]=='小元体检') {
 													serventList.push('<div class="kbd"><img src="images/jian.png"/></div>')
 												};
-												console.log(sysTag[1])
 											};
 											serventList.push('</div>')
 											
@@ -356,3 +405,5 @@ $('#txt').on('tap',function(){
 $('#offCanvasShow').on('tap','#MaternityMatron',function(){
 	window.location.href='MaternityMatron.html'
 })
+
+

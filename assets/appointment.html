@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>微元汇</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="styles/mui.min.css">
+		<link rel="stylesheet" href="styles/mui.picker.min.css">
+		<link rel="stylesheet" type="text/css" href="styles/main.css"/>
+		<link rel="stylesheet" type="text/css" href="styles/pages/user_card.css"/>
+	</head>
+
+	<body>
+		<!--页面主结构开始-->
+		<div id="app" class="mui-views">
+			<div class="mui-view">
+				<div class="mui-navbar">
+				</div>
+				<div class="mui-pages">
+				</div>
+			</div>
+		</div>
+		<!--页面主结构结束-->
+		<!--单页面开始-->
+        <div id="card" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>
+				</button>
+				<h1 class="mui-center mui-title" id="name_card">预约面试</h1>
+			</div>
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper" id="returnup">
+					<div class="mui-scroll">
+						<div class="mui-row card_main">
+							<div class="mui-pull-left mui-col-xs-4">
+								<img src="images/timg.jpg" id="avatarUrl">
+							</div>
+							<div class="mui-pull-right mui-col-xs-7 ">
+								<!-- <span class="mui-icon iconfont icon-personalcenter mui-pull-left"></span><p id="userName">--</p> -->
+								<div  class="pop">
+									<p id="userName">--</p>
+									<p id="expectSalary"></p>
+									<!-- <span class="mui-icon iconfont icon-shouhuodizhi mui-pull-left"></span><p id="serveCity">--</p> -->
+									<div class="kbd" id="shi" style="display:none"><img src="images/shi.png"></div>
+									<div class="kbd" id="jian" style="display:none"><img src="images/jian.png"></div>
+									<div class="kbd" id="ping" style="display:none"><img src="images/ping.png"></div>
+								</div>
+								<!-- <span class="mui-icon iconfont icon-mingpian mui-pull-left"></span><p id="IDCard">--</p> -->
+								<!-- <span class="mui-icon iconfont icon-tishi mui-pull-left">
+								<span class="mui-icon iconfont icon-shouhuodizhi mui-pull-left"></span> -->
+							</div>
+						</div>
+						<div class="needs">
+							需求清单：60平米、5人、1位不能自理老人、1位小于1岁小孩。
+						</div>
+						<form class="mui-input-group appointment">
+							<div class="mui-input-row">
+								<label>面试时间</label>
+								<div class="mui-row s_selcet" id="local" type="button" tagid="0">选择地点</div>
+								<span class="mui-icon mui-icon-arrowdown mui-pull-right select_icon"></span>
+							</div>
+							<div class="mui-input-row">
+								<label>面试地点</label>
+								<div class="mui-row s_selcet" id="time" type="button" tagid="0">选择时间</div>
+								<span class="mui-icon mui-icon-arrowdown mui-pull-right select_icon"></span>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="cer" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>
+				</button>
+				<h1 class="mui-center mui-title" id="cer_title">证书</h1>
+			</div>
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll" id="card_main">
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/mui/mui.min.js"></script>
+	<script src="js/mui/mui.picker.min.js "></script>
+	<script src="js/mui/mui.view.js "></script>
+	<script src="js/base.js"></script>
+	<script src="js/page/user_card.js"></script>
+	<script type="text/javascript">
+	var local = new mui.PopPicker();
+ 	local.setData([
+ 		{value:'1',text:'翔宇苑'},
+ 		{value:'2',text:'东苑'}
+	]);
+	$('#local').on('tap', function(event) {
+		var _this = $(this);
+		local.show(function(items) {
+			_this.html(items[0].text);
+			_this.attr('tagID',items[0].value);
+			
+		});
+	});
+	var time = new mui.DtPicker('hour');
+	$('#time').on('tap', function(event) {
+		var _this = $(this);
+		time.show(function(items) {
+		});
+	});
+	console.log((base.getCookie('needs')))
+	</script>
+
+	<script src="https://s4.cnzz.com/z_stat.php?id=1260604409&web_id=1260604409" language="JavaScript"></script>
+</html>

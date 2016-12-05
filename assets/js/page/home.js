@@ -123,13 +123,10 @@
 			};
 			_czc.push(["_trackEvent", "个人主页", "绑定手机号", "", "", ""]);
 		})
-		$('#user_card').on('tap',function(){
-			_czc.push(["_trackEvent", "个人主页", "名片", "", "", ""]);
-			window.location.href='userCard.html?userID='+userID;
-		})
 		$('#share').on('tap',function(){
 			_czc.push(["_trackEvent", "个人主页", "分享", "", "", ""]);
 			var avatarUrl=$('.avatarUrl').attr('src');
+			var userID=$('.nickname').attr('userID');
 			window.location.href='share.html?userID='+userID+'&avatarUrl='+avatarUrl;
 		})
 		base.tabbarHtml();
