@@ -126,7 +126,14 @@ module.exports = {
     User.find({phone: opts.phone}).exec(function (err, result) {
       if (err) return cb(err);
       if (result != '') {
-        return cb('这个手机号已经注册过了')
+        for(x in result){
+          //没有openid的说明这是导入的数据，需要后续做匹配
+          if(result[x].openid){
+            return cb('这个手机号已经注册过了');
+          }
+          return cb(null, opts);
+        }
+
       }
       else {
         cb(null, opts);
