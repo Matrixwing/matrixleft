@@ -133,9 +133,8 @@ module.exports = {
           if(result[x].openid){
             return cb('这个手机号已经注册过了');
           }
-          return cb(null, opts);
         }
-
+        return cb(null, opts);
       }
       else {
         cb(null, opts);
