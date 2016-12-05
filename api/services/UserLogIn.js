@@ -308,18 +308,15 @@ module.exports = {
       User.isPhoneExisted(optPassedOn,function(err,phoneReslut){
         if(err) return cb(err);
         if(phoneReslut==''){
-          //服务员不光更新手机还更新身份证
-          //
           User.update({userID:opts.userID},{phone:opts.phone}).exec(function(err,result){
             if (err) return cb(err);
             cb(null,result);
           });
         }else {
           /**
-           *手机号存在，接下来判断是否有openid。有则表示手机号被占用。无则拉取用户信息
+           *手机号存在
            */
             //又有手机号又有openid，这个号码已经被注册过了
-          console.log(phoneReslut[0]);
           if(phoneReslut[0].openid){return cb('这手机已经被注册了');}
           else{//有手机号但没有openid。表示这是个我们导入的用户。更新到我们的数据库
             //更新信息
@@ -344,7 +341,7 @@ module.exports = {
                   console.log(phoneReslut[0].userID);
                   req.session.userID=phoneReslut[0].userID;
                   console.log(req.session.userID);
-                  cb(null,newuser)
+                  cb(null,newuser,'0001');           //0001表示前端需要获取这个服务员的信息之后再让用户填写或者修改
                 })
 
               })

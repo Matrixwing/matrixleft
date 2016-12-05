@@ -137,17 +137,20 @@ module.exports = {
     userID: req.session.userID||req.param('userID','')
   };
 
-
-
   if(opts.phone==''||opts.num==''||opts.userID=='') return res.send('{"msgNo":"9999","msgInfo":"参数错误"}');//还需要一个code参数
-  UserLogIn.bindingPhone(opts,req,function(err,result){
+  UserLogIn.bindingPhone(opts,req,function(err,result,stauts){
     if(err){
       sails.log.error(err);
       return res.send('{"msgNo":"9999","msgInfo":"'+err+'"}');
     }
+    if(stauts=='0001'){
+      var str = JSON.stringify(result) ;
+      result = util.format('{"msgNo":"0001","msgInfo":"验证成功"}');
+      return res.send(result);
+    }
     var str = JSON.stringify(result) ;
     result = util.format('{"msgNo":"0000","msgInfo":"验证成功"}');
-    res.send(result);
+    return res.send(result);
   });
 },
   //测试方法
