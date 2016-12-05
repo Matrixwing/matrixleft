@@ -126,6 +126,7 @@ module.exports = {
     User.find({phone: opts.phone}).exec(function (err, result) {
       if (err) return cb(err);
       if (result != '') {
+        console.log(result);
         for(x in result){
           //没有openid的说明这是导入的数据，需要后续做匹配
           if(result[x].openid){
