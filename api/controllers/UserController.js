@@ -15,7 +15,7 @@ module.exports = {
     //获取参数
     var opts = {
       code : req.param('code',''),
-      role : req.param('state',1),
+      page : req.param('state',1),
     };
     // 1,从微信获取openid 2，根据openid查是否注册，若没有注册则拉取用户资料然后再写入
     async.waterfall([
@@ -35,13 +35,13 @@ module.exports = {
       }
 
       req.session.userID=result.userID;
-      req.session.role=result.role;
+     // req.session.role=result.role;
      // req.session.openid=result.openid;
-      if(opts.role==1)
+      if(opts.page==1)
         var redirectUrl = '/nurseList.html';
-      if (opts.role=='needlogin')
+      if (opts.page=='needlogin')
         var redirectUrl=req.session.page;
-      if(opts.role==2)
+      if(opts.page==2)
         var redirectUrl = '/nurseHome.html';
       console.log(redirectUrl);
       res.redirect(302,redirectUrl);

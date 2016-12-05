@@ -6,7 +6,7 @@
  * @docs        :: http://sailsjs.org/#!documentation/policies
  *
  */
-var wyhCon= require('../../config/wyhConfig').Weixin;
+var wyhCon=sails.config.weixin;
 
 module.exports = function(req, res, next) {
   // If `req.session.userID` 则表示已经登录过了

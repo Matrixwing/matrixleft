@@ -1,6 +1,6 @@
 var WXPay = require('weixin-pay');
 
-var weixinConfig = require('../../config/wyhConfig.js').Weixin;
+var weixinConfig = sails.config.weixin;
 var crypto=require('crypto');
 var async = require('async');
 var util = require('util');

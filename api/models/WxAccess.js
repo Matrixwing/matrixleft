@@ -7,7 +7,7 @@
 
 
 var qs = require('querystring');
-var wxConfig = require('../../config/wyhConfig.js').Weixin;
+var wxConfig = sails.config.weixin;
 var https = require('https');
 var util = require('util');
 module.exports = {

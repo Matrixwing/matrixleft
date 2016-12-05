@@ -56,7 +56,5 @@ process.chdir(__dirname);
 
   // Start server
   sails.lift(rc('sails'));
-  //启动服务器之后设置定时任务
-  //刷新微信公众的acesstoken
 
 })();

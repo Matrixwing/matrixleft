@@ -4,7 +4,7 @@
  * @description :: Server-side logic for managing Messages
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
-var weixinConfig = require('../../config/wyhConfig.js').Weixin;
+var weixinConfig = sails.config.weixin;
 var https = require('https');
 var request = require('request');
 var querystring = require('querystring');
