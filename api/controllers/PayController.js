@@ -11,14 +11,12 @@ module.exports = {
     var opts = {
       userID:req.session.userID,
      // totalfee:req.getParams('totalFee',null),
-      salary:parseInt(req.param('salary',1)),                         //将字符串转换成数字，流程完善之后有服务端传入数字
+      salary:parseInt(req.param('salary')),                         //将字符串转换成数字，流程完善之后有服务端传入数字
       servicePrice:parseInt(req.param('servicePrice',1)),       //将字符串转换成数字，流程完善之后有服务端传入数字
       body:'微元汇-测试支付',                                        //暂时写死
       outTradeNo:req.param('orderId',null),
       payUrl:req.param('payUrl',req.originalUrl)//当前支付网页的URL
     };
-
-
 
     ////-------------测试数据-----------------
     //var opts = {
