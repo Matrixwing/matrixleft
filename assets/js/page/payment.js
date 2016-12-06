@@ -63,7 +63,7 @@ function all_m(){
 		$('#servicePrice_div').hide();
 		commission=base.keepTwoDecimal(((salary*num)*0.006));
 		$('#all_m').html(salary*num+commission);
-		$('#commission_show').html(commission)
+		$('#commission_show').html(commission+'元')
 	}else{
 		$('#commission_div').hide();
 		$('#servicePrice_div').show();
@@ -95,10 +95,17 @@ $('#pay_sure').on('tap',function(){
 	};
 	var firstService = $('#st_time').attr('date');
 	var payUrl=window.location.href;
-	var link='/pay?orderId='+orderId+'&servicePrice='+servicePrice*num*100+'&salary='+salary*num*100+'&payUrl='+payUrl+'&firstService='+firstService+'&commission='+commission;
 	$.ajax({
-	    type: 'get',
-	    url: link,
+	    type: 'post',
+	    url: '/pay',
+	    data:{
+	    	'orderId':orderId,
+	    	'servicePrice':servicePrice,
+	    	'salary':salary,
+	    	'payUrl':payUrl,
+	    	'firstService':firstService,
+	    	'commission':commission
+	    },
 	    dataType: 'json',
 	    success: function(data) {
 	    	$('.tips').hide();
