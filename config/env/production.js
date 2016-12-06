@@ -47,11 +47,14 @@ module.exports = {
     'http%3a%2f%2fwyh.matrixwing.com%2fweixinLogIn&response_type=code&scope=snsapi_userinfo&state=needlogin#wechat_redirect',//通过微信的授权登录的页面
     //运营人员的openid，发送订单提醒时使用
     //目前发给whl，ljh，tj，老李四个人这固定的四人，后续需要发给 user.role == 4 即运营人员
-    adminOpenid : [{openid:'ovSs8w7mUy1j1SkeLBsmWpjVpkGM'},{openid:'ovSs8w80wR9UoqpP5oROHe84QcqM'},{openid:'ovSs8w4905MKwk0k57Kztf1YYxfw'},{openid:'ovSs8w_eUu_OrGgSXvpwPF6sY1c0'}]
+    adminOpenid : [{openid:'ovSs8w7mUy1j1SkeLBsmWpjVpkGM'},{openid:'ovSs8w80wR9UoqpP5oROHe84QcqM'},{openid:'ovSs8w4905MKwk0k57Kztf1YYxfw'},{openid:'ovSs8w_eUu_OrGgSXvpwPF6sY1c0'}],
     //appid : 'wx63ace09080406d46',
     //appsecret:'ef65f9b655db88606885742d5e2c41d7',
     //access_token:'',
     //notify_url : 'http://1k5x895985.iask.in/ok',
+    perPayTemp:'	aP5_YUw_lC4sJ8aqGpsQWGpA5DWdvIKQEkzyRTA2nKM',//待支付订单提醒
+    interTemp: '	4etMv_lqdemL4CTnOBSgZkm_lc0SmKZX-ycYh4ykm9s',//面试通知
+    newOrderTemp:'NZV86TEHiamtyXFeMK4Xdau4RmJalP4pnB_Xye2VfrY',//新订单通知
   }
 
 };

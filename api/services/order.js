@@ -3,30 +3,28 @@
 *
 *
 */
-
-
+//https://github.com/felixge/node-dateformat
+var dateformat = require('dateformat');
+var util = require('util');
 module.exports = {
 
   //下单
   order : function(opts,cb){
-    var str=""
-    //str+=Date.getFullYear()//年
-    //str+=Date.getMonth()+1//月 月比实际月份要少1
-    //str+=Date.getDate()//日
-    //str+=Date.getHours()//HH
-    //str+=Date.getMinutes()//MM
-    //str+=Date.getSeconds //SS
+    var now = new Date(); //现在时间
+    var expire=new Date(now.getTime()+10*24*60*60*1000); //过期时间
     var newOrder = {
       userID:opts.userID,
-      orderID:str+Math.random().toString().substr(2, 10),   //todo 生产订单号
+      orderID:dateformat(now,'yyyymmddHHMMss')+Math.random().toString().substr(2, 4),
       servantID:opts.servantID,
+      createTime:dateformat(now,'isoUtcDateTime'),
+      validTime:dateformat(expire,'isoUtcDateTime'),
       remark : JSON.stringify({
         apptTime:opts.apptTime,
         apptPlace:opts.apptPlace,
         tags:opts.tags
       }),
     }
-console.log(newOrder);
+
     Order.create(newOrder).exec(function(err,order){
       if(err) return cb(err)
       console.log('order',order);
@@ -34,7 +32,69 @@ console.log(newOrder);
         orderID:order.orderID
       };
 
-      //todo 发消息
+      async.parallel([
+        function(next){//发面试邀请
+          User.find({userID:order.servantID,role:2}).exec(function(err,servant){
+            if (err) return next(err);
+            if (servant!=''){
+              var msg = {
+                openid:servant[0].openid,
+                apptTime:opts.apptTime,
+                apptPlace:opts.apptPlace,
+                tags:opts.tags
+              }
+              console.log('发面试邀请',msg);
+              WxMessage.sendInterviewToSeverant(msg,function(err,result){
+                if(err) return next(err)
+                return next(null,result);
+              });
+            }
+          })
+        },
+        function(next){//发支付信息
+          var msg = {
+            openid:opts.openid,
+            orderID:order.orderID,
+            createTime:order.createTime,
+            validTime:order.validTime
+          }
+          console.log('发支付信息',msg);
+          WxMessage.sendPayMsgToUser(msg,function(err,result){
+            if(err) return next(err)
+            return next(null,result);
+          });
+        },
+
+        function(next){//发管理员通知
+          User.find({userID:order.userID}).exec(function(err,user){
+            console.log(user);
+            if(err) if(err) return next(err);
+            User.find({userID:order.servantID,role:2}).exec(function(err,servant){
+              servant=servant[0];
+              if (err) return next(err);
+              if (servant!=''){
+                var invMsg = util.format('雇主%s,%s 邀请服务员%s,%s于%s在%s面试',user.userName,user.phone,servant.userName,servant.phone,opts.apptTime,opts.apptPlace);
+                var msg = {
+                  apptTime:opts.apptTime,
+                  msg:invMsg,
+                  tags:opts.tags
+                }
+                console.log('发管理员通知',msg);
+                WxMessage.sendPayMsgToAdmin(msg,function(err,result){
+                  if(err) return next(err)
+                  return next(null,'result');
+                });
+              }
+
+            })
+          })
+        }
+      ],function(err,result){
+        console.log(err);
+        console.log(result);
+      })
+
+
 
       return cb(null,result)
     })
@@ -49,6 +109,7 @@ console.log(newOrder);
   //订单详情
   getOrderDetail :  function(opts,cb){
     Order.find(opts).exec(function(err,order){
+      //todo 订单过期 提示过期
       if(err) return cb(err);
       //console.log(err);
       //console.log(order);
@@ -65,4 +126,11 @@ console.log(newOrder);
       })
     })
   },
+
+
+  //服务员响应邀请
+  answerInvitation : function(opt,cb){
+
+  }
+
 }

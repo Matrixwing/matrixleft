@@ -36,7 +36,7 @@ module.exports = {
 
       req.session.userID=result.userID;
      // req.session.role=result.role;
-     // req.session.openid=result.openid;
+      req.session.openid=result.openid;
       if(opts.page==1)
         var redirectUrl = '/nurseList.html';
       if (opts.page=='needlogin')
