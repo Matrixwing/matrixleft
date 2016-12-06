@@ -149,8 +149,17 @@ $('#pay_sure').on('tap',function(){
 	            signType: paydata.signType,
 	            paySign: paydata.paySign,
 	            success: function (res) {
-	                
-	            }
+	                mui.toast("支付成功！");
+	                setTimeout(function(){
+	                	window.location.href='record.html'
+	                }, 2000);
+	            },
+	            cancel:function(res){  
+		            mui.toast("您取消了支付");
+		        },  
+		        fail:function(res){ 
+		        	 mui.toast("支付失败，请重试");
+		        } 
 	        });
 	    });
 	}
