@@ -206,15 +206,14 @@
 			    }
 			});
 		})
-
 		$('#shi').on('tap',function(){
 			mui.toast('已通过小元实名认证')
 		})
 		$('#jian').on('tap',function(){
-			mui.toast('已通过小元体检认证')
+			//mui.toast('已通过小元体检认证')
 		})
 
-/*yuyue*/
+/*order*/
 	var local = new mui.PopPicker();
  	local.setData([
  		{value:'1',text:'翔宇苑'},
@@ -235,7 +234,7 @@
 	if (t.getHours()>19) {
 		var str = t.valueOf() + 1*24*60*60*1000
 	};*/
-	var time = new mui.DtPicker({
+	/*var time = new mui.DtPicker({
 	    type: "datetime",//设置日历初始视图模式 
 	    beginDate: new Date(),//设置开始日期
 	    "customData": {
@@ -252,33 +251,112 @@
             { value: "18", text: "18" },
         ]
     } 
+	});*/
+	var time = new mui.DtPicker({
+	    type: "datetime",
+	    beginDate: new Date()
 	});
 	$('#time').on('tap', function(event) {
 		var _this = $(this);
 		time.show(function(items) {
 			var t = items.y.text+'-'+items.m.text+'-'+items.d.text+'&nbsp;'+items.h.text+'时'+items.i.text+'分';
+			var d = items.y.text+'-'+items.m.text+'-'+items.d.text+' '+items.h.text+':'+items.i.text;
 			$('#time').html(t)
+			$('#time').attr('d',d)
 		});
 	});
 	var h=base.getCookie('needs');
 	console.log(h);
-	h = eval('(' + h + ')');
-	var needs_html=[];
-	needs_html.push(h[1].tagName+h[1].value+'人，'+h[2].tagName+h[2].value+'平米，')
-	for(var i = 3;i<h.length;i++){
-		if (i==(h.length-1)) {
-			if (h[i].value==1) {
-				needs_html.push(h[i].tagName)
+	if (h) {
+		$('.needs').show();
+		h = eval('(' + h + ')');
+		var needs_html=[];
+		needs_html.push(h[1].tagName+h[1].value+'人、'+h[2].tagName+h[2].value+'平米、')
+		for(var i = 3;i<h.length;i++){
+			if (i==(h.length-1)) {
+				if (h[i].value==1) {
+					needs_html.push(h[i].tagName)
+				}else{
+					needs_html.push('两位'+h[i].tagName)
+				};
 			}else{
-				needs_html.push('两位'+h[i].tagName)
+				if (h[i].value==1) {
+					needs_html.push(h[i].tagName+'、')
+				}else{
+					needs_html.push('两位'+h[i].tagName+'、')
+				};
 			};
-		}else{
-			if (h[i].value==1) {
-				needs_html.push(h[i].tagName+'，')
-			}else{
-				needs_html.push('两位'+h[i].tagName+'，')
-			};
+		}
+		needs_html = needs_html.join('')
+		$('.needs p').html(needs_html)
+	};
+	
+	$('#order').on('tap',function(){
+		var servantID = base.getQueryString('userID');
+		var tags = base.getCookie('needs');
+		var apptTime = $('#time').attr('d');
+		var apptPlace = $('#local').html();
+		if (apptPlace == '选择地点') {
+			mui.toast('请选择面试地点');
+			return;
 		};
-	}
-	needs_html = needs_html.join('')
-	$('.needs p').html(needs_html)
+		if (!apptTime) {
+			mui.toast('请选择面试时间');
+			return;
+		};
+		mui('#order').button('loading');
+		$.ajax({
+		    type: 'post',
+		    url: '/order',
+		    data: {
+		    	'servantID':servantID,
+		    	'tags':tags,
+		    	'apptTime':apptTime,
+		    	'apptPlace':apptPlace
+		    },
+		    dataType: 'json',
+		    success: function(data) {
+		    	if (data.msgNo==0000) {
+		        	mui('#reg').button('reset');
+					$('#order').attr('href','#pay')
+		    	}else{
+		    		mui.toast(data.msgInfo);
+		    	};
+		    },
+		    error: function(xhr, textStatus, errorThrown) {
+		    	if (xhr.status == 401) {
+		    		var href =eval('(' + xhr.responseText + ')');
+		    		window.location.href=href.loginPage;
+		    	}
+		    }
+		});
+	})
+
+	/*pay*/
+
+	var st_time = new mui.DtPicker({
+	    type: "date",
+	    beginDate: new Date()
+	});
+	$('#st_time').on('tap', function(event) {
+		var _this = $(this);
+		st_time.show(function(items) {
+			var t = items.y.text+'年'+items.m.text+'月'+items.d.text+'日';
+			$('#st_time').html(t)
+		});
+	});
+	var m_num = new mui.PopPicker();
+ 	m_num.setData([
+ 		{value:'1',text:'1月-无优惠'},
+ 		{value:'3',text:'3月-立减10元'},
+ 		{value:'6',text:'6月-立减15元'},
+ 		{value:'12',text:'12月-立减100元'},
+	]);
+	$('#m_num').on('tap', function(event) {
+		var _this = $(this);
+		m_num.show(function(items) {
+			_this.html(items[0].text);
+			_this.attr('num',items[0].value);
+			
+		});
+	});

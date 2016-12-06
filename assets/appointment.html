@@ -30,7 +30,7 @@
 				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
 					<span class="mui-icon mui-icon-left-nav"></span>
 				</button>
-				<h1 class="mui-center mui-title" id="name_card">名片</h1>
+				<h1 class="mui-center mui-title" id="name_card">预约</h1>
 			</div>
 			<div class="mui-page-content">
 				<div class="mui-scroll-wrapper" id="returnup">
@@ -40,22 +40,17 @@
 								<img src="images/timg.jpg" id="avatarUrl">
 							</div>
 							<div class="mui-pull-right mui-col-xs-7 ">
-								<!-- <span class="mui-icon iconfont icon-personalcenter mui-pull-left"></span><p id="userName">--</p> -->
 								<div  class="pop">
 									<p id="userName">--</p>
 									<p id="expectSalary"></p>
-									<!-- <span class="mui-icon iconfont icon-shouhuodizhi mui-pull-left"></span><p id="serveCity">--</p> -->
 									<div class="kbd" id="shi" style="display:none"><img src="images/shi.png"></div>
-									<div class="kbd" id="jian" style="display:none"><img src="images/jian.png"></div>
+									<a href="#tj"><div class="kbd" id="jian" style="display:none"><img src="images/jian.png"></div></a>
 									<div class="kbd" id="ping" style="display:none"><img src="images/ping.png"></div>
 								</div>
-								<!-- <span class="mui-icon iconfont icon-mingpian mui-pull-left"></span><p id="IDCard">--</p> -->
-								<!-- <span class="mui-icon iconfont icon-tishi mui-pull-left">
-								<span class="mui-icon iconfont icon-shouhuodizhi mui-pull-left"></span> -->
 							</div>
 						</div>
-						<div class="needs">
-							<span>需求清单：</span><p>60平米、5人、1位不能自理老人、1位小于1岁小孩。</p>
+						<div class="needs" style="display:none">
+							<span>需求清单：</span><p></p>
 						</div>
 						<div class="mui-row card_info">
 							<ul class="mui-table-view" id="getUserCard">
@@ -68,39 +63,24 @@
 							 	<a href="javascript:;" class="mui-pull-right" id="card_up"><span class="mui-icon iconfont icon-xiangxiajiantou mui-pull-left"></span></a>
 							 	<a href="javascript:;" class="mui-pull-right" id="card_down"  style="display:none"><span class="mui-icon iconfont icon-xiangshangjiantou mui-pull-left"></span></a>
 							 	<a href="#cer" class="mui-pull-right" style="display:none"><span class="mui-icon iconfont icon-zhengshu mui-pull-left"></span></a>
-								<!-- <a href="#rated" class="mui-pull-right"><span class="mui-icon iconfont icon-pingjia1 mui-pull-left"></span></a> -->
 								<input type="hidden" id="IDCard" />
 							</div>
 						</div>
 						<form class="mui-input-group appointment">
 							<div class="mui-input-row">
 								<label>面试地点</label>
-								<div class="mui-row s_selcet" id="local" type="button" tagid="0">选择地点</div>
+								<div class="mui-row s_selcet" id="local" type="button">选择地点</div>
 								<span class="mui-icon mui-icon-arrowdown mui-pull-right select_icon"></span>
 							</div>
 							<div class="mui-input-row">
 								<label>面试时间</label>
-								<div class="mui-row s_selcet" id="time" type="button" tagid="0">选择时间</div>
+								<div class="mui-row s_selcet" id="time" type="button">选择时间</div>
 								<span class="mui-icon mui-icon-arrowdown mui-pull-right select_icon"></span>
 							</div>
 						</form>
 						<div class="mui-content-padded">
-							<a id="next" href="#pay" class="mui-btn mui-btn-primary" data-loading-text="下一步">下一步</a>
+							<a id="order" class="mui-btn mui-btn-primary" data-loading-text="下一步">下一步</a>
 						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div id="pay" class="mui-page">
-			<div class="mui-navbar-inner mui-bar mui-bar-nav">
-				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
-					<span class="mui-icon mui-icon-left-nav"></span>
-				</button>
-				<h1 class="mui-center mui-title" id="cer_title">支付</h1>
-			</div>
-			<div class="mui-page-content">
-				<div class="mui-scroll-wrapper">
-					<div class="mui-scroll" id="card_main">
 					</div>
 				</div>
 			</div>
@@ -119,16 +99,113 @@
 				</div>
 			</div>
 		</div>
-		<div id="jian" class="mui-page">
+		<div id="tj" class="mui-page">
 			<div class="mui-navbar-inner mui-bar mui-bar-nav">
 				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
 					<span class="mui-icon mui-icon-left-nav"></span>
 				</button>
-				<h1 class="mui-center mui-title" id="cer_title">证书</h1>
+				<h1 class="mui-center mui-title" id="cer_title">体检信息</h1>
 			</div>
 			<div class="mui-page-content">
 				<div class="mui-scroll-wrapper">
-					<div class="mui-scroll" id="card_main">
+					<div class="mui-scroll" id="">
+						<div id="slider" class="mui-slider" >
+							<div class="mui-slider-group mui-slider-loop">
+								<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+								<div class="mui-slider-item mui-slider-item-duplicate">
+									<a href="#">
+										<img src="../images/yuantiao.jpg">
+										<p class="mui-slider-title">体检信息图</p>
+									</a>
+								</div>
+								<!-- 第一张 -->
+								<div class="mui-slider-item">
+									<a href="#">
+										<img src="../images/shuijiao.jpg">
+										<p class="mui-slider-title">体检信息图</p>
+									</a>
+								</div>
+								<!-- 第二张 -->
+								<div class="mui-slider-item">
+									<a href="#">
+										<img src="../images/muwu.jpg">
+										<p class="mui-slider-title">体检信息图</p>
+									</a>
+								</div>
+								<!-- 第三张 -->
+								<div class="mui-slider-item">
+									<a href="#">
+										<img src="../images/cbd.jpg">
+										<p class="mui-slider-title">体检信息图</p>
+									</a>
+								</div>
+								<!-- 第四张 -->
+								<div class="mui-slider-item">
+									<a href="#">
+										<img src="../images/yuantiao.jpg">
+										<p class="mui-slider-title">体检信息图</p>
+									</a>
+								</div>
+								<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+								<div class="mui-slider-item mui-slider-item-duplicate">
+									<a href="#">
+										<img src="../images/shuijiao.jpg">
+										<p class="mui-slider-title">体检信息图</p>
+									</a>
+								</div>
+							</div>
+							<div class="mui-slider-indicator mui-text-right">
+								<div class="mui-indicator mui-active"></div>
+								<div class="mui-indicator"></div>
+								<div class="mui-indicator"></div>
+								<div class="mui-indicator"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="pay" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>
+				</button>
+				<h1 class="mui-center mui-title" id="cer_title">支付</h1>
+			</div>
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll" id="pay_main">
+						<div class="mui-row orderInfo">
+							<div class="name mui-pull-left">姓名：王大新</div>
+							<div class="mui-pull-right">订单：89757</div>
+						</div>
+						<form class="mui-input-group appointment">
+							<div class="mui-input-row">
+								<label>月薪</label>
+								<input type="number" class="mui-input" placeholder="请输入服务员月薪">
+							</div>
+							<div class="mui-input-row">
+								<label>首次服务</label>
+								<div class="mui-row s_selcet" id="st_time" type="button" tagid="0">选择首次服务时间</div>
+								<span class="mui-icon mui-icon-arrowdown mui-pull-right select_icon"></span>
+							</div>
+							<div class="mui-input-row">
+								<label>薪资月数</label>
+								<div class="mui-row s_selcet" id="m_num" type="button" tagid="0">选择支付月数</div>
+								<span class="mui-icon mui-icon-arrowdown mui-pull-right select_icon"></span>
+							</div>
+						</form>
+						<div class="serviceCharge">
+							<label>选择服务</label>
+							<div class="c_charge mui-row">
+								<div class="scharge">基本保障<br>68元/月</div>
+								<div class="scharge">基本保障<br>118元/月</div>
+							</div>
+							<div class="c_text mui-row">
+								 基础保险，1年服务员的培训学习和督导，免费工资托管服务
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
