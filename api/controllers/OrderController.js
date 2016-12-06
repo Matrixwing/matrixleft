@@ -36,9 +36,8 @@ module.exports = {
       console.log(err);
       console.log(result);
       if (err) return res.send(500,'{"msgNo":"9999","msgInfo":"服务出错，请您稍后再试","data":'+JSON.stringify(err) +'}');
-      if (result=='') return res.send(404,'{"msgNo":"8888","msgInfo":"对不起，没有找到您要信息"}');
       var str = JSON.stringify(result) ;
-      result = util.format('{"msgNo":"0000","msgInfo":"查询到了信息","data":[%s]}',str);
+      result = util.format('{"msgNo":"0000","msgInfo":"预约成功","data":%s}',str);
       res.send(result);
     })
   },

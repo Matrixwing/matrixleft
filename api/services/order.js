@@ -29,7 +29,11 @@ module.exports = {
 console.log(newOrder);
     Order.create(newOrder).exec(function(err,order){
       if(err) return cb(err)
-      return cb(null,order)
+      console.log('order',order);
+      var result={
+        orderID:order.orderID
+      };
+      return cb(null,result)
     })
 
   },
