@@ -18,7 +18,7 @@ module.exports = {
     //str+=Date.getSeconds //SS
     var newOrder = {
       userID:opts.userID,
-      orderID:str+Math.random().toString().substr(2, 10),
+      orderID:str+Math.random().toString().substr(2, 10),   //todo 生产订单号
       servantID:opts.servantID,
       remark : JSON.stringify({
         apptTime:opts.apptTime,
@@ -33,6 +33,9 @@ console.log(newOrder);
       var result={
         orderID:order.orderID
       };
+
+      //todo 发消息
+
       return cb(null,result)
     })
 
@@ -45,6 +48,19 @@ console.log(newOrder);
 
   //订单详情
   getOrderDetail :  function(opts,cb){
-
+    Order.find(opts).exec(function(err,order){
+      if(err) return cb(err);
+      console.log(err);
+      console.log(order);
+      User.find({userID:opts.servantID}).exec(function(err,servant) {
+        if(err) return cb(err);
+        var orderInfo = {
+          servantName:servant[0].userName,
+          expectSalary:servant[0].expectSalary,
+          orderID:order[0].orderID,
+        };
+        cb(null,orderInfo);
+      })
+    })
   },
 }

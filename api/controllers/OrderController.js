@@ -12,11 +12,11 @@ module.exports = {
     //------------------------------
     var opts = {
       userID:req.session.userID,
-      servantID:req.getParams('servantID'),
-      tags : req.getParams('tags'),
+      servantID:req.param('servantID'),
+      tags :req.param('tags'),
       // totalfee:req.getParams('totalFee',null),
-      apptTime:req.getParams('apptTime'), //预约时间
-      apptPlace:req.getParams('apptPlace'),
+      apptTime:req.param('apptTime'), //预约时间
+      apptPlace:req.param('apptPlace'),
     };
     //--------------------------------------
 
@@ -35,7 +35,7 @@ module.exports = {
     order.order(opts,function(err,result){
       console.log(err);
       console.log(result);
-      if (err) return res.send(500,'{"msgNo":"9999","msgInfo":"服务出错，请您稍后再试","data":'+JSON.stringify(err) +'}');
+      if (err) return res.send('{"msgNo":"9999","msgInfo":"服务出错，请您稍后再试","data":'+JSON.stringify(err) +'}');
       var str = JSON.stringify(result) ;
       result = util.format('{"msgNo":"0000","msgInfo":"预约成功","data":%s}',str);
       res.send(result);
@@ -45,7 +45,7 @@ module.exports = {
   getOrderList : function (req,res) {
     var opts = {
       userID : req.session.userID,
-      status : req.getParams('status','100'),//完成交易：0 等待交易：1 取消交易：2
+      status : req.param('status','100'),//完成交易：0 等待交易：1 取消交易：2
     };
 
   },
@@ -53,8 +53,18 @@ module.exports = {
   getOrderDetail : function (req,res){
     var opts = {
       userID : req.session.userID,
-      orderID : req.getParams('orderID')
+      orderID : req.param('orderID')||'4020045553'
     };
+
+    //todo 参数处理
+
+    order.getOrderDetail(opts,function(err,result){
+      if (err) return res.send('{"msgNo":"9999","msgInfo":"服务出错，请您稍后再试","data":' + JSON.stringify(err) + '}');
+      var str = JSON.stringify(result);
+      result = util.format('{"msgNo":"0000","msgInfo":"查询成功","data":%s}', str);
+      res.send(result);
+    });
+
   }
 };
 

@@ -40,7 +40,7 @@ module.exports = {
       if(opts.page==1)
         var redirectUrl = '/nurseList.html';
       if (opts.page=='needlogin')
-        var redirectUrl=req.session.page;
+        var redirectUrl=req.session.page||'/nurseList.html';
       if(opts.page==2)
         var redirectUrl = '/nurseHome.html';
       console.log(redirectUrl);
