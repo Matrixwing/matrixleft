@@ -10,7 +10,7 @@ var wyhCon=sails.config.weixin;
 
 module.exports = function(req, res, next) {
   // If `req.session.userID` 则表示已经登录过了
-  console.log('isAuthenticated',req.session.userID);
+  //console.log('isAuthenticated',req.session.userID);
   req.session.page=req.headers['referer'];
   if (req.session.userID){
     return next();
@@ -22,5 +22,7 @@ module.exports = function(req, res, next) {
 
   }
 
-  return res.redirect('https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8306afd398ab31e5&redirect_uri=http%3a%2f%2fwyh.matrixwing.com%2fweixinLogIn&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect');
+  return res.redirect(wyhCon.loginPage);
+
+  // return res.redirect('https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8306afd398ab31e5&redirect_uri=http%3a%2f%2fwyh.matrixwing.com%2fweixinLogIn&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect');
 };
