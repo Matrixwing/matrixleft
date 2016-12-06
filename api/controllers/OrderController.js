@@ -47,15 +47,13 @@ module.exports = {
       userID : req.session.userID,
       status : req.param('status','100'),//完成交易：0 等待交易：1 取消交易：2
     };
-
   },
 
   getOrderDetail : function (req,res){
     var opts = {
       userID : req.session.userID,
-      orderID : req.param('orderID')||'4020045553'
+      orderID : req.param('orderID')
     };
-
     //todo 参数处理
 
     order.getOrderDetail(opts,function(err,result){

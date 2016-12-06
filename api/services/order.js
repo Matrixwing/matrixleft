@@ -50,9 +50,11 @@ console.log(newOrder);
   getOrderDetail :  function(opts,cb){
     Order.find(opts).exec(function(err,order){
       if(err) return cb(err);
-      console.log(err);
-      console.log(order);
-      User.find({userID:opts.servantID}).exec(function(err,servant) {
+      //console.log(err);
+      //console.log(order);
+      User.find({userID:order[0].servantID}).exec(function(err,servant) {
+        //console.log(err);
+        //console.log(servant);
         if(err) return cb(err);
         var orderInfo = {
           servantName:servant[0].userName,
