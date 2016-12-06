@@ -87,12 +87,12 @@ $('#pay_sure').on('tap',function(){
 	var orderId = base.getQueryString('orderID');
 	var salary = $('#salary').val();
 	var commission=0;
+	var num = $('#m_num').attr('num');
 	var servicePrice = $('.oncharge').attr('servicePrice');
 	if (!servicePrice) {
 		servicePrice=0;
-		commission=$('#all_m').html()*0.006;
+		commission=base.keepTwoDecimal(salary*num*0.006);
 	};
-	var num = $('#m_num').attr('num');
 	var firstService = $('#st_time').attr('date');
 	var payUrl=window.location.href;
 	var link='/pay?orderId='+orderId+'&servicePrice='+servicePrice*num*100+'&salary='+salary*num*100+'&payUrl='+payUrl+'&firstService='+firstService+'&commission='+commission;
