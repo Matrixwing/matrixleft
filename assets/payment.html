@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>微元汇</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="styles/mui.min.css">
+		<link rel="stylesheet" href="styles/mui.picker.min.css">
+		<link rel="stylesheet" href="//at.alicdn.com/t/font_y77vc7658xsz6w29.css">
+		<link rel="stylesheet" type="text/css" href="styles/main.css"/>
+		<link rel="stylesheet" type="text/css" href="styles/pages/payment.css"/>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>
+				</button>
+			<h1 class="mui-title">支付</h1>
+		</header>
+		<div class="mui-content">
+			<div class="mui-row orderInfo">
+					<div class="name mui-pull-left" id="name"></div>
+					<div class="mui-pull-right" id="orderID"></div>
+				</div>
+				<form class="mui-input-group appointment">
+					<div class="mui-input-row">
+						<label>月薪：</label>
+						<input type="number" class="mui-input" placeholder="请输入服务员月薪" id="salary">
+					</div>
+					<div class="mui-input-row">
+						<label>首次服务：</label>
+						<div class="mui-row s_selcet" id="st_time"></div>
+						<span class="mui-icon mui-icon-arrowdown mui-pull-right select_icon"></span>
+					</div>
+					<div class="mui-input-row">
+						<label>薪资月数：</label>
+						<div class="mui-row s_selcet" id="m_num" num='1'>1月-无优惠</div>
+						<span class="mui-icon mui-icon-arrowdown mui-pull-right select_icon"></span>
+					</div>
+				</form>
+				<div class="serviceCharge">
+					<label>选择服务</label>
+					<div class="c_charge mui-row">
+						<div class="scharge" servicePrice = '68'>基本保障<br>68元/月</div>
+						<div class="scharge oncharge" servicePrice = '118'>基本保障<br>118元/月</div>
+					</div>
+					<div class="c_text mui-row">
+						 基础保险，1年服务员的培训学习和督导，免费工资托管服务
+					</div>
+				</div>
+				<div class="pay_div mui-row">
+					<span class="mui-icon iconfont icon-weixinzhifu mui-pull-left"></span>
+					<div class="mui-pull-left">微信支付</div>
+					<span class="mui-icon iconfont icon-gouxuan mui-pull-right"></span>
+				</div>
+				<div class="details mui-row ">
+					<div class="mui-input-row" id="showDeatils">
+						<label>您需支付：<span id='all_m'></span>元</label>
+						<span class="mui-icon mui-icon-arrowdown mui-pull-right select_icon"></span>
+					</div>
+					<form class="mui-input-group deatilsInfo">
+						<div class="mui-input-row">
+							<label>保姆月薪：</label>
+							<div class="mui-row s_selcet" id="salary_show"></div>
+						</div>
+						<div class="mui-input-row" id="servicePrice_div">
+							<label>服务费用：</label>
+							<div class="mui-row s_selcet" id="servicePrice_show"></div>
+						</div>
+						<div class="mui-input-row" style="display:none" id="commission_div">
+							<label>手续费：</label>
+							<div class="mui-row s_selcet" id="commission_show"></div>
+						</div>
+					</form>
+				</div>
+				<div class="tag_over  mui-pull-left">
+					<div id="reset" class="">稍后支付</div>
+					<div id="pay_sure" class="">支付</div>
+				</div>
+		</div>
+	</body>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/mui/mui.min.js"></script>
+	<script src="js/mui/mui.picker.min.js "></script>
+	<script src="js/base.js"></script>
+	<script src="js/page/payment.js"></script>
+	<script src="https://s4.cnzz.com/z_stat.php?id=1260604409&web_id=1260604409" language="JavaScript"></script>
+</html>

@@ -135,40 +135,6 @@ img{width: 100%}
     top: 5px;
 }
 #slider{margin-top: 10px;}
-.orderInfo,.serviceCharge{
-    width: 100%;
-    margin-top: 5px;
-    padding: 10px 15px;
-    background-color: #fff;
-    font-size: 14px;
-    border-bottom: 1px solid #e8ebf0
-}
-.appointment .mui-input{
-    width: 72% !important
-}
-.mui-input-group:after{
-    background-color: #e8ebf0;
-}
-.c_charge{
-    margin: 10px auto;
-    text-align: center;
-}
-.c_charge .scharge{
-    width: 100px;
-    color: #333;
-    background-color: #f0f2f5;
-    border: 1px solid #f0f2f5;
-    border-radius: 5px;
-    text-align: center;
-    padding: 5px 10px;
-    display: inline-block;
-}
-.c_charge .scharge:first-child{
-    margin-right: 5%;
-}
-.serviceCharge {
-    margin: 0 auto;
-}
-.serviceCharge label{
-    color: #e3457d
+.details_info{
+    margin-bottom: 45px;
 }

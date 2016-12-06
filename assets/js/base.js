@@ -205,5 +205,10 @@ var base = {
         exdate.setDate(exdate.getDate()+expiredays)
         document.cookie=c_name+ "=" +escape(value)+
         ((expiredays==null) ? "" : ";expires="+exdate.toGMTString())
+    },
+    keepTwoDecimal:function(num){
+        var result = parseFloat(num);
+        result = Math.round(num * 100) / 100;
+        return result;
     }
 }

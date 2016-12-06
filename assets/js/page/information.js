@@ -183,6 +183,7 @@ $('#reg').on('tap',function(){
 	$.ajax({
 	    type: 'get',
 	    url: '/bindingPhone',
+	    async:false,
 	    data: {'phone':phone,'num':num},
 	    dataType: 'json',
 	    success: function(data) {
@@ -202,21 +203,22 @@ $('#reg').on('tap',function(){
 	});
 })
 
-$(document).ready(function(){
-	var hy = new mui.PopPicker();
- 	hy.setData([
- 		{value:'0',text:'已婚'},
- 		{value:'1',text:'未婚'},
- 		{value:'2',text:'保密'}
-	]);
+
+	
 	$('#marriage').on('tap', function(event) {
+		var hy = new mui.PopPicker();
+	 	hy.setData([
+	 		{value:'0',text:'已婚'},
+	 		{value:'1',text:'未婚'},
+	 		{value:'2',text:'保密'}
+		]);
 		var _this = $(this);
 		hy.show(function(items) {
 			_this.html(items[0].text);
 			_this.attr('tagID',items[0].value);
 		});
 	});
-})
+
 
 /*link*/
 $('#user_card').on('tap',function(){

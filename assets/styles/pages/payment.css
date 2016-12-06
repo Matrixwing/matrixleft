@@ -1,0 +1,119 @@
+.appointment{margin-top: 5px;}
+.appointment .select_icon {
+    line-height: 40px;
+    margin: 0 15px 0 0 !important;
+    position: relative;
+    top: -40px;
+    color: #ccc;
+    font-size: 20px;
+}
+.appointment label{
+    line-height: 1
+}
+.s_selcet {
+    font-size: 14px;
+    line-height: 40px;
+    float: right;
+    width: 72%;
+}
+.appointment label{font-size: 14px;width: 28%}
+.appointment .mui-input-row label{padding: 13px 15px;line-height: 14px;}
+.orderInfo,.serviceCharge,.pay_div,.details{
+    width: 100%;
+    margin-top: 5px;
+    padding: 10px 15px;
+    background-color: #fff;
+    font-size: 14px;
+    border-bottom: 1px solid #e8ebf0
+}
+.appointment .mui-input{
+    width: 72% !important
+}
+.mui-input-group:after{
+    background-color: #e8ebf0;
+}
+.c_charge{
+    margin: 10px auto;
+    text-align: center;
+}
+.c_charge .scharge{
+    width: 100px;
+    color: #333;
+    background-color: #f0f2f5;
+    border: 1px solid #f0f2f5;
+    border-radius: 5px;
+    text-align: center;
+    padding: 5px 10px;
+    display: inline-block;
+}
+.c_charge .scharge:first-child{
+    margin-right: 5%;
+}
+.oncharge{
+	background-color: #ff7043 !important;
+	color: #fff !important;
+}
+.serviceCharge {
+    margin: 0 auto;
+}
+.serviceCharge label{
+    color: #e3457d
+}
+.pay_div{
+	line-height: 40px;
+	font-size: 16px;
+	color: #333;
+}
+.icon-weixinzhifu{
+	color: #00bb0c;
+	font-size: 40px;
+	line-height: 40px;
+	margin-right: 10px;
+}
+.icon-gouxuan{
+	color: #ff7043;
+	font-size: 24px;
+	line-height: 40px;
+}
+.tag_over {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+}
+.tag_over div {
+    width: 50%;
+    float: left;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    font-size: 16px;
+}
+#reset {
+    background-color: #D4D4D4;
+    color: #6D6D6D;
+}
+#pay_sure {
+    background-color: #e3457d;
+    color: #fff;
+}
+.details {margin-bottom: 54px;}
+.details label{
+	padding: 11px 0px;
+	width: auto !important
+}
+.details .s_selcet{
+	width: auto;
+}
+.details .mui-icon-arrowdown{
+	position: relative;
+	top: 5px;
+}
+.deatilsInfo{
+	display: none
+}
+#all_m{
+    color: #e3457d;
+    font-size: 16px;
+}

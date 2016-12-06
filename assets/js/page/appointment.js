@@ -46,8 +46,10 @@
 					}else{
 						$('#userName').html('我是'+data.data.userName)
 					}
+					$('#name').val(data.data.userName)
 					if (data.data.expectSalary) {
 						$('#expectSalary').html('期望薪资：'+data.data.expectSalary+'元')
+						$('#expectSalary_in').val(data.data.expectSalary)
 					}
 					if (data.data.serviceCity) {
 						$('#serveCity').html('服务于'+data.data.serviceCity)
@@ -214,12 +216,13 @@
 		})
 
 /*order*/
-	var local = new mui.PopPicker();
- 	local.setData([
- 		{value:'1',text:'翔宇苑'},
- 		{value:'2',text:'东苑'}
-	]);
+	
 	$('#local').on('tap', function(event) {
+		var local = new mui.PopPicker();
+	 	local.setData([
+	 		{value:'1',text:'翔宇苑'},
+	 		{value:'2',text:'东苑'}
+		]);
 		var _this = $(this);
 		local.show(function(items) {
 			_this.html(items[0].text);
@@ -317,8 +320,11 @@
 		    dataType: 'json',
 		    success: function(data) {
 		    	if (data.msgNo==0000) {
-		        	mui('#reg').button('reset');
-					$('#order').attr('href','#pay')
+		        	mui('#order').button('reset');
+		        	var name = encodeURI(encodeURI($('#name').val()));
+		        	var orderID = data.data.orderID;
+		        	var expectSalary = $('#expectSalary_in').val();
+		        	window.location.href='payment.html?name='+name+'&orderID='+orderID+'&expectSalary='+expectSalary;
 		    	}else{
 		    		mui.toast(data.msgInfo);
 		    	};
@@ -345,14 +351,15 @@
 			$('#st_time').html(t)
 		});
 	});
-	var m_num = new mui.PopPicker();
- 	m_num.setData([
- 		{value:'1',text:'1月-无优惠'},
- 		{value:'3',text:'3月-立减10元'},
- 		{value:'6',text:'6月-立减15元'},
- 		{value:'12',text:'12月-立减100元'},
-	]);
+	
 	$('#m_num').on('tap', function(event) {
+		var m_num = new mui.PopPicker();
+	 	m_num.setData([
+	 		{value:'1',text:'1月-无优惠'},
+	 		{value:'3',text:'3月-立减10元'},
+	 		{value:'6',text:'6月-立减15元'},
+	 		{value:'12',text:'12月-立减100元'},
+		]);
 		var _this = $(this);
 		m_num.show(function(items) {
 			_this.html(items[0].text);
