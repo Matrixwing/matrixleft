@@ -19,6 +19,7 @@ module.exports = {
    */
   getBrandWCPay : function (opts,cb) {
     //todo spbill_create_ip，detail
+    console.log(opts);
     wxpay.getBrandWCPayRequestParams({
       openid:opts.openid,
       body:opts.body,

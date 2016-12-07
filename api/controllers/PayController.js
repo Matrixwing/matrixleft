@@ -11,7 +11,7 @@ module.exports = {
       userID:req.session.userID,
       outTradeNo:req.param('orderId',null),
       servPriceID:parseInt(req.param('servicePriceID',0)),       //将字符串转换成数字，流程完善之后有服务端传入数字
-      //servPriceID:1,       //将字符串转换成数字，流程完善之后有服务端传入数字
+      //servPriceID:1,                    //将字符串转换成数字，流程完善之后有服务端传入数字
       salary:1,                         //将字符串转换成数字，流程完善之后有服务端传入数字
       commission:parseInt(req.param('commission',0)),
       firstService:parseInt(req.param('firstService')),
@@ -20,6 +20,7 @@ module.exports = {
       body:'微元汇-家政服务',                                        //暂时写死
       payUrl:req.param('payUrl',req.headers['referer'])//当前支付网页的URL
     };
+
 
     ////-------------测试数据-----------------
     //var opts = {
@@ -48,8 +49,6 @@ module.exports = {
   },
 
   notice : function(req,res){
-    console.log(req);
-    console.log(req.body);
     console.log(req.param('return_code'));
     console.log(req.param('return_msg'));
     //WxMessage.sendPayMsgToUser()
