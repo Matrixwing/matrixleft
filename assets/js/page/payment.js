@@ -108,12 +108,6 @@ function all_m(){
 }
 
 $('#pay_sure').on('tap',function(){
-	/*if (!$('#st_time').attr('date')) {
-		mui.toast('请选择首次服务日期');
-		return;
-	};*//*
-	mui('#pay_sure').button('reset');
-	return;*/
 	all_m();
 	var orderId = base.getQueryString('orderID');
 	var salary = $('#salary').val();
@@ -136,11 +130,11 @@ $('#pay_sure').on('tap',function(){
 	    data:{
 	    	'orderId':orderId,
 	    	'servicePriceID':servicePriceID,
-	    	'salary':salary,
+	    	'salary':salary*100,
 	    	'payUrl':payUrl,
 	    	'firstService':firstService,
 	    	'month':num,
-	    	'commission':commission
+	    	'commission':commission*100
 	    },
 	    dataType: 'json',
 	    success: function(data) {
