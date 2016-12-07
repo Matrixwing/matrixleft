@@ -23,17 +23,16 @@ module.exports.http = {
 
   middleware: {
 
+    rawParser: function(req, res, next) {
+      switch(req.headers['content-type']) {
+        case 'text/xml':
+          require('body-parser').raw({ type: 'text/xml' })(req, res, next);
+          break;
+        default :
+          next();
+      }
+    },
 
-    //bodyParser: function() {
-    //  var xmlParser = require('express-xml-bodyparser')();
-    //  var bodyParser = require('body-parser')().json();
-    //  return function(req, res, next) {
-    //    if (req.headers && (req.headers['content-type'] == 'text/xml' || req.headers['content-type'] == 'application/xml')) {
-    //      return xmlParser(req, res, next);
-    //    }
-    //    return bodyParser(req, res, next);
-    //  };
-    //},
   /***************************************************************************
   *                                                                          *
   * The order in which middleware should be run for HTTP request. (the Sails *
@@ -41,23 +40,24 @@ module.exports.http = {
   *                                                                          *
   ***************************************************************************/
 
-     //order: [
-     //  'startRequestTimer',
-     //  'cookieParser',
-     //  'session',
-     //  'myRequestLogger',
-     //  'bodyParser',
-     //  'handleBodyParserError',
-     //  'compress',
-     //  'methodOverride',
-     //  'poweredBy',
-     //  '$custom',
-     //  'router',
-     //  'www',
-     //  'favicon',
-     //  '404',
-     //  '500'
-     //],
+     order: [
+       'startRequestTimer',
+       'cookieParser',
+       'session',
+      // 'myRequestLogger',
+       'rawParser',
+       'bodyParser',
+       'handleBodyParserError',
+       'compress',
+       'methodOverride',
+       'poweredBy',
+       '$custom',
+       'router',
+       'www',
+       'favicon',
+       '404',
+       '500'
+     ],
 
   /****************************************************************************
   *                                                                           *
@@ -70,7 +70,22 @@ module.exports.http = {
      //    return next();
      //}
 
-
+  //bodyParser: function() {
+  //  // Get an XML parser instance
+  //  var xmlParser = require('express-xml-bodyparser')();
+  //  // Get a Skipper instance (handles URLencoded, JSON-encoded and multipart)
+  //  var skipper = require('skipper')();
+  //  // Return a custom middleware function
+  //  return function(req, res, next) {
+  //    // If it looks like XML, parse it as XML
+  //    if (req.headers && (req.headers['content-type'] == 'text/xml' || req.headers['content-type'] == 'application/xml')) {
+  //      return xmlParser(req, res, next);
+  //    }
+  //    // Otherwise let Skipper handle it
+  //    return skipper(req, res, next);
+  //  };
+  //
+  //}
   /***************************************************************************
   *                                                                          *
   * The body parser that will handle incoming multipart HTTP requests. By    *
