@@ -66,7 +66,9 @@ module.exports = {
         },
         function(opts,next){//计算价格，组织支付信息
           ServPrice.find({id:opts.servPriceID}).exec(function(err,price){
-            if(err) return cb(err);
+            console.log(err);
+            console.log(price);
+            if(err) return next(err);
             if(price=='') {
               opts.servPrice=0;
               opts.servName=''
@@ -77,6 +79,7 @@ module.exports = {
             //opts.body =
             opts.total_fee=(opts.salary+opts.servPrice)*opts.month-opts.cutPrice+opts.commission;
             opts.body = util.format('微元汇-%s%s家政服务',opts.servName,opts.month);
+            next(null,opts)
           })
         },
         WxPay.getBrandWCPay

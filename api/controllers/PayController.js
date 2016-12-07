@@ -10,12 +10,12 @@ module.exports = {
     var opts = {
       userID:req.session.userID,
       outTradeNo:req.param('orderId',null),
-      servPriceID:parseInt(req.param('servicePrice',0)),       //将字符串转换成数字，流程完善之后有服务端传入数字
+      servPriceID:parseInt(req.param('servicePriceID',0)),       //将字符串转换成数字，流程完善之后有服务端传入数字
       //servPriceID:1,       //将字符串转换成数字，流程完善之后有服务端传入数字
       salary:1,                         //将字符串转换成数字，流程完善之后有服务端传入数字
       commission:parseInt(req.param('commission',0)),
       firstService:parseInt(req.param('firstService')),
-      month:parseInt(req.param('month')),
+      month:parseInt(req.param('month',1)),
       cutPrice:parseInt(req.param('cutPrice',0)),
       body:'微元汇-家政服务',                                        //暂时写死
       payUrl:req.param('payUrl',req.headers['referer'])//当前支付网页的URL
@@ -35,7 +35,7 @@ module.exports = {
     //opts.userID=249;   //todo 测试时使用 正式坏境删除
     ////--------------------------------------
     //console.log(opts);
-    if(!(opts.outTradeNo&&opts.servicePrice)){
+    if(!(opts.outTradeNo)){
       return res.send('{"msgNo":"9999","msgInfo":"参数错误"}');
     }
     WxPay.wxPay(opts,function(err,result){
