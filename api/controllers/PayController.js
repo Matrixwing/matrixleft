@@ -50,7 +50,9 @@ module.exports = {
   notice : function(req,res){
     console.log(req);
     console.log(req.body);
-    WxMessage.sendPayMsgToUser()
+    console.log(req.param('return_code'));
+    console.log(req.param('return_msg'));
+    //WxMessage.sendPayMsgToUser()
   }
 };
 
