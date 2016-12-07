@@ -55,8 +55,9 @@ module.exports = {
 
     console.log(req.param('return_code'));
     console.log(req.param('return_msg'));
+    console.log(myutil);
     res.end(myutil.buildXML({ xml:{ return_code:'SUCCESS' } }));
-    myutil.pipe(req, function(err, data){
+    myutil.pipe(req, function(err,data){
       console.log('data',data);
       var xml = data.toString('utf8');
       myutil.parseXML(xml, function(err, msg){
