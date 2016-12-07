@@ -56,28 +56,28 @@ module.exports = {
 
     console.log(req.param('return_code'));
 
-    console.log(myutil);
 
-    //myutil.pipe(req, function(err,data){
-    //  console.log('data',data);
-    //  var xml = data.toString('utf8');
-    //  myutil.parseXML(xml, function(err, msg){
-    //    console.log('err',err);
-    //    console.log('111111',msg);
-    //    req.wxmessage = msg;
-    //    console.log('111111',msg);
-    //  });
-    //});
+    console.log(req.body);
+    myutil.pipe(req.body, function(err,data){
+      console.log('data',data);
+      var xml = data.toString('utf8');
+      myutil.parseXML(xml, function(err, msg){
+        console.log('err',err);
+        console.log('111111',msg);
+        req.wxmessage = msg;
+        console.log('111111',msg);
+      });
+    });
     //res.end(myutil.buildXML({ xml:{ return_code:'SUCCESS' } }));
     ////WxMessage.sendPayMsgToUser()
     ////res.success();
-    console.log(req.body);
-    WxPay.test(req.body,res,function(err,rest){
-      // 处理商户业务逻辑
-      console.log(rest);
-      // res.success() 向微信返回处理成功信息，res.fail()返回失败信息。
-      //res.success();
-    })
+
+    //WxPay.test(req.body,res,function(err,rest){
+    //  // 处理商户业务逻辑
+    //  console.log(rest);
+    //  // res.success() 向微信返回处理成功信息，res.fail()返回失败信息。
+    //  //res.success();
+    //})
 
 
   },
