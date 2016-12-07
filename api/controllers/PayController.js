@@ -5,6 +5,7 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 var util = require('util');
+var myutil =require('../util/util.js');
 module.exports = {
 	pay : function(req,res){
     console.log('1111111111111111111111111',req.body);
@@ -53,8 +54,24 @@ module.exports = {
   notice : function(req,res){
     console.log(req.param('return_code'));
     console.log(req.param('return_msg'));
+    res.end(myutil.buildXML({ xml:{ return_code:'SUCCESS' } }));
+    myutil.pipe(req, function(err, data){
+      var xml = data.toString('utf8');
+      myutil.parseXML(xml, function(err, msg){
+        req.wxmessage = msg;
+        console.log(msg);
+      });
+    });
     //WxMessage.sendPayMsgToUser()
-    res.success();
+    //res.success();
+  },
+
+  wechat : function(req,res,next){
+    console.log('sssssssssssssssssssssssssssssssssss');
+
+    next(req,res)
   }
+
+
 };
 

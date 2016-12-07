@@ -4,6 +4,7 @@ var weixinConfig = sails.config.weixin;
 var crypto=require('crypto');
 var async = require('async');
 var util = require('util');
+
 var wxpay = WXPay({
   appid:weixinConfig.appid,
   mch_id:weixinConfig.mch_id,
