@@ -75,10 +75,16 @@ module.exports = {
               opts.servPrice=price[0].servPrice;
               opts.servPrice=price[0].servName;
             }
-            //opts.body =
+            //计算折扣价格
             opts.cutPrice=0;
+            if(opts.month==3){opts.cutPrice=10;}
+            else if(opts.month==6){opts.cutPrice=15;}
+            else if(opts.month==12){opts.cutPrice=100;}
+
             console.log('-----------------------',opts);
-            opts.total_fee=(opts.salary+opts.servPrice)*opts.month-opts.cutPrice+opts.commission;
+
+            opts.total_fee=(opts.salary+opts.servPrice)*opts.month-opts.cutPrice;//没有手续费的价格
+            opts.total_fee*=1.006;
             opts.body = util.format('微元汇-%s%s家政服务',opts.servName,opts.month);
             next(null,opts)
           })
