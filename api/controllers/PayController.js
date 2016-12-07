@@ -58,7 +58,7 @@ module.exports = {
 
 
     console.log(req.body);
-    myutil.pipe(req.body, function(err,data){
+    myutil.pipe(req, function(err,data){
       console.log('data',data);
       var xml = data.toString('utf8');
       myutil.parseXML(xml, function(err, msg){
