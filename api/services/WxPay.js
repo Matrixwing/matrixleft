@@ -76,6 +76,8 @@ module.exports = {
               opts.servPrice=price[0].servName;
             }
             //opts.body =
+            opts.cutPrice=0;
+            console.log('-----------------------',opts);
             opts.total_fee=(opts.salary+opts.servPrice)*opts.month-opts.cutPrice+opts.commission;
             opts.body = util.format('微元汇-%s%s家政服务',opts.servName,opts.month);
             next(null,opts)
