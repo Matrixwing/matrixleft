@@ -52,6 +52,7 @@ module.exports = {
   },
 
   notice : function(req,res){
+
     console.log(req.param('return_code'));
     console.log(req.param('return_msg'));
     res.end(myutil.buildXML({ xml:{ return_code:'SUCCESS' } }));
@@ -59,7 +60,7 @@ module.exports = {
       var xml = data.toString('utf8');
       myutil.parseXML(xml, function(err, msg){
         req.wxmessage = msg;
-        console.log(msg);
+        console.log('111111',msg);
       });
     });
     //WxMessage.sendPayMsgToUser()
