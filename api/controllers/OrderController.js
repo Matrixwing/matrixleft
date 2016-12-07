@@ -50,10 +50,30 @@ module.exports = {
   },
 
   getOrderList : function (req,res) {
+    //var opts = {
+    //  userID : req.session.userID,
+    //  status : req.param('status','100'),//完成交易：0 等待交易：1 取消交易：2  全部：000
+    //  limit  : req.param('limit',5),
+    //  start  : (req.param('start',1)-1)*limit,
+
+    //};
+
     var opts = {
       userID : req.session.userID,
-      status : req.param('status','100'),//完成交易：0 等待交易：1 取消交易：2
+      status : req.param('status',1),//完成交易：0 等待交易：1 取消交易：2  全部：000
+      start  : 0,
+      limit  : 5,
     };
+
+    //if(!opts.status||!opts.start||!opts.limit){
+    //  return  res.send('{"msgNo":"9999","msgInfo":"参数错误"}');
+    //}
+    order.getOrderList(opts,function(err,orderList){
+      if(err) return res.send('{"msgNo":"9999","msgInfo":"服务出错，请您稍后再试"}');
+      var str = JSON.stringify(orderList) ;
+      result = util.format('{"msgNo":"0000","msgInfo":"查询成功","data":%s}',str);
+      res.send(result);
+    })
   },
 
   getOrderDetail : function (req,res){

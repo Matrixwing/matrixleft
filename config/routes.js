@@ -62,7 +62,7 @@ module.exports.routes = {
   "post  /order" : {controller : "OrderController", action : "order"},
   //"get /wechat"  : {controller: "PayController" , action : "wechat"},
   "get /getOrderDetail" : {controller : "OrderController", action : "getOrderDetail"}  ,
-
+  "get /getOrderList" : {controller : "OrderController", action : "getOrderList"}  ,
    /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *

@@ -54,30 +54,19 @@ module.exports = {
 
   notice : function(req,res){
 
-    console.log(req.param('return_code'));
-
-
     console.log(req.body);
     res.end(util.buildXML({ xml:{ return_code:'SUCCESS' } }));
     //res.end(myutil.buildXML({ xml:{ return_code:'SUCCESS' } }));
     ////WxMessage.sendPayMsgToUser()
     ////res.success();
-
     //WxPay.test(req.body,res,function(err,rest){
     //  // 处理商户业务逻辑
     //  console.log(rest);
     //  // res.success() 向微信返回处理成功信息，res.fail()返回失败信息。
     //  //res.success();
     //})
-
-
   },
 
-  wechat : function(req,res,next){
-    console.log('sssssssssssssssssssssssssssssssssss');
-
-    next(req,res)
-  }
 
 
 };

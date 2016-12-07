@@ -6,6 +6,7 @@
 //https://github.com/felixge/node-dateformat
 var dateformat = require('dateformat');
 var util = require('util');
+var async = require('async');
 module.exports = {
 
   //下单
@@ -103,6 +104,55 @@ module.exports = {
 
   //取得订单列表
   getOrderList : function(opts,cb){
+    //todo 过期的等待支付？
+    var exprieString = '';
+    var statusString = '';
+
+    if(opts.status==0){statusString=' and od.status ='+opts.status };
+    if(opts.status==1){exprieString = 'AND NOW() < od.`validTime` ';statusString=' and od.status ='+opts.status };
+    if(opts.status==2){statusString=' and od.status ='+opts.status };
+
+
+    var queryString = util.format('SELECT od.`orderID`,(SELECT  userName FROM `user` u WHERE u.userID = od.servantID) AS servantName,IFNULL((SELECT  `d`.`define`  ' +
+      'FROM `Dict` `d` WHERE (( `d`.`columnName` = "order.stauts") AND (`d`.`value` = `od`.`status`) )),"") AS `status`,remark,od.`validTime` ' +
+      ' FROM`order` od  WHERE od.`userID` = %s  %s   %s ORDER BY validTime DESC limit %s,%s;',opts.userID,statusString,exprieString,opts.start,opts.limit);
+
+    var countString = util.format('SELECT count(orderID) as totalRow '+
+      ' FROM`order` od  WHERE od.`userID` = %s  %s %s  ORDER BY validTime DESC',opts.userID,statusString,exprieString);
+
+    console.log(queryString);
+    console.log(countString);
+    async.parallel([
+      function(next){
+        Order.query(queryString,(function(err,orderList){
+          if(err) return next(err);
+          return next(null,orderList)
+        }))
+      },
+      function(next){
+        Order.query(countString,(function(err,orderList){
+          if(err) return next(err);
+          return next(null,orderList)
+        }))
+      },
+
+    ],function(err,results){
+
+      if(err) return cb(err);
+
+      var orderList = results[0];
+      for ( var x in orderList ){
+        orderList[x].apptTime = JSON.parse(orderList[x].remark).apptTime;
+        delete orderList[x].remark;
+      }
+
+      var newResults = {
+        orderList : orderList,
+        totalPages : Math.ceil(results[1][0].totalRow/opts.limit)
+      };
+
+      cb(null,newResults);
+    })
 
   },
 
