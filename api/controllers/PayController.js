@@ -56,7 +56,7 @@ module.exports = {
     console.log(req.param('return_code'));
     console.log(req.param('return_msg'));
     console.log(myutil);
-    res.end(myutil.buildXML({ xml:{ return_code:'SUCCESS' } }));
+
     myutil.pipe(req, function(err,data){
       console.log('data',data);
       var xml = data.toString('utf8');
@@ -67,6 +67,7 @@ module.exports = {
         console.log('111111',msg);
       });
     });
+    res.end(myutil.buildXML({ xml:{ return_code:'SUCCESS' } }));
     //WxMessage.sendPayMsgToUser()
     //res.success();
   },
