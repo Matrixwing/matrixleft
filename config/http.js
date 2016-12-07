@@ -20,32 +20,48 @@ module.exports.http = {
   * `customMiddleware` config option.                                         *
   *                                                                           *
   ****************************************************************************/
+  bodyParser: function() {
+    // Get an XML parser instance
+    var xmlParser = require('express-xml-bodyparser')();
+    // Get a Skipper instance (handles URLencoded, JSON-encoded and multipart)
+    var skipper = require('skipper')();
+    // Return a custom middleware function
+    return function(req, res, next) {
+      // If it looks like XML, parse it as XML
+      if (req.headers && (req.headers['content-type'] == 'text/xml' || req.headers['content-type'] == 'application/xml')) {
+        return xmlParser(req, res, next);
+      }
+      // Otherwise let Skipper handle it
+      return skipper(req, res, next);
+    };
 
+  },
   middleware: {
 
-    rawParser: function(req, res, next) {
-      switch(req.headers['content-type']) {
-        case 'text/xml':
-          require('body-parser').raw({ type: 'text/xml' })(req, res, next);
-          break;
-        default :
-          next();
-      }
-    },
+  //  rawParser: function(req, res, next) {
+  //    switch(req.headers['content-type']) {
+  //      case 'text/xml':
+  //        require('body-parser').raw({ type: 'text/xml' })(req, res, next);
+  //        break;
+  //      default :
+  //        next();
+  //    }
+  //  },
 
-  /***************************************************************************
-  *                                                                          *
-  * The order in which middleware should be run for HTTP request. (the Sails *
-  * router is invoked by the "router" middleware below.)                     *
-  *                                                                          *
-  ***************************************************************************/
 
+  ///***************************************************************************
+  //*                                                                          *
+  //* The order in which middleware should be run for HTTP request. (the Sails *
+  //* router is invoked by the "router" middleware below.)                     *
+  //*                                                                          *
+  //***************************************************************************/
+  //
      order: [
        'startRequestTimer',
        'cookieParser',
        'session',
       // 'myRequestLogger',
-       'rawParser',
+      // 'rawParser',
        'bodyParser',
        'handleBodyParserError',
        'compress',
