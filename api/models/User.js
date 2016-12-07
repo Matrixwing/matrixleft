@@ -92,7 +92,6 @@ module.exports = {
       avatarUrl: options.avatarUrl || null,
       gender: options.gender || null,
       phone: options.phone || null,
-      role: options.role || 0,
     };
 
     User.create(userWaitForCreate).exec(function (err, newUser) {

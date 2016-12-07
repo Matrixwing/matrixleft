@@ -51,8 +51,6 @@ module.exports = {
     });
   },
 
-
-
   wxPay : function (opts,cb) {
     async.waterfall([
         function(next){//获取openid
@@ -102,14 +100,12 @@ module.exports = {
       });
   },
 
- test:function(req,res,cb){
+ completePay:function(opts,cb){
    //console.log(req.body);
-  wxpay.useWXCallback(function(msg, req, res, next){
-    // 处理商户业务逻辑
-    console.log(msg);
-    // res.success() 向微信返回处理成功信息，res.fail()返回失败信息。
-    res.success();
-  })
+   //todo 校验签名
+   //todo 数据库锁
+
+
 
 }
 }

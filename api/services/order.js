@@ -69,11 +69,14 @@ module.exports = {
         function(next){//发管理员通知
           User.find({userID:order.userID}).exec(function(err,user){
             console.log(user);
+            user=user[0];
             if(err) if(err) return next(err);
             User.find({userID:order.servantID,role:2}).exec(function(err,servant){
               servant=servant[0];
               if (err) return next(err);
-              if (servant!=''){
+              if (servant){
+                console.log(servant);
+                console.log(user);
                 var invMsg = util.format('雇主%s,%s 邀请服务员%s,%s于%s在%s面试',user.userName,user.phone,servant.userName,servant.phone,opts.apptTime,opts.apptPlace);
                 var msg = {
                   apptTime:opts.apptTime,
