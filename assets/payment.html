@@ -38,7 +38,7 @@
 					</div>
 					<div class="mui-input-row">
 						<label>薪资月数：</label>
-						<div class="mui-row s_selcet" id="m_num" num='1'>1月-无优惠</div>
+						<div class="mui-row s_selcet" id="m_num" num='1' yh='0'>1月-无优惠</div>
 						<span class="mui-icon mui-icon-arrowdown mui-pull-right select_icon"></span>
 					</div>
 				</form>
@@ -59,7 +59,7 @@
 				</div>
 				<div class="details mui-row ">
 					<div class="mui-input-row" id="showDeatils">
-						<label>您需支付：<span id='all_m'></span>元</label>
+						<label>您需支付：￥<span id='all_m'></span></label>
 						<span class="mui-icon mui-icon-arrowdown mui-pull-right select_icon"></span>
 					</div>
 					<form class="mui-input-group deatilsInfo">
@@ -74,6 +74,10 @@
 						<div class="mui-input-row" style="display:none" id="commission_div">
 							<label>手续费：</label>
 							<div class="mui-row s_selcet" id="commission_show"></div>
+						</div>
+						<div class="mui-input-row" id="yh_div" style="display:none" >
+							<label>优惠金额：</label>
+							<div class="mui-row s_selcet" id="yh_show"></div>
 						</div>
 					</form>
 				</div>

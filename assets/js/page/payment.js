@@ -17,15 +17,16 @@ $('#st_time').on('tap', function(event) {
 $('#m_num').on('tap', function(event) {
 	var m_num = new mui.PopPicker();
  	m_num.setData([
- 		{value:'1',text:'1月-无优惠'},
- 		{value:'3',text:'3月-立减10元'},
- 		{value:'6',text:'6月-立减15元'},
- 		{value:'12',text:'12月-立减100元'},
+ 		{value:'1',text:'1月-无优惠',yh:'0'},
+ 		{value:'3',text:'3月-立减10元',yh:'10'},
+ 		{value:'6',text:'6月-立减15元',yh:'15'},
+ 		{value:'12',text:'12月-立减100元',yh:'100'},
 	]);
 	var _this = $(this);
 	m_num.show(function(items) {
 		_this.html(items[0].text);
 		_this.attr('num',items[0].value);
+		_this.attr('yh',items[0].yh);
 		all_m();
 	});
 });
@@ -56,24 +57,42 @@ function all_m(){
 	var salary = $('#salary').val();
 	var servicePrice = $('.oncharge').attr('servicePrice');
 	var commission=0;
+	var yh = $('#m_num').attr('yh');
 	var num = $('#m_num').attr('num');
 	if (!servicePrice) {
 		servicePrice=0;
 		$('#commission_div').show();
 		$('#servicePrice_div').hide();
 		commission=base.keepTwoDecimal(((salary*num)*0.006));
-		$('#all_m').html(salary*num+commission);
-		$('#commission_show').html(commission+'元')
+		var a =salary*num+commission;
+		if (a<yh) {
+			$('#yh_div').hide();
+			$('#all_m').html(salary*num+commission);
+		}else{
+			$('#all_m').html(salary*num+commission-yh);
+			if (yh!=0) {
+				$('#yh_div').show();
+				$('#yh_show').html('-￥'+yh)
+			};
+		};
+		$('#commission_show').html('￥'+commission)
 	}else{
 		$('#commission_div').hide();
 		$('#servicePrice_div').show();
-		$('#all_m').html(salary*num+servicePrice*num+commission)
-		$('#servicePrice_show').html(servicePrice*num+'元')
+		var b =salary*num+servicePrice*num+commission;
+		if (b<yh) {
+			$('#yh_div').hide();
+			$('#all_m').html(salary*num+servicePrice*num+commission)
+		}else{
+			$('#all_m').html(salary*num+servicePrice*num+commission-yh)
+			if (yh!=0) {
+				$('#yh_div').show();
+				$('#yh_show').html('-￥'+yh)
+			};
+		};
+		$('#servicePrice_show').html('￥'+servicePrice*num)
 	};
-	$('#salary_show').html(salary*num+'元')
-	
-
-	
+	$('#salary_show').html('￥'+salary*num)
 }
 
 $('#pay_sure').on('tap',function(){
