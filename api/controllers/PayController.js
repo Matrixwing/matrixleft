@@ -58,16 +58,7 @@ module.exports = {
 
 
     console.log(req.body);
-    myutil.pipe(req, function(err,data){
-      console.log('data',data);
-      var xml = data.toString('utf8');
-      myutil.parseXML(xml, function(err, msg){
-        console.log('err',err);
-        console.log('111111',msg);
-        req.wxmessage = msg;
-        console.log('111111',msg);
-      });
-    });
+    res.end(util.buildXML({ xml:{ return_code:'SUCCESS' } }));
     //res.end(myutil.buildXML({ xml:{ return_code:'SUCCESS' } }));
     ////WxMessage.sendPayMsgToUser()
     ////res.success();
