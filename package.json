@@ -6,8 +6,10 @@
   "keywords": [],
   "dependencies": {
     "async": "^2.1.2",
+    "body-parser": "^1.15.2",
     "dateformat": "^2.0.0",
     "ejs": "2.3.4",
+    "express-xml-bodyparser": "^0.3.0",
     "grunt": "1.0.1",
     "grunt-contrib-clean": "1.0.0",
     "grunt-contrib-coffee": "1.0.0",

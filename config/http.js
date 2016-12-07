@@ -24,16 +24,16 @@ module.exports.http = {
   middleware: {
 
 
-    bodyParser: function() {
-      var xmlParser = require('express-xml-bodyparser')();
-      var bodyParser = require('body-parser')();
-      return function(req, res, next) {
-        if (req.headers && (req.headers['content-type'] == 'text/xml' || req.headers['content-type'] == 'application/xml')) {
-          return xmlParser(req, res, next);
-        }
-        return bodyParser(req, res, next);
-      };
-    },
+    //bodyParser: function() {
+    //  var xmlParser = require('express-xml-bodyparser')();
+    //  var bodyParser = require('body-parser')().json();
+    //  return function(req, res, next) {
+    //    if (req.headers && (req.headers['content-type'] == 'text/xml' || req.headers['content-type'] == 'application/xml')) {
+    //      return xmlParser(req, res, next);
+    //    }
+    //    return bodyParser(req, res, next);
+    //  };
+    //},
   /***************************************************************************
   *                                                                          *
   * The order in which middleware should be run for HTTP request. (the Sails *
@@ -41,23 +41,23 @@ module.exports.http = {
   *                                                                          *
   ***************************************************************************/
 
-     order: [
-       'startRequestTimer',
-       'cookieParser',
-       'session',
-       'myRequestLogger',
-       'bodyParser',
-       'handleBodyParserError',
-       'compress',
-       'methodOverride',
-       'poweredBy',
-       '$custom',
-       'router',
-       'www',
-       'favicon',
-       '404',
-       '500'
-     ],
+     //order: [
+     //  'startRequestTimer',
+     //  'cookieParser',
+     //  'session',
+     //  'myRequestLogger',
+     //  'bodyParser',
+     //  'handleBodyParserError',
+     //  'compress',
+     //  'methodOverride',
+     //  'poweredBy',
+     //  '$custom',
+     //  'router',
+     //  'www',
+     //  'favicon',
+     //  '404',
+     //  '500'
+     //],
 
   /****************************************************************************
   *                                                                           *
@@ -65,10 +65,10 @@ module.exports.http = {
   *                                                                           *
   ****************************************************************************/
 
-     myRequestLogger: function (req, res, next) {
-         console.log("Requested :: ", req.method, req.url);
-         return next();
-     }
+     //myRequestLogger: function (req, res, next) {
+     //    console.log("Requested :: ", req.method, req.url);
+     //    return next();
+     //}
 
 
   /***************************************************************************
