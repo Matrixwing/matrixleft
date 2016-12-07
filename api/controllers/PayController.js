@@ -55,6 +55,11 @@ module.exports = {
   notice : function(req,res){
 
     console.log(req.body);
+    var msg=req.body.xml
+    var opts = {
+
+    }
+
     res.end(myutil.buildXML({ xml:{ return_code:'SUCCESS' } }));
     //res.end(myutil.buildXML({ xml:{ return_code:'SUCCESS' } }));
     ////WxMessage.sendPayMsgToUser()
