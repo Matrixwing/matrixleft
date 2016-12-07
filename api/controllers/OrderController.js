@@ -62,7 +62,9 @@ module.exports = {
       orderID : req.param('orderID')
     };
     //todo 参数处理
-
+    if(!opts.userID){
+      res.send('{"msgNo":"9999","msgInfo":"参数错误"}');
+    }
     order.getOrderDetail(opts,function(err,result){
       if (err) return res.send('{"msgNo":"9999","msgInfo":"服务出错，请您稍后再试","data":' + JSON.stringify(err) + '}');
       var str = JSON.stringify(result);

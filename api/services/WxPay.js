@@ -4,6 +4,7 @@ var weixinConfig = sails.config.weixin;
 var crypto=require('crypto');
 var async = require('async');
 var util = require('util');
+
 var wxpay = WXPay({
   appid:weixinConfig.appid,
   mch_id:weixinConfig.mch_id,
@@ -25,7 +26,8 @@ module.exports = {
       body:opts.body,
       //detail: '{"goods_detail": [{"goods_id": "iphone6s_16G","wxpay_goods_id": "1001","goods_name": "iPhone6s 16G","quantity": 1,"price": 528800,"goods_category": "123456","body": "苹果手机"}]}',
       out_trade_no: opts.outTradeNo, //微元汇系统订单号
-      total_fee: opts.total_fee,
+      //total_fee: opts.total_fee,
+      total_fee: 1,
       //spbill_create_ip: '112.193.91.16',
       notify_url: weixinConfig.notify_url
     }, function(err, result){
@@ -73,19 +75,22 @@ module.exports = {
               opts.servName=''
             }else{
               opts.servPrice=price[0].servPrice;
-              opts.servPrice=price[0].servName;
+              opts.servName=price[0].servName;
             }
             //计算折扣价格
             opts.cutPrice=0;
-            if(opts.month==3){opts.cutPrice=10;}
-            else if(opts.month==6){opts.cutPrice=15;}
-            else if(opts.month==12){opts.cutPrice=100;}
+            if(opts.month==3){opts.cutPrice=1000;}
+            else if(opts.month==6){opts.cutPrice=1500;}
+            else if(opts.month==12){opts.cutPrice=10000;}
 
             console.log('-----------------------',opts);
 
             opts.total_fee=(opts.salary+opts.servPrice)*opts.month-opts.cutPrice;//没有手续费的价格
+            console.log('2222222',opts.total_fee);
             opts.total_fee*=1.006;
-            opts.body = util.format('微元汇-%s%s家政服务',opts.servName,opts.month);
+            opts.total_fee=Math.ceil(opts.total_fee);
+            console.log('3333333',opts.total_fee);
+            opts.body = util.format('微元汇-%s型%s月家政服务',opts.servName,opts.month);
             next(null,opts)
           })
         },
