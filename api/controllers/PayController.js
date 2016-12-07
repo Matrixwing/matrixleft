@@ -6,7 +6,7 @@
  */
 var util = require('util');
 var myutil =require('../util/util.js');
-var WXPay = require('weixin-pay');
+//var WXPay = require('weixin-pay');
 module.exports = {
 	pay : function(req,res){
     console.log('1111111111111111111111111',req.body);
@@ -72,11 +72,11 @@ module.exports = {
     ////WxMessage.sendPayMsgToUser()
     ////res.success();
 
-    WXPay.useWXCallback(function(msg, req, res, next){
+    WxPay.test(req,res,function(err,rest){
       // 处理商户业务逻辑
-      console.log(msg);
+      console.log(rest);
       // res.success() 向微信返回处理成功信息，res.fail()返回失败信息。
-      res.success();
+      //res.success();
     })
 
 
