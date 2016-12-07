@@ -103,7 +103,7 @@ module.exports = {
   },
 
  test:function(req,res,cb){
-   console.log(req);
+   //console.log(req.body);
   wxpay.useWXCallback(function(msg, req, res, next){
     // 处理商户业务逻辑
     console.log(msg);

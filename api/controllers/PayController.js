@@ -71,8 +71,8 @@ module.exports = {
     //res.end(myutil.buildXML({ xml:{ return_code:'SUCCESS' } }));
     ////WxMessage.sendPayMsgToUser()
     ////res.success();
-
-    WxPay.test(req,res,function(err,rest){
+    console.log(req.body);
+    WxPay.test(req.body,res,function(err,rest){
       // 处理商户业务逻辑
       console.log(rest);
       // res.success() 向微信返回处理成功信息，res.fail()返回失败信息。
