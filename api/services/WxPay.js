@@ -19,7 +19,7 @@ module.exports = {
    */
   getBrandWCPay : function (opts,cb) {
     //todo spbill_create_ip，detail
-    console.log(opts);
+    console.log('opts',opts);
     wxpay.getBrandWCPayRequestParams({
       openid:opts.openid,
       body:opts.body,
@@ -35,12 +35,10 @@ module.exports = {
         //前端调用微信jsapi需要signature
         WxTicket.validateTicket(function(err,tickect){
           if(err) return cb(err);
-          console.log('result',result);
           var  signString=util.format('jsapi_ticket=%s&noncestr=%s&timestamp=%s&url=%s',tickect.ticket,result.nonceStr,result.timeStamp,weixinConfig.url+opts.payUrl);
           var sha1=crypto.createHash("sha1");
           var signature=sha1.update(signString);
           signature = sha1.digest('hex');
-          console.log('signString',signString);
           result.signature=signature;
           return cb(null,result);
         })

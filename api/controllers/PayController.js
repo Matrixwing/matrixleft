@@ -7,7 +7,7 @@
 var util = require('util');
 module.exports = {
 	pay : function(req,res){
-    console.log(req.body);
+    console.log('1111111111111111111111111',req.body);
     var opts = {
       userID:req.session.userID,
       outTradeNo:req.param('orderId',null),
