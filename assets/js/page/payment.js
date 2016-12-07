@@ -109,12 +109,12 @@ $('#pay_sure').on('tap',function(){
 	all_m();
 	var orderId = base.getQueryString('orderID');
 	var salary = $('#salary').val();
-	var cutPrice=0;
+	var commission=0;
 	var num = $('#m_num').attr('num');
 	var servicePrice = $('.oncharge').attr('servicePrice');
 	if (!servicePrice) {
 		servicePrice=0;
-		cutPrice=base.keepTwoDecimal(salary*num*0.006);
+		commission=base.keepTwoDecimal(salary*num*0.006);
 	};
 	var firstService = $('#st_time').attr('date');
 	var payUrl=window.location.href;
@@ -127,12 +127,12 @@ $('#pay_sure').on('tap',function(){
 	    url: '/pay',
 	    data:{
 	    	'orderId':orderId,
-	    	'servicePrice':servicePrice,
 	    	'servicePriceID':servicePriceID,
 	    	'salary':salary,
 	    	'payUrl':payUrl,
 	    	'firstService':firstService,
-	    	'cutPrice':cutPrice
+	    	'month':num,
+	    	'commission':commission
 	    },
 	    dataType: 'json',
 	    success: function(data) {
