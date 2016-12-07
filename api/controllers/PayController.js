@@ -15,7 +15,7 @@ module.exports = {
       salary:1,                         //将字符串转换成数字，流程完善之后有服务端传入数字
       commission:parseInt(req.param('commission',0)),
       firstService:parseInt(req.param('firstService')),
-      month:parseInt(req.param('month')),
+      month:parseInt(req.param('month',1)),
       cutPrice:parseInt(req.param('cutPrice',0)),
       body:'微元汇-家政服务',                                        //暂时写死
       payUrl:req.param('payUrl',req.headers['referer'])//当前支付网页的URL
