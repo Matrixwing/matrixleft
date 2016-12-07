@@ -45,6 +45,7 @@ module.exports = {
           },
         }
       });
+      console.log('post_data',post_data);
       request({
         url: "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token="+token.access_token,
         method: 'POST',
