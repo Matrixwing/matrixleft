@@ -7,16 +7,18 @@
 var util = require('util');
 module.exports = {
 	pay : function(req,res){
-
     var opts = {
       userID:req.session.userID,
-     // totalfee:req.getParams('totalFee',null),
-      salary:1,                         //将字符串转换成数字，流程完善之后有服务端传入数字
-      //servicePrice:parseInt(req.param('servicePrice',1)),       //将字符串转换成数字，流程完善之后有服务端传入数字
-      servPriceID:1,       //将字符串转换成数字，流程完善之后有服务端传入数字
-      body:'微元汇-测试支付',                                        //暂时写死
       outTradeNo:req.param('orderId',null),
-      payUrl:req.param('payUrl',req.originalUrl)//当前支付网页的URL
+      servPriceID:parseInt(req.param('servicePrice',0)),       //将字符串转换成数字，流程完善之后有服务端传入数字
+      //servPriceID:1,       //将字符串转换成数字，流程完善之后有服务端传入数字
+      salary:1,                         //将字符串转换成数字，流程完善之后有服务端传入数字
+      commission:parseInt(req.param('commission',0)),
+      firstService:parseInt(req.param('firstService')),
+      month:parseInt(req.param('month')),
+      cutPrice:parseInt(req.param('cutPrice',0)),
+      body:'微元汇-家政服务',                                        //暂时写死
+      payUrl:req.param('payUrl',req.headers['referer'])//当前支付网页的URL
     };
 
     ////-------------测试数据-----------------

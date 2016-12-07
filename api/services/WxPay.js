@@ -13,19 +13,18 @@ var wxpay = WXPay({
 module.exports = {
 
   /**
-   * 微信支付
+   * 微信支付，请求预支付码
    * @param opts js对象，openid,total_fee,out_trade_no
    * @param next 回调函数 next(err,result) 下一步需要执行的方法  err为错误信息  result为结果
    */
   getBrandWCPay : function (opts,cb) {
-
-    //todo 商品信息写入detail，body属性
+    //todo spbill_create_ip，detail
     wxpay.getBrandWCPayRequestParams({
       openid:opts.openid,
       body:opts.body,
       //detail: '{"goods_detail": [{"goods_id": "iphone6s_16G","wxpay_goods_id": "1001","goods_name": "iPhone6s 16G","quantity": 1,"price": 528800,"goods_category": "123456","body": "苹果手机"}]}',
       out_trade_no: opts.outTradeNo, //微元汇系统订单号
-      total_fee: opts.salary+opts.servicePrice,
+      total_fee: opts.total_fee,
       //spbill_create_ip: '112.193.91.16',
       notify_url: weixinConfig.notify_url
     }, function(err, result){
@@ -51,9 +50,11 @@ module.exports = {
     });
   },
 
+
+
   wxPay : function (opts,cb) {
     async.waterfall([
-        function(next){
+        function(next){//获取openid
           sails.log.debug(opts);
           User.findOne({userID:opts.userID}).exec(function(err,user){
             if(err)  next(err);
@@ -61,6 +62,21 @@ module.exports = {
             opts.openid=user.openid;
             sails.log.debug(opts);
             next(null,opts)
+          })
+        },
+        function(opts,next){//计算价格，组织支付信息
+          ServPrice.find({id:opts.servPriceID}).exec(function(err,price){
+            if(err) return cb(err);
+            if(price=='') {
+              opts.servPrice=0;
+              opts.servName=''
+            }else{
+              opts.servPrice=price[0].servPrice;
+              opts.servPrice=price[0].servName;
+            }
+            //opts.body =
+            opts.total_fee=(opts.salary+opts.servPrice)*opts.month-opts.cutPrice+opts.commission;
+            opts.body = util.format('微元汇-%s%s家政服务',opts.servName,opts.month);
           })
         },
         WxPay.getBrandWCPay
