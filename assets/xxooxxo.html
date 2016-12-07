@@ -30,11 +30,15 @@
 			<form class="mui-input-group appointment">
 				<div class="mui-input-row">
 					<label>月薪</label>
-					<input type="number" class="mui-input" placeholder="请输入服务员月薪">
+					<input type="number" class="mui-input" placeholder="请输入服务员月薪" id="yx" value="3000">
+				</div>
+				<div class="mui-input-row">
+					<label>月利润</label>
+					<input type="text" class="mui-input" placeholder="" id="lr" value="1">
 				</div>
 				<div class="mui-input-row">
 					<label>月数</label>
-					<select class="mui-btn mui-btn-block mui-pull-left">
+					<select class="mui-btn mui-btn-block mui-pull-left" id="select">
 						<option value="1">1月</option>
 						<option value="3">3月</option>
 						<option value="6">6月</option>
@@ -42,12 +46,45 @@
 						<option value="12">12月</option>
 					</select>
 				</div>
+				<!-- <div class="mui-input-row">
+					<label>立减比例</label>
+					<select class="mui-btn mui-btn-block mui-pull-left" id="select">
+						<option value="5">5</option>
+						<option value="3">3月</option>
+						<option value="6">6月</option>
+						<option value="9">9月</option>
+						<option value="12">12月</option>
+					</select>
+				</div> -->
+				<div class="mui-input-row">
+					<label>费率</label>
+					<input type="text" class="mui-input"  value="0.6%" readonly="readonly">
+				</div>
 			</form>
-			<button type="button" class="mui-btn mui-btn-primary" style="width:100%">计算收益</button>
+			<button type="button" class="mui-btn mui-btn-primary" style="width:100%;margin:20px 0" id="go">计算收益</button>
+			<div class="mmm">
+				
+			</div>
+			<div class="all">共计：<p style="display: inline-block;"></p></div>
 		</div>
 	</body>
 	<script src="js/jquery.min.js"></script>
 	<script type="text/javascript">
-
+		$('#go').click(function(){
+			var yx = $('#yx').val();
+			var lr = $('#lr').val();
+			var m = $('#select option:selected').val()
+			var res = 0;
+			var h=[];
+			var gj=yx*m*0.994;
+			var all=0;
+			for(var i=0;i<m;i++){
+				all += (gj-yx*i)/100*lr;
+				h.push('<div>第'+(i+1)+'月：'+( (gj-yx*i)/100*lr).toFixed(2)+'</div>')
+			}
+			h= h.join('')
+			$('.mmm').html(h)
+			$('.all p').html(all.toFixed(2))
+		})
 	</script>
 </html>
