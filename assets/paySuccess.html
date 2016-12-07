@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>微元汇</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="styles/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="styles/main.css"/>
+		<style>
+			.tips{
+				width: 100%;
+			    margin-top: 5px;
+			    padding: 20px 15px;
+			    background-color: #fff;
+			    font-size: 14px;
+			    border-bottom: 1px solid #e8ebf0;
+			    text-align: center;
+			}
+			.tips .mui-icon{
+				display: inline-block;
+				font-size: 32px;
+				color: #1AAD19
+			}
+			.tips div{
+				display: inline-block;
+				margin-left: 5px;
+				font-size: 16px;
+				position: relative;
+				top: -5px;
+			}
+			.infos{
+				margin-top: 10px;
+			}
+			.infos label{font-size: 14px;width: 28%}
+			.infos .mui-input-row label{padding: 13px 15px;line-height: 14px;}
+			.infos .mui-input{
+			    width: 72% !important
+			}
+			.mui-input-group:after{
+			    background-color: #e8ebf0;
+			}
+			.bzqy{
+				width: 100%;
+				text-align: center;
+				font-size:14px;
+				line-height: 40px;
+				padding: 10px 0;
+				position: relative;
+			}
+			.bzqy:after {
+			    position: absolute;
+			    right: 0;
+			    bottom: 0;
+			    left: 0;
+			    height: 1px;
+			    content: '';
+			    -webkit-transform: scaleY(.5);
+			    transform: scaleY(.5);
+			    background-color: #c8c7cc;
+			}
+			#reg{width: 100% !important;font-size: 14px;background-color: #e3457d;border-color: #F11764}
+			#reg .mui-spinner{
+				width: 19px;
+				height: 19px;
+			    margin-top: -5px;
+			    position: relative;
+			    top: 5px;
+			}
+			.mui-btn {
+				padding: 10px;
+			}
+			@media screen and (max-width: 320px) {
+			    .s_selcet {
+			        font-size: 14px;
+			        line-height: 40px;
+			        float: right;
+			        width: 68%;
+			    }
+			    .infos label{font-size: 14px;width: 32%}
+			    .infos .mui-input{
+			        width: 68% !important
+			    }
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>
+				</button>
+			<h1 class="mui-title">信息补全</h1>
+		</header>
+		<div class="mui-content">
+			<div class="tips">
+				<span class="mui-icon iconfont icon-wancheng"></span>
+				<div>感谢您对微元汇的支持！</div>
+			</div>
+			<form class="mui-input-group infos">
+				<div class="bzqy">为了保障您的权益，请妥善填写您的身份信息</div>
+				<div class="mui-input-row">
+					<label>姓&nbsp;&nbsp;&nbsp;&nbsp;名</label>
+					<input type="text" id="username" class="mui-input mui-pull-left" placeholder="请输入您的姓名">
+				</div>
+				<div class="mui-input-row">
+					<label>联系方式</label>
+					<input type="number" class="mui-input mui-pull-left" placeholder="请输入您的联系方式" id="salary">
+				</div>
+			</form>
+			<div class="mui-content-padded">
+				<a id='reg' href="#" class="mui-btn mui-btn-block mui-btn-primary">确定</a>
+			</div>
+		</div>
+	</body>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery.qrcode.min.js"></script>
+	<script src="js/mui/mui.min.js"></script>
+	<script src="js/base.js"></script>
+	<script>
+		mui.init({
+			swipeBack:true //启用右滑关闭功能
+		});
+		
+	</script>
+	<script src="https://s4.cnzz.com/z_stat.php?id=1260604409&web_id=1260604409" language="JavaScript"></script>
+</html>

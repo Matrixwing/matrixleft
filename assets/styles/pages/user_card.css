@@ -138,3 +138,7 @@ img{width: 100%}
 .details_info{
     margin-bottom: 45px;
 }
+.appointment .mui-input{
+    width: 72% !important;
+    font-size: 14px;
+}

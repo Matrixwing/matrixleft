@@ -9,23 +9,7 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<link rel="stylesheet" href="styles/mui.min.css">
 		<link rel="stylesheet" type="text/css" href="styles/main.css"/>
-		<style>
-			.mui-card-header{font-size: 14px;}
-			.mui-card-link{color: #e3457d;position: absolute !important;right: 15px;}
-			.tips{
-				position: absolute;
-				z-index: 999999;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;
-				overflow: hidden;
-				color: #fff;
-				text-align: center;
-				display: none;
-			}
-			.tips .mui-spinner{width: 48px;height: 48px;margin-top: 50%}
-		</style>
+		<link rel="stylesheet" type="text/css" href="styles/pages/record.css"/>
 	</head>
 
 	<body>
@@ -36,7 +20,13 @@
 			<h1 class="mui-title">我的记录</h1>
 		</header>
 		<div class="mui-content">
-			<div class="mui-card rated_info">
+			<div class="choose mui-row">
+				<button type="button" class="mui-btn mui-pull-left choosein_btn" tagid="0">未支付</button>
+				<button type="button" class="mui-btn mui-pull-left" tagid="1">已支付</button>
+				<button type="button" class="mui-btn mui-pull-left" tagid="2">待评价</button>
+				<button type="button" class="mui-btn mui-pull-left" tagid="3">全部</button>
+			</div>
+			<div class="mui-card">
 				<div class="mui-card-header">
 					订单编号：89767
 				</div>
@@ -48,7 +38,7 @@
 				<div class="mui-card-footer">
 					<a class="mui-card-link" id="pay">去支付</a>
 				</div>
-			</div>
+			</div> 
 		</div>
 		<div class="tips"><div class=" mui-icon mui-spinner"></div></div>
 	</body>
@@ -60,67 +50,10 @@
 		mui.init({
 			swipeBack:true //启用右滑关闭功能
 		});
-		$('#pay').on('tap',function(){
-
-			var orderId=parseInt(4000000*Math.random());
-			$('.tips').show();
-			var servicePrice='1';
-			var salary=1;
-			var payUrl=window.location.href;
-			var link='pay?orderId='+orderId+'&servicePrice='+servicePrice+'&salary='+salary+'&payUrl='+payUrl;
-			$.ajax({
-			    type: 'get',
-			    url: link,
-			    dataType: 'json',
-			    success: function(data) {
-			    	$('.tips').hide();
-			    	//var data= JSON.parse(data);
-					if (data.msgNo == '0000' ) {
-						var paydata={
-							'appId':data.data.appId,
-							'timeStamp':data.data.timeStamp,
-							'nonceStr':data.data.nonceStr,
-							'package':data.data.package,
-							'signature':data.data.signature,
-							'signType':data.data.signType,
-							'paySign':data.data.paySign,
-						}
-					pay(paydata)
-					}else{
-						mui.toast(data.msgInfo);
-					}	
-			    },
-			    error: function(xhr, textStatus, errorThrown) {
-			    	$('.tips').hide();
-			    	if (xhr.status == 401) {
-			    		window.location.href='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8306afd398ab31e5&redirect_uri=http%3a%2f%2fwyh.matrixwing.com%2fweixinLogIn&response_type=code&scope=snsapi_userinfo&state=needlogin#wechat_redirect'
-			    	};
-			    }
-			});
-			//orderId++;
+		$('.choose').on('tap','button',function(){
+			$('.choose .mui-btn').removeClass('choosein_btn')
+			$(this).addClass('choosein_btn')
 		})
-		function pay(paydata){
-		    wx.config({
-		        debug: false, 
-		        appId: paydata.appId, 
-		        timestamp:paydata.timeStamp,
-		        nonceStr:paydata.nonceStr,
-		        signature:paydata.signature,
-		        jsApiList: ['chooseWXPay']
-		    });
-		    wx.ready(function(){
-		        wx.chooseWXPay({
-		            timestamp: paydata.timeStamp, 
-		            nonceStr: paydata.nonceStr,
-		            package: paydata.package, 
-		            signType: paydata.signType,
-		            paySign: paydata.paySign,
-		            success: function (res) {
-		                
-		            }
-		        });
-		    });
-		}
 	</script>
 	<script src="https://s4.cnzz.com/z_stat.php?id=1260604409&web_id=1260604409" language="JavaScript"></script>
 </html>

@@ -208,7 +208,7 @@ var base = {
     },
     keepTwoDecimal:function(num){
         var result = parseFloat(num);
-        result = Math.round(num * 100) / 100;
+        result = Math.ceil(num * 100) / 100;
         return result;
     }
 }

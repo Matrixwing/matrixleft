@@ -61,6 +61,9 @@ $('#showDeatils').on('tap',function(){
 	$('.deatilsInfo').toggle()
 })
 $('#salary').on('blur',all_m)
+$('#scfw').on('tap',function(){
+	mui.toast('请慎重选择首次服务日期，该日期将决定何时给服务员发放薪资。')
+})
 function all_m(){
 	var salary = $('#salary').val();
 	var servicePrice = $('.oncharge').attr('servicePrice');
@@ -184,7 +187,7 @@ $('#pay_sure').on('tap',function(){
 	            success: function (res) {
 	                mui.toast("支付成功！");
 	                setTimeout(function(){
-	                	window.location.href='record.html'
+	                	window.location.href='paySuccess.html'
 	                }, 2000);
 	            },
 	            cancel:function(res){  

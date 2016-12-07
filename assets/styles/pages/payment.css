@@ -1,11 +1,11 @@
 .appointment{margin-top: 5px;}
 .appointment .select_icon {
-    line-height: 40px;
-    margin: 0 15px 0 0 !important;
+    margin: 0 !important;
     position: relative;
-    top: -40px;
+    top: -28px;
     color: #ccc;
     font-size: 20px;
+    right: 15px;
 }
 .appointment label{
     line-height: 1
@@ -122,4 +122,19 @@
 }
 .c_text{
     display: none;
+}
+#scfw{
+    margin-right: 10px  !important;
+}
+@media screen and (max-width: 320px) {
+    .s_selcet {
+        font-size: 14px;
+        line-height: 40px;
+        float: right;
+        width: 68%;
+    }
+    .appointment label{font-size: 14px;width: 32%}
+    .appointment .mui-input{
+        width: 68% !important
+    }
 }
