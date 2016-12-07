@@ -73,6 +73,8 @@ function all_m(){
 			if (yh!=0) {
 				$('#yh_div').show();
 				$('#yh_show').html('-￥'+yh)
+			}else{
+				$('#yh_div').hide();
 			};
 		};
 		$('#commission_show').html('￥'+commission)
@@ -88,6 +90,8 @@ function all_m(){
 			if (yh!=0) {
 				$('#yh_div').show();
 				$('#yh_show').html('-￥'+yh)
+			}else{
+				$('#yh_div').hide();
 			};
 		};
 		$('#servicePrice_show').html('￥'+servicePrice*num)
@@ -105,25 +109,30 @@ $('#pay_sure').on('tap',function(){
 	all_m();
 	var orderId = base.getQueryString('orderID');
 	var salary = $('#salary').val();
-	var commission=0;
+	var cutPrice=0;
 	var num = $('#m_num').attr('num');
 	var servicePrice = $('.oncharge').attr('servicePrice');
 	if (!servicePrice) {
 		servicePrice=0;
-		commission=base.keepTwoDecimal(salary*num*0.006);
+		cutPrice=base.keepTwoDecimal(salary*num*0.006);
 	};
 	var firstService = $('#st_time').attr('date');
 	var payUrl=window.location.href;
+	var servicePriceID=$('.oncharge').attr('stype');
+	if (!servicePriceID) {
+		servicePriceID=0;
+	};
 	$.ajax({
 	    type: 'post',
 	    url: '/pay',
 	    data:{
 	    	'orderId':orderId,
 	    	'servicePrice':servicePrice,
+	    	'servicePriceID':servicePriceID,
 	    	'salary':salary,
 	    	'payUrl':payUrl,
 	    	'firstService':firstService,
-	    	'commission':commission
+	    	'cutPrice':cutPrice
 	    },
 	    dataType: 'json',
 	    success: function(data) {
