@@ -120,3 +120,6 @@
 .mui-input-group .mui-input-row:after{
     left:0;
 }
+.c_text{
+    display: none;
+}

@@ -47,6 +47,14 @@ $(document).ready(function(){
 $('.scharge').on('tap',function(){
 	$(this).siblings().removeClass('oncharge');
 	$(this).toggleClass('oncharge');
+	var index= $('.oncharge').attr('stype');
+	$('.c_text').hide();
+	if (!index) {
+		$('.c_text').eq(2).show();
+	}else{
+		$('.c_text').eq(index-1).show();
+	};
+
 	all_m();
 })
 $('#showDeatils').on('tap',function(){
