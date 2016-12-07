@@ -27,7 +27,8 @@
     "sails-disk": "~0.10.9",
     "sails-mysql": "^0.11.5",
     "urllib": "^2.17.0",
-    "weixin-pay": "^1.1.7"
+    "weixin-pay": "^1.1.7",
+    "xml2js": "^0.4.17"
   },
   "scripts": {
     "debug": "node debug app.js",
