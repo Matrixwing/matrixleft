@@ -100,7 +100,15 @@ module.exports = {
         if (err) return cb(err);
         return cb(null,result);
       });
-  }
+  },
 
+ test:function(req,res,cb){
+  wxpay.useWXCallback(function(msg, req, res, next){
+    // 处理商户业务逻辑
+    console.log(msg);
+    // res.success() 向微信返回处理成功信息，res.fail()返回失败信息。
+    res.success();
+  })
 
+}
 }
