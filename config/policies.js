@@ -40,14 +40,6 @@ module.exports.policies = {
       logIn:true,
       sendNumToPhone:true
   },
-//
-  UserController : {
-    '*':"isAuthenticated",
-    logIn:true,
-    sendNumToPhone:true
-
-  },
-
   ServantController : {
     getCertInfo:true
 
