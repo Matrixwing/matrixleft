@@ -52,8 +52,8 @@ module.exports = {
     //appsecret:'ef65f9b655db88606885742d5e2c41d7',
     //access_token:'',
     //notify_url : 'http://1k5x895985.iask.in/ok',
-    perPayTemp:'	aP5_YUw_lC4sJ8aqGpsQWGpA5DWdvIKQEkzyRTA2nKM',//待支付订单提醒
-    interTemp: '	4etMv_lqdemL4CTnOBSgZkm_lc0SmKZX-ycYh4ykm9s',//面试通知
+    perPayTemp:'aP5_YUw_lC4sJ8aqGpsQWGpA5DWdvIKQEkzyRTA2nKM',//待支付订单提醒
+    interTemp: '4etMv_lqdemL4CTnOBSgZkm_lc0SmKZX-ycYh4ykm9s',//面试通知
     newOrderTemp:'NZV86TEHiamtyXFeMK4Xdau4RmJalP4pnB_Xye2VfrY',//新订单通知
   }
 
