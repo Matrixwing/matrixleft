@@ -50,16 +50,17 @@ module.exports = {
   },
 
   getOrderList : function (req,res) {
+    var limit =req.param('limit',5);
     var opts = {
       userID : req.session.userID,
-      status : req.param('status',000),//完成交易：0 等待交易：1 取消交易：2  全部：000
-      limit  : req.param('limit',5),
+      status : req.param('status',100),//完成交易：0 等待交易：1 取消交易：2  全部：100
+      limit  : limit,
       start  : (req.param('start',1)-1)*limit,
     };
 
     //var opts = {
     //  userID : req.session.userID,
-    //  status : req.param('status',1),//完成交易：0 等待交易：1 取消交易：2  全部：000
+    //  status : req.param('status',100),//完成交易：0 等待交易：1 取消交易：2  全部：100
     //  start  : 0,
     //  limit  : 5,
     //};
