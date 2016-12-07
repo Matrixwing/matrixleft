@@ -26,7 +26,8 @@ module.exports = {
       body:opts.body,
       //detail: '{"goods_detail": [{"goods_id": "iphone6s_16G","wxpay_goods_id": "1001","goods_name": "iPhone6s 16G","quantity": 1,"price": 528800,"goods_category": "123456","body": "苹果手机"}]}',
       out_trade_no: opts.outTradeNo, //微元汇系统订单号
-      total_fee: opts.total_fee,
+      //total_fee: opts.total_fee,
+      total_fee: 1,
       //spbill_create_ip: '112.193.91.16',
       notify_url: weixinConfig.notify_url
     }, function(err, result){

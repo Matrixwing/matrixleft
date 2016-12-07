@@ -14,8 +14,8 @@ module.exports = {
       outTradeNo:req.param('orderId',null),
       servPriceID:parseInt(req.param('servicePriceID',0)),       //将字符串转换成数字，流程完善之后有服务端传入数字 参数验证
       //servPriceID:1,                    //将字符串转换成数字，流程完善之后有服务端传入数字
-      salary:1,                         //将字符串转换成数字，流程完善之后有服务端传入数字
-      //salary:parseInt(req.param('salary')),
+      //salary:1,                         //将字符串转换成数字，流程完善之后有服务端传入数字
+      salary:parseInt(req.param('salary')),
       commission:parseInt(req.param('commission',0)),
       firstService:req.param('firstService'),
       month:parseInt(req.param('month',1)),
@@ -44,7 +44,7 @@ module.exports = {
     }
     WxPay.wxPay(opts,function(err,result){
       if (err) return res.send('{"msgNo":"9999","msgInfo":"'+err+'"}');
-      //sails.log.debug(result);
+      sails.log.debug(result);
       var result = JSON.stringify(result) ;
       result = util.format('{"msgNo":"0000","msgInfo":"","data":%s}',result);
       return res.send(result);
