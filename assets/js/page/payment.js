@@ -163,6 +163,7 @@ $('#pay_sure').on('tap',function(){
 })
 
 	function pay(paydata){
+		console.log(paydata);
 	    wx.config({
 	        debug: false, 
 	        appId: paydata.appId, 
