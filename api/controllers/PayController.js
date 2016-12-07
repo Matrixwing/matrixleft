@@ -7,6 +7,7 @@
 var util = require('util');
 module.exports = {
 	pay : function(req,res){
+
     var opts = {
       userID:req.session.userID,
       outTradeNo:req.param('orderId',null),
@@ -52,6 +53,7 @@ module.exports = {
     console.log(req.param('return_code'));
     console.log(req.param('return_msg'));
     //WxMessage.sendPayMsgToUser()
+    res.success();
   }
 };
 
