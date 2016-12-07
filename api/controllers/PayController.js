@@ -6,6 +6,7 @@
  */
 var util = require('util');
 var myutil =require('../util/util.js');
+var WXPay = require('weixin-pay');
 module.exports = {
 	pay : function(req,res){
     console.log('1111111111111111111111111',req.body);
@@ -54,22 +55,31 @@ module.exports = {
   notice : function(req,res){
 
     console.log(req.param('return_code'));
-    console.log(req.param('return_msg'));
+
     console.log(myutil);
 
-    myutil.pipe(req, function(err,data){
-      console.log('data',data);
-      var xml = data.toString('utf8');
-      myutil.parseXML(xml, function(err, msg){
-        console.log('err',err);
-        console.log('111111',msg);
-        req.wxmessage = msg;
-        console.log('111111',msg);
-      });
-    });
-    res.end(myutil.buildXML({ xml:{ return_code:'SUCCESS' } }));
-    //WxMessage.sendPayMsgToUser()
-    //res.success();
+    //myutil.pipe(req, function(err,data){
+    //  console.log('data',data);
+    //  var xml = data.toString('utf8');
+    //  myutil.parseXML(xml, function(err, msg){
+    //    console.log('err',err);
+    //    console.log('111111',msg);
+    //    req.wxmessage = msg;
+    //    console.log('111111',msg);
+    //  });
+    //});
+    //res.end(myutil.buildXML({ xml:{ return_code:'SUCCESS' } }));
+    ////WxMessage.sendPayMsgToUser()
+    ////res.success();
+
+    WXPay.useWXCallback(function(msg, req, res, next){
+      // 处理商户业务逻辑
+      console.log(msg);
+      // res.success() 向微信返回处理成功信息，res.fail()返回失败信息。
+      res.success();
+    })
+
+
   },
 
   wechat : function(req,res,next){
