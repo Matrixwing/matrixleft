@@ -70,7 +70,7 @@ module.exports = {
           User.find({userID:order.userID}).exec(function(err,user){
             user=user[0];
             if(err) if(err) return next(err);
-            User.find({userID:order.servantID,role:2}).exec(function(err,servant){
+            User.find({userID:order.servantID}).exec(function(err,servant){
               servant=servant[0];
               if (err) return next(err);
               if (servant){
