@@ -98,15 +98,15 @@ module.exports = {
           console.log('---------11111--------------',opts);
           Order.find({orderID:opts.outTradeNo}).exec(function(err,oldOrder){
             console.log(err);
-            console.log(newOlder);
+            console.log(oldOrder);
             if(err) return next(err);
             var remark=JSON.parse(oldOrder[0].remark);
             remark.firstService=opts.firstService;
             remark.month=opts.month;
             console.log('-------------oldOrder------------',remark);
-            Order.update({orderID:opts.outTradeNo},{sericePrice:opts.sericePrice,salary:opts.salary,cutPrice:opts.cutPrice,commission:commission,remark:remark}).exec(function(err,newOlder){
+            Order.update({orderID:opts.outTradeNo},{sericePrice:opts.sericePrice,salary:opts.salary,cutPrice:opts.cutPrice,commission:commission,remark:remark}).exec(function(err,newOrder){
               console.log(err);
-              console.log(newOlder);
+              console.log(newOrder);
               if(err) return cb(err);
               return next(null,opts)
             })

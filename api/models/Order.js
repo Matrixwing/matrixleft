@@ -37,10 +37,16 @@ module.exports = {
       type: 'datetime',
     },
     servicePrice :{
-      type: 'float',
+      type: 'integer',
     },
     salary :{
-      type: 'float',
+      type: 'integer',
+    },
+    cutPrice:{
+      type: 'integer',
+    },
+    commission:{
+      type: 'integer',
     },
     status :{
       type: 'integer',   //完成交易：0  等待交易：1    取消交易：2
@@ -51,12 +57,12 @@ module.exports = {
     platform  :{
       type: 'string',
     },
-    ResultCode    :{
+    resultCode    :{
       type: 'string',
     },
-    ErrCodeAndDes   :{
+    returnCode   :{
       type: 'string',
-      size:256
+      size:2048
     },
     remark   :{
       type: 'string',
