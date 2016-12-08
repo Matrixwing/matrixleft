@@ -41,7 +41,7 @@ module.exports = {
     access_token:'',
     mch_id:'1402095402',
     partner_key:'qd20160725scfkilejlmatrix7u8x0kd',//微信商户平台API密钥
-    url:'http://wyh.matrixwing.com',//公众号的域名
+    url:'http://wyh.matrixwing.com/',//公众号的域名
     notify_url : 'http://wyh.matrixwing.com/notice',
     loginPage : 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8306afd398ab31e5&redirect_uri=' +
     'http%3a%2f%2fwyh.matrixwing.com%2fweixinLogIn&response_type=code&scope=snsapi_userinfo&state=needlogin#wechat_redirect',//通过微信的授权登录的页面
@@ -52,6 +52,7 @@ module.exports = {
     //appsecret:'ef65f9b655db88606885742d5e2c41d7',
     //access_token:'',
     //notify_url : 'http://1k5x895985.iask.in/ok',
+    perPayUrl:'http://wyh.matrixwing.com/record.html',
     perPayTemp:'aP5_YUw_lC4sJ8aqGpsQWGpA5DWdvIKQEkzyRTA2nKM',//待支付订单提醒
     interTemp: '4etMv_lqdemL4CTnOBSgZkm_lc0SmKZX-ycYh4ykm9s',//面试通知
     newOrderTemp:'NZV86TEHiamtyXFeMK4Xdau4RmJalP4pnB_Xye2VfrY',//新订单通知

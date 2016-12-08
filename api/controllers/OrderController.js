@@ -27,7 +27,6 @@ module.exports = {
       res.send('{"msgNo":"9999","msgInfo":"参数错误"}');
     }
 
-
     //todo 后续需要后台判断身份证和姓名
     if(opts.userName==''&& opts.phone == '') {
       order.order(opts,function(err,result){
@@ -38,12 +37,9 @@ module.exports = {
         result = util.format('{"msgNo":"0000","msgInfo":"预约成功","data":%s}',str);
         res.send(result);
       })
-
     }else{
-
       //完善用户姓名和身份证 后续需要修改
       User.update({userID:opts.userID},{userName:opts.userName,phone:opts.phone}).exec(function(err,user){
-
         if(err) return res.send('{"msgNo":"9999","msgInfo":"请您稍后再试"}');
         order.order(opts,function(err,result){
           console.log(err);
@@ -55,7 +51,6 @@ module.exports = {
         })
       })
     }
-
   },
 
   getOrderList : function (req,res) {
@@ -66,14 +61,12 @@ module.exports = {
       limit  : limit,
       start  : (req.param('start',1)-1)*limit,
     };
-
     //var opts = {
     //  userID : req.session.userID,
     //  status : req.param('status',100),//完成交易：0 等待交易：1 取消交易：2  全部：100
     //  start  : 0,
     //  limit  : 5,
     //};
-
     //if(!opts.status||!opts.start||!opts.limit){
     //  return  res.send('{"msgNo":"9999","msgInfo":"参数错误"}');
     //}

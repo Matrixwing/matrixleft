@@ -104,8 +104,13 @@ module.exports = {
    //console.log(req.body);
    //todo 校验签名
    //todo 数据库锁
+   //todo 订单是否已经写过了？
+   Order.find({orderID:opts.orderID}).exec(function(err,order) {
+     order = order[0] ;
+    if(order){
+      order.status!=1;
 
-
-
+    }
+   })
 }
 }

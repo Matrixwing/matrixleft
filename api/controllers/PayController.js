@@ -54,13 +54,45 @@ module.exports = {
 
   notice : function(req,res){
 
+
+  /*
+   { xml:
+   { appid: [ 'wx8306afd398ab31e5' ],
+   bank_type: [ 'BOC_DEBIT' ],
+   cash_fee: [ '1' ],
+   fee_type: [ 'CNY' ],
+   is_subscribe: [ 'Y' ],
+   mch_id: [ '1402095402' ],
+   nonce_str: [ 'tQIf9LEQFbzT8CJoJpfVBhbxUXJJSmpc' ],
+   openid: [ 'ovSs8w7mUy1j1SkeLBsmWpjVpkGM' ],
+   out_trade_no: [ '201612081146549039' ],
+   result_code: [ 'SUCCESS' ],
+   return_code: [ 'SUCCESS' ],
+   sign: [ 'E176BA8F4676EFEC56C45DE7B20A08BA' ],
+   time_end: [ '20161208115437' ],
+   total_fee: [ '1' ],
+   trade_type: [ 'JSAPI' ],
+   transaction_id: [ '4003152001201612082142160784' ] } }
+   */
+    //todo 成功失败
     console.log(req.body);
     var msg=req.body.xml
     var opts = {
-
+      appid:msg.appid[0],
+      nonce_str:msg.nonce_str[0],
+      sign:msg.sign[0],
+      result_code:msg.result_code[0],
+      openid:msg.openid[0],
+      total_fee:msg.total_fee[0],
+      transaction_id:msg.transaction_id[0],
+      orderID:msg.out_trade_no[0],
     }
 
-    res.end(myutil.buildXML({ xml:{ return_code:'SUCCESS' } }));
+    order.completePay(opts,function(err,result){
+
+      res.end(myutil.buildXML({ xml:{ return_code:'SUCCESS' } }));
+    })
+    //res.end(myutil.buildXML({ xml:{ return_code:'SUCCESS' } }));
     //res.end(myutil.buildXML({ xml:{ return_code:'SUCCESS' } }));
     ////WxMessage.sendPayMsgToUser()
     ////res.success();

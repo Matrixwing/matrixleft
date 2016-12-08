@@ -32,7 +32,6 @@ module.exports = {
       var result={
         orderID:order.orderID
       };
-
       async.parallel([
         function(next){//发面试邀请
           User.find({userID:order.servantID,role:2}).exec(function(err,servant){
@@ -65,7 +64,6 @@ module.exports = {
             return next(null,result);
           });
         },
-
         function(next){//发管理员通知
           User.find({userID:order.userID}).exec(function(err,user){
             console.log(user);
@@ -97,12 +95,8 @@ module.exports = {
         console.log(err);
         console.log(result);
       })
-
-
-
       return cb(null,result)
     })
-
   },
 
   //取得订单列表
