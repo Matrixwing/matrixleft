@@ -83,8 +83,8 @@ module.exports = {
       totalFee:msg.total_fee[0],
       transactionID:msg.transaction_id[0],//微信的订单号
       orderID:msg.out_trade_no[0],          //系统的订到号
-      resultCode:JSON.stringify(msg.return_code[0]),
-      returnCode:msg,
+      resultCode:msg.return_code[0],
+      returnCode:JSON.stringify(msg),
       //paidTime:msg.time_end[0]
     }
     console.log(opts);
