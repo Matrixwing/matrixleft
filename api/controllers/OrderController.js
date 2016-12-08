@@ -70,7 +70,7 @@ module.exports = {
     order.getOrderList(opts,function(err,orderList){
       if(err) return res.send('{"msgNo":"9999","msgInfo":"服务出错，请您稍后再试"}');
       var str = JSON.stringify(orderList) ;
-      result = util.format('{"msgNo":"0000","msgInfo":"查询成功","data":%s}',str);
+      var  result = util.format('{"msgNo":"0000","msgInfo":"查询成功","data":%s}',str);
       res.send(result);
     })
   },
@@ -84,12 +84,18 @@ module.exports = {
     if(!opts.orderID){
       res.send('{"msgNo":"9999","msgInfo":"参数错误"}');
     }
-    order.getOrderDetail(opts,function(err,result){
-      if (err) return res.send('{"msgNo":"9999","msgInfo":"请您稍后再试"}');
-      var str = JSON.stringify(result);
-      result = util.format('{"msgNo":"0000","msgInfo":"查询成功","data":%s}', str);
-      res.send(result);
-    });
+    //order.getOrderDetail(opts,function(err,result){
+    //  if (err) return res.send('{"msgNo":"9999","msgInfo":"请您稍后再试"}');
+    //  var str = JSON.stringify(result);
+    //  result = util.format('{"msgNo":"0000","msgInfo":"查询成功","data":%s}', str);
+    //  res.send(result);
+    //});
+    Order.find({orderID:opts.orderID}).exec(function(err,orderInfo){
+        if (err) return res.send('{"msgNo":"9999","msgInfo":"请您稍后再试"}');
+        var str = JSON.stringify(orderInfo[0]);
+        var result = util.format('{"msgNo":"0000","msgInfo":"查询成功","data":%s}', str);
+        res.send(result);
+    })
   },
 
   buyIns:function(req,res){
@@ -107,7 +113,7 @@ module.exports = {
     order.buyIns(opts,function(err,ins){
       if(err) return res.send('{"msgNo":"9999","msgInfo":"请您稍后再试"}');
       var str = JSON.stringify(ins);
-      result = util.format('{"msgNo":"0000","msgInfo":"成功","data":%s}', str);
+      var result = util.format('{"msgNo":"0000","msgInfo":"成功","data":%s}', str);
       res.send(result);
     })
   }
