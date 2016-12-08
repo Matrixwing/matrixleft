@@ -28,6 +28,10 @@ module.exports = {
       res.send('{"msgNo":"9999","msgInfo":"参数错误"}');
     }
 
+    if(opts.userID==opts.servantID){
+      return res.send('{"msgNo":"9999","msgInfo":"对不起，不能预约您自己"}');
+    }
+
     //todo 后续需要后台判断身份证和姓名
     if(opts.userName==''&& opts.phone == '') {
       User.find({userID:opts.expectSalary}).exec(function(err,user) {
