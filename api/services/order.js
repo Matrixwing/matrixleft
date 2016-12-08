@@ -45,7 +45,7 @@ module.exports = {
                 apptPlace:opts.apptPlace,
                 tags:opts.tags
               }
-              console.log('发面试邀请',msg);
+
               WxMessage.sendInterviewToSeverant(msg,function(err,result){
                 if(err) return next(err)
                 return next(null,result);
@@ -60,7 +60,7 @@ module.exports = {
             createTime:order.createTime,
             validTime:order.validTime
           }
-          console.log('发支付信息',msg);
+
           WxMessage.sendPayMsgToUser(msg,function(err,result){
             if(err) return next(err)
             return next(null,result);
@@ -80,13 +80,12 @@ module.exports = {
                   msg:invMsg,
                   tags:opts.tags
                 }
-                console.log('发管理员通知',msg);
+
                 WxMessage.sendPayMsgToAdmin(msg,function(err,result){
                   if(err) return next(err)
                   return next(null,'result');
                 });
               }
-
             })
           })
         }
