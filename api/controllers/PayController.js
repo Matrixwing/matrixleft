@@ -90,7 +90,7 @@ module.exports = {
       paidTime:msg.time_end[0]
     }
 
-    order.completePay(opts,function(err,result){
+    WxPay.completePay(opts,function(err,result){
       if(err) return res.end(myutil.buildXML({ xml:{ return_code:'FAIL' } }));
       return  res.end(myutil.buildXML({ xml:{ return_code:'SUCCESS' } }));
     })
