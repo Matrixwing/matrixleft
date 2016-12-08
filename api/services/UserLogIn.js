@@ -107,9 +107,10 @@ module.exports = {
           '\ud83d[\udc00-\ude4f]',
           '\ud83d[\ude80-\udeff]'
         ];
-        dataValided.nikename=dataValided.nikename.replace(new RegExp(ranges.join('|'), 'g'), '');
+         var nike = dataValided.nikename;
+        dataValided.nikename=nike.replace(new RegExp(ranges.join('|'), 'g'), '');
         delete dataValided.headimgurl;
-        delete dataValided.sexl;
+        delete dataValided.sex;
         cb(null,dataValided);
       })
     }).on('error', function(e) {

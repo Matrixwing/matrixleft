@@ -19,34 +19,42 @@ module.exports = {
       // totalfee:req.getParams('totalFee',null),
       apptTime:req.param('apptTime',''), //预约时间
       apptPlace:req.param('apptPlace',''),
+      userName: req.param('userName',''),
+      phone   : req.param('phone','')
     };
-    //--------------------------------------
 
-    ////--------------测试----------------
-    //var opts = {
-    //  userID:req.session.userID,
-    //  openid:req.session.openid,
-    //  servantID:6,
-    //  tags : ['sdf','sdfasd','sdfa'],
-    //  // totalfee:req.getParams('totalFee',null),
-    //  apptTime:'2016-12-06 20:28', //预约时间
-    //  apptPlace:'阳光春天',
-    //};
-    //--------------------------------------
-    console.log(opts);
     //todo 需要参数处理:apptTime
     if(opts.servantID==''||opts.apptPlace==''||opts.apptTime==''){
       res.send('{"msgNo":"9999","msgInfo":"参数错误"}');
     }
 
-    order.order(opts,function(err,result){
-      console.log(err);
-      console.log(result);
-      if (err) return res.send('{"msgNo":"9999","msgInfo":"服务出错，请您稍后再试","data":'+JSON.stringify(err) +'}');
-      var str = JSON.stringify(result) ;
-      result = util.format('{"msgNo":"0000","msgInfo":"预约成功","data":%s}',str);
-      res.send(result);
-    })
+
+    //todo 后续需要后台判断身份证和姓名
+    if(userName==''&& phone == '') {
+      order.order(opts,function(err,result){
+        console.log(err);
+        console.log(result);
+        if (err) return res.send('{"msgNo":"9999","msgInfo":"请您稍后再试"}');
+        var str = JSON.stringify(result) ;
+        result = util.format('{"msgNo":"0000","msgInfo":"预约成功","data":%s}',str);
+        res.send(result);
+      })
+    }else{
+      //完善用户姓名和身份证 后续需要修改
+      User.update({userID:opts.UserID},{userName:opts.userName,phone:opts.phone}).exec(function(err,user){
+        if(err) return res.send('{"msgNo":"9999","msgInfo":"请您稍后再试"}');
+        order.order(opts,function(err,result){
+          console.log(err);
+          console.log(result);
+          if (err) return res.send('{"msgNo":"9999","msgInfo":"请您稍后再试"}');
+          var str = JSON.stringify(result) ;
+          result = util.format('{"msgNo":"0000","msgInfo":"预约成功","data":%s}',str);
+          res.send(result);
+        })
+      })
+
+    }
+
   },
 
   getOrderList : function (req,res) {
