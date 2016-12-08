@@ -130,7 +130,8 @@ module.exports = {
             color:"#173177"
           },
           remark:{
-            value:opts.tags,
+            //value:opts.tags,
+            value:'',
             color:"#173177"
           },
         }
