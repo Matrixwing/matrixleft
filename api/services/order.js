@@ -22,7 +22,8 @@ module.exports = {
       remark : JSON.stringify({
         apptTime:opts.apptTime,
         apptPlace:opts.apptPlace,
-        tags:opts.tags
+        tags:opts.tags,
+        expectSalary:opts.expectSalary
       }),
     }
 

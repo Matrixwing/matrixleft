@@ -19,7 +19,8 @@ module.exports = {
       apptTime:req.param('apptTime',''), //预约时间
       apptPlace:req.param('apptPlace',''),
       userName: req.param('userName',''),
-      phone   : req.param('phone','')
+      phone   : req.param('phone',''),
+      expectSalary : req.param('expectSalary'),
     };
 
     //todo 需要参数处理:apptTime

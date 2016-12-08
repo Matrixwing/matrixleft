@@ -87,8 +87,8 @@ module.exports = {
             opts.salary*=opts.month;
             opts.total_fee=(opts.salary+opts.servPrice)-opts.cutPrice;//没有手续费的价格
             console.log('2222222',opts.total_fee);
-            var commission= opts.total_fee*comRate
-            opts.total_fee+=commission;
+            opts.commission= opts.total_fee*comRate
+            opts.total_fee+= opts.commission;
             opts.total_fee=Math.ceil(opts.total_fee);
             console.log('3333333',opts.total_fee);
             opts.body = util.format('微元汇-%s %s月家政服务',opts.servName,opts.month);
@@ -103,8 +103,9 @@ module.exports = {
             var remark=JSON.parse(oldOrder[0].remark);
             remark.firstService=opts.firstService;
             remark.month=opts.month;
+            remark = JSON.stringify(remark);
             console.log('-------------oldOrder------------',remark);
-            Order.update({orderID:opts.outTradeNo},{sericePrice:opts.sericePrice,salary:opts.salary,cutPrice:opts.cutPrice,commission:commission,remark:remark}).exec(function(err,newOrder){
+            Order.update({orderID:opts.outTradeNo},{sericePrice:opts.sericePrice,salary:opts.salary,cutPrice:opts.cutPrice,commission:opts.commission,remark:remark}).exec(function(err,newOrder){
               console.log(err);
               console.log(newOrder);
               if(err) return cb(err);
