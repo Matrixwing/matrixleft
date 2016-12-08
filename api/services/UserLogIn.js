@@ -101,6 +101,13 @@ module.exports = {
         var dataValided = data;
         dataValided.avatarUrl=dataValided.headimgurl;
         dataValided.gender=dataValided.sex;
+        //去掉emoji表情
+        var ranges = [
+          '\ud83c[\udf00-\udfff]',
+          '\ud83d[\udc00-\ude4f]',
+          '\ud83d[\ude80-\udeff]'
+        ];
+        dataValided.nikename=dataValided.nikename.replace(new RegExp(ranges.join('|'), 'g'), '');
         delete dataValided.headimgurl;
         delete dataValided.sexl;
         cb(null,dataValided);
