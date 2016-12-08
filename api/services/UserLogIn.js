@@ -102,13 +102,14 @@ module.exports = {
         dataValided.avatarUrl=dataValided.headimgurl;
         dataValided.gender=dataValided.sex;
         //去掉emoji表情
-        var ranges = [
-          '\ud83c[\udf00-\udfff]',
-          '\ud83d[\udc00-\ude4f]',
-          '\ud83d[\ude80-\udeff]'
-        ];
-         var nike = dataValided.nikename;
-        dataValided.nikename=nike.replace(new RegExp(ranges.join('|'), 'g'), '');
+        //var ranges = [
+        //  '\ud83c[\udf00-\udfff]',
+        //  '\ud83d[\udc00-\ude4f]',
+        //  '\ud83d[\ude80-\udeff]'
+        //];
+        // var nike = dataValided.nikename;
+        //console.log(nike);
+        //dataValided.nikename=nike.replace(new RegExp(ranges.join('|'), 'g'), '');
         delete dataValided.headimgurl;
         delete dataValided.sex;
         cb(null,dataValided);
