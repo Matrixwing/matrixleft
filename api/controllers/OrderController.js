@@ -106,7 +106,6 @@ module.exports = {
       orderID : req.param('orderID',''),
     };
 
-
     if(opts.userID==''||opts.IDCard==''||opts.userName==''||opts.orderID==''){
       res.send('{"msgNo":"9999","msgInfo":"参数错误"}');
     }

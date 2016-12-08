@@ -83,6 +83,7 @@ module.exports = {
             else if(opts.month==6){opts.cutPrice=1500;}
             else if(opts.month==12){opts.cutPrice=10000;}
             console.log('-----------------------',opts);
+            //opts.msalary=opts.salary;
             opts.sericePrice*=opts.month;
             opts.salary*=opts.month;
             opts.total_fee=(opts.salary+opts.servPrice)-opts.cutPrice;//没有手续费的价格
@@ -94,7 +95,8 @@ module.exports = {
             opts.body = util.format('微元汇-%s %s月家政服务',opts.servName,opts.month);
             next(null,opts)
           })
-        },function(opts,next){ //修改订单
+        },function(opts,next){ //起调支付控件是先修改定
+
           console.log('---------11111--------------',opts);
           Order.find({orderID:opts.outTradeNo}).exec(function(err,oldOrder){
             console.log(err);
@@ -103,6 +105,7 @@ module.exports = {
             var remark=JSON.parse(oldOrder[0].remark);
             remark.firstService=opts.firstService;
             remark.month=opts.month;
+            //remark.salary=opts.msalary.
             remark.servPriceID=opts.servPriceID;
             remark = JSON.stringify(remark);
             console.log('-------------oldOrder------------',remark);
