@@ -95,7 +95,10 @@ module.exports = {
             next(null,opts)
           })
         },function(opts,next){ //修改订单
+          console.log('---------11111--------------',opts);
           Order.find({orderID:opts.outTradeNo}).exec(function(err,oldOrder){
+            console.log(err);
+            console.log(newOlder);
             if(err) return next(err);
             var remark=JSON.parse(oldOrder[0].remark);
             remark.firstService=opts.firstService;
