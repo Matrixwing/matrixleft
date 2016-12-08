@@ -173,6 +173,23 @@ module.exports = {
   //服务员响应邀请
   answerInvitation : function(opt,cb){
 
-  }
+  },
+
+  buyIns : function (opts,cb){
+    var insInfo = {
+      orderID:opts.orderID,
+      beneficiaryID:opts.userID,
+      status : 1,
+      remark:JSON.stringify({
+        userName:opts.userName,
+        IDCard:opts.IDCard
+      })
+    };
+    InsOrder.create(insInfo).exec(function(err,Ins){
+      if(err) return cb(err);
+      return cb(null,Ins);
+    })
+  },
+
 
 }

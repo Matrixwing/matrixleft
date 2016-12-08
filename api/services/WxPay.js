@@ -103,6 +103,7 @@ module.exports = {
             var remark=JSON.parse(oldOrder[0].remark);
             remark.firstService=opts.firstService;
             remark.month=opts.month;
+            remark.servPriceID=opts.servPriceID;
             remark = JSON.stringify(remark);
             console.log('-------------oldOrder------------',remark);
             Order.update({orderID:opts.outTradeNo},{sericePrice:opts.sericePrice,salary:opts.salary,cutPrice:opts.cutPrice,commission:opts.commission,remark:remark}).exec(function(err,newOrder){

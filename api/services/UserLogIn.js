@@ -16,8 +16,6 @@ module.exports = {
    */
   getUserByCode: function (opts,cb) {
     //发起hpttps 请求
-
-
     var hostname = util.format('https://api.weixin.qq.com/sns/oauth2/access_token?appid=%s&secret=%s&code=%s' +
       '&grant_type=authorization_code',weixinConfig.appid,weixinConfig.appsecret,opts.code);
     console.log(hostname);

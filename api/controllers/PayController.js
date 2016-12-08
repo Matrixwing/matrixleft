@@ -21,7 +21,7 @@ module.exports = {
       firstService:req.param('firstService'),
       month:parseInt(req.param('month',1)),
       cutPrice:parseInt(req.param('cutPrice',0)),
-      body:'微元汇-家政服务',                                        //暂时写死
+      body:'',                                        //暂时写死
       payUrl:req.param('payUrl',req.headers['referer'])//当前支付网页的URL
     };
 
