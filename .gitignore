@@ -44,6 +44,8 @@ config/env/development.js
 config/env/production.js
 config/env/ljhDev.js
 config/env/whlDev.js
+config/connections.js
+
 
 ################################################
 # Dependencies
