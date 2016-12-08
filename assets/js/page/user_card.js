@@ -234,13 +234,14 @@
 			$('#qcode_div').remove()
 		}
 		$('#shi').on('tap',function(){
-			mui.toast('已通过小元实名认证')
+			mui.toast('已通过小元实名认证');
+			_czc.push(["_trackEvent", "预约页面", "实", "", "", ""]);
 		})
 		$('#jian').on('tap',function(){
-			mui.toast('已通过小元体检认证')
+			mui.toast('已通过小元体检认证');
+			_czc.push(["_trackEvent", "预约页面", "检", "", "", ""]);
 		})
-
-		$('.yy_bar').on('tap',function(){
-			var userID=base.getQueryString('userID');
-			window.location.href='appointment.html?userID='+userID
-		})
+$('#edit').on('tap',function(){
+	var userID = base.getQueryString('userID')
+	window.location.href='editInfo.html?userID='+userID
+})

@@ -72,14 +72,13 @@ $('#user_card').on('tap',function(){
 	_czc.push(["_trackEvent", "服务员主页", "名片", "", "", ""]);
 	window.location.href='userCard.html?userID='+userID;
 })
-$('#editInfo').on('tap',function(){
-	var userID=$('.nickname').attr('userID');
-	_czc.push(["_trackEvent", "服务员主页", "资料", "", "", ""]);
-	window.location.href='editInfo.html?userID='+userID;
-})
 $('#share').on('tap',function(){
 	var userID=$('.nickname').attr('userID');
 	var avatarUrl = $('#avatarUrl').attr('src');
 	_czc.push(["_trackEvent", "服务员主页", "分享", "", "", ""]);
 	window.location.href='share.html?userID='+userID+'&avatarUrl='+avatarUrl;
+})
+$('.wait').on('tap',function(){
+	mui.toast('正在开发中，敬请期待');
+	return;
 })

@@ -57,6 +57,7 @@ $(document).ready(function(){
 	});
 	//延迟获取tag
 	//setTimeout("getTagList()",1500)
+	base.tabbarHtml()
 })
 
 
@@ -86,6 +87,7 @@ $('#offCanvasShow').on('tap','.ready',function() {
 	$(this).addClass('choosein_btn')
 	$('.title').html($(this).html())
 	offCanvasWrapper.offCanvas('show');
+	_czc.push(["_trackEvent", "服务列表", $(this).html(), "", "", ""]);
 	//getTagList();
 });
 
@@ -297,7 +299,8 @@ $('#tag_sure').on('tap',function(){
 	d_e = dataList;
 	getServantList(dataList,'clear')
 	console.log(JSON.stringify(needs));
-	base.setCookie('needs',JSON.stringify(needs))
+	base.setCookie('needs',JSON.stringify(needs));
+	_czc.push(["_trackEvent", "筛选", "确定", "", "", ""]);
 })
 var count = 1;
 var d_e='';
@@ -325,7 +328,11 @@ function getServantList(dataList,clear){
 		    	for(var i =0;i<data.data.servantList.length;i++){
 		    		serventList.push('<li class="mui-table-view-cell mui-media" userID="'+data.data.servantList[i].userID+'">')
 		    			serventList.push('<a class="mui-navigate-right">')
-		    				serventList.push('<img class="mui-media-object mui-pull-left" src="'+data.data.servantList[i].avatarUrl+'">')
+			    			if (data.data.servantList[i].avatarUrl) {
+			    				serventList.push('<img class="mui-media-object mui-pull-left" src="'+data.data.servantList[i].avatarUrl+'">')
+			    			}else{
+			    				serventList.push('<img class="mui-media-object mui-pull-left" src="images/timg.jpg">')
+			    			};
 		    				serventList.push('<div class="mui-media-body">')
 		    					serventList.push('<div class="mui-row">')
 									serventList.push('<span class="mui-pull-left">'+data.data.servantList[i].userName+'</span>')
@@ -368,7 +375,7 @@ function getServantList(dataList,clear){
 		    		$('#getServantList').empty();
 		    		var scroll = mui('#pullrefresh').scroll(); 
 		    		if (scroll.y!='0') {
-		    			mui('#pullrefresh').pullRefresh().scrollTo(0,0,0)
+		    			mui('#pullrefresh').pullRefresh().scrollTo(0,0,1000)
 		    			console.log(scroll.y);
 		    			//mui('#pullrefresh').pullRefresh().disablePullupToRefresh();
 		    			//mui('#pullrefresh').pullRefresh().enablePullupToRefresh();
@@ -401,10 +408,22 @@ $('.tips_close').on('tap',function(){
 	$('.tips').fadeOut("fast")
 })
 $('#txt').on('tap',function(){
-	$('.tips').fadeIn("fast")
+	$('.tips').fadeIn("fast");
+	_czc.push(["_trackEvent", "服务列表", "服务内容", "", "", ""]);
 })
 $('#offCanvasShow').on('tap','#MaternityMatron',function(){
 	window.location.href='MaternityMatron.html'
 })
 
-
+var scroll = mui('#pullrefresh').scroll(); 
+document.getElementById('pullrefresh').addEventListener('scroll', function (e ) { 
+	var title = $('.choosein_btn').html();
+	if (title) {
+	  	if (-(scroll.y)>94) {
+		  	$('.mui-title').html(title)
+		}else{
+			$('.mui-title').html('服务列表')
+		}
+	};
+  
+}) 

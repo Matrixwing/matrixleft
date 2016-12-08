@@ -36,7 +36,7 @@ var base = {
                     tabbarHtml.push('<span class="mui-tab-label">我的</span>')
                 tabbarHtml.push('</a> ')
             }else{
-                tabbarHtml.push('<a class="mui-tab-item mui-active" id="index"  data-click="首页">')
+                tabbarHtml.push('<a class="mui-tab-item mui-active" id="nurseList"  data-click="找服务">')
                     tabbarHtml.push('<span class="mui-icon iconfont icon-yduizhuye"></span>')
                     tabbarHtml.push('<span class="mui-tab-label">首页</span>')
                 tabbarHtml.push('</a>')

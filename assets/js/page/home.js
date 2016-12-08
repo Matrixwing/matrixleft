@@ -129,3 +129,7 @@
 			window.location.href='share.html?userID='+userID+'&avatarUrl='+avatarUrl;
 		})
 		base.tabbarHtml();
+		$('.wait').on('tap',function(){
+			mui.toast('正在开发中，敬请期待');
+			return;
+		})

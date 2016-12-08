@@ -242,10 +242,12 @@
 			});
 		})
 		$('#shi').on('tap',function(){
-			mui.toast('已通过小元实名认证')
+			mui.toast('已通过小元实名认证');
+			_czc.push(["_trackEvent", "预约页面", "实", "", "", ""]);
 		})
 		$('#jian').on('tap',function(){
 			//mui.toast('已通过小元体检认证')
+			_czc.push(["_trackEvent", "预约页面", "检", "", "", ""]);
 		})
 
 /*order*/
@@ -334,6 +336,7 @@
 		var apptPlace = $('#local').html();
 		var userName = $('#gz_userName').val();
 		var phone = $('#gz_phone').val();
+		var expectSalary = $('#expectSalary_in').val();
 		if (apptPlace == '选择地点') {
 			mui.toast('请选择面试地点');
 			return;
@@ -360,7 +363,8 @@
 		    	'apptTime':apptTime,
 		    	'apptPlace':apptPlace,
 		    	'phone':phone,
-		    	'userName':userName
+		    	'userName':userName,
+		    	'expectSalary':expectSalary
 		    },
 		    dataType: 'json',
 		    success: function(data) {
@@ -381,5 +385,6 @@
 		    	}
 		    }
 		});
+		czc.push(["_trackEvent", "预约页面", "下一步", "", "", ""]);
 	})
 

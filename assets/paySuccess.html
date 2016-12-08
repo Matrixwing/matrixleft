@@ -61,8 +61,8 @@
 			    transform: scaleY(.5);
 			    background-color: #c8c7cc;
 			}
-			#reg{width: 100% !important;font-size: 14px;background-color: #e3457d;border-color: #F11764}
-			#reg .mui-spinner{
+			#buyIns{width: 100% !important;font-size: 14px;background-color: #fc5b3e;border-color: #fc5b3e}
+			#buyIns .mui-spinner{
 				width: 19px;
 				height: 19px;
 			    margin-top: -5px;
@@ -71,6 +71,22 @@
 			}
 			.mui-btn {
 				padding: 10px;
+			}
+			.mui-content-padded{
+				text-align: center;
+				margin-top: 30px;
+			}
+			.ret_div{
+				display: none;
+			}
+			.ret{
+				width: 30%;
+				margin: 0 20px;
+				font-size: 14px;
+				background-color: #fc5b3e;
+				border-color: #fc5b3e;
+				display: inline-block;
+
 			}
 			@media screen and (max-width: 320px) {
 			    .s_selcet {
@@ -103,27 +119,75 @@
 				<div class="bzqy">为了保障您的权益，请妥善填写您的身份信息</div>
 				<div class="mui-input-row">
 					<label>姓&nbsp;&nbsp;&nbsp;&nbsp;名</label>
-					<input type="text" id="username" class="mui-input mui-pull-left" placeholder="请输入您的姓名">
+					<input type="text" id="userName" class="mui-input mui-pull-left" placeholder="请输入您的姓名">
 				</div>
 				<div class="mui-input-row">
-					<label>联系方式</label>
-					<input type="number" class="mui-input mui-pull-left" placeholder="请输入您的联系方式" id="salary">
+					<label>身份证号</label>
+					<input type="text" class="mui-input mui-pull-left" placeholder="请输入您的身份证号" id="IDCard">
 				</div>
 			</form>
-			<div class="mui-content-padded">
-				<a id='reg' href="#" class="mui-btn mui-btn-block mui-btn-primary">确定</a>
+			<div class="mui-content-padded buyIns_div">
+				<a id='buyIns' href="#" class="mui-btn mui-btn-block mui-btn-primary">确定</a>
+				
+			</div>
+			<div class="mui-content-padded ret_div">
+				<a id='home' href="home.html" class="mui-btn mui-btn-block mui-btn-primary ret">首页</a>
+				<a id='order' href="record.html" class="mui-btn mui-btn-block mui-btn-primary ret">订单</a>
 			</div>
 		</div>
 	</body>
 	<script src="js/jquery.min.js"></script>
-	<script src="js/jquery.qrcode.min.js"></script>
 	<script src="js/mui/mui.min.js"></script>
 	<script src="js/base.js"></script>
 	<script>
 		mui.init({
 			swipeBack:true //启用右滑关闭功能
 		});
-		
+		$('#buyIns').on('tap',function(){
+			var orderId = base.getQueryString('orderId');
+			var btnArray = ['取消', '确定'];
+			var IDCard = $('#IDCard').val();
+			var userName = $('#userName').val();
+			if (!userName) {
+				mui.toast('请输入您的姓名');
+				return;
+			};
+			if (!base.IdCheck(IDCard)) {
+				mui.toast('请输入正确的身份证号码')
+				return;
+			};
+			mui.confirm(userName+'<br>'+IDCard, '请再次确认身份信息', btnArray, function(e) {
+				if (e.index == 1) {
+					mui('#order').button('loading');
+					$.ajax({
+					    type: 'post',
+					    url: '/buyIns',
+					    data: {
+					    	'IDCard':IDCard,
+					    	'userName':userName,
+					    	'orderID':orderId
+					    },
+					    dataType: 'json',
+					    success: function(data) {
+				        	mui('#order').button('reset');
+					    	if (data.msgNo==0000) {
+					        	mui.toast(data.msgInfo);
+					        	$('.buyIns_div').hide();
+					        	$('.ret_div').show();
+					    	}else{
+					    		mui.toast(data.msgInfo);
+					    	};
+					    },
+					    error: function(xhr, textStatus, errorThrown) {
+					    	if (xhr.status == 401) {
+					    		var href =eval('(' + xhr.responseText + ')');
+					    		window.location.href=href.loginPage;
+					    	}
+					    }
+					});
+				}
+			})
+		})
 	</script>
 	<script src="https://s4.cnzz.com/z_stat.php?id=1260604409&web_id=1260604409" language="JavaScript"></script>
 </html>

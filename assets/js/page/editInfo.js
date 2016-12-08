@@ -43,9 +43,9 @@ setTimeout(function() {
 }
 
 $('#type').on('tap',function(){
-	if ($(this).attr('close')=='c') {
+	/*if ($(this).attr('close')=='c') {*/
 		$('#type_div').show()
-	};
+	/*};*/
 })
 
 $('#type_sure').on('tap',function(){
@@ -67,9 +67,9 @@ $('#type_sure').on('tap',function(){
 })
 
 $('#skill').on('tap',function(){
-	if ($(this).attr('close')=='c') {
+	/*if ($(this).attr('close')=='c') {*/
 		$('#skill_div').show()
-	};
+	/*};*/
 })
 
 $('#skill_sure').on('tap',function(){
@@ -90,64 +90,7 @@ $('#skill_sure').on('tap',function(){
 	$('#skill_div').hide();
 })
 
-/*uploadimg*/
-$('.file').on('change', function () {
-	var p =$(this);
-	var type = $(this).attr('data')
-    lrz(this.files[0],{width: 640,quality:0.3})
-        .then(function (rst) {
-        	p.next().show();
-            $.ajax({
-			    type: 'post',
-			    url: '/uploadFiles',
-			    data: {'files':rst.base64,'filesType':type},
-			    dataType: 'json',
-			    success: function(data) {
-			    	p.next().hide();
-			    	if (data.msgNo==0000) {
-			        	p.prev().show();
-			            p.prev().attr('src',rst.base64);
-			            p.parent().removeClass('space')
-			    	}else{
-			    		mui.toast(data.msgInfo);
-			    	};
-			    },
-			    error: function(xhr, textStatus, errorThrown) {
-			    	if (xhr.status == 401) {
-			    		window.location.href='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8306afd398ab31e5&redirect_uri=http%3a%2f%2fwyh.matrixwing.com%2fweixinLogIn&response_type=code&scope=snsapi_userinfo&state=needlogin#wechat_redirect'
-			    	};
-			    }
-			});
-            //return rst;
-        })
-        .catch(function (err) {
-        	alert(err);
-        })
-        .always(function () {
-        });
-});
-$('.image-close').on('tap',function(){
-	$(this).next().hide();
-	$(this).nextAll('input').val('');
-	$(this).parent().addClass('space')
-})
-
-
-
 $(document).ready(function(){
-	var hy = new mui.PopPicker();
- 	hy.setData([
- 		{value:'0',text:'已婚'},
- 		{value:'1',text:'未婚'},
- 		{value:'2',text:'保密'}
-	]);
-	$('#marriage').on('tap', function(event) {
-		var _this = $(this);
-		hy.show(function(items) {
-			_this.html(items[0].text);
-			_this.attr('tagID',items[0].value);
-		});
-	});
 	//$('input').attr('readonly','readonly');
 	var userID = base.getQueryString('userID')
 	$.ajax({
@@ -210,13 +153,26 @@ $(document).ready(function(){
 	    }
 	});
 })
-$('#edit').on('tap',function(){
+$('#marriage').on('tap', function(event) {
+	var hy = new mui.PopPicker();
+ 	hy.setData([
+ 		{value:'0',text:'已婚'},
+ 		{value:'1',text:'未婚'},
+ 		{value:'2',text:'保密'}
+	]);
+	var _this = $(this);
+	hy.show(function(items) {
+		_this.html(items[0].text);
+		_this.attr('tagID',items[0].value);
+	});
+});
+/*$('#edit').on('tap',function(){
 	$('input').removeAttr('readonly')
 	$('#sure_btn').show();
 	$('#type').attr('close','c');
 	$('#skill').attr('close','c');
 })
-
+*/
 $('#reg_add').on('tap',function(){
 	var userName = $('#userName').val();
 	var IDCard = $('#idCard').val();
@@ -307,7 +263,8 @@ $('#reg_add').on('tap',function(){
 	    	if (data.msgNo=='0000') {
 	    		mui.toast('恭喜您，资料修改成功');
 	    		setTimeout(function(){
-	    			window.location.href='nurseHome.html'
+	    			var userID = base.getQueryString('userID')
+	    			window.location.href='userCard.html?userID='+userID;
 	    		},1500)
 	    	}else{
 	    		mui.toast(data.msgInfo);

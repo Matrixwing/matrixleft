@@ -94,7 +94,7 @@ li.mui-table-view-cell.mui-media {
 }
 
 #pullrefresh {
-	top: 138px;
+	top: 44px;
 	height: 100%;
 	padding-bottom: 140px
 }
@@ -361,6 +361,9 @@ li.mui-table-view-cell.mui-media {
 .tips_close .mui-icon{
 	color: #fc5b3e;
 	font-size: 36px;
+}
+.mui-active{
+	z-index: 999999;
 }
 /*兼容性*/
 

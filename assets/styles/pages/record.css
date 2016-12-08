@@ -1,5 +1,5 @@
 .mui-card-header{font-size: 14px;}
-.mui-card-link{color: #fc5b3e;position: absolute !important;right: 15px;}
+.mui-card-link{color: #fc5b3e;position: absolute !important;right: 0;padding: 0 20px;}
 .choose {
 	background-color: #fff;
 	padding: 10px 15px;
@@ -53,4 +53,17 @@
 }
 .mui-table-view{
 	margin-top: 0;
+	padding-top: 10px;
+}
+.mui-card-content-inner{
+	padding: 10px 15px 0  15px;
+}
+.mui-card{
+	box-shadow: none;
+	border:1px solid #c8c7cc;
+	margin: 0 10px 10px 10px;
+	border-radius: 5px;
+}
+.mui-scroll-wrapper, .mui-scroll{
+	background-color: #fff;
 }

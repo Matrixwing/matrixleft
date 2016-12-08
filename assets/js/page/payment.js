@@ -62,7 +62,8 @@ $('#showDeatils').on('tap',function(){
 })
 $('#salary').on('blur',all_m)
 $('#scfw').on('tap',function(){
-	mui.toast('请慎重选择首次服务日期，该日期将决定何时给服务员发放薪资。')
+	mui.toast('请慎重选择首次服务日期，该日期将决定何时给服务员发放薪资。');
+	_czc.push(["_trackEvent", "支付页面", "首次服务说明", "", "", ""]);
 })
 function all_m(){
 	var salary = $('#salary').val();
@@ -152,6 +153,7 @@ $('#pay_sure').on('tap',function(){
 					'signature':data.data.signature,
 					'signType':data.data.signType,
 					'paySign':data.data.paySign,
+					'orderId':orderId
 				}
 			pay(paydata)
 			}else{
@@ -165,6 +167,7 @@ $('#pay_sure').on('tap',function(){
 	    	}
 	    }
 	});
+	_czc.push(["_trackEvent", "支付页面", "支付", "", "", ""]);
 })
 
 	function pay(paydata){
@@ -187,7 +190,7 @@ $('#pay_sure').on('tap',function(){
 	            success: function (res) {
 	                mui.toast("支付成功！");
 	                setTimeout(function(){
-	                	window.location.href='paySuccess.html'
+	                	window.location.href='paySuccess.html?orderId='+paydata.orderId
 	                }, 2000);
 	            },
 	            cancel:function(res){  
@@ -199,3 +202,9 @@ $('#pay_sure').on('tap',function(){
 	        });
 	    });
 	}
+$('#fwf').on('tap',function(){
+	_czc.push(["_trackEvent", "支付页面", "首次服务说明", "", "", ""]);
+})
+$('#reset').on('tap',function(){
+	_czc.push(["_trackEvent", "支付页面", "稍后支付", "", "", ""]);
+})
