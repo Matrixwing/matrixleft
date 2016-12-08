@@ -130,7 +130,40 @@
 				};
 					
 			});
+			setTimeout(getuser, 2000);
 		});
+		function getuser(){
+			$.ajax({
+			    type: 'get',
+			    url: '/getUser',
+			    dataType: 'json',
+			    success: function(data) {
+			    	//var data = JSON.parse(data);
+					if (data.msgNo=='0000') {
+					    if (data.data[0].userName) {
+					   		$('#gz_userName').val(data.data[0].userName);
+					    }
+					    if (data.data[0].gender==1) {
+					    	$('.gender').html('女');
+					    }else{
+					    	$('.gender').html('男');
+					    };
+					    
+					    if (data.data[0].phone) {
+					    	$('#gz_phone').val(data.data[0].phone);
+					    }
+					}else{
+						mui.toast(data.msgInfo)
+					};
+			    },
+			    error: function(xhr, textStatus, errorThrown) {
+			    	if (xhr.status == 401) {
+			    		var href =eval('(' + xhr.responseText + ')');
+			    		window.location.href=href.loginPage;
+			    	}
+			    }
+			});
+		}
 		$('.icon-zhengshu').on('tap',function(){
 			/*var certID = $('#certID').val();
 			var certID =$('#certID').val(base.getAesString(certID,'1234567812345678','Pkcs7'));*/
@@ -299,6 +332,8 @@
 		var tags = base.getCookie('needs');
 		var apptTime = $('#time').attr('d');
 		var apptPlace = $('#local').html();
+		var userName = $('#gz_userName').val();
+		var phone = $('#gz_phone').val();
 		if (apptPlace == '选择地点') {
 			mui.toast('请选择面试地点');
 			return;
@@ -307,6 +342,14 @@
 			mui.toast('请选择面试时间');
 			return;
 		};
+		if (!userName) {
+			mui.toast('请输入您的称呼');
+			return;
+		};
+		if (!base.phoneCheck(phone)) {
+			mui.toast('请输入正确的手机号');
+			return;
+		}
 		mui('#order').button('loading');
 		$.ajax({
 		    type: 'post',
@@ -315,7 +358,9 @@
 		    	'servantID':servantID,
 		    	'tags':tags,
 		    	'apptTime':apptTime,
-		    	'apptPlace':apptPlace
+		    	'apptPlace':apptPlace,
+		    	'phone':phone,
+		    	'userName':userName
 		    },
 		    dataType: 'json',
 		    success: function(data) {
@@ -338,32 +383,3 @@
 		});
 	})
 
-	/*pay*/
-
-	var st_time = new mui.DtPicker({
-	    type: "date",
-	    beginDate: new Date()
-	});
-	$('#st_time').on('tap', function(event) {
-		var _this = $(this);
-		st_time.show(function(items) {
-			var t = items.y.text+'年'+items.m.text+'月'+items.d.text+'日';
-			$('#st_time').html(t)
-		});
-	});
-	
-	$('#m_num').on('tap', function(event) {
-		var m_num = new mui.PopPicker();
-	 	m_num.setData([
-	 		{value:'1',text:'1月-无优惠'},
-	 		{value:'3',text:'3月-立减10元'},
-	 		{value:'6',text:'6月-立减15元'},
-	 		{value:'12',text:'12月-立减100元'},
-		]);
-		var _this = $(this);
-		m_num.show(function(items) {
-			_this.html(items[0].text);
-			_this.attr('num',items[0].value);
-			
-		});
-	});
