@@ -22,11 +22,11 @@ module.exports = {
       remark : JSON.stringify({
         apptTime:opts.apptTime,
         apptPlace:opts.apptPlace,
-        tags:opts.tags,
-        expectSalary:opts.expectSalary
+        expectSalary:opts.expectSalary,
+        tags:opts.tags
       }),
     }
-
+    console.log(newOrder);
     Order.create(newOrder).exec(function(err,order){
       if(err) return cb(err)
       console.log('order',order);
