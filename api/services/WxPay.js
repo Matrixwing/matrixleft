@@ -27,7 +27,7 @@ module.exports = {
       //detail: '{"goods_detail": [{"goods_id": "iphone6s_16G","wxpay_goods_id": "1001","goods_name": "iPhone6s 16G","quantity": 1,"price": 528800,"goods_category": "123456","body": "苹果手机"}]}',
       out_trade_no: opts.outTradeNo, //微元汇系统订单号
       //total_fee: opts.total_fee,
-      total_fee: 1,
+      total_fee: opts.total_fee,
       //spbill_create_ip: '112.193.91.16',
       notify_url: weixinConfig.notify_url
     }, function(err, result){
@@ -65,8 +65,8 @@ module.exports = {
         },
         function(opts,next){//计算价格，组织支付信息
           ServPrice.find({id:opts.servPriceID}).exec(function(err,price){
-            console.log(err);
-            console.log(price);
+            //console.log(err);
+            //console.log(price);
             if(err) return next(err);
             if(price=='') {
               opts.servPrice=0;
@@ -82,25 +82,25 @@ module.exports = {
             if(opts.month==3){opts.cutPrice=1000;}
             else if(opts.month==6){opts.cutPrice=1500;}
             else if(opts.month==12){opts.cutPrice=10000;}
-            console.log('-----------------------',opts);
+            //console.log('-----------------------',opts);
             //opts.msalary=opts.salary;
-            opts.sericePrice*=opts.month;
+            opts.servPrice*=opts.month;
             opts.salary*=opts.month;
             opts.total_fee=(opts.salary+opts.servPrice)-opts.cutPrice;//没有手续费的价格
-            console.log('2222222',opts.total_fee);
+
             opts.commission= opts.total_fee*comRate
             opts.total_fee+= opts.commission;
             opts.total_fee=Math.ceil(opts.total_fee);
-            console.log('3333333',opts.total_fee);
+
             opts.body = util.format('微元汇-%s %s月家政服务',opts.servName,opts.month);
             next(null,opts)
           })
         },function(opts,next){ //起调支付控件是先修改定
 
-          console.log('---------11111--------------',opts);
+          //console.log('---------11111--------------',opts);
           Order.find({orderID:opts.outTradeNo}).exec(function(err,oldOrder){
-            console.log(err);
-            console.log(oldOrder);
+            //console.log(err);
+            //console.log(oldOrder);
             if(err) return next(err);
             var remark=JSON.parse(oldOrder[0].remark);
             remark.firstService=opts.firstService;
@@ -108,10 +108,10 @@ module.exports = {
             //remark.salary=opts.msalary.
             remark.servPriceID=opts.servPriceID;
             remark = JSON.stringify(remark);
-            console.log('-------------oldOrder------------',remark);
+            //console.log('-------------oldOrder------------',remark);
             Order.update({orderID:opts.outTradeNo},{sericePrice:opts.sericePrice,salary:opts.salary,cutPrice:opts.cutPrice,commission:opts.commission,remark:remark}).exec(function(err,newOrder){
-              console.log(err);
-              console.log(newOrder);
+              //console.log(err);
+              //console.log(newOrder);
               if(err) return cb(err);
               return next(null,opts)
             })

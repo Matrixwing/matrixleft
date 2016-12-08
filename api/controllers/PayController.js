@@ -9,14 +9,14 @@ var myutil =require('../util/util.js');
 //var WXPay = require('weixin-pay');
 module.exports = {
 	pay : function(req,res){
-    console.log('1111111111111111111111111',req.body);
+
     var opts = {
       userID:req.session.userID,
       outTradeNo:req.param('orderId',null),
       servPriceID:parseInt(req.param('servicePriceID',0)),       //将字符串转换成数字，流程完善之后有服务端传入数字 参数验证
       //servPriceID:1,                    //将字符串转换成数字，流程完善之后有服务端传入数字
       //salary:1,                         //将字符串转换成数字，流程完善之后有服务端传入数字
-      salary:parseInt(req.param('salary')),
+      salary:parseInt(req.param('salary'))*100,
       commission:parseInt(req.param('commission',0)),
       firstService:req.param('firstService'),
       month:parseInt(req.param('month',1)),
