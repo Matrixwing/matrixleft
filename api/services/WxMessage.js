@@ -12,7 +12,7 @@ module.exports = {
         touser:opts.openid,
         template_id:weixinConfig.perPayTemp,
         //template_id:"aP5_YUw_lC4sJ8aqGpsQWGpA5DWdvIKQEkzyRTA2nKM",//pr
-        url:weixinConfig.perPayUrl+"?orderID="+opts.orderID,
+        url:weixinConfig.perPayUrl,
         //topcolor:"#FF0000",
         data:{
           first: {
