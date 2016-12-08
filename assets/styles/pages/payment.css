@@ -50,14 +50,14 @@
     margin-right: 5%;
 }
 .oncharge{
-	background-color: #ff7043 !important;
+	background-color:#fecd40 !important;
 	color: #fff !important;
 }
 .serviceCharge {
     margin: 0 auto;
 }
 .serviceCharge label{
-    color: #e3457d
+    color: #fc5b3e
 }
 .pay_div{
 	line-height: 40px;
@@ -71,7 +71,7 @@
 	margin-right: 10px;
 }
 .icon-gouxuan{
-	color: #ff7043;
+	color: #fecd40;
 	font-size: 24px;
 	line-height: 40px;
 }
@@ -91,12 +91,13 @@
     font-size: 16px;
 }
 #reset {
-    background-color: #D4D4D4;
-    color: #6D6D6D;
+    background-color: #fc5b3e;
+    color: #fff;
 }
 #pay_sure {
-    background-color: #e3457d;
+    background-color: #fc5b3e;
     color: #fff;
+    border-left: 1px solid #F58C79;
 }
 .details {margin-bottom: 54px;}
 .details label{
@@ -114,7 +115,7 @@
 	display: none
 }
 #all_m{
-    color: #e3457d;
+    color: #fc5b3e;
     font-size: 16px;
 }
 .mui-input-group .mui-input-row:after{
@@ -125,6 +126,7 @@
 }
 #scfw{
     margin-right: 10px  !important;
+    color: #fecd40;
 }
 @media screen and (max-width: 320px) {
     .s_selcet {

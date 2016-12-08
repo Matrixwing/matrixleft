@@ -36,7 +36,7 @@
 	padding: 10px;
 }
 #code{width: 37% !important;float: left;}
-#reg,#reg_add{width: 100% !important;font-size: 14px;background-color: #e3457d;border-color: #F11764}
+#reg,#reg_add{width: 100% !important;font-size: 14px;background-color: #fc5b3e;border-color: #F11764}
 #reg .mui-spinner{
 	width: 19px;
 	height: 19px;
@@ -51,12 +51,12 @@
 .xieyi .mui-icon{
 	font-size: 16px;
 	line-height: 16px;
-	color: #e3457d;
+	color: #fc5b3e;
 	position: relative;
 	top: 1px;
 	margin-right: 5px;
 }
-#getcode{width: auto !important;padding: 8px;margin-right: 10px;margin-top: 3px;float: right !important;color: #e3457d;background-color: #f0f2f5;border: 1px solid #f0f2f5;border-radius: 6px;}
+#getcode{width: auto !important;padding: 8px;margin-right: 10px;margin-top: 3px;float: right !important;color: #fc5b3e;background-color: #f0f2f5;border: 1px solid #f0f2f5;border-radius: 6px;}
 .information select,.information input,.information button{width: 72% !important;;float: left;font-size: 14px;line-height: 14px;}
 .information .select_icon{line-height: 44px;margin-right: 10px;position: relative;top:-40px;color: #ccc;font-size: 20px;}
 .information label{font-size: 14px;width: 28%}
@@ -115,9 +115,9 @@
 	text-align: center;
 	line-height: 20px;
 	border-radius: 12px;
-	background-color: #e3457d;
+	background-color: #fc5b3e;
 	color: #f3f3f3;
-	border: solid 1px #e3457d;
+	border: solid 1px #fc5b3e;
 	font-size: 9px;
 	font-weight: 200;
 	z-index: 1;
@@ -135,7 +135,7 @@
 .imgtips{margin: 10px 0 0 15px !important}
 #image-list .uploadimg{display: none }
 .dotips{padding-left: 10px;font-size: 14px;color: #000;margin-top: 10px}
-.dotips .mui-icon{color: #e3457d;margin-right: 3px}
+.dotips .mui-icon{color: #fc5b3e;margin-right: 3px}
 .step{
 	width: 100%;
 	padding: 10px;

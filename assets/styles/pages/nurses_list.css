@@ -17,7 +17,7 @@
 
 .choose .mui-btn:active {
 	background-color: #fff;
-	color: #e3457d;
+	color: #fc5b3e;
 }
 
 .choose .mui-btn:last-child {
@@ -29,9 +29,9 @@
 }
 
 .choose .choosein_btn {
-	color: #e3457d;
+	color: #fc5b3e;
 	background-color: #fff;
-	border: 1px solid #e3457d;
+	border: 1px solid #fc5b3e;
 }
 
 .mui-input-group:before {
@@ -120,7 +120,7 @@ li.mui-table-view-cell.mui-media {
 	text-align: center;
 	line-height: 44px;
 	font-size: 16px;
-	color: #e3457d;
+	color: #fc5b3e;
 	border-bottom: 1px solid #c8c7cc
 }
 
@@ -264,7 +264,7 @@ li.mui-table-view-cell.mui-media {
 	display: inline-block;
 	height: 31px;
 	line-height: 31px;
-	color: #e3457d;
+	color: #fc5b3e;
 	font-size: 16px;
 }
 
@@ -309,7 +309,7 @@ li.mui-table-view-cell.mui-media {
 }
 
 #tag_sure {
-	background-color: #e3457d;
+	background-color: #fc5b3e;
 	color: #fff;
 }
 
@@ -359,7 +359,7 @@ li.mui-table-view-cell.mui-media {
 	right: 0
 }
 .tips_close .mui-icon{
-	color: #e3457d;
+	color: #fc5b3e;
 	font-size: 36px;
 }
 /*兼容性*/

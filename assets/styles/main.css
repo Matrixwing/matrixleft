@@ -455,11 +455,14 @@ ul{list-style:none}
 .mui-bar-nav{box-shadow: none;border-bottom: 1px solid #c8c7cc;}
 .mui-views, .mui-view, .mui-pages, .mui-page, .mui-page-content{background-color: #f0f2f5}
 .mui-table-view.mui-grid-view{background-color: #fff;margin-top: 5px}
-.mui-navbar{background-color: #fff;}
+.mui-navbar,.mui-bar{background-color: #fc5b3e;border-bottom: none}
+.mui-navbar .mui-icon,.mui-bar .mui-icon{color: #fff;}
+.mui-navbar .mui-title,.mui-bar .mui-title{color: #fff;}
+
 .mui-page .mui-table-view:first-child{margin-top: 5px;}
 .mui-table-view-cell:after,.mui-table-view-cell:before,.mui-table-view:before,.mui-table-view:after{background-color: #e8ebf0;-webkit-transform:none;transform:none;}
-.mui-bar-tab .mui-tab-item.mui-active{color: #e3457d}
-.mui-bar .mui-btn-link{color: #e3457d}
+.mui-bar-tab .mui-tab-item.mui-active{color: #ff7043}
+.mui-bar .mui-btn-link{color: #fff}
 .mui-backdrop{background-color: rgba(0,0,0,0.7)}
 /*pingjia*/
 .starrr {
@@ -468,5 +471,14 @@ ul{list-style:none}
     font-size: 24px;
     padding: 0 1px;
     cursor: pointer;
-    color: #e3457d;
+    color: #ff7043;
     text-decoration: none; }
+#tab-bar{
+	background-color: #fff;
+}
+#tab-bar .mui-icon{
+	color: #929292
+}
+#tab-bar .mui-active .mui-icon{
+	color: #fc5b3e
+}

@@ -5,7 +5,7 @@ img{width: 100%}
 .card_main .mui-card-footer{padding: 0}
 .mui-table-view{margin: 0;width: 100%}
 .mui-page .mui-table-view:last-child{margin-bottom: 0}
-.mui-icon{color: #e3457d;margin: 4px 5px 0 0}
+.mui-icon{color: #fc5b3e;margin: 4px 5px 0 0}
 .cardbar{background: #fff;text-align: right;padding: 0 15px}
 
 .card_info span{font-size: 14px;}
@@ -19,7 +19,7 @@ img{width: 100%}
 .rated_info .mui-card-header{font-size: 14px;}
 .rated_info .mui-card-link{color: #6d6d72}
 
-.rated_info .mui-card-link span{color: #e3457d;font-size: 16px}
+.rated_info .mui-card-link span{color: #fc5b3e;font-size: 16px}
 #qcode_div{position: absolute;top: 0;bottom: 0;left: 0;right: 0;width: 270px;height: 270px;background-color: #fff;z-index: 999;margin: auto;overflow: hidden;}
 #qcode_div canvas{padding: 10px}
 .pop {
@@ -58,7 +58,7 @@ img{width: 100%}
     bottom: 0;
     height: 44px;
     width: 100%;
-    background-color: #e3457d;
+    background-color: #fc5b3e;
     color: #fff;
     text-align: center;
     line-height: 44px;
@@ -93,7 +93,7 @@ img{width: 100%}
     font-size: 14px;
 }
 .needs span{
-    color: #e3457d;
+    color: #fc5b3e;
 }
 .needs p{
     margin-bottom: 0 !important;
@@ -122,7 +122,7 @@ img{width: 100%}
 #order {
     width: 100% !important;
     font-size: 14px;
-    background-color: #e3457d;
+    background-color: #fc5b3e;
     border-color: #F11764;
     margin-top: 20px;
     padding: 10px;

@@ -21,24 +21,34 @@
 		</header>
 		<div class="mui-content">
 			<div class="choose mui-row">
-				<button type="button" class="mui-btn mui-pull-left choosein_btn" tagid="0">未支付</button>
-				<button type="button" class="mui-btn mui-pull-left" tagid="1">已支付</button>
-				<button type="button" class="mui-btn mui-pull-left" tagid="2">待评价</button>
-				<button type="button" class="mui-btn mui-pull-left" tagid="3">全部</button>
+				<button type="button" class="mui-btn mui-pull-left choosein_btn" status="0">未支付</button>
+				<button type="button" class="mui-btn mui-pull-left" status="1">已支付</button>
+				<button type="button" class="mui-btn mui-pull-left" status="2">待评价</button>
+				<button type="button" class="mui-btn mui-pull-left" status="">全部</button>
 			</div>
-			<div class="mui-card">
+			<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<!--数据列表-->
+					<ul class="mui-table-view mui-table-view-chevron" id="getServantList">
+					</ul>
+				</div>
+			</div>
+			<!-- <div class="mui-card">
 				<div class="mui-card-header">
-					订单编号：89767
+					<p id="orderID">订单编号：89767</p>
+					<p id="status">待支付</p>
 				</div>
 				<div class="mui-card-content">
 					<div class="mui-card-content-inner">
-						<p>订单金额：0.01元</p>
+						<p>服务员姓名：111</p>
+						<p>预约时间：111</p>
+						<p>订单金额：111元</p>
 					</div>
 				</div>
 				<div class="mui-card-footer">
 					<a class="mui-card-link" id="pay">去支付</a>
 				</div>
-			</div> 
+			</div>  -->
 		</div>
 		<div class="tips"><div class=" mui-icon mui-spinner"></div></div>
 	</body>
@@ -46,14 +56,6 @@
 	<script src="js/mui/mui.min.js"></script>
 	<script type="text/javascript" charset="UTF-8" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 	<script src="js/base.js"></script>
-	<script>
-		mui.init({
-			swipeBack:true //启用右滑关闭功能
-		});
-		$('.choose').on('tap','button',function(){
-			$('.choose .mui-btn').removeClass('choosein_btn')
-			$(this).addClass('choosein_btn')
-		})
-	</script>
+	<script src="js/page/record.js"></script>
 	<script src="https://s4.cnzz.com/z_stat.php?id=1260604409&web_id=1260604409" language="JavaScript"></script>
 </html>

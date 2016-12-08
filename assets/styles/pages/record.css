@@ -1,5 +1,5 @@
 .mui-card-header{font-size: 14px;}
-.mui-card-link{color: #e3457d;position: absolute !important;right: 15px;}
+.mui-card-link{color: #fc5b3e;position: absolute !important;right: 15px;}
 .choose {
 	background-color: #fff;
 	padding: 10px 15px;
@@ -19,16 +19,16 @@
 
 .choose .mui-btn:active {
 	background-color: #fff;
-	color: #e3457d;
+	color: #fc5b3e;
 }
 
 .choose .mui-btn:last-child {
 	margin-right: 0
 }
 .choose .choosein_btn {
-	color: #e3457d;
+	color: #fc5b3e;
 	background-color: #fff;
-	border: 1px solid #e3457d;
+	border: 1px solid #fc5b3e;
 }
 .tips{
 	position: absolute;
@@ -43,3 +43,14 @@
 	display: none;
 }
 .tips .mui-spinner{width: 48px;height: 48px;margin-top: 50%}
+.mui-card-header p{
+	margin-bottom: 0
+}
+#pullrefresh {
+    top: 108px;
+    height: 100%;
+    padding-bottom: 110px;
+}
+.mui-table-view{
+	margin-top: 0;
+}
