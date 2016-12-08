@@ -77,19 +77,36 @@ module.exports = {
             }
             //计算折扣价格
             opts.cutPrice=0;
+            var comRate=0;//是否需要费率；
+            if(opts.servPrice==0){ comRate=0.006 }//没有服务非用则需要交手续费
             if(opts.month==3){opts.cutPrice=1000;}
             else if(opts.month==6){opts.cutPrice=1500;}
             else if(opts.month==12){opts.cutPrice=10000;}
-
             console.log('-----------------------',opts);
-
-            opts.total_fee=(opts.salary+opts.servPrice)*opts.month-opts.cutPrice;//没有手续费的价格
+            opts.sericePrice*=opts.month;
+            opts.salary*=opts.month;
+            opts.total_fee=(opts.salary+opts.servPrice)-opts.cutPrice;//没有手续费的价格
             console.log('2222222',opts.total_fee);
-            opts.total_fee*=1.006;
+            var commission= opts.total_fee*comRate
+            opts.total_fee+=commission;
             opts.total_fee=Math.ceil(opts.total_fee);
             console.log('3333333',opts.total_fee);
-            opts.body = util.format('微元汇-%s型%s月家政服务',opts.servName,opts.month);
+            opts.body = util.format('微元汇-%s %s月家政服务',opts.servName,opts.month);
             next(null,opts)
+          })
+        },function(opts,next){ //修改订单
+          Order.find({orderID:opts.outTradeNo}).exec(function(err,oldOrder){
+            if(err) return next(err);
+            var remark=JSON.parse(oldOrder[0].remark);
+            remark.firstService=opts.firstService;
+            remark.month=opts.month;
+            console.log('-------------oldOrder------------',remark);
+            Order.update({orderID:opts.outTradeNo},{sericePrice:opts.sericePrice,salary:opts.salary,cutPrice:opts.cutPrice,commission:commission,remark:remark}).exec(function(err,newOlder){
+              console.log(err);
+              console.log(newOlder);
+              if(err) return cb(err);
+              return next(null,opts)
+            })
           })
         },
         WxPay.getBrandWCPay
@@ -105,12 +122,42 @@ module.exports = {
    //todo 校验签名
    //todo 数据库锁
    //todo 订单是否已经写过了？
+
    Order.find({orderID:opts.orderID}).exec(function(err,order) {
      order = order[0] ;
-    if(order){
-      order.status!=1;
+     if(err) return cb(err);
+     //已经支付完了
+     if(order.status==0){ return cb(err,''); } //todo 有问题？
+     //订单状态为等待支付
 
-    }
+     //成功
+     if(opts.resultCode=='SUCCESS'){
+       var updateInfo = {
+         status:0,
+         paidTime:opts.paidTime,
+         Platform:'WX',
+         resultCode:opts.resultCode,
+         returnCode:opts.returnCode,
+         transactionID:opts.transactionID,
+       };
+       Order.update({orderID:opts.orderID},updateInfo).exec(function(err,newOrder){
+         if(err) return cb(err);
+         return cb(null,newOrder)
+       });
+     }else{
+       //微信支付失败 //记录失败信息
+       var updateInfo = {
+         paidTime:opts.paidTime,
+         Platform:'WX',
+         resultCode:opts.resultCode,
+         returnCode:opts.returnCode,
+         transactionID:opts.transactionID,
+       };
+       Order.update({orderID:opts.orderID},updateInfo).exec(function(err,newOrder){
+         if(err) return cb(err);
+         return cb(null,newOrder)
+       });
+     }
    })
 }
 }

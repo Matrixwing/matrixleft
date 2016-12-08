@@ -54,7 +54,6 @@ module.exports = {
 
   notice : function(req,res){
 
-
   /*
    { xml:
    { appid: [ 'wx8306afd398ab31e5' ],
@@ -83,14 +82,17 @@ module.exports = {
       sign:msg.sign[0],
       result_code:msg.result_code[0],
       openid:msg.openid[0],
-      total_fee:msg.total_fee[0],
-      transaction_id:msg.transaction_id[0],
-      orderID:msg.out_trade_no[0],
+      totalFee:msg.total_fee[0],
+      transactionID:msg.transaction_id[0],//微信的订单号
+      orderID:msg.out_trade_no[0],          //系统的订到号
+      resultCode:msg.return_code[0],
+      returnCode:msg,
+      paidTime:msg.time_end[0]
     }
 
     order.completePay(opts,function(err,result){
-
-      res.end(myutil.buildXML({ xml:{ return_code:'SUCCESS' } }));
+      if(err) return res.end(myutil.buildXML({ xml:{ return_code:'FAIL' } }));
+      return  res.end(myutil.buildXML({ xml:{ return_code:'SUCCESS' } }));
     })
     //res.end(myutil.buildXML({ xml:{ return_code:'SUCCESS' } }));
     //res.end(myutil.buildXML({ xml:{ return_code:'SUCCESS' } }));

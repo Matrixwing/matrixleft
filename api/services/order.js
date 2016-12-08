@@ -158,11 +158,7 @@ module.exports = {
     Order.find(opts).exec(function(err,order){
       //todo 订单过期 提示过期
       if(err) return cb(err);
-      //console.log(err);
-      //console.log(order);
       User.find({userID:order[0].servantID}).exec(function(err,servant) {
-        //console.log(err);
-        //console.log(servant);
         if(err) return cb(err);
         var orderInfo = {
           servantName:servant[0].userName,
