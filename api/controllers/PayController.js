@@ -51,9 +51,7 @@ module.exports = {
       return res.send(result);
     })
   },
-
   notice : function(req,res){
-
   /*
    { xml:
    { appid: [ 'wx8306afd398ab31e5' ],
@@ -85,9 +83,9 @@ module.exports = {
       totalFee:msg.total_fee[0],
       transactionID:msg.transaction_id[0],//微信的订单号
       orderID:msg.out_trade_no[0],          //系统的订到号
-      resultCode:msg.return_code[0],
+      resultCode:JSON.stringify(msg.return_code[0]),
       returnCode:msg,
-      paidTime:msg.time_end[0]
+      //paidTime:msg.time_end[0]
     }
     console.log(opts);
     WxPay.completePay(opts,function(err,result){

@@ -33,6 +33,7 @@ module.exports = {
       var result={
         orderID:order.orderID
       };
+
       async.parallel([
         function(next){//发面试邀请
           User.find({userID:order.servantID,role:2}).exec(function(err,servant){
@@ -90,8 +91,8 @@ module.exports = {
           })
         }
       ],function(err,result){
-        console.log(err);
-        console.log(result);
+        console.log('----err-----------------',err);
+        console.log('-------result-----------',result);
       })
       return cb(null,result)
     })
