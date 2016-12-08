@@ -22,7 +22,7 @@ module.exports = {
       phone   : req.param('phone',''),
       expectSalary : req.param('expectSalary'),
     };
-    console.log('opts',opts);
+
     //todo 需要参数处理:apptTime
     if(opts.servantID==''||opts.apptPlace==''||opts.apptTime==''){
       res.send('{"msgNo":"9999","msgInfo":"参数错误"}');
