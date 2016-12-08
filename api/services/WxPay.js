@@ -128,6 +128,7 @@ module.exports = {
    //todo 订单是否已经写过了？
 
    Order.find({orderID:opts.orderID}).exec(function(err,order) {
+
      order = order[0] ;
      if(err) return cb(err);
      //已经支付完了

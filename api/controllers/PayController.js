@@ -89,8 +89,10 @@ module.exports = {
       returnCode:msg,
       paidTime:msg.time_end[0]
     }
-
+    console.log(opts);
     WxPay.completePay(opts,function(err,result){
+      console.log(err);
+      console.log(result);
       if(err) return res.end(myutil.buildXML({ xml:{ return_code:'FAIL' } }));
       return  res.end(myutil.buildXML({ xml:{ return_code:'SUCCESS' } }));
     })
