@@ -9,7 +9,6 @@ var util = require('util');
 
 module.exports = {
   order : function(req,res){
-
     //------------------------------
     var opts = {
       userID:req.session.userID,
@@ -30,7 +29,7 @@ module.exports = {
 
 
     //todo 后续需要后台判断身份证和姓名
-    if(userName==''&& phone == '') {
+    if(opts.userName==''&& opts.phone == '') {
       order.order(opts,function(err,result){
         console.log(err);
         console.log(result);
@@ -39,9 +38,12 @@ module.exports = {
         result = util.format('{"msgNo":"0000","msgInfo":"预约成功","data":%s}',str);
         res.send(result);
       })
+
     }else{
+
       //完善用户姓名和身份证 后续需要修改
-      User.update({userID:opts.UserID},{userName:opts.userName,phone:opts.phone}).exec(function(err,user){
+      User.update({userID:opts.userID},{userName:opts.userName,phone:opts.phone}).exec(function(err,user){
+
         if(err) return res.send('{"msgNo":"9999","msgInfo":"请您稍后再试"}');
         order.order(opts,function(err,result){
           console.log(err);
@@ -52,7 +54,6 @@ module.exports = {
           res.send(result);
         })
       })
-
     }
 
   },
