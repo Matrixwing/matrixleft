@@ -115,8 +115,6 @@ module.exports = {
     var countString = util.format('SELECT count(orderID) as totalRow '+
       ' FROM`order` od  WHERE od.`userID` = %s  %s %s  ORDER BY validTime DESC',opts.userID,statusString,exprieString);
 
-    console.log(queryString);
-    console.log(countString);
     async.parallel([
       function(next){
         Order.query(queryString,(function(err,orderList){
@@ -138,6 +136,7 @@ module.exports = {
       var orderList = results[0];
       for ( var x in orderList ){
         orderList[x].apptTime = JSON.parse(orderList[x].remark).apptTime;
+        orderList[x].expectSalary =JSON.parse(orderList[x].remark).expectSalary;
         delete orderList[x].remark;
       }
 
