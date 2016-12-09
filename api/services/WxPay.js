@@ -20,7 +20,7 @@ module.exports = {
    */
   getBrandWCPay : function (opts,cb) {
     //todo spbill_create_ip，detail
-    console.log('opts',opts);
+    console.log('111111opts',opts);
     wxpay.getBrandWCPayRequestParams({
       openid:opts.openid,
       body:opts.body,
@@ -28,7 +28,7 @@ module.exports = {
       out_trade_no: opts.outTradeNo, //微元汇系统订单号
       //total_fee: opts.total_fee,
       total_fee: opts.totalFee,
-      spbill_create_ip: opts.ip,
+      //spbill_create_ip: opts.ip,
       notify_url: weixinConfig.notify_url
     }, function(err, result){
       if (err){
