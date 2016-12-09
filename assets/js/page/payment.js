@@ -148,7 +148,7 @@ $('#pay_sure').on('tap',function(){
     	month:num,
     	commission:commission*100,
     	platform:'wx',
-    	totalFee:'1'
+    	totalFee:totalFee
     };
     //sign方法：按照ASCII码从小到大排序（字典序）为URL键值对的格式（即key1=value1&key2=value2…）后用md5加密
 	function sign(param){
