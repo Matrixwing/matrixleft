@@ -17,6 +17,7 @@ module.exports = {
       //salary:1,                         //将字符串转换成数字，流程完善之后有服务端传入数字
       salary:parseInt(req.param('salary'))*100,
       commission:parseInt(req.param('commission',0)),
+      totalFee:parseInt(req.param('totalFee',0)),
       firstService:req.param('firstService'),
       month:parseInt(req.param('month',1)),
       cutPrice:parseInt(req.param('cutPrice',0)),

@@ -27,7 +27,7 @@ module.exports = {
       //detail: '{"goods_detail": [{"goods_id": "iphone6s_16G","wxpay_goods_id": "1001","goods_name": "iPhone6s 16G","quantity": 1,"price": 528800,"goods_category": "123456","body": "苹果手机"}]}',
       out_trade_no: opts.outTradeNo, //微元汇系统订单号
       //total_fee: opts.total_fee,
-      total_fee: opts.total_fee,
+      total_fee: opts.totalFee,
       spbill_create_ip: opts.ip,
       notify_url: weixinConfig.notify_url
     }, function(err, result){
@@ -87,11 +87,9 @@ module.exports = {
             opts.servPrice*=opts.month;
             opts.salary*=opts.month;
             opts.total_fee=(opts.salary+opts.servPrice)-opts.cutPrice;//没有手续费的价格
-
             opts.commission= opts.total_fee*comRate
             opts.total_fee+= opts.commission;
             opts.total_fee=Math.ceil(opts.total_fee);
-
             opts.body = util.format('微元汇-%s %s月家政服务',opts.servName,opts.month);
             next(null,opts)
           })
