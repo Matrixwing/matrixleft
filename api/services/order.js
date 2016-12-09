@@ -162,7 +162,7 @@ module.exports = {
       //todo 订单过期 提示过期
       if(err) return cb(err);
       order = order[0];
-      User.find({userID:order[0].servantID}).exec(function(err,servant) {
+      User.find({userID:order.servantID}).exec(function(err,servant) {
         if(err) return cb(err);
         order.servantName=servant[0].userName||'';
         order.expectSalary=JSON.parse(order.remark).expectSalary||'';

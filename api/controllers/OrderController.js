@@ -23,6 +23,7 @@ module.exports = {
       expectSalary : req.param('expectSalary'),
     };
 
+    console.log('2222222222222222222222222222222222222222222222',opts);
     //todo 需要参数处理:apptTime
     if(opts.servantID==''||opts.apptPlace==''||opts.apptTime==''){
       res.send('{"msgNo":"9999","msgInfo":"参数错误"}');
@@ -35,10 +36,10 @@ module.exports = {
 
     //todo 后续需要后台判断身份证和姓名
     if(opts.userName==''&& opts.phone == '') {
-      User.find({userID:opts.expectSalary}).exec(function(err,user) {
+      User.find({userID:opts.servantID}).exec(function(err,servant) {
         if (err) return res.send('{"msgNo":"9999","msgInfo":"请您稍后再试"}');
         //写入expectSalary，前端需要
-        opts.expectSalary=user.expectSalary;
+        opts.expectSalary=servant[0].expectSalary;
         order.order(opts, function (err, result) {
           if (err) return res.send('{"msgNo":"9999","msgInfo":"请您稍后再试"}');
           var str = JSON.stringify(result);
@@ -49,10 +50,11 @@ module.exports = {
     }else{
       //完善用户姓名和身份证 后续需要修改
       User.update({userID:opts.userID},{userName:opts.userName,phone:opts.phone}).exec(function(err,user) {
-        User.find({userID: opts.expectSalary}).exec(function (err, user) {
+        User.find({userID: opts.servantID}).exec(function (err, servant) {
           if (err) return res.send('{"msgNo":"9999","msgInfo":"请您稍后再试"}');
           //写入expectSalary，前端需要
-          opts.expectSalary = user.expectSalary;
+
+          opts.expectSalary = servant[0].expectSalary;
           if (err) return res.send('{"msgNo":"9999","msgInfo":"请您稍后再试"}');
           order.order(opts, function (err, result) {
             if (err) return res.send('{"msgNo":"9999","msgInfo":"请您稍后再试"}');
@@ -83,7 +85,7 @@ module.exports = {
     //  return  res.send('{"msgNo":"9999","msgInfo":"参数错误"}');
     //}
     order.getOrderList(opts,function(err,orderList){
-      if(err) return res.send('{"msgNo":"9999","msgInfo":"服务出错，请您稍后再试"}');
+      if(err) return res.send('{"msgNo":"9999","msgInfo":"请您稍后再试"}');
       var str = JSON.stringify(orderList) ;
       var  result = util.format('{"msgNo":"0000","msgInfo":"查询成功","data":%s}',str);
       res.send(result);
