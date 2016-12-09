@@ -22,6 +22,7 @@ module.exports = {
       month:parseInt(req.param('month',1)),
       cutPrice:parseInt(req.param('cutPrice',0)),
       body:'',                                        //暂时写死
+      ip:req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress,
       payUrl:req.param('payUrl',req.headers['referer'])//当前支付网页的URL
     };
 
@@ -85,7 +86,7 @@ module.exports = {
       orderID:msg.out_trade_no[0],          //系统的订到号
       resultCode:msg.return_code[0],
       returnCode:JSON.stringify(msg),
-      //paidTime:msg.time_end[0]
+      paidTime:myutil.formateDate(msg.time_end[0]),
     }
     console.log(opts);
     WxPay.completePay(opts,function(err,result){

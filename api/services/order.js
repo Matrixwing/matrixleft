@@ -17,8 +17,8 @@ module.exports = {
       userID:opts.userID,
       orderID:dateformat(now,'yyyymmddHHMMss')+Math.random().toString().substr(2, 4),
       servantID:opts.servantID,
-      createTime:dateformat(now,'isoUtcDateTime'),
-      validTime:dateformat(expire,'isoUtcDateTime'),
+      createTime:dateformat(now,'isoDateTime'),
+      validTime:dateformat(expire,'isoDateTime'),
       remark : JSON.stringify({
         apptTime:opts.apptTime,
         apptPlace:opts.apptPlace,
@@ -109,7 +109,7 @@ module.exports = {
 
 
     var queryString = util.format('SELECT od.`orderID`,(SELECT  userName FROM `user` u WHERE u.userID = od.servantID) AS servantName,IFNULL((SELECT  `d`.`define`  ' +
-      'FROM `Dict` `d` WHERE (( `d`.`columnName` = "order.stauts") AND (`d`.`value` = `od`.`status`) )),"") AS `status`,remark,od.`validTime` ' +
+      'FROM `Dict` `d` WHERE (( `d`.`columnName` = "order.stauts") AND (`d`.`value` = `od`.`status`) )),"") AS `status`,od.createTime,remark,od.`validTime` ' +
       ' FROM`order` od  WHERE od.`userID` = %s  %s   %s ORDER BY validTime DESC limit %s,%s;',opts.userID,statusString,exprieString,opts.start,opts.limit);
 
     var countString = util.format('SELECT count(orderID) as totalRow '+
@@ -137,6 +137,8 @@ module.exports = {
       for ( var x in orderList ){
         orderList[x].apptTime = JSON.parse(orderList[x].remark).apptTime;
         orderList[x].expectSalary =JSON.parse(orderList[x].remark).expectSalary;
+        orderList[x].createTime = dateformat(orderList[x].createTime,'yyyy-mm-dd HH:MM:ss'),
+        orderList[x].validTime = dateformat(orderList[x].validTime,'yyyy-mm-dd HH:MM:ss'),
         delete orderList[x].remark;
       }
 
@@ -166,6 +168,8 @@ module.exports = {
         if(err) return cb(err);
         order.servantName=servant[0].userName||'';
         order.expectSalary=JSON.parse(order.remark).expectSalary||'';
+        order.createTime = dateformat(order.createTime,'yyyy-mm-dd HH:MM:ss'),
+        order.validTime = dateformat(order.validTime,'yyyy-mm-dd HH:MM:ss'),
         cb(null,order);
       })
     })
