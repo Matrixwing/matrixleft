@@ -1,5 +1,6 @@
 
 var xml2js = require('xml2js');
+var MD5    = require('MD5');
 
 exports.buildXML = function(json){
 	var builder = new xml2js.Builder();
@@ -60,6 +61,17 @@ exports.generateNonceString = function(length){
 };
 
 exports.formateDate = function(dateString){
-  var formatedDate = dateString.replace(pattern, '$1/$2/$3 $4:$5:$6');
+  var pattern = /(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/;
+  var formatedDate = dateString.replace(pattern, '$1-$2-$3 $4:$5:$6');
   return formatedDate;
+};
+
+exports.sign=function(param){
+  var querystring = Object.keys(param).filter(function(key){
+    return param[key] !== undefined && param[key] !== ''<0;
+  }).sort().map(function(key){
+    return key + '=' + param[key];
+  }).join("&");
+  console.log(querystring);
+  return MD5(querystring).toUpperCase();
 };
