@@ -152,17 +152,21 @@ module.exports = {
 
   //订单详情
   getOrderDetail :  function(opts,cb){
+    //Order.find({orderID:opts.orderID}).exec(function(err,orderInfo){
+    //  if (err) return res.send('{"msgNo":"9999","msgInfo":"请您稍后再试"}');
+    //  var str = JSON.stringify(orderInfo[0]);
+    //  var result = util.format('{"msgNo":"0000","msgInfo":"查询成功","data":%s}', str);
+    //  res.send(result);
+    //})
     Order.find(opts).exec(function(err,order){
       //todo 订单过期 提示过期
       if(err) return cb(err);
+      order = order[0];
       User.find({userID:order[0].servantID}).exec(function(err,servant) {
         if(err) return cb(err);
-        var orderInfo = {
-          servantName:servant[0].userName,
-          expectSalary:servant[0].expectSalary,
-          orderID:order[0].orderID,
-        };
-        cb(null,orderInfo);
+        order.servantName=servant[0].userName||'';
+        order.expectSalary=JSON.parse(order.remark).expectSalary||'';
+        cb(null,order);
       })
     })
   },

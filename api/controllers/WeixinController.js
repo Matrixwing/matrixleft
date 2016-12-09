@@ -9,7 +9,7 @@ module.exports = {
 
 	jsApiAccess : function(req,res){
     var opts = {
-      curUrl : req.pama('curUrl',req.headers['referer']),
+      curUrl : req.param('curUrl',req.headers['referer']),
     };
     console.log(opts);
     WxJsApi.getAccess(opts,function(err,result){
