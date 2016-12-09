@@ -34,65 +34,65 @@ module.exports = {
         orderID:order.orderID
       };
 
-      async.parallel([
-        function(next){//发面试邀请
-          User.find({userID:order.servantID,role:2}).exec(function(err,servant){
-            if (err) return next(err);
-            if (servant!=''){
-              var msg = {
-                openid:servant[0].openid,
-                apptTime:opts.apptTime,
-                apptPlace:opts.apptPlace,
-                tags:opts.tags
-              }
-
-              WxMessage.sendInterviewToSeverant(msg,function(err,result){
-                if(err) return next(err)
-                return next(null,result);
-              });
-            }
-          })
-        },
-        function(next){//发支付信息
-          var msg = {
-            openid:opts.openid,
-            orderID:order.orderID,
-            createTime:order.createTime,
-            validTime:order.validTime
-          }
-
-          WxMessage.sendPayMsgToUser(msg,function(err,result){
-            if(err) return next(err)
-            return next(null,result);
-          });
-        },
-        function(next){//发管理员通知
-          User.find({userID:order.userID}).exec(function(err,user){
-            user=user[0];
-            if(err) if(err) return next(err);
-            User.find({userID:order.servantID}).exec(function(err,servant){
-              servant=servant[0];
-              if (err) return next(err);
-              if (servant){
-                var invMsg = util.format('雇主%s,%s 邀请服务员%s,%s于%s在%s面试',user.userName,user.phone,servant.userName,servant.phone,opts.apptTime,opts.apptPlace);
-                var msg = {
-                  apptTime:opts.apptTime,
-                  msg:invMsg,
-                  tags:opts.tags
-                }
-
-                WxMessage.sendPayMsgToAdmin(msg,function(err,result){
-                  if(err) return next(err)
-                  return next(null,'result');
-                });
-              }
-            })
-          })
-        }
-      ],function(err,result){
-        console.log('----err-----------------',err);
-        console.log('-------result-----------',result);
-      })
+      //async.parallel([
+      //  function(next){//发面试邀请
+      //    User.find({userID:order.servantID,role:2}).exec(function(err,servant){
+      //      if (err) return next(err);
+      //      if (servant!=''){
+      //        var msg = {
+      //          openid:servant[0].openid,
+      //          apptTime:opts.apptTime,
+      //          apptPlace:opts.apptPlace,
+      //          tags:opts.tags
+      //        }
+      //
+      //        WxMessage.sendInterviewToSeverant(msg,function(err,result){
+      //          if(err) return next(err)
+      //          return next(null,result);
+      //        });
+      //      }
+      //    })
+      //  },
+      //  function(next){//发支付信息
+      //    var msg = {
+      //      openid:opts.openid,
+      //      orderID:order.orderID,
+      //      createTime:order.createTime,
+      //      validTime:order.validTime
+      //    }
+      //
+      //    WxMessage.sendPayMsgToUser(msg,function(err,result){
+      //      if(err) return next(err)
+      //      return next(null,result);
+      //    });
+      //  },
+      //  function(next){//发管理员通知
+      //    User.find({userID:order.userID}).exec(function(err,user){
+      //      user=user[0];
+      //      if(err) if(err) return next(err);
+      //      User.find({userID:order.servantID}).exec(function(err,servant){
+      //        servant=servant[0];
+      //        if (err) return next(err);
+      //        if (servant){
+      //          var invMsg = util.format('雇主%s,%s 邀请服务员%s,%s于%s在%s面试',user.userName,user.phone,servant.userName,servant.phone,opts.apptTime,opts.apptPlace);
+      //          var msg = {
+      //            apptTime:opts.apptTime,
+      //            msg:invMsg,
+      //            tags:opts.tags
+      //          }
+      //
+      //          WxMessage.sendPayMsgToAdmin(msg,function(err,result){
+      //            if(err) return next(err)
+      //            return next(null,'result');
+      //          });
+      //        }
+      //      })
+      //    })
+      //  }
+      //],function(err,result){
+      //  console.log('----err-----------------',err);
+      //  console.log('-------result-----------',result);
+      //})
       return cb(null,result)
     })
   },
