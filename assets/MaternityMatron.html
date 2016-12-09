@@ -9,9 +9,42 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<link rel="stylesheet" href="styles/mui.min.css">
 		<link rel="stylesheet" type="text/css" href="styles/main.css"/>
-		<link rel="stylesheet" type="text/css" href="styles/pages/life.css"/>
 		<style>
-		
+			.appointment{margin-top: 10px;}
+			.appointment .select_icon {
+			    line-height: 40px;
+			    margin: 0 15px 0 0 !important;
+			    position: relative;
+			    top: -40px;
+			    color: #ccc;
+			    font-size: 20px;
+			}
+			.appointment label{
+			    line-height: 1
+			}
+			.s_selcet {
+			    font-size: 14px;
+			    line-height: 40px;
+			    float: right;
+			    width: 72%;
+			}
+			.appointment label{font-size: 14px;width: 28%}
+			.appointment .mui-input-row label{padding: 13px 15px;line-height: 14px;}
+			#order {
+			    width: 100% !important;
+			    font-size: 14px;
+			    background-color: #fc5b3e;
+			    border-color: #fc5b3e;
+			    margin-top: 20px;
+			    padding: 10px;
+			}
+			#order .mui-spinner{
+			    width: 19px;
+			    height: 19px;
+			    margin-top: -5px;
+			    position: relative;
+			    top: 5px;
+			}
 		</style>
 	</head>
 
@@ -23,6 +56,22 @@
 			<h1 class="mui-title">月嫂预约</h1>
 		</header>
 		<div class="mui-content">
+			<form class="mui-input-group appointment">
+				<div class="mui-input-row">
+					<label>怎么称呼</label>
+					<input type="text" id="gz_userName" class="mui-input mui-pull-left" placeholder="请输入您的称呼">
+				</div>
+				<div class="mui-input-row">
+					<label>联系方式</label>
+					<input type="number" class="mui-input mui-pull-left" placeholder="请输入您的联系方式" id="gz_phone">
+				</div>
+			</form>
+			<div class="mui-content-padded">
+				<input id="name" type="hidden">
+				<input id="expectSalary_in" type="hidden">
+
+				<a id="order" class="mui-btn mui-btn-primary" data-loading-text="提交">提交</a>
+			</div>
 		</div>
 	</body>
 	<script src="js/mui/mui.min.js"></script>
@@ -32,7 +81,7 @@
 			swipeBack:true //启用右滑关闭功能
 		});
 		/*追加tabbar*/
-		base.tabbarHtml();
+		//base.tabbarHtml();
 
 	</script>
 
