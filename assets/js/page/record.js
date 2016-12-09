@@ -68,9 +68,11 @@ function getOrderList (status,clear) {
 									/*html.push('<p>订单金额：111元</p>')*/
 								html.push('</div>')
 							html.push('</div>')
-							html.push('<div class="mui-card-footer">')
-								html.push('<a class="mui-card-link pay" servantName='+list[i].servantName+' orderID='+list[i].orderID+' expectSalary='+list[i].expectSalary+'>去支付</a>')
-							html.push('</div>')
+							if (list[i].status=='等待交易') {
+								html.push('<div class="mui-card-footer">')
+									html.push('<a class="mui-card-link pay" servantName='+list[i].servantName+' orderID='+list[i].orderID+' expectSalary='+list[i].expectSalary+'>去支付</a>')
+								html.push('</div>')
+							}
 						html.push('</div>')
 	    			}
 	    			html = html.join('')
