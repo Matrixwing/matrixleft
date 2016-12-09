@@ -25,7 +25,7 @@ module.exports = {
       ip:req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress,
       payUrl:req.param('payUrl',req.headers['referer'])//当前支付网页的URL
     };
-console.log(req.body);
+console.log('req.body111111111111',req.body);
     ////-------------测试数据-----------------
     //var opts = {
     //  userID:req.session.userID,
