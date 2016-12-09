@@ -1,4 +1,6 @@
-
+/*
+支付相关。生产订单。处理微信回调
+ */
 var weixinConfig = sails.config.weixin;
 var https = require('https');
 var request = require('request');
