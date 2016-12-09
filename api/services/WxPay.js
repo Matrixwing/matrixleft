@@ -20,14 +20,14 @@ module.exports = {
    */
   getBrandWCPay : function (opts,cb) {
     //todo spbill_create_ip，detail
-    console.log('111111opts',opts);
+
     wxpay.getBrandWCPayRequestParams({
       openid:opts.openid,
       body:opts.body,
       //detail: '{"goods_detail": [{"goods_id": "iphone6s_16G","wxpay_goods_id": "1001","goods_name": "iPhone6s 16G","quantity": 1,"price": 528800,"goods_category": "123456","body": "苹果手机"}]}',
       out_trade_no: opts.outTradeNo, //微元汇系统订单号
       //total_fee: opts.total_fee,
-      total_fee: 1,
+      total_fee: opts.totalFee,
       //spbill_create_ip: opts.ip,
       notify_url: weixinConfig.notify_url
     }, function(err, result){
@@ -54,12 +54,12 @@ module.exports = {
   wxPay : function (opts,cb) {
     async.waterfall([
         function(next){//获取openid
-          sails.log.debug(opts);
+
           User.findOne({userID:opts.userID}).exec(function(err,user){
             if(err)  next(err);
             //sails.log.debug(user);
             opts.openid=user.openid;
-            sails.log.debug(opts);
+
             next(null,opts)
           })
         },
@@ -101,13 +101,13 @@ module.exports = {
             //console.log(oldOrder);
             if(err) return next(err);
             var remark=JSON.parse(oldOrder[0].remark);
-            console.log('111111remark11111111111',remark);
+
             remark.firstService=opts.firstService;
             remark.month=opts.month;
             //remark.salary=opts.msalary.
             remark.servPriceID=opts.servPriceID;
             remark = JSON.stringify(remark);
-            console.log('111111remark11111111111',remark);
+
             //console.log('-------------oldOrder------------',remark);
             Order.update({orderID:opts.outTradeNo},{sericePrice:opts.sericePrice,salary:opts.salary,cutPrice:opts.cutPrice,commission:opts.commission,remark:remark}).exec(function(err,newOrder){
               //console.log(err);
