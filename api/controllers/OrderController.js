@@ -31,6 +31,7 @@ module.exports = {
     if(opts.userID==opts.servantID){
       return res.send('{"msgNo":"9999","msgInfo":"对不起，不能预约您自己"}');
     }
+    if(opts.tags!==''){opts.tags=JSON.parse(opts.tags)}
 
     //todo 后续需要后台判断身份证和姓名
     if(opts.userName==''&& opts.phone == '') {
