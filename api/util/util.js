@@ -58,3 +58,8 @@ exports.generateNonceString = function(length){
 	}
 	return noceStr;
 };
+
+exports.formateDate = function(dateString){
+  var formatedDate = dateString.replace(pattern, '$1/$2/$3 $4:$5:$6');
+  return formatedDate;
+};
