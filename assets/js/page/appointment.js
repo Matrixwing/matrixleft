@@ -157,10 +157,10 @@
 					};
 			    },
 			    error: function(xhr, textStatus, errorThrown) {
-			    	if (xhr.status == 401) {
+			    	/*if (xhr.status == 401) {
 			    		var href =eval('(' + xhr.responseText + ')');
 			    		window.location.href=href.loginPage;
-			    	}
+			    	}*/
 			    }
 			});
 		}
@@ -385,6 +385,6 @@
 		    	}
 		    }
 		});
-		czc.push(["_trackEvent", "预约页面", "下一步", "", "", ""]);
+		_czc.push(["_trackEvent", "预约页面", "下一步", "", "", ""]);
 	})
 

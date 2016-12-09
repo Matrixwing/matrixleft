@@ -115,6 +115,10 @@ $('#pay_sure').on('tap',function(){
 	all_m();
 	var orderId = base.getQueryString('orderID');
 	var salary = $('#salary').val();
+	if (!salary) {
+		mui.toast("请输入服务员月薪");
+		return;
+	};
 	var commission=0;
 	var num = $('#m_num').attr('num');
 	var servicePrice = $('.oncharge').attr('servicePrice');
@@ -171,7 +175,6 @@ $('#pay_sure').on('tap',function(){
 })
 
 	function pay(paydata){
-		console.log(paydata);
 	    wx.config({
 	        debug: false, 
 	        appId: paydata.appId, 

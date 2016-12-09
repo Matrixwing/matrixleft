@@ -210,5 +210,56 @@ var base = {
         var result = parseFloat(num);
         result = Math.ceil(num * 100) / 100;
         return result;
+    },
+    getShareConfig:function(sharedata){
+        $.ajax({
+            type: 'Get',
+            url: '/weixin/jsApiAccess',
+            data:'',
+            dataType: 'json',
+            success: function(data) {
+                if (data.msgNo == '0000' ) {
+                    var config={
+                        'appId':data.data.appID,
+                        'timestamp':data.data.timeStamp,
+                        'nonceStr':data.data.nonceStr,
+                        'signature':data.data.signature
+                    }
+                    base.share(config,sharedata)
+                }  
+            }
+        });
+    },
+    share:function(config,sharedata){
+        wx.config({
+            debug: false, 
+            appId: config.appId, 
+            timestamp:config.timestamp,
+            nonceStr:config.nonceStr,
+            signature:config.signature,
+            jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage']
+        });
+        wx.onMenuShareTimeline({
+            title: sharedata.title,
+            link: sharedata.link,
+            imgUrl: sharedata.imgUrl, 
+            success: function () { 
+                
+            },
+            cancel: function () { 
+               
+            }
+        });
+        wx.onMenuShareAppMessage({
+            title: sharedata.title,
+            link: sharedata.link,
+            imgUrl: sharedata.imgUrl, 
+            success: function () { 
+                
+            },
+            cancel: function () { 
+               
+            }
+        });
     }
 }

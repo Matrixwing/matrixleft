@@ -25,11 +25,12 @@ $('.choose').on('tap','button',function(){
 })*/
 var count = 1;
 function getOrderList (status,clear) {
+	$('.tips').show()
 	if (clear) {
 		count=1;
 		mui('#pullrefresh').pullRefresh().refresh(true);
 	};
-	if (status!='') {
+	if (status!= '000') {
 		var data ={
 	    	'status':status,
 	    	'start':count,
@@ -37,6 +38,7 @@ function getOrderList (status,clear) {
 	    }
 	}else{
 		var data ={
+			'status':1,
 	    	'start':count,
 	    	'limit':8
 	    }
@@ -48,11 +50,12 @@ function getOrderList (status,clear) {
 	    data:data,
 	    dataType: 'json',
 	    success: function(data) {
+	    	$('.tips').hide()
+    		if (clear) {
+    			$('#getOrderList').empty();
+    		};
 	    	if (data.msgNo==0000) {
 	    		var list = data.data.orderList;
-	    		if (clear) {
-	    			$('#getOrderList').empty();
-	    		};
 	    		if (list) {
 	    			var html=[];
 	    			for(var i=0;i<list.length;i++){
@@ -70,7 +73,13 @@ function getOrderList (status,clear) {
 							html.push('</div>')
 							if (list[i].status=='等待交易') {
 								html.push('<div class="mui-card-footer">')
+
+									html.push('<a class="mui-card-link getOrderDetail" orderID='+list[i].orderID+' >查看详情</a>')
 									html.push('<a class="mui-card-link pay" servantName='+list[i].servantName+' orderID='+list[i].orderID+' expectSalary='+list[i].expectSalary+'>去支付</a>')
+								html.push('</div>')
+							}else{
+								html.push('<div class="mui-card-footer">')
+									html.push('<a class="mui-card-link getOrderDetail" orderID='+list[i].orderID+' >查看详情</a>')
 								html.push('</div>')
 							}
 						html.push('</div>')
@@ -101,4 +110,8 @@ $('#getOrderList').on('tap','.pay',function(){
 	var orderID = $(this).attr('orderID');
 	var expectSalary = $(this).attr('expectSalary');
 	window.location.href='payment.html?orderID='+orderID+'&name='+servantName+'&expectSalary='+expectSalary;
+})
+$('#getOrderList').on('tap','.getOrderDetail',function(){
+	var orderID = $(this).attr('orderID');
+	window.location.href='orderDetail.html?orderID='+orderID;
 })
