@@ -9,7 +9,6 @@ var myutil =require('../util/util.js');
 //var WXPay = require('weixin-pay');
 module.exports = {
 	pay : function(req,res){
-
     var opts = {
       userID:req.session.userID,
       outTradeNo:req.param('orderId',null),
@@ -25,7 +24,6 @@ module.exports = {
       ip:req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress,
       payUrl:req.param('payUrl',req.headers['referer'])//当前支付网页的URL
     };
-
 
     ////-------------测试数据-----------------
     //var opts = {
@@ -106,6 +104,13 @@ module.exports = {
     //  //res.success();
     //})
   },
+
+  getTotaoFee : function(req,res) {
+    var opts = {
+      month:req.param(),
+    }
+
+  }
 
 };
 
