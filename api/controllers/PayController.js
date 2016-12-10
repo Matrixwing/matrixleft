@@ -8,7 +8,7 @@ var util = require('util');
 var myutil =require('../util/util.js');
 //var WXPay = require('weixin-pay');
 module.exports = {
-	pay : function(req,res){
+  pay : function(req,res){
     var opts = {
       userID:req.session.userID,
       outTradeNo:req.param('orderId',null),
@@ -21,11 +21,11 @@ module.exports = {
       firstService:req.param('firstService'),
       month:parseInt(req.param('month',1)),
       cutPrice:parseInt(req.param('cutPrice',0)),
-      body:'',                                        //暂时写死
+      body:'',
       ip:req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress,
       payUrl:req.param('payUrl',req.headers['referer'])//当前支付网页的URL
     };
-console.log('req.body111111111111',req.body);
+    console.log('req.body111111111111',req.body);
     ////-------------测试数据-----------------
     //var opts = {
     //  userID:req.session.userID,
@@ -52,25 +52,25 @@ console.log('req.body111111111111',req.body);
     })
   },
   notice : function(req,res){
-  /*
-   { xml:
-   { appid: [ 'wx8306afd398ab31e5' ],
-   bank_type: [ 'BOC_DEBIT' ],
-   cash_fee: [ '1' ],
-   fee_type: [ 'CNY' ],
-   is_subscribe: [ 'Y' ],
-   mch_id: [ '1402095402' ],
-   nonce_str: [ 'tQIf9LEQFbzT8CJoJpfVBhbxUXJJSmpc' ],
-   openid: [ 'ovSs8w7mUy1j1SkeLBsmWpjVpkGM' ],
-   out_trade_no: [ '201612081146549039' ],
-   result_code: [ 'SUCCESS' ],
-   return_code: [ 'SUCCESS' ],
-   sign: [ 'E176BA8F4676EFEC56C45DE7B20A08BA' ],
-   time_end: [ '20161208115437' ],
-   total_fee: [ '1' ],
-   trade_type: [ 'JSAPI' ],
-   transaction_id: [ '4003152001201612082142160784' ] } }
-   */
+    /*
+     { xml:
+     { appid: [ 'wx8306afd398ab31e5' ],
+     bank_type: [ 'BOC_DEBIT' ],
+     cash_fee: [ '1' ],
+     fee_type: [ 'CNY' ],
+     is_subscribe: [ 'Y' ],
+     mch_id: [ '1402095402' ],
+     nonce_str: [ 'tQIf9LEQFbzT8CJoJpfVBhbxUXJJSmpc' ],
+     openid: [ 'ovSs8w7mUy1j1SkeLBsmWpjVpkGM' ],
+     out_trade_no: [ '201612081146549039' ],
+     result_code: [ 'SUCCESS' ],
+     return_code: [ 'SUCCESS' ],
+     sign: [ 'E176BA8F4676EFEC56C45DE7B20A08BA' ],
+     time_end: [ '20161208115437' ],
+     total_fee: [ '1' ],
+     trade_type: [ 'JSAPI' ],
+     transaction_id: [ '4003152001201612082142160784' ] } }
+     */
     //todo 成功失败
     console.log(req.body);
     var msg=req.body.xml
