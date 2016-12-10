@@ -103,6 +103,7 @@
 		$('#reg').on('tap',function(){
 			var phone = $('#phone').val();
 			var code = $('#code').val();
+			var userID = $('.nickname').attr('userID');
 			if (!base.phoneCheck(phone)) {
 				mui.toast('请输入正确的手机号');
 				return;

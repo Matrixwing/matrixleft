@@ -87,7 +87,7 @@ $('#detail').on('tap','.pay',function(){
 var sharedata={
 	'title':'微元汇',
 	'link':'http://wyh.matrixwing.com/nurseList.html',
-	'imgUrl':'http://wyh.matrixwing.com/images/yuantiao.jpg',
+	'imgUrl':'http://wyh.matrixwing.com/images/logo.jpg',
 	'desc':'小元找保姆就是好'
 }
 base.getShareConfig(sharedata)
