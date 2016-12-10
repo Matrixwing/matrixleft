@@ -26,73 +26,38 @@ module.exports = {
         tags:opts.tags
       }),
     }
-    console.log(newOrder);
     Order.create(newOrder).exec(function(err,order){
       if(err) return cb(err)
-      console.log('order',order);
       var result={
         orderID:order.orderID
       };
-
+      //想雇主，服务员，管理员发微信消息
       async.parallel([
-        function(next){//发面试邀请
-          User.find({userID:order.servantID,role:2}).exec(function(err,servant){
-            if (err) return next(err);
-            if (servant!=''){
-              var msg = {
-                openid:servant[0].openid,
-                apptTime:opts.apptTime,
-                apptPlace:opts.apptPlace,
-                tags:opts.tags
-              }
-
-              WxMessage.sendInterviewToSeverant(msg,function(err,result){
-                if(err) return next(err)
-                return next(null,result);
-              });
-            }
+        function(next){
+          User.find({userID:order.userID}).exec(function(err,userInfo){
+            if(err) return next(err);
+            if(userInfo == '') return next('用户为空');
+            userInfo[0].genderName='女士';
+            if(userInfo[0].gender==1) userInfo[0].genderName='先生';
+            return next(null,userInfo[0]);
           })
         },
-        function(next){//发支付信息
-          var msg = {
-            openid:opts.openid,
-            orderID:order.orderID,
-            createTime:order.createTime,
-            validTime:order.validTime
-          }
-
-          WxMessage.sendPayMsgToUser(msg,function(err,result){
-            if(err) return next(err)
-            return next(null,result);
-          });
-        },
-        function(next){//发管理员通知
-          User.find({userID:order.userID}).exec(function(err,user){
-            user=user[0];
-            if(err) if(err) return next(err);
-            User.find({userID:order.servantID}).exec(function(err,servant){
-              servant=servant[0];
-              if (err) return next(err);
-              if (servant){
-                var invMsg = util.format('雇主%s,%s 邀请服务员%s,%s于%s在%s面试',user.userName,user.phone,servant.userName,servant.phone,opts.apptTime,opts.apptPlace);
-                var msg = {
-                  apptTime:opts.apptTime,
-                  msg:invMsg,
-                  tags:opts.tags
-                }
-
-                WxMessage.sendPayMsgToAdmin(msg,function(err,result){
-                  if(err) return next(err)
-                  return next(null,'result');
-                });
-              }
-            })
+        function(next) {
+          User.find({userID: order.servantID, role: 2}).exec(function (err, servantInfo) {
+            if (err) return next(err);
+            if (servantInfo == '') return next('用户为空');
+            return next(null, servantInfo[0]);
           })
         }
-      ],function(err,result){
-        console.log('----err-----------------',err);
-        console.log('-------result-----------',result);
+      ],function(err,results){
+        newOrder.apptTime= opts.apptTime,'yyyy-mm-dd HH:MM:ss';
+        newOrder.apptPlace=opts.apptPlace;
+        newOrder.createTime=dateformat(newOrder.createTime,'yyyy-mm-dd HH:MM:ss');
+        newOrder.validTime=dateformat(newOrder.validTime,'yyyy-mm-dd HH:MM:ss');
+        msg=[newOrder,results[0],results[1]];
+        WxMessage.sendWxMsgAfterOrderDone(msg);
       })
+
       return cb(null,result)
     })
   },

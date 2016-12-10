@@ -1,10 +1,67 @@
 /*
-支付相关。生产订单。处理微信回调
+*用于使用微信公众号消息模版发送微信消息给用户
+* 消息模版需要在公众页面进行配置
  */
 var weixinConfig = sails.config.weixin;
 var https = require('https');
 var request = require('request');
+var util = require('util');
 module.exports = {
+
+  /**
+   * 下单完成之后
+   * 向服务员，用户，管理员分别发送消息提示
+   * 在下单完成之后即可调用
+   *
+   * @api public
+   * @param  {Object} `opts`  需要发送的信息，{[订单信息]，[用户信息]，[服务员信息]}
+   * @param {Function} cb
+   * @return {*}
+   */
+  sendWxMsgAfterOrderDone : function(opts,cb){
+    async.parallel([
+      function(next){//发面试邀请
+        var msg = {
+          openid : opts[2].openid,
+          apptTime:opts[0].apptTime,
+          apptPlace:opts[0].apptPlace,
+          remark :util.format('雇主%s%s,电话%s 邀请您面试。请及时回应邀请哦',opts[1].userName,opts[1].genderName,opts[1].phone),
+        }
+        WxMessage.sendInterviewToSeverant(msg,function(err,result){
+          if(err) return next(err)
+          return next(null,result);
+        });
+      },
+      function(next){//发支付信息
+        var msg = {
+          openid : opts[1].openid,
+          orderID:opts[0].orderID,
+          createTime:opts[0].createTime,
+          validTime:opts[0].validTime
+        }
+        WxMessage.sendPayMsgToUser(msg,function(err,result){
+          if(err) return next(err)
+          return next(null,result);
+        });
+      },
+      function(next){//发管理员通知
+        var invMsg = util.format('雇主%s%s，电话%s 邀请服务员%s%s，%s于%s在%s面试',opts[1].userName,opts[1].genderName,opts[1].phone,opts[2].userName,opts[2].genderName,opts[2].phone,opts[0].apptTime,opts[0].apptPlace);
+        var msg = {
+          apptTime:opts[0].apptTime,
+          msg:invMsg,
+          remark:'诸君请及时处理'
+        }
+        WxMessage.sendPayMsgToAdmin(msg,function(err,result){
+          if(err) return next(err)
+          return next(null,'result');
+        })
+      }
+    ],function(err,result){
+      console.log('----err-----------------',err);
+      console.log('-------result-----------',result);
+    })
+
+  },
 
   //给雇主发支付通知
   //待支付订单提醒
@@ -42,12 +99,12 @@ module.exports = {
             color:"#173177"
           },
           remark:{
-            value:"您有条新的订单，点击完成支付",
+            value:"面试结束后即可点击完成支付哦~",
             color:"#173177"
           },
         }
       });
-      console.log('post_data',post_data);
+      console.log('sendPayMsgToUser',post_data);
       request({
         url: "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token="+token.access_token,
         method: 'POST',
@@ -58,7 +115,6 @@ module.exports = {
 
     })
   },
-
 
   //发送消息给管理员，告知管理员订单情况
   //目前发给whl，ljh，tj，老李四个人这固定的四人，后续需要发给 user.role == 4 即运营人员
@@ -85,11 +141,12 @@ module.exports = {
               color: "#173177"
             },
             remark: {
-              value: opts.tags,
+              value: opts.remark,
               color: "#173177"
             },
           }
         });
+
         request({
           url: "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=" + token.access_token,
           method: 'POST',
@@ -104,6 +161,7 @@ module.exports = {
   //发送信息给保险业务员，告知保险情况
   sendMsgToInsure : function (opts,cb){
   },
+
 
   //发送面试邀请给服务服务员
   sendInterviewToSeverant : function(opts,cb){
@@ -120,7 +178,7 @@ module.exports = {
             color:"#173177"
           },
           keyword1: {
-            value:"家庭服务",
+            value:"家政服务",
             color:"#173177"
           },
           keyword2:{
@@ -133,11 +191,12 @@ module.exports = {
           },
           remark:{
             //value:opts.tags,
-            value:'',
+            value:opts.remark,
             color:"#173177"
           },
         }
       });
+      console.log('post_data',post_data);
       request({
         url: "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token="+token.access_token,
         method: 'POST',
