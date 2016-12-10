@@ -36,16 +36,7 @@ module.exports = {
     paidTime :{
       type: 'datetime',
     },
-    servicePrice :{
-      type: 'integer',
-    },
-    salary :{
-      type: 'integer',
-    },
-    cutPrice:{
-      type: 'integer',
-    },
-    commission:{
+    totalFee:{
       type: 'integer',
     },
     status :{

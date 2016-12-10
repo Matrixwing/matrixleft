@@ -20,6 +20,7 @@ module.exports = {
       createTime:dateformat(now,'isoDateTime'),
       validTime:dateformat(expire,'isoDateTime'),
       remark : JSON.stringify({
+        title:opts.title,
         apptTime:opts.apptTime,
         apptPlace:opts.apptPlace,
         expectSalary:opts.expectSalary,
@@ -37,8 +38,9 @@ module.exports = {
           User.find({userID:order.userID}).exec(function(err,userInfo){
             if(err) return next(err);
             if(userInfo == '') return next('用户为空');
-            userInfo[0].genderName='女士';
+            userInfo[0].genderName='';
             if(userInfo[0].gender==1) userInfo[0].genderName='先生';
+            else if(userInfo[0].gender==1) userInfo[0].genderName='女士'
             return next(null,userInfo[0]);
           })
         },
@@ -133,6 +135,14 @@ module.exports = {
         if(err) return cb(err);
         order.servantName=servant[0].userName||'';
         order.expectSalary=JSON.parse(order.remark).expectSalary||'';
+        order.apptTime=JSON.parse(order.remark).apptTime||'';
+        order.apptPlace=JSON.parse(order.remark).apptPlace||'';
+        order.month=JSON.parse(order.remark).month||'';
+        order.fristService=JSON.parse(order.remark).fristService||'';
+        order.servPrice=JSON.parse(order.remark).servPrice||'';
+        order.salary =JSON.parse(order.remark).salary ||'';
+        order.cutPrice =JSON.parse(order.remark).cutPrice ||'';
+        order.commission =JSON.parse(order.remark).commission ||'';
         order.createTime = dateformat(order.createTime,'yyyy-mm-dd HH:MM:ss'),
         order.validTime = dateformat(order.validTime,'yyyy-mm-dd HH:MM:ss'),
         cb(null,order);

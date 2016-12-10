@@ -6,16 +6,11 @@
  */
 
 module.exports = {
-
   connection: 'localMysqlServer',
   autoCreatedAt: false,
   autoUpdatedAt: false,
   autoid: false,
   attributes: {
-
   },
-
-
-
 };
 

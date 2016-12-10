@@ -45,7 +45,7 @@ module.exports = {
         });
       },
       function(next){//发管理员通知
-        var invMsg = util.format('雇主%s%s，电话%s 邀请服务员%s%s，%s于%s在%s面试',opts[1].userName,opts[1].genderName,opts[1].phone,opts[2].userName,opts[2].genderName,opts[2].phone,opts[0].apptTime,opts[0].apptPlace);
+        var invMsg = util.format('雇主%s%s，电话%s 邀请服务员%s%s，电话%s于%s在%s面试',opts[1].userName,opts[1].genderName,opts[1].phone,opts[2].userName,opts[2].genderName,opts[2].phone,opts[0].apptTime,opts[0].apptPlace);
         var msg = {
           apptTime:opts[0].apptTime,
           msg:invMsg,
@@ -70,7 +70,6 @@ module.exports = {
       var post_data = JSON.stringify({
         touser:opts.openid,
         template_id:weixinConfig.perPayTemp,
-        //template_id:"aP5_YUw_lC4sJ8aqGpsQWGpA5DWdvIKQEkzyRTA2nKM",//pr
         url:weixinConfig.perPayUrl,
         //topcolor:"#FF0000",
         data:{
@@ -124,9 +123,6 @@ module.exports = {
         var post_data = JSON.stringify({
           touser: weixinConfig.adminOpenid[admin].openid,
           template_id: weixinConfig.newOrderTemp,
-          //template_id: "OCMXadGpWX4FJRQypnDqO4_GNuo-PVcM365QuB0CHzQ",//pr
-          //url:"http://1k5x895985.iask.in/index.html",
-          //topcolor:"#FF0000",
           data: {
             first: {
               value: "新的订单",
@@ -169,9 +165,6 @@ module.exports = {
       var post_data = JSON.stringify({
         touser:opts.openid,
         template_id:weixinConfig.interTemp,
-        //template_id:"4etMv_lqdemL4CTnOBSgZkm_lc0SmKZX-ycYh4ykm9s",//pr
-        //url:"http://1k5x895985.iask.in/index.html",
-        //topcolor:"#FF0000",
         data:{
           first: {
             value:"您有一条面试邀请",

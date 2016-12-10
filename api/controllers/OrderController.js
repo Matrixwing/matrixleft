@@ -21,6 +21,7 @@ module.exports = {
       userName: req.param('userName',''),
       phone   : req.param('phone',''),
       expectSalary : req.param('expectSalary'),
+      title:req.param('title','家政服务'),
     };
 
     //todo 需要参数处理:apptTime

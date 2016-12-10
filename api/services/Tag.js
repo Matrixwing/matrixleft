@@ -1,12 +1,23 @@
 /**
- * Created by Administrator on 2016/11/13.
+ * Tag
+ *
+ * @description :: 根据标签筛选服务员和获取标签有关，价格算法和筛选请参照设计文档
+ * @help
  */
-
-
-//价格算法和筛选请参照设计文档
 async = require('async');
-
 module.exports = {
+  /**
+   * 在前端调用/getServantList接口，而且不传参数时。即随机推挤
+   *
+   * @api public
+   * @param  {Object} `opts`  随机的tagID
+   * @param {Function} cb
+   * @return {*}
+   */
+  getRandomServantList : function(){
+
+
+  },
 
   //查询出所有的标签，并且把type不同的标签区分开。返回一个二维的对象数组：
   //返回的结果：tagList = [[type=0的对象组成的对象数组],[type=1的对象组成的对象数组],[type=2的对象组成的对象数组],........]
@@ -182,7 +193,6 @@ module.exports = {
            workPrice +=  tagInfo[x].price*(1+(opts[y].value-tagInfo[x].minValue)/tagInfo[x].precision*tagInfo[x].coefficient);//计算公示请参照设计文档3.1.3便签价格算法
         }
       }
-
       var result ={
         workPrice:workPrice
       };
@@ -192,5 +202,6 @@ module.exports = {
       }
       return cb(null,result);
     })
-  }
+  },
+
 }

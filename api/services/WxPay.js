@@ -108,7 +108,7 @@ module.exports = {
             remark.servPriceID=opts.servPriceID;
             remark = JSON.stringify(remark);
             //console.log('-------------oldOrder------------',remark);
-            Order.update({orderID:opts.outTradeNo},{remark:remark}).exec(function(err,newOrder){
+            Order.update({orderID:opts.outTradeNo},{totalFee:opts.totalFee,remark:remark}).exec(function(err,newOrder){
               if(err) return cb(err);
               return next(null,opts)
             })
