@@ -153,7 +153,7 @@ $('#pay_sure').on('tap',function(){
     //sign方法：按照ASCII码从小到大排序（字典序）为URL键值对的格式（即key1=value1&key2=value2…）后用md5加密
 	function sign(param){
 		var querystring = Object.keys(param).filter(function(key){
-		return param[key] !== undefined && param[key] !== ''  <0;
+		return param[key] !== undefined && param[key] !== '' &&['sign'].indexOf(key)<0;
 		}).sort().map(function(key){
 			return key + '=' + param[key];
 		}).join("&")

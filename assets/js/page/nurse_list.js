@@ -385,8 +385,11 @@ function getServantList(dataList,clear){
 				mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > data.data.totalPages));
 	    	};
 	    },
-	    error: function(data) {
-	    	mui.toast('请重试');
+	    error: function(xhr, textStatus, errorThrown) {
+	    	if (xhr.status == 401) {
+	    		var href =eval('(' + xhr.responseText + ')');
+	    		window.location.href=href.loginPage;
+	    	}
 	    }
 	});
 }
