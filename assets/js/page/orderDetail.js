@@ -19,17 +19,17 @@ $(document).ready(function(){
 					html.push('<div class="mui-input-row"><label>过期时间：</label><div class="mui-row">'+data.data.validTime+'</div></div>')
 					html.push('<div class="mui-input-row"><label>订单状态：</label><div class="mui-row">'+status[data.data.status]+'</div></div>')
 					if (data.data.salary) {
-						html.push('<div class="mui-input-row"><label>订单金额：</label><div class="mui-row">'+(data.data.salary+data.data.servicePrice+data.data.commission-data.data.cutPrice)/100+'</div></div>')
-						html.push('<div class="mui-input-row"><label>工资金额：</label><div class="mui-row">'+(data.data.salary)/100+'</div></div>')
+						html.push('<div class="mui-input-row"><label>订单金额：</label><div class="mui-row">'+(data.data.salary+data.data.servicePrice+data.data.commission-data.data.cutPrice)/100+'元</div></div>')
+						html.push('<div class="mui-input-row"><label>工资金额：</label><div class="mui-row">'+(data.data.salary)/100+'元</div></div>')
 					};
 					if (data.data.servicePrice) {
-						html.push('<div class="mui-input-row"><label>服务费：</label><div class="mui-row">'+(data.data.servicePrice)/100+'</div></div>')
+						html.push('<div class="mui-input-row"><label>服务费：</label><div class="mui-row">'+(data.data.servicePrice)/100+'元</div></div>')
 					};
 					if (data.data.cutPrice) {
-						html.push('<div class="mui-input-row"><label>优惠金额：</label><div class="mui-row">'+(data.data.cutPrice)/100+'</div></div>')
+						html.push('<div class="mui-input-row"><label>优惠金额：</label><div class="mui-row">'+(data.data.cutPrice)/100+'元</div></div>')
 					};
 					if (data.data.commission) {
-						html.push('<div class="mui-input-row"><label>手续费：</label><div class="mui-row">'+(data.data.commission)/100+'</div></div>')
+						html.push('<div class="mui-input-row"><label>手续费：</label><div class="mui-row">'+(data.data.commission)/100+'元</div></div>')
 					};
 				html.push('</form>')
 				var remark =  eval('(' + data.data.remark + ')'); 
@@ -85,8 +85,9 @@ $('#detail').on('tap','.pay',function(){
 	window.location.href='payment.html?orderID='+orderID+'&name='+servantName+'&expectSalary='+expectSalary;
 })
 var sharedata={
-	'title':'lalala',
-	'link':'www',
-	'imgUrl':'asa'
+	'title':'微元汇',
+	'link':'http://wyh.matrixwing.com/nurseList.html',
+	'imgUrl':'http://wyh.matrixwing.com/images/yuantiao.jpg',
+	'desc':'小元找保姆就是好'
 }
 base.getShareConfig(sharedata)

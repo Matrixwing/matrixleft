@@ -239,27 +239,29 @@ var base = {
             signature:config.signature,
             jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage']
         });
-        wx.onMenuShareTimeline({
-            title: sharedata.title,
-            link: sharedata.link,
-            imgUrl: sharedata.imgUrl, 
-            success: function () { 
-                
-            },
-            cancel: function () { 
-               
-            }
-        });
-        wx.onMenuShareAppMessage({
-            title: sharedata.title,
-            link: sharedata.link,
-            imgUrl: sharedata.imgUrl, 
-            success: function () { 
-                
-            },
-            cancel: function () { 
-               
-            }
+        wx.ready(function(){
+            wx.onMenuShareTimeline({
+                title: sharedata.title,
+                link: sharedata.link,
+                imgUrl: sharedata.imgUrl,
+                success: function () { 
+                    
+                },
+                cancel: function () { 
+                   
+                }
+            });
+            wx.onMenuShareAppMessage({
+                title: sharedata.title,
+                link: sharedata.link,
+                imgUrl: sharedata.imgUrl,  
+                desc: sharedata.desc, 
+                success: function () { 
+                },
+                cancel: function () { 
+                   
+                }
+            });
         });
     }
 }
