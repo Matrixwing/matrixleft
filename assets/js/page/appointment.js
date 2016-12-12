@@ -373,7 +373,8 @@
 		        	var name = encodeURI(encodeURI($('#name').val()));
 		        	var orderID = data.data.orderID;
 		        	var expectSalary = $('#expectSalary_in').val();
-		        	window.location.href='payment.html?name='+name+'&orderID='+orderID+'&expectSalary='+expectSalary;
+		        	//window.location.href='payment.html?name='+name+'&orderID='+orderID+'&expectSalary='+expectSalary;
+		        	window.location.href='apSuccess.html'
 		    	}else{
 		    		mui.toast(data.msgInfo);
 		    	};

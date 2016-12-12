@@ -110,6 +110,17 @@
 				font-size: 32px;
 				color: #e3457d
 			}
+			html,.mui-content{
+				background-color: #fff;
+			}
+			.main{
+				width: 100%;
+				padding: 15px;
+			}
+			.main img{
+				width: 100%;
+				border-radius: 5px;
+			}
 		</style>
 	</head>
 
@@ -123,10 +134,42 @@
 		
 
 		<div class="mui-content">
-			<div class="tips mui-row">
+			<!-- <div class="tips mui-row">
 				<span class="mui-icon iconfont icon-55240"></span>
 				<p>正在建设中，敬请期待！</p>
+			</div> -->
+			<div class="main">
+				<img src="../images/life_csxz.jpg">
 			</div>
+			<ul class="mui-table-view mui-table-view-chevron">
+				<li class="mui-table-view-cell mui-media">
+					<a class="mui-navigate-right" href="helpInterviewSkills.html">
+						<img class="mui-media-object mui-pull-left" src="../images/help-icon_msjq.png">
+						<div class="mui-media-body">
+							面试服务员技巧
+							<p class="mui-ellipsis">如何在面试中找到心仪的服务员</p>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a class="mui-navigate-right" href="helpQa.html">
+						<img class="mui-media-object mui-pull-left" src="../images/help-icon_qa.png">
+						<div class="mui-media-body">
+							面试服务员几个经典问题
+							<p class="mui-ellipsis">问什么问题才能表现出一副很懂的样子</p>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a class="mui-navigate-right" href="helpConsiderations.html">
+						<img class="mui-media-object mui-pull-left" src="../images/help-icon_zysx.png">
+						<div class="mui-media-body">
+							用户注意事项
+							<p class="mui-ellipsis">注意这些问题，让您享受服务时更舒心</p>
+						</div>
+					</a>
+				</li>
+			</ul>
 		</div>
 	</body>
 	<script src="js/jquery.min.js"></script>
@@ -136,8 +179,12 @@
 		mui.init({
 			swipeBack:true //启用右滑关闭功能
 		});
-		/*追加tabbar*/
-		base.tabbarHtml();
+		var type = base.getQueryString('type')
+		if (type) {
+			base.tabbarHtml(2);
+		}else{
+			base.tabbarHtml();
+		};
 	</script>
 
 	<script src="https://s4.cnzz.com/z_stat.php?id=1260604409&web_id=1260604409" language="JavaScript"></script>
