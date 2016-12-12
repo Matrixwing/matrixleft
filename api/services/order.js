@@ -48,7 +48,10 @@ module.exports = {
           User.find({userID: order.servantID, role: 2}).exec(function (err, servantInfo) {
             if (err) return next(err);
             if (servantInfo == '') return next('用户为空');
-            return next(null, servantInfo[0]);
+            servantInfo[0].genderName='';
+            if(servantInfo[0].gender==1) servantInfo[0].genderName='先生';
+            else if(servantInfo[0].gender==1) servantInfo[0].genderName='女士'
+            return next(null,servantInfo[0]);
           })
         }
       ],function(err,results){
