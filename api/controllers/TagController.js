@@ -19,11 +19,10 @@ module.exports = {
   },
 
   getServantList : function (req,res) {
-    console.log('testConfig',sails.config.weixin);
     var tag = JSON.parse(req.param('tag','')) ;
-    if(tag=='') {
-      tag = [{tagID: 0}, {tagID: 1}, {tagID: 2}, {tagID: 3}];
-    }
+    //if(tag=='') {
+    //  tag = [{tagID: 0}, {tagID: 1}, {tagID: 2}, {tagID: 3}];
+    //}
     var limit = req.param('limit',0);
     var start = (req.param('start',1)-1)*limit;
     var tagParam={
@@ -33,9 +32,9 @@ module.exports = {
     };
 
     console.log(tagParam);
-    if(tagParam.tag==''){
-      return res.send('{"msgNo":"9999","msgInfo":"参数不正确"}');
-    }
+    //if(tagParam.tag==''){
+    //  return res.send('{"msgNo":"9999","msgInfo":"参数不正确"}');
+    //}
     Tag.getServantList(tagParam,function(err,tagList){
       if (err) {return res.send(500,'{"msgNo":"9999","msgInfo":"服务出错"}');}
       var str = JSON.stringify(tagList) ;

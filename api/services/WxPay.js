@@ -94,10 +94,8 @@ module.exports = {
           })
         },function(opts,next){ //起调支付控件是先修改定
 
-          //console.log('---------11111--------------',opts);
           Order.find({orderID:opts.outTradeNo}).exec(function(err,oldOrder){
-            //console.log(err);
-            //console.log(oldOrder);
+
             if(err) return next(err);
             var remark=JSON.parse(oldOrder[0].remark);
             remark.firstService=opts.firstService;
@@ -127,15 +125,12 @@ module.exports = {
     //todo 校验签名
     //todo 数据库锁
     //todo 订单是否已经写过了？
-
     Order.find({orderID:opts.orderID}).exec(function(err,order) {
-
       order = order[0] ;
       if(err) return cb(err);
       //已经支付完了
       if(order.status==0){ return cb(err,''); } //todo 有问题？
       //订单状态为等待支付
-
       //成功
       if(opts.resultCode=='SUCCESS'){
         var updateInfo = {

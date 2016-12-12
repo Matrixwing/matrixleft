@@ -67,41 +67,141 @@ module.exports = {
   //把通过getServantSortByWight和getWorkTagPrice拼接成：
   //含有userID，用户姓名，avaterUrl，小元推荐薪资，服务员期望薪资，系统标签属性，小元评价属性的对象
   getServantList : function(opts,cb) {
+    var tag = opts.tag;
+    console.log(tag);
+    var tagNum;
+    var tagStr='';
+    var queryNeedString='';
+    var queryInfoString ='';
+    var countString = '';
+    var count=0;
+    if(tag!=''){
+      for(tagNum in tag){
+        count ++;
+        tagStr+=tag[tagNum].tagID;
+        if(tagNum<tag.length-1)
+          tagStr+=',';
+      }
+    }
+    var havingString = " ";
+    var whereString  = " ";
+    var tagString = " ";
+    if(tag!=''){
+      console.log('1111111');
+      havingString = " HAVING COUNT(*)="+ count;
+      whereString  = " AND tur.tagID IN ("+tagStr+") ";
+    }
+    console.log(tagStr);
     async.parallel([
       function(next) {
-        Tag.getServantSortByWight(opts,function(err,results){
-          if(err) return cb(err);
-          next(null,results)
+        var queryString = "SELECT "+
+          "tur.`userID`, "+
+          "IFNULL(ur.userName,'') AS userName, "+
+          "IFNULL(ur.`avatarUrl`,'') AS avatarUrl,(SELECT '') AS sysComment, "+
+          "IFNULL(ur.expectSalary,'') AS expectSalary, "+
+          // "-- IFNULL((SELECT GROUP_CONCAT(tagName SEPARATOR '|') FROM tag t LEFT JOIN taguserre tur ON tur.tagID=t.tagID WHERE t.type=4  ),'') AS sysTag , "+
+          "SUM(ta.weight) AS sumweight "+
+          "FROM taguserre tur LEFT JOIN tag ta ON ta.`tagID`=tur.`tagID` "+
+          "LEFT JOIN `user` ur ON tur.`userID` = ur.`userID` "+
+          "WHERE  ur.workstatus!=2  AND ur.role=2  "+
+          whereString+
+          "GROUP BY tur.userID "+ havingString+" ORDER BY sumweight DESC limit "+opts.start +", "+opts.limit+" ;";
+        console.log(queryString);
+        TagList.query(queryString,function(err,result){
+          if(err) { return next(err); }
+          next(null,result);
         })
       },
       function(next){
-
-        Tag.getWorkTagPrice(opts.tag,function(err,results){
-          if(err) return cb(err);
-          next(null,results)
+        var queryString = "SELECT COUNT(*) "+
+        "FROM "+
+        "(SELECT "+
+        "COUNT(tur.`userID`) "+
+        "FROM taguserre tur LEFT JOIN tag ta ON ta.`tagID`=tur.`tagID` "+
+        "LEFT JOIN `user` ur ON tur.`userID` = ur.`userID` "+
+        "WHERE  ur.workstatus!=2  AND ur.role=2  "+
+         whereString+
+        "GROUP BY tur.userID "+ havingString+" ) AS a ; ";
+        console.log(queryString);
+        TagList.query(queryString,function(err,result){
+          if(err) { return next(err); }
+          next(null,result);
+        })
+      },
+      function(next){  //计算出推荐工资的下限
+        if(tag==''){
+          return  next(null,[{lowPrice:0}]);
+        }
+        var queryString = "select sum(price) as lowPrice from tag tur where tur.type!=1 "+whereString
+        console.log(queryString);
+        TagList.query(queryString,function(err,result){
+          if(err) { return next(err); }
+          next(null,result);
+        })
+      },
+      function(next){  //计算出推荐工资的上限
+        var queryString = "SELECT SUM(price) AS highPrice ,tur.`userID` FROM "+
+        "taguserre tur LEFT JOIN tag t ON tur.`tagID`=t.`tagID` WHERE t.`type`!=1 AND tur.userID IN "+
+        "(SELECT tur.userID "+
+        " FROM taguserre tur LEFT JOIN tag ta ON ta.`tagID`=tur.`tagID` "+
+        "LEFT JOIN `user` ur ON tur.`userID` = ur.`userID` "+
+        "WHERE "+
+        " ur.workstatus!=2  AND ur.role=2 "+whereString +
+        " GROUP BY tur.userID "+havingString+" ) GROUP BY tur.userID ;"
+        console.log(queryString);
+        TagList.query(queryString,function(err,result){
+          if(err) { return next(err); }
+          next(null,result);
         })
       },
       function(next){
-        Tag.getTotalRowNum(opts,function(err,results){
-          if(err) return cb(err);
-          next(null,results)
+        var workPrice = 0;//工作内容需要的价格
+        var queryString = 'select * from tag tur where tur.type=1 '+whereString ;
+        //计算出工作内容的价格
+        console.log(queryString);
+        TagList.query(queryString,function(err,tagInfo){
+          for(x in tagInfo){
+            for(y in tag){
+              if(tag[y].tagID== tagInfo[x].tagID)
+                workPrice +=  tagInfo[x].price*(1+(tag[y].value-tagInfo[x].minValue)/tagInfo[x].precision*tagInfo[x].coefficient);//计算公示请参照设计文档3.1.3便签价格算法
+            }
+          }
+          var result ={
+            workPrice:workPrice
+          };
+          if(err) {
+            sails.log.error(err);
+            return next(err);
+          }
+          return next(null,result);
         })
       }
     ],function(err,results){
+      console.log(err);
+      console.log(results);
       if(err) return cb(err);
-      var tag;
+      var x;
       var tagList = results[0];
-      for(tag in tagList){
-        tagList[tag].downPrice+=results[1].workPrice;
-        tagList[tag].upPrice+=results[1].workPrice;
-        tagList[tag].price=tagList[tag].downPrice+'-'+tagList[tag].upPrice;
-        delete tagList[tag].upPrice;
-        delete tagList[tag].downPrice;
-        delete tagList[tag].sumweight;
+      var lowPrice= results[2][0];
+      var highPrice=results[3];
+      for( x in tagList){
+        tagList[x].lowPrice = lowPrice.lowPrice||0;
+        tagList[x].lowPrice+=results[4].workPrice;
+        tagList[x].highPrice = highPrice[x].highPrice||0;
+        tagList[x].highPrice += results[4].workPrice;
+        delete tagList[x].upPrice;
+        delete tagList[x].downPrice;
+        delete tagList[x].sumweight;
+        if(tag==''){
+          tagList[x].price=tagList[x].highPrice;
+        }else{
+          tagList[x].price=tagList[x].lowPrice+'-'+tagList[x].highPrice;
+        }
+
       }
       var servants = {
         servantList:tagList,
-        totalPages:results[2].totalPages
+        totalPages:Math.ceil(results[1][0].totalRow/opts.limit)
       };
       return cb(null,servants);
     });
@@ -112,29 +212,31 @@ module.exports = {
   //查询出来的信息有：用户姓名，用户id，用户头像，用户期待薪水，除去工作内容价格的价格下限和价格上限。
   //工作内容价格需要用公示进行计算
   getServantSortByWight : function (opts,cb){
-    //拼接出查询语句
     var tag = opts.tag;
     var tagNum;
     var tagStr='';
+    var queryNeedString='';
+    var queryInfoString ='';
+    var countString = '';
     for(tagNum in tag){
-      //if(opts[tag].tagID){
-        tagStr+=tag[tagNum].tagID;
-        if(tagNum<tag.length-1)
-          tagStr+=' or t.tagID=';
-      //}
+      tagStr+=tag[tagNum].tagID;
+      if(tagNum<tag.length-1)
+        tagStr+=',';
     }
-    //sails.log.debug(tagStr);
-    var queryString = "SELECT a.userID,IFNULL(ur.userName,'') AS userName,IFNULL(ur.`avatarUrl`,'') AS avatarUrl,(select '') as sysComment,IFNULL(ur.expectSalary,'') AS expectSalary,SUM(weight) sumweight  ," +
-      "ifnull((SELECT SUM(ta.`price`) FROM tag ta LEFT JOIN taguserre t ON t.tagID=ta.tagID WHERE ta.type!=1 AND (t.tagID=" ;
-    queryString += tagStr ;
-    queryString +=') AND t.`userID`=a.userID ),0)AS downPrice,ifnull((SELECT SUM(ta.`price`) FROM tag ta LEFT JOIN taguserre t ON t.tagID=ta.tagID WHERE ta.type!=1  AND t.`userID`=a.userID ),0)AS upPrice,' +
-      'IFNULL((SELECT GROUP_CONCAT(tagName SEPARATOR "|") FROM tag t   LEFT JOIN taguserre tur ON tur.tagID=t.tagID WHERE t.type=4 AND tur.`userID`=a.userID ),"") AS sysTag FROM  (SELECT ta.tagName,t.userID,t.tagID ' +
-    'FROM `taguserre` t LEFT JOIN `tag` ta ON t.tagID=ta.tagID  WHERE (t.tagID=';
-    queryString += tagStr ;
-    queryString +=') OR ta.type=4 OR ta.type=3) AS a LEFT JOIN `tag` ta ON a.tagID=ta.`tagID` LEFT JOIN `user` ur  ON ur.`userID`=a.userID GROUP BY a.userID ORDER BY sumweight  DESC ';
-    queryString +='limit '+opts.start +', '+opts.limit+';';
-    //sails.log.debug(queryString);
-    //Tag.getWorkTagPrice(opts,function(){});
+    console.log(tagStr);
+    var queryString = "SELECT "+
+      "tur.`userID`, "+
+      "GROUP_CONCAT(ta.tagID), "+
+      "IFNULL(ur.userName,'') AS userName, "+
+      "IFNULL(ur.`avatarUrl`,'') AS avatarUrl,(SELECT '') AS sysComment, "+
+      "IFNULL(ur.expectSalary,'') AS expectSalary, "+
+      "-- IFNULL((SELECT GROUP_CONCAT(tagName SEPARATOR '|') FROM tag t LEFT JOIN taguserre tur ON tur.tagID=t.tagID WHERE t.type=4  ),'') AS sysTag , "+
+      "SUM(ta.weight) AS sumweight "+
+      "FROM taguserre tur LEFT JOIN tag ta ON ta.`tagID`=tur.`tagID` "+
+      "LEFT JOIN `user` ur ON tur.`userID` = ur.`userID` "+
+      "WHERE  tur.tagID IN ("+tagStr+") "+
+      "AND ur.workstatus!=2  AND ur.role=2 "+
+      "GROUP BY tur.userID HAVING COUNT(*)>1 ORDER BY sumweight DESC limit "+opts.start +", "+opts.limit+" ;";
     TagList.query(queryString,function(err,result){
       if(err) {
         sails.log.error(err);
@@ -186,6 +288,7 @@ module.exports = {
     }
     queryString += ' ) and t.type=1;';
     //计算出工作内容的价格
+    console.log(queryString);
     TagList.query(queryString,function(err,tagInfo){
       for(x in tagInfo){
         for(y in opts){
