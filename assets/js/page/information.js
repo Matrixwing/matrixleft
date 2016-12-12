@@ -227,14 +227,14 @@ $('#user_card').on('tap',function(){
 })
 
 $('#reg_add').on('tap',function(){
-	if ($('#idcard_img1').attr('src')=='') {
+	/*if ($('#idcard_img1').attr('src')=='') {
 		mui.toast('请上传您的身份证正面照片')
 		return
 	};
 	if ($('#idcard_img2').attr('src')=='') {
 		mui.toast('请上传您的身份证反面照片')
 		return
-	};
+	};*/
 	var userName = $('#userName').val();
 	var IDCard = $('#idCard').val();
 	var homeTown = $('#homeTown').val();

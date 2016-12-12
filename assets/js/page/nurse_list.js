@@ -402,7 +402,7 @@ function reset(){
 	$('#add_old').show();
 	$('#add_child').show();
 	$('#full_tag button').removeClass('onselect')
-	old_tag.pickers.setSelectedIndex(1, 2000);
+	//old_tag.pickers.setSelectedIndex(1, 2000);
 }
 $('#reset').on('tap',function(){
 	reset()
