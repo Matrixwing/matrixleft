@@ -146,8 +146,9 @@ module.exports = {
         order.salary =JSON.parse(order.remark).salary ||'';
         order.cutPrice =JSON.parse(order.remark).cutPrice ||'';
         order.commission =JSON.parse(order.remark).commission ||'';
-        order.createTime = dateformat(order.createTime,'yyyy-mm-dd HH:MM:ss'),
-        order.validTime = dateformat(order.validTime,'yyyy-mm-dd HH:MM:ss'),
+        order.createTime = dateformat(order.createTime,'yyyy-mm-dd HH:MM:ss');
+        order.validTime = dateformat(order.validTime,'yyyy-mm-dd HH:MM:ss');
+        order.paidTime=dateformat(order.paidTime,'yyyy-mm-dd HH:MM:ss');
         cb(null,order);
       })
     })
