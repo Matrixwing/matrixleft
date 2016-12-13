@@ -30,7 +30,7 @@ function getOrderList (status,clear) {
 		count=1;
 		mui('#pullrefresh').pullRefresh().refresh(true);
 	};
-	if (status!= '000') {
+	if (status!= undefined) {
 		var data ={
 	    	'status':status,
 	    	'start':count,

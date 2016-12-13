@@ -18,8 +18,13 @@ $(document).ready(function(){
 					html.push('<div class="mui-input-row"><label>下单时间：</label><div class="mui-row">'+data.data.createTime+'</div></div>')
 					html.push('<div class="mui-input-row"><label>过期时间：</label><div class="mui-row">'+data.data.validTime+'</div></div>')
 					html.push('<div class="mui-input-row"><label>订单状态：</label><div class="mui-row">'+status[data.data.status]+'</div></div>')
+					if (data.data.paidTime) {
+						html.push('<div class="mui-input-row"><label>支付时间：</label><div class="mui-row">'+data.data.paidTime+'</div></div>')
+					}
+					if (data.data.totalFee) {
+						html.push('<div class="mui-input-row"><label>订单金额：</label><div class="mui-row">'+data.data.totalFee/100+'元</div></div>')
+					};
 					if (data.data.salary) {
-						html.push('<div class="mui-input-row"><label>订单金额：</label><div class="mui-row">'+(data.data.salary+data.data.servicePrice+data.data.commission-data.data.cutPrice)/100+'元</div></div>')
 						html.push('<div class="mui-input-row"><label>工资金额：</label><div class="mui-row">'+(data.data.salary)/100+'元</div></div>')
 					};
 					if (data.data.servicePrice) {
