@@ -298,7 +298,7 @@ $('#tag_sure').on('tap',function(){
 	}
 	d_e = dataList;
 	getServantList(dataList,'clear')
-	console.log(JSON.stringify(needs));
+	console.log(JSON.stringify(dataList));
 	base.setCookie('needs',JSON.stringify(needs));
 	_czc.push(["_trackEvent", "筛选", "确定", "", "", ""]);
 })

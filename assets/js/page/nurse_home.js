@@ -68,9 +68,17 @@ $(document).ready(function(){
 })
 /*link*/
 $('#user_card').on('tap',function(){
-	var userID=$('.nickname').attr('userID');
-	_czc.push(["_trackEvent", "服务员主页", "名片", "", "", ""]);
-	window.location.href='userCard.html?userID='+userID;
+	if ($('.reg_phone').is(":visible")) {
+		mui.toast('您需要先完善资料')
+		setTimeout(function(){
+			window.location.href='information.html'
+		},2000);
+	}else{
+		var userID=$('.nickname').attr('userID');
+		_czc.push(["_trackEvent", "服务员主页", "名片", "", "", ""]);
+		window.location.href='userCard.html?userID='+userID;
+	};
+	
 })
 $('#share').on('tap',function(){
 	var userID=$('.nickname').attr('userID');

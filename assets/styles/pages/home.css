@@ -1,17 +1,22 @@
 .mui-card-content-inner{
 	text-align: center;
 }
+.mui-card{
+	margin: 10px 15px;
+	box-shadow:none;
+	border:1px solid #EAEAEA;
+}
 .card_title{
 	color: #007aff
 }
 .card_content{
 	width: 100%;
-	text-align: left;
 	font-size: .8em;
-	color: #ccc;
+	color: #333;
 }
 .card_content .mui-icon{
 	font-size: .8em;
+	margin-right: 5px;
 }
 .mui-input-group:first-child {
 	margin-top: 20px;
@@ -36,7 +41,7 @@
 	padding: 10px;
 }
 #code{width: 37% !important;float: left;}
-#reg,#reg_add{width: 100% !important;font-size: 14px;background-color: #fc5b3e;border-color: #F11764}
+#reg,#reg_add{width: 100% !important;font-size: 14px;background-color: #fc5b3e;border-color: #fc5b3e}
 #reg .mui-spinner{
 	width: 19px;
 	height: 19px;

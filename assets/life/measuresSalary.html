@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>测算下你的服务能力值多少钱</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../styles/mui.min.css">
+		<style>
+			html,.mui-content{
+				background-color: #fff
+			}
+			.title img{
+				width: 100%;
+			}
+			.choose{
+				width: 100%;
+				padding: 15px;
+			}
+			.choose .mui-btn {
+			    width: auto;
+			    padding: 5px 10px;
+			    margin: 7px 15px 0 0;
+			    background-color: #f0f2f5;
+			    border: 1px solid #f0f2f5;
+			    border-radius: 5px;
+			    font-size: 13px;
+			    color: #797979
+			}
+			.choose .mui-btn:active{
+				background-color: #fc525f;
+			}
+			.choose_title{
+				color: #fc525f;
+				font-weight: 600;
+				font-size: 14px;
+			}
+			#reg{width: 100% !important;font-size: 14px;background-color: #fc525f;border-color: #fc5b3e;padding: 10px;border-radius: 10px}
+			#reg .mui-spinner{
+				width: 19px;
+				height: 19px;
+			    margin-top: -5px;
+			    position: relative;
+			    top: 5px;
+			}
+			.choose .on{
+				background-color: #fc525f;
+				border-color: #fc525f;
+				color: #fff;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<div class="mui-scroll">
+				<div class="title">
+					<img src="../images/life_csxz1.png">
+				</div>
+				<div class="choose">
+					<div class="choose_title">我能胜任：</div>
+					<div class="mui-row" id="">
+						<button type="button" class="mui-btn mui-pull-left type " tagid="0">育婴师</button>
+						<button type="button" class="mui-btn mui-pull-left type" tagid="300">月嫂</button>
+						<button type="button" class="mui-btn mui-pull-left type on" tagid="1">住家保姆</button>
+						<button type="button" class="mui-btn mui-pull-left type" tagid="2">半天钟点</button>
+						<button type="button" class="mui-btn mui-pull-left type" tagid="3">全天钟点</button>
+					</div>
+				</div>
+				<div class="choose">
+					<div class="choose_title">我能做：</div>
+					<div class="mui-row" id="">
+						<button type="button" class="mui-btn mui-pull-left ready" tagid="21">打扫卫生</button>
+						<button type="button" class="mui-btn mui-pull-left ready" tagid="23">做饭</button>
+						<button type="button" class="mui-btn mui-pull-left ready" tagid="200">照顾老人</button>
+						<button type="button" class="mui-btn mui-pull-left ready" tagid="100">照顾小孩</button>
+					</div>
+				</div>
+				<div class="choose">
+					<div class="choose_title">别人夸我：</div>
+					<div class="mui-row" id="">
+						<button type="button" class="mui-btn mui-pull-left ready" tagid="24">做饭好吃</button>
+						<button type="button" class="mui-btn mui-pull-left ready" tagid="25">工作认真</button>
+						<button type="button" class="mui-btn mui-pull-left ready" tagid="26">热情亲切</button>
+					</div>
+				</div>
+				<div class="choose">
+					<div class="choose_title">我有的证书：</div>
+					<div class="mui-row" id="">
+						<button type="button" class="mui-btn mui-pull-left ready" tagid="4">育婴师证</button>
+						<button type="button" class="mui-btn mui-pull-left ready" tagid="5">催乳师证</button>
+						<button type="button" class="mui-btn mui-pull-left ready" tagid="8">营养师证</button>
+						<button type="button" class="mui-btn mui-pull-left ready" tagid="6">小儿推拿证</button>
+						<button type="button" class="mui-btn mui-pull-left ready" tagid="7">护士证</button>
+						<button type="button" class="mui-btn mui-pull-left ready" tagid="9">茶艺证</button>
+						<button type="button" class="mui-btn mui-pull-left ready" tagid="10">驾驶证</button>
+					</div>
+				</div>
+				<div class="choose">
+					<div class="choose_title">我的特长：</div>
+					<div class="mui-row" id="">
+						<button type="button" class="mui-btn mui-pull-left ready" tagid="16">会做西餐</button>
+						<button type="button" class="mui-btn mui-pull-left ready" tagid="11">会做面食</button>
+						<button type="button" class="mui-btn mui-pull-left ready" tagid="13">会英语</button>
+						<button type="button" class="mui-btn mui-pull-left ready" tagid="14">懂早教</button>
+						<button type="button" class="mui-btn mui-pull-left ready" tagid="15">会插花</button>
+					</div>
+				</div>
+				<div class="mui-content-padded">
+					<a id='reg' href="#" class="mui-btn mui-btn-block mui-btn-primary">确定</a>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/mui/mui.min.js"></script>
+	<script src="../js/base.js"></script>
+	<script>
+		mui.init({
+			swipeBack:true //启用右滑关闭功能
+		});
+		$('.ready').on('tap',function(){
+			$(this).toggleClass('on')
+		})
+		$('.type').on('tap',function(){
+			$('.type').removeClass('on')
+			$(this).addClass('on');
+		})
+		$('#reg').on('tap',function(){
+			var dataList=[];
+			for(var i =0;i<$('.on').length;i++){
+				if ($('.on').eq(i).attr('tagID')) {
+					if (i==1) {
+						dataList.push({
+						   tagID:$('.on').eq(i).attr('tagID'),
+						   value:'100'
+						})
+					}else if(i==2){
+						dataList.push({
+						   tagID:$('.on').eq(i).attr('tagID'),
+						   value:'3'
+						})
+					}else{
+						dataList.push({
+						   tagID:$('.on').eq(i).attr('tagID'),
+						   value:'1'
+						})
+					};
+					
+				};
+			}
+			dataList = JSON.stringify(dataList)
+			console.log(dataList);
+			$.ajax({
+			    type: 'post',
+			    url: '/countPrice',
+			    async:false,
+			    data: {'tag':dataList},
+			    dataType: 'json',
+			    success: function(data) {
+			    	if (data.msgNo==0000) {
+			        	
+			    	}
+			    },
+			    error: function(xhr, textStatus, errorThrown) {
+			    	if (xhr.status == 401) {
+			    		var href =eval('(' + xhr.responseText + ')');
+			    		window.location.href=href.loginPage;
+			    	}
+			    }
+			});
+		})
+	</script>
+
+	<script src="https://s4.cnzz.com/z_stat.php?id=1260604409&web_id=1260604409" language="JavaScript"></script>
+</html>

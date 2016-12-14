@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>你的服务能力值多少钱</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../styles/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../styles/main.css"/>
+		<style>
+			html,.mui-content,.mui-scroll,.mui-scroll-wrapper{
+				background-color: #fff;
+			}
+			.title img{
+				width: 100%;
+			}
+			.mui-navbar,.mui-bar-nav{
+				background-color:#fc525f;
+				color: #fff; 
+				box-shadow: none
+			}
+			.mui-bar .mui-btn {
+				color: #fff;
+			}
+			.mui-title{
+				color: #fff;
+			}
+			.mui-bar .mui-btn-nav.mui-pull-right{margin-right: 0}
+			.mui-content-padded{
+				text-align: center;
+			}
+			.reg{width: 40% !important;font-size: 14px;background-color: #fc525f;border-color: #fc5b3e;padding: 10px;border-radius: 10px;display: inline-block;}
+			.reg .mui-spinner{
+				width: 19px;
+				height: 19px;
+			    margin-top: -5px;
+			    position: relative;
+			    top: 5px;
+			}
+			.res_bg{
+			  	
+			}
+			.result{
+				padding:30px 15px 15px;
+				color: #333;
+			}
+			.result span{
+				color: #fc525f;
+				font-weight: 700;
+				font-size: 24px;
+			}
+			.yqtitle{
+				width: 100%;
+				padding: 15px 15px 5px 15px;
+				position: relative;
+			}
+			.yqtitle:after{
+				position: absolute;
+			    right: 0;
+			    bottom: 0;
+			    left: 15px;
+			    right: 15px;
+			    height: 1px;
+			    content: '';
+			    -webkit-transform: scaleY(.5);
+			    transform: scaleY(.5);
+			    background-color: #c8c7cc;
+			}
+			.add_div{
+				width: 100%;
+				padding:15px;
+				color: #fc525f;
+				text-align: center;
+				line-height: 180%
+			}
+			.goods{
+				width: 100%;
+				padding:15px;
+				color: #333;
+			}
+			.wecat{margin-right: 20px;}
+			#shareit {-webkit-user-select: none;display: none;position: fixed;width: 100%;height: 100%;  background: rgba(0,0,0,0.85);text-align: center;top: 0;left: 0;z-index: 1005;  }  
+ 			#shareit img { max-width: 70%;}  
+ 			.arrow {position: absolute; right: 5%;top: 2%;}  
+ 			#follow{width: 100%;height: 50px;line-height: 50px;text-align: center; text-decoration: none;font-size: 18px;float: left;margin-top: 400px;}
+ 			.phb_main{
+ 				margin-bottom: 100px;
+ 			}
+ 			.phb_main img{
+ 				width: 100%
+ 			}
+ 			.mui-table-view{
+ 				margin-top: 10px;
+ 			}
+ 			.mui-media img{
+ 				border-radius: 50%
+ 			}
+ 			.mui-table-view:after{
+ 				height: 1px;
+ 			}
+ 			.phb_main li{
+ 				line-height: 42px;
+ 			}
+ 			.num{
+ 				font-size: 18px;
+ 				color: #8f8f94;
+ 				width: 42px;
+ 				height: 42px;
+ 				text-align: center;
+ 			}
+ 			.num_icon{
+ 				font-size: 42px;
+ 				color: #fc525f;
+ 				width: 42px;
+ 				height: 42px;
+ 			}
+ 			.phb_main li img{
+ 				margin: 0 10px;
+ 			}
+ 			.mui-ellipsis{margin-right:10px;}
+ 			.yx{font-size: 14px;}
+ 			.yx font{color:#fc525f }
+ 			.phb_btn{
+			    position: fixed;
+			    bottom: 0;
+			    left: 0;
+			    width: 100%;
+			    z-index: 9999;
+			    background-color: #fff;
+			    margin: 0;
+			    padding-top: 10px;
+ 			}
+		</style>
+	</head>
+
+	<body>
+		<div id="app" class="mui-views">
+			<div class="mui-view">
+				<div class="mui-navbar">
+				</div>
+				<div class="mui-pages">
+				</div>
+			</div>
+		</div>
+		<div id="main" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>
+				</button>
+				<h1 class="mui-center mui-title">计算结果</h1>
+				<a href="#phb" class="mui-left mui-btn  mui-btn-link mui-btn-nav mui-pull-right" id="">排行榜</a>
+			</div>
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<div class="res_bg">
+							<div class="result">
+								您的测试薪资为：<span>8888</span>元/月
+							</div>
+							<div class="result" style="padding-top:15px">
+								超过成都地区：<span>80%</span>的服务人员
+							</div>
+						</div>
+						<div class="yqtitle">
+							<img src="../images/logo.jpg" style="vertical-align: middle;">
+							<span style="vertical-align: middle;">小元的邀请</span>
+						</div>
+						<div class="add_div">
+							免费加入微元汇，享福利<br>让您找到更好的工作！
+						</div>
+						<div class="goods">
+							<p>小元福利一：几十项免费上岗培训，让您工作更顺利</p>
+							<p>小元福利二：专享体检，体检更全面，费用更低</p>
+							<p>小元福利三：专业技能培训，证书在手，高薪我有</p>
+							<p>小元福利四：享受保险服务，工作安全有保障</p>
+						</div>	
+					</div>
+					<div class="mui-content-padded phb_btn">
+						<a id='wecat' href="#" class="mui-btn mui-btn-block mui-btn-primary reg wecat">看看朋友的薪资</a>
+						<a id='reg' href="#" class="mui-btn mui-btn-block mui-btn-primary reg">加入微元汇</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="phb" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>
+				</button>
+				<h1 class="mui-center mui-title">排行榜</h1>
+			</div>
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<div class="phb_main">
+							<img src="../images/phb.png">
+							<ul class="mui-table-view">
+								<li class="mui-table-view-cell mui-media">
+								<span class="mui-icon iconfont icon-icon mui-pull-left num_icon"></span>
+									<img class="mui-media-object mui-pull-left" src="../images/shuijiao.jpg">
+									<p class="mui-ellipsis mui-pull-left">李霸天</p>
+									<span class='mui-pull-left yx'><font>8888</font>元/月</span>
+								</li>
+								<li class="mui-table-view-cell mui-media">
+								<span class="mui-icon iconfont icon-icon1 mui-pull-left num_icon"></span>
+									<img class="mui-media-object mui-pull-left" src="../images/shuijiao.jpg">
+									<p class="mui-ellipsis mui-pull-left">李霸天</p>
+									<span class='mui-pull-left yx'><font>8888</font>元/月</span>
+								</li>
+								<li class="mui-table-view-cell mui-media">
+								<span class="mui-icon iconfont icon-icon2 mui-pull-left num_icon"></span>
+									<img class="mui-media-object mui-pull-left" src="../images/shuijiao.jpg">
+									<p class="mui-ellipsis mui-pull-left">李霸天</p>
+									<span class='mui-pull-left yx'><font>8888</font>元/月</span>
+								</li>
+								<li class="mui-table-view-cell mui-media">
+									<span class='mui-pull-left num'>4.</span>
+									<img class="mui-media-object mui-pull-left" src="../images/shuijiao.jpg">
+									<p class="mui-ellipsis mui-pull-left">育儿嫂</p>
+									<span class='mui-pull-left yx'><font>8888</font>元/月</span>
+								</li><li class="mui-table-view-cell mui-media">
+									<span class='mui-pull-left num'>4.</span>
+									<img class="mui-media-object mui-pull-left" src="../images/shuijiao.jpg">
+									<p class="mui-ellipsis mui-pull-left">育儿嫂</p>
+									<span class='mui-pull-left yx'><font>8888</font>元/月</span>
+								</li><li class="mui-table-view-cell mui-media">
+									<span class='mui-pull-left num'>4.</span>
+									<img class="mui-media-object mui-pull-left" src="../images/shuijiao.jpg">
+									<p class="mui-ellipsis mui-pull-left">育儿嫂</p>
+									<span class='mui-pull-left yx'><font>8888</font>元/月</span>
+								</li><li class="mui-table-view-cell mui-media">
+									<span class='mui-pull-left num'>4.</span>
+									<img class="mui-media-object mui-pull-left" src="../images/shuijiao.jpg">
+									<p class="mui-ellipsis mui-pull-left">育儿嫂</p>
+									<span class='mui-pull-left yx'><font>8888</font>元/月</span>
+								</li><li class="mui-table-view-cell mui-media">
+									<span class='mui-pull-left num'>4.</span>
+									<img class="mui-media-object mui-pull-left" src="../images/shuijiao.jpg">
+									<p class="mui-ellipsis mui-pull-left">育儿嫂</p>
+									<span class='mui-pull-left yx'><font>8888</font>元/月</span>
+								</li><li class="mui-table-view-cell mui-media">
+									<span class='mui-pull-left num'>4.</span>
+									<img class="mui-media-object mui-pull-left" src="../images/shuijiao.jpg">
+									<p class="mui-ellipsis mui-pull-left">育儿嫂</p>
+									<span class='mui-pull-left yx'><font>8888</font>元/月</span>
+								</li><li class="mui-table-view-cell mui-media">
+									<span class='mui-pull-left num'>4.</span>
+									<img class="mui-media-object mui-pull-left" src="../images/shuijiao.jpg">
+									<p class="mui-ellipsis mui-pull-left">育儿嫂</p>
+									<span class='mui-pull-left yx'><font>8888</font>元/月</span>
+								</li><li class="mui-table-view-cell mui-media">
+									<span class='mui-pull-left num'>4.</span>
+									<img class="mui-media-object mui-pull-left" src="../images/shuijiao.jpg">
+									<p class="mui-ellipsis mui-pull-left">育儿嫂</p>
+									<span class='mui-pull-left yx'><font>8888</font>元/月</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="mui-content-padded phb_btn">
+						<a id='' href="#" class="mui-btn mui-btn-block mui-btn-primary reg wecat">看看朋友的薪资</a>
+						<a id='reg' href="#" class="mui-btn mui-btn-block mui-btn-primary reg">加入微元汇</a>
+					</div>
+				</div>
+
+						
+			</div>
+		</div>
+		<div id="shareit">  
+		  <img class="arrow" src="../images/share_it.png">  
+		  <a href="#" id="follow">点击右上角按钮，分享给朋友</a>  
+		</div>
+	</body>
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/mui/mui.min.js"></script>
+	<script src="../js/mui/mui.view.js "></script>
+	<script src="../js/base.js"></script>
+	<script>
+		mui.init({
+			swipeBack:true //启用右滑关闭功能
+		});
+		//初始化单页view
+		var viewApi = mui('#app').view({
+			defaultPage: '#main'
+		});
+		//初始化单页的区域滚动
+		mui('.mui-scroll-wrapper').scroll();
+		var view = viewApi.view;
+		(function($) {
+			//处理view的后退与webview后退
+			var oldBack = $.back;
+			$.back = function() {
+				if (viewApi.canBack()) { //如果view可以后退，则执行view的后退
+					viewApi.back();
+				} else { //执行webview后退
+					oldBack();
+				}
+			};
+			
+		})(mui);
+		$('.wecat').on('tap',function(){
+			$("#shareit").show(); 
+		})
+		$("#shareit").on("tap", function(){  
+		    $("#shareit").hide();  
+		})
+	</script>
+
+	<script src="https://s4.cnzz.com/z_stat.php?id=1260604409&web_id=1260604409" language="JavaScript"></script>
+</html>
