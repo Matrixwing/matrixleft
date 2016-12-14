@@ -117,6 +117,7 @@
 	<script src="../js/jquery.min.js"></script>
 	<script src="../js/mui/mui.min.js"></script>
 	<script src="../js/base.js"></script>
+	<script type="text/javascript" charset="UTF-8" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 	<script>
 		mui.init({
 			swipeBack:true //启用右滑关闭功能
@@ -161,7 +162,7 @@
 			    dataType: 'json',
 			    success: function(data) {
 			    	if (data.msgNo==0000) {
-			        	
+			        	console.log(data.data.totalPrice);
 			    	}
 			    },
 			    error: function(xhr, textStatus, errorThrown) {
@@ -172,6 +173,13 @@
 			    }
 			});
 		})
+		var sharedata={
+			'title':'快来测试下你的服务水平值多少钱',
+			'link':'http://wyh.matrixwing.com/measuresSalary.html',
+			'imgUrl':'http://wyh.matrixwing.com/images/logo.jpg',
+			'desc':'找工作不知道要多少工资？想知道你的服务水平导致值多少钱吗？快来测试吧！'
+		}
+		//base.getShareConfig(sharedata)
 	</script>
 
 	<script src="https://s4.cnzz.com/z_stat.php?id=1260604409&web_id=1260604409" language="JavaScript"></script>
