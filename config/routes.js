@@ -65,6 +65,7 @@ module.exports.routes = {
   "post /getOrderList" : {controller : "OrderController", action : "getOrderList"}  ,
   "post /buyIns" : {controller : "OrderController", action : "buyIns" },
   "get /weixin/jsApiAccess" : {controller : "WeixinController", action : "jsApiAccess"}  ,
+  "post /countPrice":{controller:"TagController",action:"countPrice"},
   //"post /getTotalFee" : {controller : "PayController", action : "jsApiAccess"}  ,
    /***************************************************************************
   *                                                                          *

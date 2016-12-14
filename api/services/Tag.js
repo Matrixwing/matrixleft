@@ -15,15 +15,13 @@ module.exports = {
    * @return {*}
    */
   getRandomServantList : function(){
-
-
   },
 
   //查询出所有的标签，并且把type不同的标签区分开。返回一个二维的对象数组：
   //返回的结果：tagList = [[type=0的对象组成的对象数组],[type=1的对象组成的对象数组],[type=2的对象组成的对象数组],........]
   getAllListGoupByType : function(cb){
-    TagList.query('SELECT t.tagID,t.tagName,t.type FROM tag t where t.type != 5 ORDER BY t.tagID ASC; ',function(err,allTag){
-
+    //TagList.query('SELECT t.tagID,t.tagName,t.type FROM tag t where t.type != 5 ORDER BY t.tagID ASC; ',function(err,allTag){
+    TagList.query('SELECT t.tagID,t.tagName,t.type FROM tag t  ORDER BY t.tagID ASC; ',function(err,allTag){
       if(err){
         sails.console.error('查询出所有的标签出错(TagList.getAllListGoupByType)：',err);
         return cb(err);
@@ -44,7 +42,6 @@ module.exports = {
         if(allTag[tag].tagID == 101 || allTag[tag].tagID == 102 || allTag[tag].tagID == 103) {
           allTag[childTag].sonTag.push(allTag[tag]);
           allTag[tag]=null;
-
         }
         //约定‘照顾老人’的tagID为200，其子选项tagID为201，202，203
         if(allTag[tag]&&allTag[tag].tagID == 200){
@@ -87,11 +84,9 @@ module.exports = {
     var whereString  = " ";
     var tagString = " ";
     if(tag!=''){
-      console.log('1111111');
       havingString = " HAVING COUNT(*)="+ count;
       whereString  = " AND tur.tagID IN ("+tagStr+") ";
     }
-    console.log(tagStr);
     async.parallel([
       function(next) {
         var queryString = "SELECT "+
@@ -106,7 +101,6 @@ module.exports = {
           "WHERE  ur.workstatus!=2  AND ur.role=2  "+
           whereString+
           "GROUP BY tur.userID "+ havingString+" ORDER BY sumweight DESC limit "+opts.start +", "+opts.limit+" ;";
-        console.log(queryString);
         TagList.query(queryString,function(err,result){
           if(err) { return next(err); }
           next(null,result);
@@ -122,7 +116,6 @@ module.exports = {
         "WHERE  ur.workstatus!=2  AND ur.role=2  "+
          whereString+
         "GROUP BY tur.userID "+ havingString+" ) AS a ; ";
-        console.log(queryString);
         TagList.query(queryString,function(err,result){
           if(err) { return next(err); }
           next(null,result);
@@ -133,7 +126,6 @@ module.exports = {
           return  next(null,[{lowPrice:0}]);
         }
         var queryString = "select sum(price) as lowPrice from tag tur where tur.type!=1 "+whereString
-        console.log(queryString);
         TagList.query(queryString,function(err,result){
           if(err) { return next(err); }
           next(null,result);
@@ -147,8 +139,7 @@ module.exports = {
         "LEFT JOIN `user` ur ON tur.`userID` = ur.`userID` "+
         "WHERE "+
         " ur.workstatus!=2  AND ur.role=2 "+whereString +
-        " GROUP BY tur.userID "+havingString+" ) GROUP BY tur.userID ;"
-        console.log(queryString);
+        " GROUP BY tur.userID "+havingString+" ) GROUP BY tur.userID ;";
         TagList.query(queryString,function(err,result){
           if(err) { return next(err); }
           next(null,result);
@@ -158,7 +149,6 @@ module.exports = {
         var workPrice = 0;//工作内容需要的价格
         var queryString = 'select * from tag tur where tur.type=1 '+whereString ;
         //计算出工作内容的价格
-        console.log(queryString);
         TagList.query(queryString,function(err,tagInfo){
           for(x in tagInfo){
             for(y in tag){
@@ -177,8 +167,6 @@ module.exports = {
         })
       }
     ],function(err,results){
-      console.log(err);
-      console.log(results);
       if(err) return cb(err);
       var x;
       var tagList = results[0];
@@ -306,5 +294,21 @@ module.exports = {
       return cb(null,result);
     })
   },
+
+  countPrice : function (opts,cb){ //活动，算算你值多少钱
+    var tag = opts.tag;
+    var tagStr = '';
+    for(var tagNum in tag){
+      tagStr+=tag[tagNum].tagID;
+      if(tagNum<tag.length-1)
+        tagStr+=',';
+    }
+    var queryString = " select sum(price) totalPrice from tag where tagID in("+tagStr+")";
+    TagList.query(queryString,function(err,result){
+      if(err) return cb(err);
+      return cb(null,result[0]);
+    })
+
+  }
 
 }
