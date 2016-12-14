@@ -46,19 +46,17 @@ module.exports = {
     var opts = {
       tag: req.param('tag','')
     };
-
    // opts.tag=[{tagID:1},{tagID:17},{tagID:22}];
-
     if(opts.tag==''){
       return res.send( '{"msgNo":"0000","msgInfo":"成功","data":{"totalPrice":0}}');
     }
+    opts.tag=JSON.parse(opts.tag);
     Tag.countPrice(opts,function(err,price){
       if (err) {return res.send(500,'{"msgNo":"9999","msgInfo":"服务出错"}');}
       var str = JSON.stringify(price) ;
       tagList = util.format('{"msgNo":"0000","msgInfo":"成功","data":%s}',str);
       res.send(tagList);
     })
-
   }
 };
 

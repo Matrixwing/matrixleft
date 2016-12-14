@@ -230,7 +230,6 @@ module.exports = {
         sails.log.error(err);
         return cb(err);
       }
-
       return cb(null,result);
     })
   },
