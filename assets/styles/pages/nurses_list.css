@@ -331,15 +331,17 @@ li.mui-table-view-cell.mui-media {
 	color: #fff;
 	display: none
 }
+
+.tips p,.tips span{
+	color: #fff;
+}
 .tips span{
 	font-size: 14px;
+	color: #fc5b3e
 }
 .tips p{
 	font-size: 12px;
 	text-indent: 2em;
-}
-.tips p,.tips span{
-	color: #fff;
 }
 .tips_title{
 	display: inline-block;

@@ -66,6 +66,38 @@ $(function(){
 $(document).ready(function(){
 	base.tabbarHtml(2);
 })
+$('.file').on('change', function () {
+	var p =$(this);
+    lrz(this.files[0],{width: 640,quality:0.3})
+        .then(function (rst) {
+        	$('.tips').show();
+            $.ajax({
+			    type: 'post',
+			    url: '/uploadFiles',
+			    data: {'files':rst.base64,'filesType':4},
+			    dataType: 'json',
+			    success: function(data) {
+			    	$('.tips').hide();
+			    	if (data.msgNo==0000) {
+			           $('#head-img1').attr('src',rst.base64);
+			    	}else{
+			    		mui.toast(data.msgInfo);
+			    	};
+			    },
+			    error: function(xhr, textStatus, errorThrown) {
+			    	/*if (xhr.status == 401) {
+			    		window.location.href='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8306afd398ab31e5&redirect_uri=http%3a%2f%2fwyh.matrixwing.com%2fweixinLogIn&response_type=code&scope=snsapi_userinfo&state=needlogin#wechat_redirect'
+			    	};*/
+			    }
+			});
+            //return rst;
+        })
+        .catch(function (err) {
+        	alert(err);
+        })
+        .always(function () {
+        });
+});
 /*link*/
 $('#user_card').on('tap',function(){
 	if ($('.reg_phone').is(":visible")) {

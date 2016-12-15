@@ -157,7 +157,7 @@
 					<div class="mui-scroll">
 						<div class="res_bg">
 							<div class="result">
-								您的测试薪资为：<span>8888</span>元/月
+								您的测试薪资为：<span id='totalPrice'>8888</span>元/月
 							</div>
 							<div class="result" style="padding-top:15px">
 								超过成都地区：<span>80%</span>的服务人员
@@ -179,7 +179,7 @@
 					</div>
 					<div class="mui-content-padded phb_btn">
 						<a id='wecat' href="#" class="mui-btn mui-btn-block mui-btn-primary reg wecat">看看朋友的薪资</a>
-						<a id='reg' href="#" class="mui-btn mui-btn-block mui-btn-primary reg">加入微元汇</a>
+						<a id='' href="../information.html" class="mui-btn mui-btn-block mui-btn-primary reg">加入微元汇</a>
 					</div>
 				</div>
 			</div>
@@ -261,7 +261,7 @@
 					</div>
 					<div class="mui-content-padded phb_btn">
 						<a id='' href="#" class="mui-btn mui-btn-block mui-btn-primary reg wecat">看看朋友的薪资</a>
-						<a id='reg' href="#" class="mui-btn mui-btn-block mui-btn-primary reg">加入微元汇</a>
+						<a id='' href="../information.html" class="mui-btn mui-btn-block mui-btn-primary reg">加入微元汇</a>
 					</div>
 				</div>
 
@@ -298,8 +298,8 @@
 					oldBack();
 				}
 			};
-			
 		})(mui);
+		$('#totalPrice').html(base.getQueryString('totalPrice'))
 		$('.wecat').on('tap',function(){
 			$("#shareit").show(); 
 		})

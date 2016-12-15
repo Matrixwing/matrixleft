@@ -162,7 +162,8 @@
 			    dataType: 'json',
 			    success: function(data) {
 			    	if (data.msgNo==0000) {
-			        	console.log(data.data.totalPrice);
+			        	//console.log(data.data.totalPrice);
+			        	window.location.href='../life/measuresResult.html?totalPrice='+data.data.totalPrice;
 			    	}
 			    },
 			    error: function(xhr, textStatus, errorThrown) {
