@@ -157,10 +157,10 @@
 					<div class="mui-scroll">
 						<div class="res_bg">
 							<div class="result">
-								您的测试薪资为：<span id='totalPrice'>8888</span>元/月
+								您的测试薪资为：<span id='totalPrice'></span>元/月
 							</div>
 							<div class="result" style="padding-top:15px">
-								超过成都地区：<span>80%</span>的服务人员
+								超过成都地区：<span id='percentage'></span>的服务人员
 							</div>
 						</div>
 						<div class="yqtitle">
@@ -196,66 +196,7 @@
 					<div class="mui-scroll">
 						<div class="phb_main">
 							<img src="../images/phb.png">
-							<ul class="mui-table-view">
-								<li class="mui-table-view-cell mui-media">
-								<span class="mui-icon iconfont icon-icon mui-pull-left num_icon"></span>
-									<img class="mui-media-object mui-pull-left" src="../images/shuijiao.jpg">
-									<p class="mui-ellipsis mui-pull-left">李霸天</p>
-									<span class='mui-pull-left yx'><font>8888</font>元/月</span>
-								</li>
-								<li class="mui-table-view-cell mui-media">
-								<span class="mui-icon iconfont icon-icon1 mui-pull-left num_icon"></span>
-									<img class="mui-media-object mui-pull-left" src="../images/shuijiao.jpg">
-									<p class="mui-ellipsis mui-pull-left">李霸天</p>
-									<span class='mui-pull-left yx'><font>8888</font>元/月</span>
-								</li>
-								<li class="mui-table-view-cell mui-media">
-								<span class="mui-icon iconfont icon-icon2 mui-pull-left num_icon"></span>
-									<img class="mui-media-object mui-pull-left" src="../images/shuijiao.jpg">
-									<p class="mui-ellipsis mui-pull-left">李霸天</p>
-									<span class='mui-pull-left yx'><font>8888</font>元/月</span>
-								</li>
-								<li class="mui-table-view-cell mui-media">
-									<span class='mui-pull-left num'>4.</span>
-									<img class="mui-media-object mui-pull-left" src="../images/shuijiao.jpg">
-									<p class="mui-ellipsis mui-pull-left">育儿嫂</p>
-									<span class='mui-pull-left yx'><font>8888</font>元/月</span>
-								</li><li class="mui-table-view-cell mui-media">
-									<span class='mui-pull-left num'>4.</span>
-									<img class="mui-media-object mui-pull-left" src="../images/shuijiao.jpg">
-									<p class="mui-ellipsis mui-pull-left">育儿嫂</p>
-									<span class='mui-pull-left yx'><font>8888</font>元/月</span>
-								</li><li class="mui-table-view-cell mui-media">
-									<span class='mui-pull-left num'>4.</span>
-									<img class="mui-media-object mui-pull-left" src="../images/shuijiao.jpg">
-									<p class="mui-ellipsis mui-pull-left">育儿嫂</p>
-									<span class='mui-pull-left yx'><font>8888</font>元/月</span>
-								</li><li class="mui-table-view-cell mui-media">
-									<span class='mui-pull-left num'>4.</span>
-									<img class="mui-media-object mui-pull-left" src="../images/shuijiao.jpg">
-									<p class="mui-ellipsis mui-pull-left">育儿嫂</p>
-									<span class='mui-pull-left yx'><font>8888</font>元/月</span>
-								</li><li class="mui-table-view-cell mui-media">
-									<span class='mui-pull-left num'>4.</span>
-									<img class="mui-media-object mui-pull-left" src="../images/shuijiao.jpg">
-									<p class="mui-ellipsis mui-pull-left">育儿嫂</p>
-									<span class='mui-pull-left yx'><font>8888</font>元/月</span>
-								</li><li class="mui-table-view-cell mui-media">
-									<span class='mui-pull-left num'>4.</span>
-									<img class="mui-media-object mui-pull-left" src="../images/shuijiao.jpg">
-									<p class="mui-ellipsis mui-pull-left">育儿嫂</p>
-									<span class='mui-pull-left yx'><font>8888</font>元/月</span>
-								</li><li class="mui-table-view-cell mui-media">
-									<span class='mui-pull-left num'>4.</span>
-									<img class="mui-media-object mui-pull-left" src="../images/shuijiao.jpg">
-									<p class="mui-ellipsis mui-pull-left">育儿嫂</p>
-									<span class='mui-pull-left yx'><font>8888</font>元/月</span>
-								</li><li class="mui-table-view-cell mui-media">
-									<span class='mui-pull-left num'>4.</span>
-									<img class="mui-media-object mui-pull-left" src="../images/shuijiao.jpg">
-									<p class="mui-ellipsis mui-pull-left">育儿嫂</p>
-									<span class='mui-pull-left yx'><font>8888</font>元/月</span>
-								</li>
+							<ul class="mui-table-view" id="ranking">
 							</ul>
 						</div>
 					</div>
@@ -276,6 +217,7 @@
 	<script src="../js/jquery.min.js"></script>
 	<script src="../js/mui/mui.min.js"></script>
 	<script src="../js/mui/mui.view.js "></script>
+	<script type="text/javascript" charset="UTF-8" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 	<script src="../js/base.js"></script>
 	<script>
 		mui.init({
@@ -299,13 +241,64 @@
 				}
 			};
 		})(mui);
-		$('#totalPrice').html(base.getQueryString('totalPrice'))
 		$('.wecat').on('tap',function(){
 			$("#shareit").show(); 
 		})
 		$("#shareit").on("tap", function(){  
 		    $("#shareit").hide();  
 		})
+		$.ajax({
+		    type: 'get',
+		    url: '/life/getResult',
+		    async:false,
+		    dataType: 'json',
+		    success: function(data) {
+		    	if (data.msgNo==0000) {
+		    		if (data.data.userInfo) {
+			        	$('#totalPrice').html(data.data.userInfo.totalPrice)
+			        	$('#percentage').html(data.data.userInfo.totalPrice)
+			        	if (data.data.ranking) {
+			        		var html=[];
+			        		for(var i=0;i<data.data.ranking.length;i++){
+			        			html.push('<li class="mui-table-view-cell mui-media">');
+			        			if (i==0) {
+									html.push('<span class="mui-icon iconfont icon-icon mui-pull-left num_icon"></span>');
+			        			}else if(i==1){
+			        				html.push('<span class="mui-icon iconfont icon-icon1 mui-pull-left num_icon"></span>');
+			        			}else if(i==2){
+			        				html.push('<span class="mui-icon iconfont icon-icon2 mui-pull-left num_icon"></span>');
+			        			}else{
+			        				html.push('<span class="mui-pull-left num">'+(i+1)+'.</span>');
+			        			};
+									html.push('<img class="mui-media-object mui-pull-left" src="'+data.data.ranking[i].avatarUrl+'">');
+									html.push('<p class="mui-ellipsis mui-pull-left">'+data.data.ranking[i].nickname+'</p>');
+									html.push('<span class="mui-pull-right yx"><font>'+data.data.ranking[i].totalPrice+'</font>元/月</span>');
+								html.push('</li>');
+			        		}
+			        		html = html.join('');
+			        		$('#ranking').append(html)
+			        	};
+		    		}
+		    		var title = '我在微元汇的测试薪资为'+data.data.userInfo.totalPrice+',超过了成都地区'+data.data.userInfo.totalPrice+'的服务人员'
+		    		var sharedata={
+						'title':title,
+						'link':'http://wyh.matrixwing.com/measuresSalary.html',
+						'imgUrl':'http://wyh.matrixwing.com/images/share_top_img.png',
+						'desc':'找工作不知道要多少工资？想知道你的服务水平到底值多少钱吗？快来测试吧！'
+					}
+					base.getShareConfig(sharedata)
+		    	}else{
+	    			mui.toast(data.msgInfo)
+	    		};
+		    },
+		    error: function(xhr, textStatus, errorThrown) {
+		    	if (xhr.status == 401) {
+		    		var href =eval('(' + xhr.responseText + ')');
+		    		window.location.href=href.loginPage;
+		    	}
+		    }
+		});
+		
 	</script>
 
 	<script src="https://s4.cnzz.com/z_stat.php?id=1260604409&web_id=1260604409" language="JavaScript"></script>
