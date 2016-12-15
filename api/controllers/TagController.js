@@ -44,7 +44,8 @@ module.exports = {
 
   countPrice : function(req,res){
     var opts = {
-      tag: req.param('tag','')
+      tag: req.param('tag',''),
+      userID:req.session.userID,
     };
    // opts.tag=[{tagID:1},{tagID:17},{tagID:22}];
     if(opts.tag==''){
@@ -54,9 +55,22 @@ module.exports = {
     Tag.countPrice(opts,function(err,price){
       if (err) {return res.send(500,'{"msgNo":"9999","msgInfo":"服务出错"}');}
       var str = JSON.stringify(price) ;
-      tagList = util.format('{"msgNo":"0000","msgInfo":"成功","data":%s}',str);
-      res.send(tagList);
+      price = util.format('{"msgNo":"0000","msgInfo":"成功","data":%s}',str);
+      res.send(price);
     })
-  }
+  },
+
+  getResult:function(req,res){
+    var opts = {
+      userID : req.session.userID
+    }
+    Tag.getResult(opts,function(err,result){
+      if (err) {return res.send(500,'{"msgNo":"9999","msgInfo":"请稍后再试"}');}
+      var str = JSON.stringify(result) ;
+      result = util.format('{"msgNo":"0000","msgInfo":"成功","data":%s}',str);
+      res.send(result);
+      console.log(result);
+    })
+  },
 };
 

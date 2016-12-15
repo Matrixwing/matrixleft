@@ -305,8 +305,75 @@ module.exports = {
     var queryString = " select sum(price) totalPrice from tag where tagID in("+tagStr+")";
     TagList.query(queryString,function(err,result){
       if(err) return cb(err);
-      return cb(null,result[0]);
+      var info = {
+        userID: opts.userID,
+        totalPrice:result[0].totalPrice
+      }
+      MeasPrice.updateOrCreate(info,function(err,result1){
+        if(err) return cb(err);
+        return cb(null,result[0]);
+      })
     })
-  }
+  },
 
+  getResult : function(opts,cb){
+    async.parallel([
+      function(next){
+        MeasPrice.find({userID:opts.userID}).exec(function(err,priceInfo){
+          if(err) return next(err);
+          var num = Math.ceil(priceInfo[0].totalPrice/1000);
+          console.log(num);
+          var percentage = '5%';
+          switch(num)
+          {
+            case 1:
+              percentage = '10%';
+              break;
+            case 2:
+              percentage = '40%';
+              break;
+            case 3:
+              percentage = '54%';
+              break;
+            case 4:
+              percentage = '63%';
+              break;
+            case 5:
+              percentage = '79%';
+              break;
+            case 6:
+              percentage = '85%';
+              break;
+            case 7:
+              percentage = '91%';
+              break;
+            case 7:
+              percentage = '95%';
+              break;
+            default:
+              percentage = '96%';
+          }
+          delete  priceInfo[0].id;
+          delete  priceInfo[0].userID;
+          delete  priceInfo[0].createTime;
+          priceInfo[0].percentage = percentage;
+          return next(null,priceInfo[0]);
+        })
+      },
+      function(next){
+        MeasPrice.getRanking(function(err,ranking){
+          if(err) return next(err);
+          return next(null,ranking);
+        })
+      }
+    ],function(err,reslut){
+      if(err) return cb(err);
+      var info = {
+        userInfo : reslut[0],
+        ranking   : reslut[1],
+      };
+      return cb(null,info)
+    })
+
+  }
 }

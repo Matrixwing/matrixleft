@@ -23,13 +23,14 @@ module.exports.policies = {
     '*': 'isAuthenticated',
 
     TagController : {
-      '*' :true
+      '*' :"isAuthenticated",
+      getTagList:true,
+      getServantList:true
     },
 
      PayController : {
        '*':"isAuthenticated",
        notice:true
-
     },
 
     CardController : {
