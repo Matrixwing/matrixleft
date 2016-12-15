@@ -3,7 +3,7 @@ mui.init({
 });
 //初始化单页view
 var viewApi = mui('#app').view({
-	defaultPage: '#information_sec'
+	defaultPage: '#information_one'
 });
 //初始化单页的区域滚动
 mui('.mui-scroll-wrapper').scroll();
@@ -80,6 +80,27 @@ $('#type_sure').on('tap',function(){
 		$('#type').attr('data',s);
 	}
 	$('#type_div').hide();
+})
+$('#content').on('tap',function(){
+	$('#content_div').show()
+})
+
+$('#content_sure').on('tap',function(){
+	$('#content').attr('data','');
+	var s='';
+	var h='';
+	var obj = $('#content_div input');
+	for(var i=0; i<obj.length; i++){
+		if(obj[i].checked) {
+			s+=obj[i].value+',' ;
+			h+=obj[i].previousElementSibling.innerText+',' ;
+		}
+	}
+	if (h) {
+		$('#content').html(h);
+		$('#content').attr('data',s);
+	}
+	$('#content_div').hide();
 })
 
 $('#skill').on('tap',function(){
@@ -187,12 +208,15 @@ $('#reg').on('tap',function(){
 	    data: {'phone':phone,'num':num},
 	    dataType: 'json',
 	    success: function(data) {
-	    	/*if (data.msgNo==0000) {*/
+	    	if (data.msgNo==0000) {
 	        	mui('#reg').button('reset');
 				$('#reg').attr('href','#information_sec')
-	    	/*}else{
+	    	}else if (data.msgNo==0001) {
+	        	mui('#reg').button('reset');
+				$('#reg').attr('href','#information_sec')
+	    	}else{
 	    		mui.toast(data.msgInfo);
-	    	};*/
+	    	};
 	    },
 	    error: function(xhr, textStatus, errorThrown) {
 	    	if (xhr.status == 401) {
@@ -309,6 +333,14 @@ $('#reg_add').on('tap',function(){
 		var skill = $('#skill').attr('data').split(',')
 		for(var i=0;i<skill.length-1;i++){
 			userTags.push({'tagID':skill[i]})
+		}
+	};
+	if ($('#content').attr('data')==undefined) {
+		//mui.toast('请选择您的工作类型')
+	}else{
+		var content = $('#content').attr('data').split(',')
+		for(var i=0;i<content.length-1;i++){
+			userTags.push({'tagID':content[i]})
 		}
 	};
 	$.ajax({
