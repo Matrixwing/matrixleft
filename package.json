@@ -24,6 +24,7 @@
     "grunt-sails-linker": "~0.10.1",
     "grunt-sync": "0.5.2",
     "include-all": "~0.1.6",
+    "qiniu": "^6.1.13",
     "rc": "1.0.1",
     "request": "^2.79.0",
     "sails": "~0.12.4",

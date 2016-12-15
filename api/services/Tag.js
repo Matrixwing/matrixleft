@@ -307,7 +307,6 @@ module.exports = {
       if(err) return cb(err);
       return cb(null,result[0]);
     })
-
   }
 
 }
