@@ -106,7 +106,7 @@ module.exports = {
           '\ud83d[\ude80-\udeff]'
         ];
          var nick = dataValided.nickname;
-        dataValided.nickname=nick.replace(new RegExp(ranges.join('|'), 'g'), '');
+        dataValided.nickname=nick.replace(new RegExp(ranges.join('|'), 'g'), '')||'神秘人';
         delete dataValided.headimgurl;
         delete dataValided.sex;
         cb(null,dataValided);
@@ -281,10 +281,10 @@ module.exports = {
           */
 
           //又有手机号又有openid，这个号码已经被注册过了
-          console.log('openid+++++++',phoneReslut[0].openid);
+
           if(phoneReslut[0].openid){return cb('这手机已经被注册了');}
           //有手机号但没有openid。表示这是个我们导入的用户。拉取这个人的微信信息，更新到我们的数据库
-          console.log('有手机号但没有openid。表示这是个我们导入的用户。拉取这个人的微信信息，更新到我们的数据库');
+
           async.waterfall([
               function(cb1){
                 console.log('1111111111111111');
