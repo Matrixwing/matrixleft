@@ -55,20 +55,12 @@ var base = {
         tabbarHtml = tabbarHtml.join('');
         mui('body')[0].insertAdjacentHTML('beforeend', tabbarHtml);
         var path = window.location.pathname.slice(1,-5)
-        console.log(path);
-        if (!path) {
-            path= 'index'
-        };
-        /*if (!tabid) {
-            if (type==2) {
-                tabid='nurseHome';
-            }else{
-                tabid='index';
-            };
-        };*/
         var lastActiveElem = document.querySelector('#tab-bar a.mui-active');
         lastActiveElem&&lastActiveElem.classList.remove('mui-active');
-        document.getElementById(path).classList.add('mui-active');
+
+        if (document.getElementById(path)) {
+           document.getElementById(path).classList.add('mui-active');
+        };
         base.tabbar();
     },
         //手机
@@ -227,12 +219,18 @@ var base = {
                     }
                     base.share(config,sharedata)
                 }  
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                if (xhr.status == 401) {
+                    var href =eval('(' + xhr.responseText + ')');
+                    window.location.href=href.loginPage;
+                }
             }
         });
     },
     share:function(config,sharedata){
         wx.config({
-            debug: false, 
+            debug: true, 
             appId: config.appId, 
             timestamp:config.timestamp,
             nonceStr:config.nonceStr,
