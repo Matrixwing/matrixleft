@@ -335,13 +335,13 @@ module.exports = {
               percentage = '10%';
               break;
             case 2:
-              percentage = '40%';
+              percentage = '15%';
               break;
             case 3:
-              percentage = '54%';
+              percentage = '31%';
               break;
             case 4:
-              percentage = '63%';
+              percentage = '59%';
               break;
             case 5:
               percentage = '79%';
