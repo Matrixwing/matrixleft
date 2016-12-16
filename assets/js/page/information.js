@@ -3,7 +3,7 @@ mui.init({
 });
 //初始化单页view
 var viewApi = mui('#app').view({
-	defaultPage: '#information_sec'
+	defaultPage: '#information_one'
 });
 //初始化单页的区域滚动
 mui('.mui-scroll-wrapper').scroll();
