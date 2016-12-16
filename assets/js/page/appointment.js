@@ -80,7 +80,8 @@
 					};
 					if (data.data.examination==1) {
 						//cardHtml.push('<li class="mui-table-view-cell"><p class="mui-pull-left mui-col-xs-3">小元体检：</p><span>'+data.data.examination+'</span></li>')
-						$('#jian').show();
+						//$('#jian').show();
+						//暂时屏蔽掉体检
 					};
 					if (data.data.assessment==1) {
 						cardHtml.push('<li class="mui-table-view-cell"><p class="mui-pull-left mui-col-xs-3">小元评价：</p><span>'+data.data.assessment+'</span></li>')
@@ -143,18 +144,10 @@
 					    if (data.data[0].userName) {
 					   		$('#gz_userName').val(data.data[0].userName);
 					    }
-					    if (data.data[0].gender==1) {
-					    	$('.gender').html('女');
-					    }else{
-					    	$('.gender').html('男');
-					    };
-					    
 					    if (data.data[0].phone) {
 					    	$('#gz_phone').val(data.data[0].phone);
 					    }
-					}else{
-						mui.toast(data.msgInfo)
-					};
+					}
 			    },
 			    error: function(xhr, textStatus, errorThrown) {
 			    	/*if (xhr.status == 401) {

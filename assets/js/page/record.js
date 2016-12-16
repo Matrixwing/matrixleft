@@ -115,3 +115,4 @@ $('#getOrderList').on('tap','.getOrderDetail',function(){
 	var orderID = $(this).attr('orderID');
 	window.location.href='orderDetail.html?orderID='+orderID;
 })
+base.tabbarHtml();

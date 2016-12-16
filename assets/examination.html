@@ -11,52 +11,75 @@
 		<link rel="stylesheet" type="text/css" href="styles/main.css"/>
 		<link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_xbnxihrv6idlsor.css"/>
 		<style>
-			.mui-table-view:after{
-				height: 1px;
+			#image-list {
+				width:100%;
+				height: 85px;
+				background-size: cover;
+				padding: 10px 10px;
+				overflow: hidden;
 			}
-			.success{
+			#image-list .image-item {
+				width: 100px;
+				height: 65px;
+				float: left;
+				background-image: url(../../images/upload_bg.png);
+				background-size: 100% 100%;
+				display: inline-block;
+				position: relative;
+				border-radius: 5px;
+				margin-right: 10px;
+				margin-bottom: 10px;
+				border: solid 1px #e8e8e8;
+			}
+			#image-list .image-item input[type="file"] {
+				position: absolute;
+				left: 0px;
+				top: 0px;
 				width: 100%;
-				padding: 15px;
+				height: 100%;
+				opacity: 0;
+				cursor: pointer;
+				z-index: 0;
+			}
+			#image-list .image-item.space {
+				border: none;
+			}
+			#image-list .image-item .image-close {
+				position: absolute;
+				display: inline-block;
+				right: -6px;
+				top: -6px;
+				width: 20px;
+				height: 20px;
 				text-align: center;
-				background-color: #fff;
-				margin-bottom: 10px;
+				line-height: 20px;
+				border-radius: 12px;
+				background-color: #fc5b3e;
+				color: #f3f3f3;
+				border: solid 1px #fc5b3e;
+				font-size: 9px;
+				font-weight: 200;
+				z-index: 1;
 			}
-			.fwlc{
-				margin-bottom: 10px;
+			#image-list .image-item input[type="file"]{
+				width: 100% !important
 			}
-			.fwlc img{
-				width: 100%;
+			#image-list .image-item.space .image-close {
+				display: none;
 			}
-			.inting{
-				margin: 0;
-				padding: 0;
-				text-align: center;
+			.upload_tips{
+				width: 48px;
+				line-height: 65px;
+				height: 65px;
+				float: left;
+				font-size: 14px;
 			}
-			.inting img{display: block;width: 100%}
-			.success .yycg{
-				color: #91c54c;
-				width: 30%;
-				margin-bottom: 10px;
-			}
-			.success p{
-				font-size: 16px;
-			}
-			.mui-content-padded{
-				text-align: center;
-				margin: 30px 10px;
-			}
-			.ret{
-				width: 100% !important;
-			    font-size: 14px;
-			    background-color: #fc5b3e;
-			    border-color: #fc5b3e;
-			    margin-top: 20px;
-			    padding: 10px;
-		        margin-bottom: 50px;
-			}
-			.mui-table-view{
-				margin-top: 0;
-			}
+			.imgtips{margin: 10px 0 0 15px !important}
+			#image-list .uploadimg{display: none }
+			.load_tag{width: 100px;height: 65px;text-align: center;display: none;background-color: #fff;border-radius: 5px;border: 1px solid #ccc}
+			.load_tag span{margin-top: 20px;}
+			.load_tag span:after{color: #fff}
+			.mui-pull-loading{margin-right: 0}
 		</style>
 	</head>
 
@@ -65,59 +88,86 @@
 			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
 					<span class="mui-icon mui-icon-left-nav"></span>
 				</button>
-			<h1 class="mui-title">预约成功</h1>
+			<h1 class="mui-title">体检信息</h1>
 		</header>
-
 		<div class="mui-content">
-			<div class="mui-scroll">
-				<div class="success">
-					<img src="../images/yycg.png" class="yycg">
-					<p>预约成功，请耐心等待服务员与您联系</p>
+			<p class="imgtips">请上传1-3张您的体检报告图片，您也可以稍后再上传。</p>
+			<form class="mui-input-group" id="form">
+				<div id="image-list" class="row image-list">
+					<div class="upload_tips">正面：</div>
+					<div class="image-item space">
+						<div class="image-close">X</div>
+						<img src="" class="image-item uploadimg" id="idcard_img1">
+						<input type="file" class="file" accept="image/*" id="image-1" data='1'>
+						<div class="load_tag  mui-pull-left">
+							<span class="mui-pull-loading mui-icon mui-spinner"></span>
+						</div>
+					</div>
+					<div class="upload_tips">反面：</div>
+					<div class="image-item space">
+						<div class="image-close">X</div>
+						<img src="" class="image-item uploadimg" id="idcard_img2">
+						<input type="file" class="file" accept="image/*" id="image-1" data='2'>
+						<div class="load_tag  mui-pull-left">
+							<span class="mui-pull-loading mui-icon mui-spinner"></span>
+						</div>
+					</div>
 				</div>
-				<div class="fwlc">
-					<img src="../images/fwlc.png">
-				</div>
-				<div class="inting">
-					<img src="../images/inting.png" class="">
-				</div>
-				<ul class="mui-table-view mui-table-view-chevron">
-					<li class="mui-table-view-cell mui-media">
-						<a class="mui-navigate-right" href="helpInterviewSkills.html">
-							<img class="mui-media-object mui-pull-left" src="../images/help-icon_msjq.png">
-							<div class="mui-media-body">
-								面试服务员技巧
-								<p class="mui-ellipsis">如何在面试中找到心仪的服务员</p>
-							</div>
-						</a>
-					</li>
-					<li class="mui-table-view-cell mui-media">
-						<a class="mui-navigate-right" href="helpQa.html">
-							<img class="mui-media-object mui-pull-left" src="../images/help-icon_qa.png">
-							<div class="mui-media-body">
-								面试服务员几个经典问题
-								<p class="mui-ellipsis">问什么问题才能表现出一副很懂的样子</p>
-							</div>
-						</a>
-					</li>
-					<li class="mui-table-view-cell mui-media">
-						<a class="mui-navigate-right" href="helpConsiderations.html">
-							<img class="mui-media-object mui-pull-left" src="../images/help-icon_zysx.png">
-							<div class="mui-media-body">
-								用户注意事项
-								<p class="mui-ellipsis">注意这些问题，让您享受服务时更舒心</p>
-							</div>
-						</a>
-					</li>
-				</ul>
-				<div class="mui-content-padded ">
-					<a href="record.html" class="mui-btn mui-btn-block mui-btn-primary ret">查看订单</a>
-				</div>
-			</div>
+			</form>
 		</div>
+		<!-- <div class="mui-content">
+			<div class="mui-scroll">
+				<div id="slider" class="mui-slider" >
+					<div class="mui-slider-group mui-slider-loop">
+						<div class="mui-slider-item mui-slider-item-duplicate">
+							<a href="#">
+								<img src="../images/yuantiao.jpg">
+								<p class="mui-slider-title">体检信息图</p>
+							</a>
+						</div>
+						<div class="mui-slider-item">
+							<a href="#">
+								<img src="../images/shuijiao.jpg">
+								<p class="mui-slider-title">体检信息图</p>
+							</a>
+						</div>
+						<div class="mui-slider-item">
+							<a href="#">
+								<img src="../images/muwu.jpg">
+								<p class="mui-slider-title">体检信息图</p>
+							</a>
+						</div>
+						<div class="mui-slider-item">
+							<a href="#">
+								<img src="../images/cbd.jpg">
+								<p class="mui-slider-title">体检信息图</p>
+							</a>
+						</div>
+						<div class="mui-slider-item">
+							<a href="#">
+								<img src="../images/yuantiao.jpg">
+								<p class="mui-slider-title">体检信息图</p>
+							</a>
+						</div>
+						<div class="mui-slider-item mui-slider-item-duplicate">
+							<a href="#">
+								<img src="../images/shuijiao.jpg">
+								<p class="mui-slider-title">体检信息图</p>
+							</a>
+						</div>
+					</div>
+					<div class="mui-slider-indicator mui-text-right">
+						<div class="mui-indicator mui-active"></div>
+						<div class="mui-indicator"></div>
+						<div class="mui-indicator"></div>
+						<div class="mui-indicator"></div>
+					</div>
+				</div>			
+			</div>
+		<!-- </div> --> -->
 	</body>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/mui/mui.min.js"></script>
-	 <script src="js/starrr.js"></script>
 	<script src="js/base.js"></script>
 	<script>
 		mui.init({
