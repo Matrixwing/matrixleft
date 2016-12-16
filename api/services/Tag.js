@@ -5,6 +5,7 @@
  * @help
  */
 async = require('async');
+
 module.exports = {
   /**
    * 在前端调用/getServantList接口，而且不传参数时。即随机推挤
