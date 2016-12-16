@@ -230,7 +230,7 @@ var base = {
     },
     share:function(config,sharedata){
         wx.config({
-            debug: true, 
+            debug: false, 
             appId: config.appId, 
             timestamp:config.timestamp,
             nonceStr:config.nonceStr,
