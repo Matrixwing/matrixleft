@@ -21,6 +21,13 @@ module.exports = {
     perPayTemp:'_xuKsTWtEL8w_eg-n2tZtLY-i_VvKJksSlO-RrB98HI',//待支付订单提醒
     interTemp: 'vZCuH9JB73JzWrxXK322Lf5dfGsQrEm8-olG-jM7Hvs',//面试通知
     newOrderTemp:'FQa1YyjBO8WaECPc3DlzZpjjBkNC2_ROPiGq7WV84dU',//新订单通知
+  },
+
+  qiniu:{
+    avatarBucket : 'test',
+    domain:'http://ogp0rwqj4.bkt.clouddn.com/',
+    ACCESS_KEY:'AJKfZNP67TG_MEvBPvTFMpRVMnx2mMwx673ezHzn',
+    SECRET_KEY :'_cEQvBddK7nrtaCcUCcsrc4Owj37zkzVJTjFMQ4p',
   }
 
 };
