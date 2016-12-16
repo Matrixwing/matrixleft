@@ -305,12 +305,16 @@ module.exports = {
     }
     var queryString = " select sum(price) totalPrice from tag where tagID in("+tagStr+")";
     TagList.query(queryString,function(err,result){
+      console.log(err);
+      console.log(result);
       if(err) return cb(err);
       var info = {
         userID: opts.userID,
         totalPrice:result[0].totalPrice
       }
       MeasPrice.updateOrCreate(info,function(err,result1){
+        console.log(err);
+        console.log(result1);
         if(err) return cb(err);
         return cb(null,result[0]);
       })
