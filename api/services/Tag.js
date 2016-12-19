@@ -5,7 +5,7 @@
  * @help
  */
 async = require('async');
-
+var weixinConfig= sails.config.weixin;
 module.exports = {
   /**
    * 在前端调用/getServantList接口，而且不传参数时。即随机推挤
@@ -93,9 +93,9 @@ module.exports = {
         var queryString = "SELECT "+
           "tur.`userID`, "+
           "IFNULL(ur.userName,'') AS userName, "+
-          "IFNULL(ur.`avatarUrl`,'') AS avatarUrl,(SELECT '') AS sysComment, "+
+          "IFNULL(ur.`avatarUrl`,'"+weixinConfig.url+"images/avatar404.jpg') AS avatarUrl,(SELECT '') AS sysComment, "+
           "IFNULL(ur.expectSalary,'') AS expectSalary, "+
-          // "-- IFNULL((SELECT GROUP_CONCAT(tagName SEPARATOR '|') FROM tag t LEFT JOIN taguserre tur ON tur.tagID=t.tagID WHERE t.type=4  ),'') AS sysTag , "+
+          "IFNULL((SELECT GROUP_CONCAT(tagName SEPARATOR '|') FROM tag t LEFT JOIN taguserre tur ON tur.tagID=t.tagID WHERE t.type=4 AND tur.`userID` = ur.`userID` ),'') AS sysTag ,"+
           "SUM(ta.weight) AS sumweight "+
           "FROM taguserre tur LEFT JOIN tag ta ON ta.`tagID`=tur.`tagID` "+
           "LEFT JOIN `user` ur ON tur.`userID` = ur.`userID` "+
@@ -108,7 +108,7 @@ module.exports = {
         })
       },
       function(next){
-        var queryString = "SELECT COUNT(*) "+
+        var queryString = "SELECT COUNT(*) totalRow "+
         "FROM "+
         "(SELECT "+
         "COUNT(tur.`userID`) "+
@@ -192,6 +192,8 @@ module.exports = {
         servantList:tagList,
         totalPages:Math.ceil(results[1][0].totalRow/opts.limit)
       };
+      console.log(results[1]);
+      console.log(servants);
       return cb(null,servants);
     });
   },
@@ -219,13 +221,14 @@ module.exports = {
       "IFNULL(ur.userName,'') AS userName, "+
       "IFNULL(ur.`avatarUrl`,'') AS avatarUrl,(SELECT '') AS sysComment, "+
       "IFNULL(ur.expectSalary,'') AS expectSalary, "+
-      "-- IFNULL((SELECT GROUP_CONCAT(tagName SEPARATOR '|') FROM tag t LEFT JOIN taguserre tur ON tur.tagID=t.tagID WHERE t.type=4  ),'') AS sysTag , "+
+      " IFNULL((SELECT GROUP_CONCAT(tagName SEPARATOR '|') FROM tag t LEFT JOIN taguserre tur ON tur.tagID=t.tagID WHERE t.type=4  ),'') AS sysTag , "+
       "SUM(ta.weight) AS sumweight "+
       "FROM taguserre tur LEFT JOIN tag ta ON ta.`tagID`=tur.`tagID` "+
       "LEFT JOIN `user` ur ON tur.`userID` = ur.`userID` "+
       "WHERE  tur.tagID IN ("+tagStr+") "+
       "AND ur.workstatus!=2  AND ur.role=2 "+
       "GROUP BY tur.userID HAVING COUNT(*)>1 ORDER BY sumweight DESC limit "+opts.start +", "+opts.limit+" ;";
+    console.log(queryString);
     TagList.query(queryString,function(err,result){
       if(err) {
         sails.log.error(err);

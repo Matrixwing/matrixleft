@@ -13,6 +13,7 @@ module.exports = {
     appsecret:'c137431a59f56f560f5861c7a5f7c182',
     access_token:'',
     mch_id:'1402095402',
+    url:'http://15898oq619.iok.la/',
     partner_key:'qd20160725scfkilejlmatrix7u8x0kd',//微信商户平台API密钥
     notify_url : 'http://15898oq619.iok.la/ok',
     loginPage:'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8ec4c9973e23c290&redirect_uri=' +

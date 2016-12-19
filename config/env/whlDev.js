@@ -15,6 +15,7 @@ module.exports = {
     mch_id:'1402095402',
     partner_key:'qd20160725scfkilejlmatrix7u8x0kd',//微信商户平台API密钥
     access_token:'',
+    url:'http://1k5x895985.iask.in/',
     notify_url : 'http://1k5x895985.iask.in/notice',
     loginPage:'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx63ace09080406d46&redirect_uri=http%3a%2f%2f1k5x895985.iask.in%2fweixinLogIn&response_type=code&scope=snsapi_userinfo&state=needlogin#wechat_redirect',
     adminOpenid : [{openid:'oD7UUwN27b2-ROCqYyfWgVtIwcOs'}],

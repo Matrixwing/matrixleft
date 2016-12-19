@@ -56,6 +56,13 @@ module.exports = {
     perPayTemp:'aP5_YUw_lC4sJ8aqGpsQWGpA5DWdvIKQEkzyRTA2nKM',//待支付订单提醒
     interTemp: '4etMv_lqdemL4CTnOBSgZkm_lc0SmKZX-ycYh4ykm9s',//面试通知
     newOrderTemp:'NZV86TEHiamtyXFeMK4Xdau4RmJalP4pnB_Xye2VfrY',//新订单通知
+  },
+
+  qiniu:{
+    avatarBucket : 'wyhavatar',
+    domain:'http://oi6ew5eiq.bkt.clouddn.com/',
+    ACCESS_KEY:'HYZdjE-F-L3_jVMRxqtNsKV2CLMoUtMlMZOb_MvK',
+    SECRET_KEY :'l3x2955xsBYwdViVujG9DQcuxUzArGPBYnSymsMx',
   }
 
 };
