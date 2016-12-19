@@ -99,7 +99,7 @@ module.exports = {
           "SUM(ta.weight) AS sumweight "+
           "FROM taguserre tur LEFT JOIN tag ta ON ta.`tagID`=tur.`tagID` "+
           "LEFT JOIN `user` ur ON tur.`userID` = ur.`userID` "+
-          "WHERE  ur.workstatus!=2  AND ur.role=2  "+
+          "WHERE  ur.workstatus!=0  AND ur.role=2  "+
           whereString+
           "GROUP BY tur.userID "+ havingString+" ORDER BY sumweight DESC limit "+opts.start +", "+opts.limit+" ;";
         TagList.query(queryString,function(err,result){
