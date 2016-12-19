@@ -142,6 +142,7 @@ module.exports = {
         "WHERE "+
         " ur.workstatus!=2  AND ur.role=2 "+whereString +
         " GROUP BY tur.userID "+havingString+" ) GROUP BY tur.userID ;";
+        console.log(queryString);
         TagList.query(queryString,function(err,result){
           if(err) { return next(err); }
           next(null,result);
