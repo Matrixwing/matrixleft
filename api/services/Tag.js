@@ -102,6 +102,7 @@ module.exports = {
           "WHERE  ur.workstatus!=0  AND ur.role=2  "+
           whereString+
           "GROUP BY tur.userID "+ havingString+" ORDER BY sumweight DESC limit "+opts.start +", "+opts.limit+" ;";
+        console.log(queryString);
         TagList.query(queryString,function(err,result){
           if(err) { return next(err); }
           next(null,result);
@@ -192,8 +193,6 @@ module.exports = {
         servantList:tagList,
         totalPages:Math.ceil(results[1][0].totalRow/opts.limit)
       };
-      console.log(results[1]);
-      console.log(servants);
       return cb(null,servants);
     });
   },
