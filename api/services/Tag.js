@@ -133,21 +133,21 @@ module.exports = {
           next(null,result);
         })
       },
-      function(next){  //计算出推荐工资的上限
-        var queryString = "SELECT SUM(price) AS highPrice ,tur.`userID` FROM "+
-        "taguserre tur LEFT JOIN tag t ON tur.`tagID`=t.`tagID` WHERE t.`type`!=1 AND tur.userID IN "+
-        "(SELECT tur.userID "+
-        " FROM taguserre tur LEFT JOIN tag ta ON ta.`tagID`=tur.`tagID` "+
-        "LEFT JOIN `user` ur ON tur.`userID` = ur.`userID` "+
-        "WHERE "+
-        " ur.workstatus!=2  AND ur.role=2 "+whereString +
-        " GROUP BY tur.userID "+havingString+" ) GROUP BY tur.userID ;";
-        console.log(queryString);
-        TagList.query(queryString,function(err,result){
-          if(err) { return next(err); }
-          next(null,result);
-        })
-      },
+      //function(next){  //计算出推荐工资的上限
+      //  var queryString = "SELECT SUM(price) AS highPrice ,tur.`userID` FROM "+
+      //  "taguserre tur LEFT JOIN tag t ON tur.`tagID`=t.`tagID` WHERE t.`type`!=1 AND tur.userID IN "+
+      //  "(SELECT tur.userID "+
+      //  " FROM taguserre tur LEFT JOIN tag ta ON ta.`tagID`=tur.`tagID` "+
+      //  "LEFT JOIN `user` ur ON tur.`userID` = ur.`userID` "+
+      //  "WHERE "+
+      //  " ur.workstatus!=2  AND ur.role=2 "+whereString +
+      //  " GROUP BY tur.userID "+havingString+" ) GROUP BY tur.userID ;";
+      //  console.log(queryString);
+      //  TagList.query(queryString,function(err,result){
+      //    if(err) { return next(err); }
+      //    next(null,result);
+      //  })
+      //},
       function(next){
         var workPrice = 0;//工作内容需要的价格
         var queryString = 'select * from tag tur where tur.type=1 '+whereString ;
@@ -172,29 +172,46 @@ module.exports = {
     ],function(err,results){
       if(err) return cb(err);
       var x;
+      var users = '';
+      var count=0;
       var tagList = results[0];
       var lowPrice= results[2][0];
       var highPrice=results[3];
-      for( x in tagList){
-        tagList[x].lowPrice = lowPrice.lowPrice||0;
-        tagList[x].lowPrice+=results[4].workPrice;
-        tagList[x].highPrice = highPrice[x].highPrice||0;
-        tagList[x].highPrice += results[4].workPrice;
-        delete tagList[x].upPrice;
-        delete tagList[x].downPrice;
-        delete tagList[x].sumweight;
-        if(tag==''){
-          tagList[x].price=tagList[x].highPrice;
-        }else{
-          tagList[x].price=tagList[x].lowPrice+'-'+tagList[x].highPrice;
-        }
-
+      for(a in tagList) {
+        count++;
+        users += tagList[a].userID;
+        if (a < tagList.length - 1)
+          users += ',';
       }
-      var servants = {
-        servantList:tagList,
-        totalPages:Math.ceil(results[1][0].totalRow/opts.limit)
-      };
-      return cb(null,servants);
+      //console.log(users);
+      if(users!='')
+        var queryString = "SELECT SUM(price) AS highPrice ,tur.`userID` FROM taguserre tur LEFT JOIN tag t ON tur.`tagID`=t.`tagID` WHERE t.`type`!=1 AND tur.userID IN ("+users+") GROUP BY tur.`userID`";
+      else var queryString = "SELECT null";
+      //console.log(queryString);
+      TagList.query(queryString,function(err,high){
+        if(err) return cb(err);
+        for( x in tagList){
+          tagList[x].lowPrice = lowPrice.lowPrice||0;
+          tagList[x].lowPrice+=results[3].workPrice;
+          tagList[x].highPrice = high[x].highPrice||0;
+          tagList[x].highPrice += results[3].workPrice;
+          delete tagList[x].upPrice;
+          delete tagList[x].downPrice;
+          delete tagList[x].sumweight;
+          if(tag==''){
+            tagList[x].price=tagList[x].highPrice;
+          }else{
+            tagList[x].price=tagList[x].lowPrice+'-'+tagList[x].highPrice;
+          }
+        }
+        var servants = {
+          servantList:tagList,
+          totalPages:Math.ceil(results[1][0].totalRow/opts.limit)
+        };
+        return cb(null,servants);
+      })
+
+
     });
   },
 

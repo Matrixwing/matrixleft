@@ -48,6 +48,9 @@ module.exports = {
           User.find({userID: order.servantID, role: 2}).exec(function (err, servantInfo) {
             if (err) return next(err);
             if (servantInfo == '') return next('用户为空');
+            //console.log(servantInfo[0].phone);
+            if(servantInfo[0].phone) servantInfo[0].phone='电话'+servantInfo[0].phone;
+            else servantInfo[0].phone='';
             servantInfo[0].genderName='';
             if(servantInfo[0].gender==1) servantInfo[0].genderName='先生';
             else if(servantInfo[0].gender==1) servantInfo[0].genderName='女士'
