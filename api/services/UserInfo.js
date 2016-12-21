@@ -27,11 +27,15 @@ module.exports = {
         })
       },
       function(next){
-        TagUserRe.updataTagUserRe(userInfo.userID,userTag,function(err,results){
-
-          if(err) return next(err);
-          return next(null,results)
-        })
+        console.log(userTag);
+        if(userTag!==''){
+          TagUserRe.updataTagUserRe(userInfo.userID,userTag,function(err,results){
+            if(err) return next(err);
+            return next(null,results)
+          })
+        }else{
+          return next(null,'')
+        }
       }
     ],function(err,results){
       if(err) return cb(err);
