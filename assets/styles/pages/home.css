@@ -41,7 +41,7 @@
 	padding: 10px;
 }
 #code{width: 37% !important;float: left;}
-#reg,#reg_add{width: 100% !important;font-size: 14px;background-color: #fc5b3e;border-color: #fc5b3e}
+#reg,#reg_add,#save{width: 100% !important;font-size: 14px;background-color: #fc5b3e;border-color: #fc5b3e}
 #reg .mui-spinner{
 	width: 19px;
 	height: 19px;
@@ -192,6 +192,7 @@
 }
 .up_avatarUrl{
 	position: relative;
+	height: 62px !important
 }
 .up_avatarUrl input[type="file"] {
     width: 100% !important;
@@ -220,6 +221,9 @@
 .tips .mui-spinner{width: 24px;height: 24px;margin-top: 50%}
 .mui-checkbox.mui-left input[type=checkbox], .mui-radio.mui-left input[type=radio]{
 	left: 0
+}
+.editinfos input{
+	text-align: right;
 }
 /*兼容性*/
 

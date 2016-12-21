@@ -37,6 +37,7 @@
 		    var userID=base.getQueryString('userID');
 		    $.get('getUserCard?userID='+userID,function(data,status){
 		    	var data= JSON.parse(data);
+		    	$('.tips').hide();
 				if (data.msgNo == '0000' ) {
 					if (data.data.avatarUrl) {
 						$('#avatarUrl').attr('src',data.data.avatarUrl)
@@ -245,7 +246,7 @@
 
 /*order*/
 	
-	$('#local').on('tap', function(event) {
+	/*$('#local').on('tap', function(event) {
 		var local = new mui.PopPicker();
 	 	local.setData([
 	 		{value:'1',text:'翔宇苑'},
@@ -257,7 +258,7 @@
 			_this.attr('tagID',items[0].value);
 			
 		});
-	});
+	});*/
 	/*var t=new Date();
 	if (t.getHours()>18) {
 		var str = t.getFullYear()+','+ (t.getMonth()+1)+','+(t.getDate()+1)
@@ -326,14 +327,14 @@
 		var servantID = base.getQueryString('userID');
 		var tags = base.getCookie('needs');
 		var apptTime = $('#time').attr('d');
-		var apptPlace = $('#local').html();
+		//var apptPlace = $('#local').html();
 		var userName = $('#gz_userName').val();
 		var phone = $('#gz_phone').val();
 		var expectSalary = $('#expectSalary_in').val();
-		if (apptPlace == '选择地点') {
+		/*if (apptPlace == '选择地点') {
 			mui.toast('请选择面试地点');
 			return;
-		};
+		};*/
 		if (!apptTime) {
 			mui.toast('请选择面试时间');
 			return;
@@ -354,7 +355,7 @@
 		    	'servantID':servantID,
 		    	'tags':tags,
 		    	'apptTime':apptTime,
-		    	'apptPlace':apptPlace,
+		    	'apptPlace':'1',
 		    	'phone':phone,
 		    	'userName':userName,
 		    	'expectSalary':expectSalary

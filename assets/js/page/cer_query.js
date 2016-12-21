@@ -93,7 +93,7 @@
                     });
             return encrypted;
         }
-       function isWeiXin(){
+/*       function isWeiXin(){
             var ua = window.navigator.userAgent.toLowerCase();
             if(ua.match(/MicroMessenger/i) == 'micromessenger'){
                 return true;
@@ -107,3 +107,4 @@
 		        $('.qr_div').show();
 		    }
 		})
+*/

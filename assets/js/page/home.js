@@ -28,22 +28,27 @@ $(function() {
             //var data = JSON.parse(data);
             if (data.msgNo == '0000') {
                 $('.avatarUrl').attr('src', data.data[0].avatarUrl);
+                $('.nickname').html(data.data[0].nickname);
+                $('#nickname').val(data.data[0].nickname);
                 if (data.data[0].userName) {
                     $('.nickname').html(data.data[0].userName);
-                } else {
-                    $('.nickname').html(data.data[0].nickname);
-                };
+                    $('#userName').val(data.data[0].userName);
+                }
+                if (data.data[0].IDCard) {
+                    $('#IDCard').val(data.data[0].IDCard);
+                }
                 if (data.data[0].userID) {
                     $('.nickname').attr('userID', data.data[0].userID);
                 };
                 if (data.data[0].gender == 1) {
-                    $('.gender').html('女');
+                    $('.gender').val('女');
                 } else {
-                    $('.gender').html('男');
+                    $('.gender').val('男');
                 };
 
                 if (data.data[0].phone) {
                     $('.phone').html(data.data[0].phone);
+                    $('#phone').val(data.data[0].phone);
                 } else {
                     $('.reg_phone').show();
                 };
@@ -119,7 +124,7 @@ function() {
             if (JSON.parse(data).msgNo == '0000') {
                 mui.toast(JSON.parse(data).msgInfo);
                 setTimeout(function() {
-                    window.location.href = document.referrer;
+                    window.location.reload();
                 },
                 1000);
             } else {
@@ -179,3 +184,45 @@ $('.file').on('change',function() {
         alert(err);
     }).always(function() {});
 });
+
+$('#edit').on('tap',function(){
+    $(this).hide();
+    $('.save_btn').show();
+    $('.file').show();
+    $('.editinfos input').removeAttr("readOnly");
+})
+$('#save').on('tap',function(){
+    var userName = $('#userName').val();
+    var IDCard = $('#IDCard').val();
+    var nickname = $('#nickname').val();
+    var phone = $('#phone').val();
+    var userInfo={
+        'userName':userName,
+        'IDCard':IDCard,
+        'nikename':nickname,
+        'phone':phone,
+        'role':1
+    }
+    $.ajax({
+        type: 'post',
+        url: '/updateUserInfo',
+        data: {
+            'userInfo':JSON.stringify(userInfo),
+            'userTags':''
+        },
+        dataType: 'json',
+        success: function(data) {
+            if (data.msgNo=='0000') {
+                mui.toast('恭喜您，资料修改成功');
+                setTimeout(function(){
+                    window.location.href='home.html';
+                },1500)
+            }else{
+                mui.toast(data.msgInfo);
+            }
+        },
+        error: function(data) {
+            mui.toast('请重试');
+        }
+    });
+})

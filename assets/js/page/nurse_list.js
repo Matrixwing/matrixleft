@@ -108,13 +108,14 @@ function getTagList(){
 				var g = d[0];
 				var thtml =[];
 				for(var i=0;i<g.length;i++){
-					if (g[i].tagID=='300') {
+					/*if (g[i].tagID=='300') {
 						thtml.push('<a class="mui-btn mui-pull-left" id="MaternityMatron" tagID='+g[i].tagID+'>'+g[i].tagName+'</a>')
 					}else if(g[i].tagID=='301'){
 						thtml.push('<a class="mui-btn mui-pull-left" tagID='+g[i].tagID+'>'+g[i].tagName+'</a>')
 					}else{
 						thtml.push('<button type="button" class="mui-btn mui-pull-left ready" tagID='+g[i].tagID+'>'+g[i].tagName+'</button>')
-					}
+					}*/
+					thtml.push('<button type="button" class="mui-btn mui-pull-left ready" tagID='+g[i].tagID+'>'+g[i].tagName+'</button>')
 				}
 				var html=thtml.join('');
 				$('#offCanvasShow').empty();
@@ -298,7 +299,6 @@ $('#tag_sure').on('tap',function(){
 	}
 	d_e = dataList;
 	getServantList(dataList,'clear')
-	console.log(JSON.stringify(dataList));
 	base.setCookie('needs',JSON.stringify(needs));
 	_czc.push(["_trackEvent", "筛选", "确定", "", "", ""]);
 })

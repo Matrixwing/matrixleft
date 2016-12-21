@@ -31,32 +31,42 @@
 					<span class="mui-icon mui-icon-left-nav"></span>
 				</button>
 				<h1 class="mui-center mui-title">个人信息</h1>
+				<button type="button" class="mui-left mui-btn  mui-btn-link mui-btn-nav mui-pull-right" id="edit">修改</button>
 			</div>
 			<div class="mui-page-content">
-				<div class="mui-scroll-wrapper">
-					<div class="mui-scroll">
-						<ul class="mui-table-view">
-							<li class="mui-table-view-cell up_avatarUrl">
-								<a id="head" class="mui-navigate-right">头像
-									<span class="mui-pull-right head">
-										<img class="head-img mui-action-preview avatarUrl" id="head-img1" src=""/>
-									</span>
-									<input type="file" class="file" accept="image/*" id="image-1" data='4'>
-								</a>
-							</li>
-							<li class="mui-table-view-cell">
-								<a>昵称<span class="mui-pull-right nickname">--</span></a>
-							</li>
-							<li class="mui-table-view-cell">
-								<a>性别<span class="mui-pull-right gender">--</span></a>
-							</li>
-						</ul>
-						<ul class="mui-table-view">
-							<li class="mui-table-view-cell">
-								<a>手机号<span class="mui-pull-right phone">--</span></a>
-							</li>
-						</ul>
+				<form class="mui-input-group editinfos">
+					<div class="mui-input-row up_avatarUrl">
+						<label style="margin-top: 15px;">头像</label>
+						<span class="mui-pull-right head mui-navigate-right">
+							<img class="head-img mui-action-preview avatarUrl" id="head-img1" src=""/>
+						</span>
+						<input type="file" class="file" accept="image/*" id="image-1" data='4' style="display:none">
 					</div>
+					<div class="mui-input-row">
+						<label>昵称</label>
+						<input id='nickname' type="text" class="mui-input" placeholder="请输入昵称" readonly="readonly">
+					</div>
+					<div class="mui-input-row">
+						<label>性别</label>
+						<input  type="text" class="mui-input gender" readonly="readonly">
+					</div>
+				</form>
+				<form class="mui-input-group editinfos">
+					<div class="mui-input-row ">
+						<label >姓名</label>
+						<input id='userName' type="text" class="mui-input userName" placeholder="请输入姓名" readonly="readonly">
+					</div>
+					<div class="mui-input-row">
+						<label>手机号</label>
+						<input id='phone' type="text" class="mui-input" placeholder="请输入昵称" readonly="readonly">
+					</div>
+					<div class="mui-input-row">
+						<label>身份证</label>
+						<input id='IDCard' type="text" class="mui-input IDCard" placeholder="" readonly="readonly">
+					</div>
+				</form>
+				<div class="mui-content-padded save_btn" style="display:none">
+					<button id='save' class="mui-btn mui-btn-block mui-btn-primary">保存</button>
 				</div>
 			</div>
 		</div>
@@ -104,7 +114,7 @@
 								<a href="#infos" class="mui-navigate-right">
 									<img class="mui-media-object mui-pull-left head-img avatarUrl" id="avatarUrl" src="images/timg.jpg">
 									<div class="mui-media-body">
-										<span id='nickname' class='nickname'>--</span>
+										<span  class='nickname'>--</span>
 										<p class='phone' class="phone">--</p>
 									</div>
 								</a>

@@ -14,6 +14,10 @@
 			select{
 				width: 72% !important
 			}
+			.mmm{
+				font-size: 14px;
+				margin: 10px 0
+			}
 		</style>
 	</head>
 
@@ -33,15 +37,17 @@
 					<input type="number" class="mui-input" placeholder="请输入服务员月薪" id="yx" value="3000">
 				</div>
 				<div class="mui-input-row">
-					<label>月利润</label>
-					<input type="text" class="mui-input" placeholder="" id="lr" value="1">
+					<label>年化</label>
+					<input type="text" class="mui-input" placeholder="" id="lr" value="9">
 				</div>
 				<div class="mui-input-row">
 					<label>仓位</label>
 					<select class="mui-btn mui-btn-block mui-pull-left" id="cw">
+						<option value="1">100%</option>
+						<option value="0.9">90%</option>
 						<option value="0.8">80%</option>
 						<option value="0.75">75%</option>
-						<option value="0.7">70%</option>
+						<option value="0.7" selected ='selected'>70%</option>
 						<option value="0.65">65%</option>
 						<option value="0.6">60%</option>
 					</select>
@@ -57,13 +63,17 @@
 					</select>
 				</div>
 				<div class="mui-input-row">
+					<label>投资缓冲区</label>
+					<input type="text" class="mui-input"  value="0.3" id="hcq">
+				</div>
+				<div class="mui-input-row">
 					<label>费率</label>
-					<input type="text" class="mui-input"  value="0.6%" readonly="readonly">
+					<input type="text" class="mui-input"  value="0.006" id="fl">
 				</div>
 			</form>
 			<button type="button" class="mui-btn mui-btn-primary" style="width:100%;margin:20px 0" id="go">计算收益</button>
 			<div class="mmm">
-				
+				投资缓冲区：选择投资时间，实际投资时间为月数减掉缓冲区时间
 			</div>
 			<div class="all">共计：<p style="display: inline-block;"></p></div>
 		</div>
@@ -72,16 +82,18 @@
 	<script type="text/javascript">
 		$('#go').click(function(){
 			var yx = $('#yx').val();
-			var lr = $('#lr').val();
-			var m = $('#select option:selected').val()
+			var hcq = $('#hcq').val();
+			var lr = $('#lr').val()/12;
+			var m = $('#select option:selected').val();
 			var res = 0;
 			var h=[];
-			var gj=yx*m*0.994;
+			var fl= $('#fl').val();
+			var gj=yx*m*(1-fl);
 			var all=0;
 			var cw = $('#cw option:selected').val()
 			for(var i=0;i<m;i++){
-				all += (gj-yx*i)/100*lr*cw;
-				h.push('<div>第'+(i+1)+'月：'+( (gj-yx*i)/100*lr*cw).toFixed(2)+'</div>')
+				all += (gj-yx*i)/100*lr*cw*(1-hcq);
+				h.push('<div>第'+(i+1)+'月：'+( (gj-yx*i)/100*lr*cw*(1-hcq)).toFixed(2)+'</div>')
 			}
 			h= h.join('')
 			$('.mmm').html(h)

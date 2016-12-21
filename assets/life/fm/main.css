@@ -1,0 +1,61 @@
+    html, body {
+        position: relative;
+        height: 100%;
+    }
+    body {
+        background: #ccc;
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color:#000;
+        margin: 0;
+        padding: 0;
+    }
+    .swiper-container {
+        width: 100%;
+        height: 100%;
+    }
+    .slideArrow {
+    position: fixed;
+    bottom: 50px;
+    left: 50%;
+    z-index: 10000;
+    margin-left: -18px;}
+    .slideArrow span {
+    position: absolute;
+    width: 33px;
+    height: 25px;
+    background: url(http://mat1.gtimg.com/news/panda/arrow.png) no-repeat;
+    background-size: 100% 100%;
+    -webkit-animation: start 1.5s infinite ease-in-out;
+    animation: start 1.5s infinite ease-in-out;
+}
+@-webkit-keyframes start {
+	0,30% {
+	opacity:0;
+	-webkit-transform:translate(0,10px)
+}
+60% {
+	opacity:1;
+	-webkit-transform:translate(0,0)
+}
+100% {
+	opacity:0;
+	-webkit-transform:translate(0,-8px)
+}
+}@keyframes start {
+	0,30% {
+	opacity:0;
+	transform:translate(0,10px)
+}
+60% {
+	opacity:1;
+	transform:translate(0,0)
+}
+100% {
+	opacity:0;
+	transform:translate(0,-8px)
+}
+}
+.swiper-slide img{
+    width: 100%
+}

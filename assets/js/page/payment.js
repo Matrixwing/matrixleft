@@ -74,18 +74,19 @@ function all_m(){
 	var salary_m=salary*num;
 	var all=0;
 	if (num==1) {
-		$('#commission_div').show();
 		if (!servicePrice) {
+			$('#commission_div').show();
 			$('#servicePrice_div').hide();
-			commission=base.keepTwoDecimal(salary_m*0.012);
+			commission=base.keepTwoDecimal(salary_m*0.006);
 			all =salary*num+commission;
+			$('#commission_show').html('￥'+commission)
 		}else{
 			$('#servicePrice_div').show();
-			commission=base.keepTwoDecimal(salary_m*0.006);
-			all =salary*num+servicePrice*num+commission;
+			$('#commission_div').hide();
+			//commission=base.keepTwoDecimal(salary_m*0.006);
+			all =salary*num+servicePrice*num;
 			$('#servicePrice_show').html('￥'+servicePrice*num)
 		};
-		$('#commission_show').html('￥'+commission)
 		
 	}else{
 		if (!servicePrice) {
