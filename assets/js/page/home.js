@@ -199,7 +199,7 @@ $('#save').on('tap',function(){
     var userInfo={
         'userName':userName,
         'IDCard':IDCard,
-        'nikename':nickname,
+        'nickname':nickname,
         'phone':phone,
         'role':1
     }

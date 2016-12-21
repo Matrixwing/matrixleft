@@ -9,9 +9,7 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<link rel="stylesheet" href="styles/mui.min.css">
 		<link rel="stylesheet" type="text/css" href="styles/main.css"/>
-		<style>
-		
-		</style>
+		<link rel="stylesheet" type="text/css" href="styles/pages/redPackets.css"/>
 	</head>
 
 	<body>
@@ -19,24 +17,79 @@
 			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
 					<span class="mui-icon mui-icon-left-nav"></span>
 				</button>
-			<h1 class="mui-title">我的红包</h1>
+			<h1 class="mui-title">我的优惠券</h1>
 		</header>
-		
-
 		<div class="mui-content">
+			<div class="choose mui-row">
+				<button type="button" class="mui-btn mui-pull-left choosein_btn" status="1">未使用</button>
+				<button type="button" class="mui-btn mui-pull-left" status="0">已使用</button>
+				<button type="button" class="mui-btn mui-pull-left" status="3">已过期</button>
+			</div>
+			<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<!--数据列表-->
+					<ul class="mui-table-view mui-table-view-chevron" id="getPacketsList">
+						<li>
+							<div class="packets_up">
+								<img src="../images/yhq_bg.png">
+								<div class="packets_main">
+									<div class="mui-pull-left">
+										<span class="title">新用户家政服务大礼包</span>
+										<span class="yxq">有效期至：2016年12月21日</span>
+									</div>
+									<div class="mui-pull-right">
+										<span>￥<font>888</font></span>
+									</div>
+								</div>
+							</div>
+							<div class="packets_down">
+								<p>使用条件：托管九个月及以上工资+订单金额满27000元</p>
+							</div>
+						</li>
+						<li>
+							<div class="packets_up">
+								<img src="../images/yhq_bg.png">
+								<div class="packets_main">
+									<div class="mui-pull-left">
+										<span class="title">新用户家政服务大礼包</span>
+										<span class="yxq">有效期至：2016年12月21日</span>
+									</div>
+									<div class="mui-pull-right">
+										<span>￥<font>888</font></span>
+									</div>
+								</div>
+							</div>
+							<div class="packets_down">
+								<p>使用条件：托管九个月及以上工资+订单金额满27000元</p>
+							</div>
+						</li>
+						<li>
+							<div class="packets_up">
+								<img src="../images/yhq_bg.png">
+								<div class="packets_main">
+									<div class="mui-pull-left">
+										<span class="title">新用户家政服务大礼包</span>
+										<span class="yxq">有效期至：2016年12月21日</span>
+									</div>
+									<div class="mui-pull-right">
+										<span>￥<font>888</font></span>
+									</div>
+								</div>
+							</div>
+							<div class="packets_down">
+								<p>使用条件：托管九个月及以上工资+订单金额满27000元</p>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
 		</div>
+		<div class="tips"><div class=" mui-icon mui-spinner"></div></div>
 	</body>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/mui/mui.min.js"></script>
-	 <script src="js/starrr.js"></script>
+	<script type="text/javascript" charset="UTF-8" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 	<script src="js/base.js"></script>
-	<script>
-		mui.init({
-			swipeBack:true //启用右滑关闭功能
-		});
-		/*追加tabbar*/
-		base.tabbarHtml();
-	</script>
-
+	<script src="js/page/redPackets.js"></script>
 	<script src="https://s4.cnzz.com/z_stat.php?id=1260604409&web_id=1260604409" language="JavaScript"></script>
 </html>
