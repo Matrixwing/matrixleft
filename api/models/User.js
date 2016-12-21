@@ -168,9 +168,9 @@ module.exports = {
     });
   },
 
-
+  //只在完善用户资料的时候时候
   updateUserInfoByUserID: function (userInfo,cb) {
-    console.log(userInfo.userID);
+    //User.find()
     User.update(userInfo.userID,userInfo).exec(function (err,result) {
       if (err) return cb(err);
       return cb(null, result);

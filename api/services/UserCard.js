@@ -12,13 +12,11 @@ module.exports = {
       var shengxiao=null, xingzuo=null, niandai=null;
       var idcard = card[0].IDCard;
       if (idcard) {
-      console.log(idcard);
+
       year = idcard.substring(6, 10);
       month = idcard.substring(10, 12);
       day = idcard.substring(12, 14);
-      console.log(year);
-      console.log(month);
-      console.log(day);
+
       shengxiao = UserCard.getShengxiao(year);
       xingzuo = UserCard.getXingzuo(month, day);
       niandai = UserCard.getNiandai(year);
@@ -26,7 +24,7 @@ module.exports = {
       card[0].xingzuo=xingzuo;
       card[0].shengxiao=shengxiao;
       card[0].niandai=niandai;
-      console.log(card);
+
       return cb(null,card[0]);
     })
   },
@@ -115,13 +113,13 @@ module.exports = {
     if (month == 6 && day > 30) {value = "未知";}
     if (month == 7 && day >=23 || month == 8 && day <=22) {value = "狮子座";}
     if (month == 7 && day > 31) {value = "未知";}
-    if (month == 8 && day >=23 || month == 9 && day <=22) {value = "室女座";}
+    if (month == 8 && day >=23 || month == 9 && day <=22) {value = "处女座";}
     if (month == 8 && day > 31) {value = "未知";}
     if (month == 9 && day >=23 || month == 10 && day <=22) {value = "天秤座";}
     if (month == 9 && day > 30) {value = "未知";}
     if (month == 10 && day >=23 || month == 11 && day <=21) {value = "天蝎座";}
     if (month == 10 && day > 31) {value = "未知";}
-    if (month == 11 && day >=22 || month == 12 && day <=21) {value = "人马座";}
+    if (month == 11 && day >=22 || month == 12 && day <=21) {value = "射手座";}
     if (month == 11 && day > 30) {value = "未知";}
     if (month == 12 && day >=22 || month == 1 && day <=19) {value = "摩羯座";}
     if (month == 12 && day > 31) {value = "未知";}
@@ -130,7 +128,6 @@ module.exports = {
 
   getNiandai : function(year){
     var niandai = year.substring(2,3);
-    console.log('niandai1111',niandai);
     if(niandai) return (niandai+'0后')
     return(null);
   },

@@ -96,7 +96,7 @@ module.exports = {
           "IFNULL(ur.`avatarUrl`,'"+weixinConfig.url+"images/avatar404.jpg') AS avatarUrl,(SELECT '') AS sysComment, "+
           "IFNULL(ur.expectSalary,'') AS expectSalary, "+
           "IFNULL((SELECT GROUP_CONCAT(tagName SEPARATOR '|') FROM tag t LEFT JOIN taguserre tur ON tur.tagID=t.tagID WHERE t.type=4 AND tur.`userID` = ur.`userID` ),'') AS sysTag ,"+
-          "SUM(ta.weight) AS sumweight "+
+          "(SELECT SUM(b.weight) FROM taguserre a LEFT JOIN tag b ON b.`tagID` =a.`tagID` WHERE a.userID = tur.`userID` GROUP BY tur.`userID`) AS sumweight "+
           "FROM taguserre tur LEFT JOIN tag ta ON ta.`tagID`=tur.`tagID` "+
           "LEFT JOIN `user` ur ON tur.`userID` = ur.`userID` "+
           "WHERE  ur.workstatus!=0  AND ur.role=2  "+
@@ -184,11 +184,17 @@ module.exports = {
           users += ',';
       }
       //console.log(users);
-      if(users!='')
+      if(users!=''&&tag!=''){
         var queryString = "SELECT SUM(price) AS highPrice ,tur.`userID` FROM taguserre tur LEFT JOIN tag t ON tur.`tagID`=t.`tagID` WHERE t.`type`!=1 AND tur.userID IN ("+users+") GROUP BY tur.`userID`";
-      else var queryString = "SELECT null";
-      //console.log(queryString);
+      }
+      else if(users!=''&&tag==''){
+        var queryString = "SELECT SUM(price) AS highPrice ,tur.`userID` FROM taguserre tur LEFT JOIN tag t ON tur.`tagID`=t.`tagID` WHERE  tur.userID IN ("+users+") GROUP BY tur.`userID`";
+      }else var queryString = "SELECT null";
+      console.log(queryString);
       TagList.query(queryString,function(err,high){
+        console.log(high);
+        console.log(results[3]);
+        console.log(lowPrice);
         if(err) return cb(err);
         for( x in tagList){
           tagList[x].lowPrice = lowPrice.lowPrice||0;
@@ -214,8 +220,6 @@ module.exports = {
 
     });
   },
-
-
   //通过用户选择的标签筛选出服务员。并且通过标签的权重之和进行重高到低的排序
   //查询出来的信息有：用户姓名，用户id，用户头像，用户期待薪水，除去工作内容价格的价格下限和价格上限。
   //工作内容价格需要用公示进行计算
