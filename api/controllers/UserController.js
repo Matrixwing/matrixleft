@@ -25,7 +25,6 @@ module.exports = {
       UserLogIn.getUserByCode,
       UserLogIn.validateRegisterByOpenID,
     ],function (err,result){
-
       if (err != null ) {
         //if(err=='toUser') {
         // return res.view('toUser');
@@ -43,7 +42,7 @@ module.exports = {
         var redirectUrl=req.session.page||'/nurseList.html';
       if(opts.page==2)
         var redirectUrl = '/nurseHome.html';
-      console.log(redirectUrl);
+      //console.log(redirectUrl);
       res.redirect(302,redirectUrl);
     })
 
