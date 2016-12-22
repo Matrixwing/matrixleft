@@ -94,8 +94,13 @@ module.exports = {
           "tur.`userID`, "+
           "IFNULL(ur.userName,'') AS userName, "+
           "IFNULL(ur.`avatarUrl`,'"+weixinConfig.url+"images/avatar404.jpg') AS avatarUrl,(SELECT '') AS sysComment, "+
+          "ur.status, " +
           "IFNULL(ur.expectSalary,'') AS expectSalary, "+
-          "IFNULL((SELECT GROUP_CONCAT(tagName SEPARATOR '|') FROM tag t LEFT JOIN taguserre tur ON tur.tagID=t.tagID WHERE t.type=4 AND tur.`userID` = ur.`userID` ),'') AS sysTag ,"+
+          "IFNULL((SELECT GROUP_CONCAT(tagName SEPARATOR '|') FROM tag t LEFT JOIN taguserre tur ON tur.tagID=t.tagID WHERE t.type=4 AND tur.`userID` = ur.`userID` ),'') AS sysTag , "+
+          "ur.workExp, "+
+          "ur.selfEval, "+
+          "ur.branch AS branchID, "+
+          "(SELECT `name` FROM branch br WHERE ur.branch=br.id) AS branchName, "+
           "(SELECT SUM(b.weight) FROM taguserre a LEFT JOIN tag b ON b.`tagID` =a.`tagID` WHERE a.userID = tur.`userID` GROUP BY tur.`userID`) AS sumweight "+
           "FROM taguserre tur LEFT JOIN tag ta ON ta.`tagID`=tur.`tagID` "+
           "LEFT JOIN `user` ur ON tur.`userID` = ur.`userID` "+
@@ -192,22 +197,32 @@ module.exports = {
       }else var queryString = "SELECT null";
       console.log(queryString);
       TagList.query(queryString,function(err,high){
-        console.log(high);
-        console.log(results[3]);
-        console.log(lowPrice);
         if(err) return cb(err);
         for( x in tagList){
           tagList[x].lowPrice = lowPrice.lowPrice||0;
           tagList[x].lowPrice+=results[3].workPrice;
           tagList[x].highPrice = high[x].highPrice||0;
           tagList[x].highPrice += results[3].workPrice;
-          delete tagList[x].upPrice;
-          delete tagList[x].downPrice;
+          delete tagList[x].highPrice;
+          delete tagList[x].lowPrice;
           delete tagList[x].sumweight;
           if(tag==''){
             tagList[x].price=tagList[x].highPrice;
           }else{
             tagList[x].price=tagList[x].lowPrice+'-'+tagList[x].highPrice;
+          }
+          if(tagList[x].status==1){
+            delete tagList[x].sysTag;
+            delete tagList[x].sysComment;
+            delete tagList[x].expectSalary;
+            delete tagList[x].price
+          }else if(tagList.status==2){
+            delete tagList[x].workExp;
+            delete tagList[x].selfEval;
+            delete tagList[x].branchID;
+            delete tagList[x].branchID;
+            delete tagList[x].branchName;
+
           }
         }
         var servants = {
@@ -329,16 +344,12 @@ module.exports = {
     }
     var queryString = " select sum(price) totalPrice from tag where tagID in("+tagStr+")";
     TagList.query(queryString,function(err,result){
-      console.log(err);
-      console.log(result);
       if(err) return cb(err);
       var info = {
         userID: opts.userID,
         totalPrice:result[0].totalPrice
       }
       MeasPrice.updateOrCreate(info,function(err,result1){
-        console.log(err);
-        console.log(result1);
         if(err) return cb(err);
         return cb(null,result[0]);
       })
@@ -406,3 +417,4 @@ module.exports = {
 
   }
 }
+
