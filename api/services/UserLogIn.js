@@ -18,7 +18,6 @@ module.exports = {
     //发起hpttps 请求
     var hostname = util.format('https://api.weixin.qq.com/sns/oauth2/access_token?appid=%s&secret=%s&code=%s' +
       '&grant_type=authorization_code',weixinConfig.appid,weixinConfig.appsecret,opts.code);
-    console.log(hostname);
     https.get(hostname, function(res) {
       var buffers = [];
       res.on('data', function(d) {
@@ -287,7 +286,7 @@ module.exports = {
 
           async.waterfall([
               function(cb1){
-                console.log('1111111111111111');
+
                 cb1(null,opts);
               },UserLogIn.getUserByCode,
               function(dataFromWeixin,cb1){
@@ -337,20 +336,14 @@ module.exports = {
                 openid:user[0].openid,
                 role:2
                 };
-              console.log('data',data);
               User.update({userID:phoneReslut[0].userID},data).exec(function(err,newuser){
-                console.log('err',err);
                 if(err) return cb(err)
                 User.update({userID:opts.userID},{openid:null}).exec(function(err,olduser){
-                  console.log('err',err);
                   if(err) return cb(err)
-                  console.log(newuser);
-                  console.log(phoneReslut[0].userID);
                   req.session.userID=phoneReslut[0].userID;
-                  console.log(req.session.userID);
+                  req.session.userID=phoneReslut[0].openid;
                   cb(null,newuser,'0001');           //0001表示前端需要获取这个服务员的信息之后再让用户填写或者修改
                 })
-
               })
             })
             //

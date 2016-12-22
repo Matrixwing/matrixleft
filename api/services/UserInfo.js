@@ -8,7 +8,7 @@ module.exports = {
     })
   },
 
-  updateUserInfo : function (userInfo,userTag,cb){
+  updateUserInfo : function (userInfo,userTag,req,cb){
     //var userBaseInfo = {
     //  userName : opts.userName,
     //  gender : opts.gender
@@ -19,28 +19,50 @@ module.exports = {
     };
     // 更新用户基本信息
     // 更新类型
-    async.parallel([
-      function(next){
-        User.updateUserInfoByUserID(userInfo,function(err,results){
-          if(err) return next(err);
-          return next(null,results)
-        })
-      },
-      function(next){
-        console.log(userTag);
-        if(userTag!==''){
-          TagUserRe.updataTagUserRe(userInfo.userID,userTag,function(err,results){
-            if(err) return next(err);
-            return next(null,results)
+    User.find({userName:userInfo.userName,IDCard:userInfo.IDCard,openid:null,status:1}).exec(function(err,tobuser){
+      console.log('2buser',tobuser)
+      if (err) return cb(err);
+      if(tobuser=='') {
+        async.parallel([
+          function (next) {
+            User.updateUserInfoByUserID(userInfo, function (err, results) {
+              if (err) return next(err);
+              return next(null, results)
+            })
+          },
+          function (next) {
+
+            if (userTag !== '') {
+              TagUserRe.updataTagUserRe(userInfo.userID, userTag, function (err, results) {
+                if (err) return next(err);
+                return next(null, results)
+              })
+            } else {
+              return next(null, '')
+            }
+          }
+        ], function (err, results) {
+          if (err) return cb(err);
+          return cb(null, '');
+        });
+      }else{
+
+         User.update({userID:userInfo.userID},{openid:null}).exec(function(err,olduser){
+           if(err) return cb(err)
+           var data ={
+             openid:userInfo.openid,
+             phone:olduser[0].phone,
+             status:2
+           };
+           User.update({userID:tobuser[0].userID},data).exec(function(err,newuser){
+            if(err) return cb(err)
+            req.session.userID=tobuser[0].userID;
+            req.session.userID=tobuser[0].openid;
+            cb(null,'');
           })
-        }else{
-          return next(null,'')
-        }
+        })
       }
-    ],function(err,results){
-      if(err) return cb(err);
-      return cb(null,'');
-    });
+  });
   },
 
   getSevantDetail:function(opts,cb){
@@ -83,5 +105,7 @@ module.exports = {
       };
       return cb(null,servantDetail);
     });
+
   }
+
 };
