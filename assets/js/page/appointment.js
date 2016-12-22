@@ -370,11 +370,16 @@
 		    success: function(data) {
 		    	if (data.msgNo==0000) {
 		        	mui('#order').button('reset');
-		        	var name = encodeURI(encodeURI($('#name').val()));
+		        	/*var name = encodeURI(encodeURI($('#name').val()));
 		        	var orderID = data.data.orderID;
-		        	var expectSalary = $('#expectSalary_in').val();
+		        	var expectSalary = $('#expectSalary_in').val();*/
+		        	var status=base.getQueryString('status');
 		        	//window.location.href='payment.html?name='+name+'&orderID='+orderID+'&expectSalary='+expectSalary;
-		        	window.location.href='apSuccess.html'
+		        	if (status==1) {
+		        		window.location.href='apSuccessTb.html'
+		        	}else{
+		        		window.location.href='apSuccess.html'
+		        	};
 		    	}else{
 		    		mui.toast(data.msgInfo);
 		    	};

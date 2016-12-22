@@ -67,7 +67,9 @@ $(document).ready(function(){
 					};
 				html.push('</form>')
 				if (data.data.status==1) {
-					html.push('<div class="mui-content-padded"><a  class="mui-btn mui-btn-block mui-btn-primary pay" servantName='+data.data.servantName+' orderID='+data.data.orderID+' expectSalary='+data.data.expectSalary+'>去支付</a></div>')
+					if (data.data.servantStatus==2) {
+						html.push('<div class="mui-content-padded"><a  class="mui-btn mui-btn-block mui-btn-primary pay" servantName='+data.data.servantName+' orderID='+data.data.orderID+' expectSalary='+data.data.expectSalary+'>去支付</a></div>')
+					};
 				};
 				html= html.join('');
 				$('#detail').append(html)
@@ -89,10 +91,10 @@ $('#detail').on('tap','.pay',function(){
 	var expectSalary = $(this).attr('expectSalary');
 	window.location.href='payment.html?orderID='+orderID+'&name='+servantName+'&expectSalary='+expectSalary;
 })
-var sharedata={
+/*var sharedata={
 	'title':'微元汇',
 	'link':'http://wyh.matrixwing.com/nurseList.html',
 	'imgUrl':'http://wyh.matrixwing.com/images/logo.jpg',
 	'desc':'小元找保姆就是好'
 }
-base.getShareConfig(sharedata)
+base.getShareConfig(sharedata)*/

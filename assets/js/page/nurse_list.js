@@ -180,7 +180,7 @@ $('#tag_sure').on('tap',function(){
 	   tagName:'服务人数',
 	   value:$('#people').val()
 	})
-	if ($('.choosein_btn').attr('tagID')=='0' || $('.choosein_btn').attr('tagID')=='2') {
+	if ($('.choosein_btn').attr('tagID')=='2') {
 		dataList.push({
 		   tagID:'22',
 		   value:$('#people').val()

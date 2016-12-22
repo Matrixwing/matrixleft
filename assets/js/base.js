@@ -8,12 +8,7 @@ var base = {
         mui('#tab-bar').on('tap', 'a', function() {
             var id = this.getAttribute('id');
             var data_click = this.getAttribute('data-click');
-            var type = this.getAttribute('type')
-            if (type) {
-                var src = id + '.html?type='+type
-            }else{
-                var src = id + '.html'
-            };
+            var src = id + '.html';
             _czc.push(["_trackEvent", "", data_click, "", "", ""]);
             window.location.href = src;
         })
@@ -27,7 +22,7 @@ var base = {
                     tabbarHtml.push('<span class="mui-icon iconfont icon-yduizhuye"></span>')
                     tabbarHtml.push('<span class="mui-tab-label">找工作</span>')
                 tabbarHtml.push('</a>')
-                tabbarHtml.push('<a class="mui-tab-item" id="life"   data-click="生活圈" type="2">')
+                tabbarHtml.push('<a class="mui-tab-item" id="nurseLife"   data-click="生活圈">')
                     tabbarHtml.push('<span class="mui-icon iconfont icon-yduifaxian"></span>')
                     tabbarHtml.push('<span class="mui-tab-label">生活圈</span>')
                 tabbarHtml.push('</a>')

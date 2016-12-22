@@ -75,7 +75,10 @@ function getOrderList (status,clear) {
 								html.push('<div class="mui-card-footer">')
 
 									html.push('<a class="mui-card-link getOrderDetail" orderID='+list[i].orderID+' >查看详情</a>')
-									html.push('<a class="mui-card-link pay" servantName='+list[i].servantName+' orderID='+list[i].orderID+' expectSalary='+list[i].expectSalary+'>去支付</a>')
+									if (list[i].servantStatus==2) {
+										html.push('<a class="mui-card-link pay" servantName='+list[i].servantName+' orderID='+list[i].orderID+' expectSalary='+list[i].expectSalary+'>去支付</a>')
+									};
+									
 								html.push('</div>')
 							}else{
 								html.push('<div class="mui-card-footer">')
