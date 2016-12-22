@@ -65,8 +65,12 @@ module.exports = {
         msg=[newOrder,results[0],results[1]];
         WxMessage.sendWxMsgAfterOrderDone(msg);
       })
+      User.find({userID:order.servantID}).exec(function(err,userInfo){
+        if(err) return cb(err);
+        result.servantStatus=userInfo[0].status;
+        return cb(null,result)
+      })
 
-      return cb(null,result)
     })
   },
 
