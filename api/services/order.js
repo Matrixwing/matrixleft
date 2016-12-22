@@ -66,10 +66,10 @@ module.exports = {
         WxMessage.sendWxMsgAfterOrderDone(msg);
       })
       User.find({userID:order.servantID}).exec(function(err,userInfo){
-        console.log(userInfo);
+
         if(err) return cb(err);
         result.servantStatus=userInfo[0].status;
-        console.log(result);
+
         return cb(null,result)
       })
 
@@ -86,14 +86,13 @@ module.exports = {
     if(opts.status==1){exprieString = 'AND NOW() < od.`validTime` ';statusString=' and od.status ='+opts.status };
     if(opts.status==2){statusString=' and od.status ='+opts.status };
 
-
-    var queryString = util.format('SELECT od.`orderID`,(SELECT  userName FROM `user` u WHERE u.userID = od.servantID) AS servantName,IFNULL((SELECT  `d`.`define`  ' +
+    var queryString = util.format('SELECT od.`orderID`,(SELECT  userName FROM `user` u WHERE u.userID = od.servantID) AS servantName, (SELECT `status` FROM `user` u WHERE u.userID = od.servantID) AS servantStatus,IFNULL((SELECT  `d`.`define`  ' +
       'FROM `Dict` `d` WHERE (( `d`.`columnName` = "order.stauts") AND (`d`.`value` = `od`.`status`) )),"") AS `status`,od.createTime,remark,od.`validTime` ' +
       ' FROM`order` od  WHERE od.`userID` = %s  %s   %s ORDER BY validTime DESC limit %s,%s;',opts.userID,statusString,exprieString,opts.start,opts.limit);
 
     var countString = util.format('SELECT count(orderID) as totalRow '+
       ' FROM`order` od  WHERE od.`userID` = %s  %s %s  ORDER BY validTime DESC',opts.userID,statusString,exprieString);
-
+    console.log(queryString);
     async.parallel([
       function(next){
         Order.query(queryString,(function(err,orderList){
@@ -146,6 +145,7 @@ module.exports = {
       User.find({userID:order.servantID}).exec(function(err,servant) {
         if(err) return cb(err);
         order.servantName=servant[0].userName||'';
+        order.servantStatus=servant[0].status;
         order.expectSalary=JSON.parse(order.remark).expectSalary||'';
         order.apptTime=JSON.parse(order.remark).apptTime||'';
         order.apptPlace=JSON.parse(order.remark).apptPlace||'';

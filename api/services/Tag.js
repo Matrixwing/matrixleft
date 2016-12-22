@@ -393,7 +393,7 @@ module.exports = {
               percentage = '85%';
               break;
             case 7:
-              percentage = '91%';
+              percentage = '90%';
               break;
             case 8:
               percentage = '95%';
