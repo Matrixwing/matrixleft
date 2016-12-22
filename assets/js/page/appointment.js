@@ -35,6 +35,7 @@
 		})
 		$(document).ready(function(){
 		    var userID=base.getQueryString('userID');
+		    var status=base.getQueryString('status');
 		    $.get('getUserCard?userID='+userID,function(data,status){
 		    	var data= JSON.parse(data);
 		    	$('.tips').hide();
@@ -49,7 +50,12 @@
 					}
 					$('#name').val(data.data.userName)
 					if (data.data.expectSalary) {
-						$('#expectSalary').html('期望薪资：'+data.data.expectSalary+'元')
+						if (status==1) {
+							$('#expectSalary').html('期望薪资：'+data.data.expectSalary+'元')
+							
+						}else{
+							$('#expectSalary').html('最低期望薪资：'+data.data.expectSalary+'元')
+						}
 						$('#expectSalary_in').val(data.data.expectSalary)
 					}
 					if (data.data.serviceCity) {

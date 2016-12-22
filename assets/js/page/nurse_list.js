@@ -160,7 +160,7 @@ $('#full_tag').on('tap','button',function(){
 	$(this).toggleClass('onselect')
 })
 $('#getServantList').on('tap','li',function(){
-	window.location.href='appointment.html?userID='+$(this).attr('userID')+'&own=1'
+	window.location.href='appointment.html?userID='+$(this).attr('userID')+'&status='+$(this).attr('status')
 })
 /*getServantList*/
 $('#tag_sure').on('tap',function(){
@@ -326,7 +326,7 @@ function getServantList(dataList,clear){
 	    	if (data.msgNo=='0000') {
 	    		var serventList = [];
 		    	for(var i =0;i<data.data.servantList.length;i++){
-		    		serventList.push('<li class="mui-table-view-cell mui-media" userID="'+data.data.servantList[i].userID+'">')
+		    		serventList.push('<li class="mui-table-view-cell mui-media" userID="'+data.data.servantList[i].userID+'" status="'+data.data.servantList[i].status+'">')
 		    			serventList.push('<a class="mui-navigate-right">')
 			    			if (data.data.servantList[i].avatarUrl) {
 			    				serventList.push('<img class="mui-media-object mui-pull-left" src="'+data.data.servantList[i].avatarUrl+'">')
@@ -336,31 +336,36 @@ function getServantList(dataList,clear){
 		    				serventList.push('<div class="mui-media-body">')
 		    					serventList.push('<div class="mui-row">')
 									serventList.push('<span class="mui-pull-left">'+data.data.servantList[i].userName+'</span>')
-									serventList.push('<div class="qwxz  mui-pull-right">期望薪资：<font>'+data.data.servantList[i].expectSalary+'</font>/月</div>')
+									if(data.data.servantList[i].status==1) {
+										serventList.push('<div class="qwxz  mui-pull-right">服务经验：<font>'+data.data.servantList[i].workExp+'</font>/月</div>')
+									}else{
+										serventList.push('<div class="qwxz  mui-pull-right">期望薪资：<font>'+data.data.servantList[i].expectSalary+'</font>/月</div>')
+									};
+									
 								serventList.push('</div>')
 								serventList.push('<div class="mui-row">')
-									serventList.push('<div class="mui-row">')
-											
-											serventList.push('<div class="ckxz">小元参考薪资：<font>'+data.data.servantList[i].price+'</font>/月</div>')
-											serventList.push('<div class="kbd_div mui-pull-left">')
-											if (data.data.servantList[i].sysTag) {
-												var sysTag=data.data.servantList[i].sysTag.split('|')
-												if (sysTag[0]=='小元认证') {
-													serventList.push('<div class="kbd"><img src="images/shi.png"/></div>')
+											if(data.data.servantList[i].status==1) {
+												serventList.push('<div class="ckxz">所属机构：'+data.data.servantList[i].branchName+'</div>')
+												serventList.push('<div class="selfEval">自我评价：'+data.data.servantList[i].selfEval+'</div>')
+											}else{
+												if (data.data.servantList[i].price){
+													serventList.push('<div class="ckxz">小元参考薪资：<font>'+data.data.servantList[i].price+'</font>/月</div>')
+												}
+												if (data.data.servantList[i].sysTag) {
+													serventList.push('<div class="kbd_div mui-pull-left">')
+														var sysTag=data.data.servantList[i].sysTag.split('|')
+														if (sysTag[0]=='小元认证') {
+															serventList.push('<div class="kbd"><img src="images/shi.png"/></div>')
+														};
+														if (sysTag[0]=='小元体检') {
+															serventList.push('<div class="kbd"><img src="images/jian.png"/></div>')
+														};
+														if (sysTag[1]=='小元体检') {
+															serventList.push('<div class="kbd"><img src="images/jian.png"/></div>')
+														};
+													serventList.push('</div>')
 												};
-												if (sysTag[0]=='小元体检') {
-													serventList.push('<div class="kbd"><img src="images/jian.png"/></div>')
-												};
-												if (sysTag[1]=='小元体检') {
-													serventList.push('<div class="kbd"><img src="images/jian.png"/></div>')
-												};
-											};
-											serventList.push('</div>')
-											
-										/*serventList.push('<div class="kbd_div mui-pull-left">')
-											serventList.push('<div class="kbd">小元体检</div>')
-										serventList.push('</div>')*/
-									serventList.push('</div>')
+											}
 								serventList.push('</div>')
 		    				serventList.push('</div>')
 		    				if (data.data.servantList[i].sysComment) {
@@ -414,10 +419,10 @@ $('#txt').on('tap',function(){
 	$('.tips').fadeIn("fast");
 	_czc.push(["_trackEvent", "服务列表", "服务内容", "", "", ""]);
 })
-$('#offCanvasShow').on('tap','#MaternityMatron',function(){
+/*$('#offCanvasShow').on('tap','#MaternityMatron',function(){
 	window.location.href='MaternityMatron.html'
 })
-
+*/
 var scroll = mui('#pullrefresh').scroll(); 
 document.getElementById('pullrefresh').addEventListener('scroll', function (e ) { 
 	var title = $('.choosein_btn').html();

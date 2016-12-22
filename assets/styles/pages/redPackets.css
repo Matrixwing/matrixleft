@@ -95,7 +95,7 @@
 }
 .packets_down{
 	background: #fff;
-	border: 1px solid #ccc;
+	border: 1px solid #d4d3d8;
 	border-top: none;
 	min-height: 60px;
 	padding: 10px 15px;
@@ -113,7 +113,70 @@
 .packets_down p {
 	margin-top: 15px;
 	margin-bottom: 0;
+	color: #939393;
+}
+.gouse{
+	font-size: 12px;
+	padding: 3px 8px;
+	border: 1px solid #d4d3d8
 }
 #getPacketsList li{
 	margin-bottom: 10px;
+}
+.packets{
+	height: 100px;
+}
+.packets_left{
+	width: 62%;
+	background: #fff;
+	height: 110px;
+	border-radius: 10px 0 0 10px;
+	padding:10px 15px;
+}
+.packets_right{
+	width: 38%;
+	height: 110px;
+	border-radius: 0 10px 10px 0;
+	position: relative;
+}
+.packets_right img{
+	width: 100%;
+	height: 110px;
+	border-radius: 0 10px 10px 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.packets_right span{
+	font-size: 14px;
+	position: absolute;
+	color: #fff;
+	top: 22%;
+	left: 20%;
+
+}
+.packets_right span font{
+	font-size: 36px;
+}
+.name{
+	color: #fd573c;
+}
+.packets_left .mui-icon{
+	font-size: 5px;
+	color: #fd573c;
+}
+.packets_left p{
+	font-size: 12px;
+	display: inline-block;
+	margin-bottom: 0;
+}
+.go{
+	font-size: 14px;
+	border: 1px solid #fff;
+	position: absolute;
+	bottom: 15px;
+	left: 30%;
+	color: #fff;
+	border-radius: 5px;
+	padding: 1px 6px;
 }
