@@ -193,7 +193,7 @@ module.exports = {
         var queryString = "SELECT SUM(price) AS highPrice ,tur.`userID` FROM taguserre tur LEFT JOIN tag t ON tur.`tagID`=t.`tagID` WHERE t.`type`!=1 AND tur.userID IN ("+users+") GROUP BY tur.`userID`";
       }
       else if(users!=''&&tag==''){
-        var queryString = "SELECT SUM(price) AS highPrice ,tur.`userID` FROM taguserre tur LEFT JOIN tag t ON tur.`tagID`=t.`tagID` WHERE  tur.userID IN ("+users+") GROUP BY tur.`userID`";
+        var queryString = "SELECT SUM(price)+2200 AS highPrice ,tur.`userID` FROM taguserre tur LEFT JOIN tag t ON tur.`tagID`=t.`tagID` WHERE  tur.userID IN ("+users+") and t.type!=0 GROUP BY tur.`userID`";
       }else var queryString = "SELECT null";
       console.log(queryString);
       TagList.query(queryString,function(err,high){

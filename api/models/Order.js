@@ -18,9 +18,6 @@ module.exports = {
     redenvId:{
       type: 'integer',
     },
-    redenvId:{
-      type: 'integer',
-    },
     userID:{
       type: 'integer',
     },
