@@ -6,11 +6,15 @@ module.exports = {
 
   getCard : function(opts,cb){
     Card.find(opts).exec(function(err,card) {
-      sails.log.error(err);
       if (err) return cb(err);
       if(card == '') return cb(null,card[0]);
       var shengxiao=null, xingzuo=null, niandai=null;
       var idcard = card[0].IDCard;
+      if(card[0].status==2){
+        delete card[0].branchID;
+        delete card[0].branchName;
+        delete card[0].branchAddress;
+      }
       if (idcard) {
 
       year = idcard.substring(6, 10);

@@ -83,6 +83,15 @@ module.exports = {
     expectSalary:{
       type:'int'
     },
+    branchID:{
+      type:'integer'
+    },
+    branchName:{
+      type:'string'
+    },
+    branchAddress:{
+      type:'string'
+    },
     certificate : {
       type:'string',
       size:512
