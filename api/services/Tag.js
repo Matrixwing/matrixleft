@@ -337,19 +337,26 @@ module.exports = {
   countPrice : function (opts,cb){ //活动，算算你值多少钱
     var tag = opts.tag;
     var tagStr = '';
+    var isYuesao = 0;
     for(var tagNum in tag){
       tagStr+=tag[tagNum].tagID;
       if(tagNum<tag.length-1)
         tagStr+=',';
+      if(tag[tagNum].tagID==300) isYuesao=1;
     }
     var queryString = " select sum(price) totalPrice from tag where tagID in("+tagStr+")";
     console.log(queryString);
     TagList.query(queryString,function(err,result){
       if(err) return cb(err);
+      console.log('isYuesao',isYuesao);
+      if(isYuesao==1){
+        result[0].totalPrice+=1400;
+      }
       var info = {
         userID: opts.userID,
-        totalPrice:result[0].totalPrice
+        totalPrice:result[0].totalPrice*1.3
       }
+      result[0].totalPrice=info.totalPrice;
       MeasPrice.updateOrCreate(info,function(err,result1){
         if(err) return cb(err);
         return cb(null,result[0]);
@@ -388,11 +395,11 @@ module.exports = {
             case 7:
               percentage = '91%';
               break;
-            case 7:
+            case 8:
               percentage = '95%';
               break;
             default:
-              percentage = '50%';
+              percentage = '97%';
           }
           delete  priceInfo[0].id;
           delete  priceInfo[0].userID;
