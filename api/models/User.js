@@ -80,6 +80,9 @@ module.exports = {
     },
     serviceCity:{
       type : 'int'
+    },
+    status:{
+      type : 'integer'
     }
 
     //user表里余额这字段没有写在这。因为余额如果写在这，可能通过orm提供的update方法改掉

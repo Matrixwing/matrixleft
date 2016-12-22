@@ -24,7 +24,6 @@ module.exports = {
       title:req.param('title','家政服务'),
     };
 
-    //todo 需要参数处理:apptTime
     if(opts.servantID==''||opts.apptPlace==''||opts.apptTime==''){
       res.send('{"msgNo":"9999","msgInfo":"参数错误"}');
     }
@@ -44,6 +43,7 @@ module.exports = {
           if (err) return res.send('{"msgNo":"9999","msgInfo":"请您稍后再试"}');
           var str = JSON.stringify(result);
           result = util.format('{"msgNo":"0000","msgInfo":"预约成功","data":%s}', str);
+          console.log(result);
           res.send(result);
         })
       })
@@ -60,6 +60,7 @@ module.exports = {
             if (err) return res.send('{"msgNo":"9999","msgInfo":"请您稍后再试"}');
             var str = JSON.stringify(result);
             result = util.format('{"msgNo":"0000","msgInfo":"预约成功","data":%s}', str);
+            console.log(result);
             res.send(result);
           })
         })
