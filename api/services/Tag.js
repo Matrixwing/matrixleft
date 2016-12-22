@@ -203,9 +203,7 @@ module.exports = {
           tagList[x].lowPrice+=results[3].workPrice;
           tagList[x].highPrice = high[x].highPrice||0;
           tagList[x].highPrice += results[3].workPrice;
-          delete tagList[x].highPrice;
-          delete tagList[x].lowPrice;
-          delete tagList[x].sumweight;
+
           if(tag==''){
             tagList[x].price=tagList[x].highPrice;
           }else{
@@ -216,14 +214,16 @@ module.exports = {
             delete tagList[x].sysComment;
             delete tagList[x].expectSalary;
             delete tagList[x].price
-          }else if(tagList.status==2){
+          }else if(tagList[x].status==2){
             delete tagList[x].workExp;
             delete tagList[x].selfEval;
             delete tagList[x].branchID;
             delete tagList[x].branchID;
             delete tagList[x].branchName;
-
           }
+          delete tagList[x].highPrice;
+          delete tagList[x].lowPrice;
+          delete tagList[x].sumweight;
         }
         var servants = {
           servantList:tagList,
