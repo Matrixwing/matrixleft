@@ -1,26 +1,32 @@
 /**
- * IDImage.js
+ * UploadImage.js
  *
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
 
 module.exports = {
-  tablename:"IDImage",
+  tablename:"UploadImage",
   autoCreatedAt: false,
   autoUpdatedAt: false,
   autoid: false,
   attributes: {
     userID:{
-      type:"string",
+      type:"integer",
     },
-    front:{
+    type:{
+      type:'string'
+    },
+    image : {
       type:"string",
       size:65535
     },
-    reverse : {
+    status:{
+      type:'integer'
+    },
+    remark : {
       type:"string",
-      size:65535
+      size:1024
     }
   }
 };
