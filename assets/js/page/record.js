@@ -62,7 +62,9 @@ function getOrderList (status,clear) {
 	    				html.push('<div class="mui-card">')
 							html.push('<div class="mui-card-header">')
 								html.push('<p id="orderID">订单编号：'+list[i].orderID+'</p>')
-								html.push('<span id="status">'+list[i].status+'</span>')
+								if (list[i].servantStatus==2) {
+									html.push('<span id="status">'+list[i].status+'</span>')
+								}
 							html.push('</div>')
 							html.push('<div class="mui-card-content">')
 								html.push('<div class="mui-card-content-inner">')

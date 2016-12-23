@@ -40,7 +40,7 @@ $(document).ready(function(){
 				var remark =  eval('(' + data.data.remark + ')'); 
 				html.push('<form class="mui-input-group">')
 					html.push('<div class="mui-input-row"><label>预约时间：</label><div class="mui-row">'+remark.apptTime+'</div></div>')
-					html.push('<div class="mui-input-row"><label>面试地点：</label><div class="mui-row">'+remark.apptPlace+'</div></div>')
+					/*html.push('<div class="mui-input-row"><label>面试地点：</label><div class="mui-row">'+remark.apptPlace+'</div></div>')*/
 					if (data.data.servantID) {
 						html.push('<div class="mui-input-row"><label>服务员：</label><div class="mui-row">'+data.data.servantName+'</div></div>')
 					};

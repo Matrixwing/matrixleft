@@ -337,7 +337,7 @@ function getServantList(dataList,clear){
 		    					serventList.push('<div class="mui-row">')
 									serventList.push('<span class="mui-pull-left">'+data.data.servantList[i].userName+'</span>')
 									if(data.data.servantList[i].status==1) {
-										serventList.push('<div class="qwxz  mui-pull-right">服务经验：<font>'+data.data.servantList[i].workExp+'</font>/月</div>')
+										serventList.push('<div class="qwxz  mui-pull-right">服务经验：<font>'+data.data.servantList[i].workExp+'</font>个月</div>')
 									}else{
 										serventList.push('<div class="qwxz  mui-pull-right">期望薪资：<font>'+data.data.servantList[i].expectSalary+'</font>/月</div>')
 									};

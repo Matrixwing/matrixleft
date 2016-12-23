@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>微元汇</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="styles/mui.min.css">
+		<style>
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>
+				</button>
+			<h1 class="mui-title">vue</h1>
+		</header>
+		
+
+		<div class="mui-content">
+			<div id="app">
+			  {{ message }}
+			</div>
+		</div>	
+		<div id="app-2">
+		  <span v-bind:title="message">
+		    Hover your mouse over me for a few seconds to see my dynamically bound title!
+		  </span>
+		</div>
+		<div id="app-3">
+		  <p v-if="seen">Now you see me</p>
+		</div>
+		<div id="app-4">
+		  <ol>
+		    <li v-for="todo in todos">
+		      {{ todo.text }}
+		    </li>
+		  </ol>
+		</div>
+		<div id="app-5">
+		  <p>{{ message }}</p>
+		  <button v-on:click="reverseMessage">Reverse Message</button>
+		</div>
+		<div id="app-6">
+		  <p>{{ message }}</p>
+		  <input v-model="message">
+		</div>
+		<div id="app-7">
+		  <ol>
+		    <!-- Now we provide each todo-item with the todo object    -->
+		    <!-- it's representing, so that its content can be dynamic -->
+		    <todo-item v-for="item in groceryList" v-bind:todo="item"></todo-item>
+		  </ol>
+		</div>
+		<div id="app8">
+            <h1>Hello, Vue.js!</h1>
+            <h1 v-if="yes">Yes!</h1>
+            <h1 v-if="no">No!</h1>
+            <h1 v-if="age >= 25">Age: {{ age }}</h1>
+            <h1 v-if="name.indexOf('jack') >= 0">Name: {{ name }}</h1>
+        </div>
+	</body>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/vue.js"></script>
+	<script type="text/javascript">
+		var app = new Vue({
+		  el: '#app',
+		  data: {
+		    message: 'Hello Vue!'
+		  }
+		})
+		var app2 = new Vue({
+		  el: '#app-2',
+		  data: {
+		    message: 'You loaded this page on ' + new Date()
+		  }
+		})
+		var app3 = new Vue({
+			el:"#app-3",
+			data:{
+				seen:false
+			}
+		})
+		var app4 = new Vue({
+		  el: '#app-4',
+		  data: {
+		    todos: [
+		      { text: 'Learn JavaScript' },
+		      { text: 'Learn Vue' },
+		      { text: 'Build something awesome' },
+		      { text: 'Build something awesome' }
+		    ]
+		  }
+		})
+		var app5 = new Vue({
+		  el: '#app-5',
+		  data: {
+		    message: 'Hello Vue.js!'
+		  },
+		  methods: {
+		    reverseMessage: function () {
+		      this.message = this.message.split('').reverse().join('')
+		    }
+		  }
+		})
+		var app6 = new Vue({
+		  el: '#app-6',
+		  data: {
+		    message: 'Hello Vue!'
+		  }
+		})
+		Vue.component('todo-item', {
+		  props: ['todo'],
+		  template: '<li>{{ todo.text }}</li>'
+		})
+
+		var app7 = new Vue({
+		  el: '#app-7',
+		  data: {
+		    groceryList: [
+		      { text: 'Vegetables' },
+		      { text: 'Cheese' },
+		      { text: 'Whatever else humans are supposed to eat' }
+		    ]
+		  }
+		})
+		 var vm = new Vue({
+            el: '#app8',
+            data: {
+                yes: true,
+                no: false,
+                age: 28,
+                name: 'keepfool'
+            }
+        })
+	</script>
+</html>
