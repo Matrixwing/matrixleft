@@ -1,13 +1,13 @@
 /**
- * Red.js
+ * RedUserRe.js
  *
- * @description :: 红包，优惠券
+ * @description :: 红包用户关系
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
 
 module.exports = {
   connection: 'localMysqlServer',
-  table: 'redenvelope',
+  table: 'reduserre',
   autoCreatedAt: false,
   autoUpdatedAt: false,
   autoid: false,
@@ -15,14 +15,23 @@ module.exports = {
     id:{
       type: 'integer',
     },
-    name:{
-      type: 'string',
-    },
-    amount:{
+    redID:{
       type: 'integer',
     },
-    condition:{
+    userID:{
+      type: 'integer',
+    },
+    createAt:{
       type:'datatime'
+    },
+    expireAt:{
+      type:'datatime'
+    },
+    usedAt:{
+      type:'datatime'
+    },
+    status:{
+      type:'integer'
     }
   }
 };
