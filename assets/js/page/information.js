@@ -208,11 +208,10 @@ $('#reg').on('tap',function(){
 	    data: {'phone':phone,'num':num},
 	    dataType: 'json',
 	    success: function(data) {
+        	mui('#reg').button('reset');
 	    	if (data.msgNo==0000) {
-	        	mui('#reg').button('reset');
 				$('#reg').attr('href','#information_sec')
 	    	}else if (data.msgNo==0001) {
-	        	mui('#reg').button('reset');
 				$('#reg').attr('href','#information_sec')
 	    	}else{
 	    		mui.toast(data.msgInfo);
