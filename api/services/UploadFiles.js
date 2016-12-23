@@ -12,29 +12,27 @@ qiniu.conf.SECRET_KEY = sails.config.qiniu.SECRET_KEY;
 var bucket = sails.config.qiniu.avatarBucket;
 var qiniuDom = sails.config.qiniu.domain ;
 module.exports = {
-    uploadIDCard : function (opts,cb){
-      if(opts.filesType==1){
-        var idcard = {
-          userID:opts.userID,
-          front:opts.files
-        };
-      }else{
-        var idcard = {
-          userID:opts.userID,
-          reverse:opts.files
-        };
-      }
-      IDImage.find({userID:opts.userID}).limit(1).exec(function(err,result) {
+    uploadImage : function (opts,cb){
+      var image = {
+        userID:opts.userID,
+        type:opts.filesType,
+        image:opts.files
+      };
+      UploadImage.find({userID:image.userID,type:image.type}).limit(1).exec(function(err,result) {
         if(result==''){
-          IDImage.create(idcard).exec(function(err,card){
+          UploadImage.create(image).exec(function(err,card){
             if(err) return cb(err)
             return cb(null,card);
           })
         }else{
-          IDImage.update({userID:opts.userID},idcard).exec(function(err,card){
-            if(err) return cb(err)
-            return cb(null,card);
-          })
+          if(result[0].status!=3){
+            UploadImage.update({userID:image.userID,type:image.type},image).exec(function(err,card){
+              if(err) return cb(err);
+              return cb(null,card);
+            })
+          }else{
+            return cb('管理员哥哥已经审核过了，不用重复上传啦！');
+          }
         }
       })
     },

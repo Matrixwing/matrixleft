@@ -16,14 +16,15 @@ module.exports = {
     if((!opts.files)||(!opts.files)){
       return res.send('{"msgNo":"9999","msgInfo":"参数错误"}');
     }
-    if(opts.filesType == 1 || opts.filesType == 2 ){
-      UploadFiles.uploadIDCard(opts,function(err,result){
-        if (err) return res.send('{"msgNo":"9999","msgInfo":"'+err+'"}');
-        var str = JSON.stringify(result) ;
+    if(opts.filesType != 4 ) {
+      UploadFiles.uploadImage(opts, function (err, result) {
+        if (err) return res.send('{"msgNo":"9999","msgInfo":"' + err + '"}');
+        var str = JSON.stringify(result);
         result = util.format('{"msgNo":"0000","msgInfo":"上传成功"}');
         res.send(result);
       })
-    }else if(opts.filesType == 4) {
+    }
+    if(opts.filesType == 4) {
       UploadFiles.uploadAvatar(opts, function (err, result) {
         if (err) return res.send('{"msgNo":"9999","msgInfo":"' + err + '"}');
         var str = JSON.stringify(result);
