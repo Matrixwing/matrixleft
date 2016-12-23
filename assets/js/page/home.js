@@ -190,12 +190,21 @@ $('#edit').on('tap',function(){
     $('.save_btn').show();
     $('.file').show();
     $('.editinfos input').removeAttr("readOnly");
+    $('.gender').attr('readOnly','readOnly')
 })
 $('#save').on('tap',function(){
     var userName = $('#userName').val();
     var IDCard = $('#IDCard').val();
     var nickname = $('#nickname').val();
     var phone = $('#phone').val();
+    if (!base.phoneCheck(phone)) {
+        mui.toast('请输入正确的手机号');
+        return;
+    }
+    if (!base.IdCheck(IDCard)) {
+        mui.toast('请输入正确的身份证号码')
+        return;
+    };
     var userInfo={
         'userName':userName,
         'IDCard':IDCard,
