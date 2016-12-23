@@ -12,28 +12,38 @@ mui.init({
 });
 $(document).ready(function(){
 	getTagList();
-  	var old_tag = new mui.PopPicker();
+  	
+	//延迟获取tag
+	//setTimeout("getTagList()",1500)
+	base.tabbarHtml()
+})
+
+
+$('.old_tag').on('tap', function(event) {
+	var _this = $(this);
+	var old_tag = new mui.PopPicker();
  	old_tag.setData([
  		{value:'200',text:'不选择'},
  		{value:'201',text:'老人自理'},
  		{value:'202',text:'老人半自理'},
  		{value:'203',text:'老人不自理'},
 	]);
-	old_tag.pickers[0].setSelectedIndex(1, 2000);
-	$('.old_tag').on('tap', function(event) {
-		var _this = $(this);
-		old_tag.show(function(items) {
-			_this.html(items[0].text);
-			_this.attr('tagID',items[0].value);
-			if (items[0].value=='200') {
-				_this.removeClass('onselect_l')
-				_this.html('照顾老人')
-			}else{
-				_this.addClass('onselect_l')
-			};
-		});
+	old_tag.pickers[0].setSelectedIndex(1, 1000);
+	old_tag.show(function(items) {
+		_this.html(items[0].text);
+		_this.attr('tagID',items[0].value);
+		if (items[0].value=='200') {
+			_this.removeClass('onselect_l')
+			_this.html('照顾老人')
+		}else{
+			_this.addClass('onselect_l')
+		};
 	});
-	//
+});
+//
+
+$('.child_tag').on('tap', function(event) {
+	var _this = $(this);
 	var child_tag = new mui.PopPicker();
  	child_tag.setData([
  		{value:'100',text:'不选择'},
@@ -41,26 +51,18 @@ $(document).ready(function(){
  		{value:'102',text:'小孩1到3岁'},
  		{value:'103',text:'小孩大于1岁'},
 	]);
-	child_tag.pickers[0].setSelectedIndex(1, 2000);
-	$('.child_tag').on('tap', function(event) {
-		var _this = $(this);
-		child_tag.show(function(items) {
-			_this.html(items[0].text);
-			_this.attr('tagID',items[0].value);
-			if (items[0].value=='100') {
-				_this.removeClass('onselect_c')
-				_this.html('照顾小孩')
-			}else{
-				_this.addClass('onselect_c')
-			};
-		});
+	child_tag.pickers[0].setSelectedIndex(1, 1000);
+	child_tag.show(function(items) {
+		_this.html(items[0].text);
+		_this.attr('tagID',items[0].value);
+		if (items[0].value=='100') {
+			_this.removeClass('onselect_c')
+			_this.html('照顾小孩')
+		}else{
+			_this.addClass('onselect_c')
+		};
 	});
-	//延迟获取tag
-	//setTimeout("getTagList()",1500)
-	base.tabbarHtml()
-})
-
-
+});
 
 
 if (mui.os.plus) {
@@ -407,7 +409,10 @@ function reset(){
 	$('#add_old').show();
 	$('#add_child').show();
 	$('#full_tag button').removeClass('onselect')
-	//old_tag.pickers.setSelectedIndex(1, 2000);
+	$('.tag_row button').removeClass('onselect_c')
+	$('.old_num').html('照顾老人')
+	$('.child_tag').html('照顾小孩')
+	$('.tag_row button').removeClass('onselect_l')
 }
 $('#reset').on('tap',function(){
 	reset()
