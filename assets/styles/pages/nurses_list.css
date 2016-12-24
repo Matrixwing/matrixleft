@@ -209,7 +209,8 @@ text-overflow:ellipsis;
 
 .onselect,.onselect_l,.onselect_c {
 	border-color: #f15353 !important;
-	background-color: #fff !important;
+	background-color: #f15353 !important;
+	color: #fff;
 	border-collapse: collapse;
 }
 
@@ -380,6 +381,14 @@ text-overflow:ellipsis;
 }
 .mui-active{
 	z-index: 999999;
+}
+.no_tips{
+	margin: 15px;
+	text-align:center;
+	font-size: 13px;
+}
+.no_tips font{
+	color: #fc5b3e
 }
 /*兼容性*/
 

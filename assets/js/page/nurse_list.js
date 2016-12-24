@@ -28,7 +28,7 @@ $('.old_tag').on('tap', function(event) {
  		{value:'202',text:'老人半自理'},
  		{value:'203',text:'老人不自理'},
 	]);
-	old_tag.pickers[0].setSelectedIndex(1, 1000);
+	old_tag.pickers[0].setSelectedIndex(1, 10);
 	old_tag.show(function(items) {
 		_this.html(items[0].text);
 		_this.attr('tagID',items[0].value);
@@ -51,7 +51,7 @@ $('.child_tag').on('tap', function(event) {
  		{value:'102',text:'小孩1到3岁'},
  		{value:'103',text:'小孩大于1岁'},
 	]);
-	child_tag.pickers[0].setSelectedIndex(1, 1000);
+	child_tag.pickers[0].setSelectedIndex(1, 10);
 	child_tag.show(function(items) {
 		_this.html(items[0].text);
 		_this.attr('tagID',items[0].value);
@@ -302,13 +302,15 @@ $('#tag_sure').on('tap',function(){
 	d_e = dataList;
 	getServantList(dataList,'clear')
 	base.setCookie('needs',JSON.stringify(needs));
+	$('.no_tips').hide();
+	reset();
 	_czc.push(["_trackEvent", "筛选", "确定", "", "", ""]);
 })
 var count = 1;
 var d_e='';
 function getServantList(dataList,clear){
 	if (!dataList) {
-		dataList = d_e;
+		dataList = '';
 	};
 	if (clear) {
 		count=1;
@@ -327,69 +329,75 @@ function getServantList(dataList,clear){
 	    success: function(data) {
 	    	if (data.msgNo=='0000') {
 	    		var serventList = [];
-		    	for(var i =0;i<data.data.servantList.length;i++){
-		    		serventList.push('<li class="mui-table-view-cell mui-media" userID="'+data.data.servantList[i].userID+'" status="'+data.data.servantList[i].status+'">')
-		    			serventList.push('<a class="mui-navigate-right">')
-			    			if (data.data.servantList[i].avatarUrl) {
-			    				serventList.push('<img class="mui-media-object mui-pull-left" src="'+data.data.servantList[i].avatarUrl+'">')
-			    			}else{
-			    				serventList.push('<img class="mui-media-object mui-pull-left" src="images/timg.jpg">')
-			    			};
-		    				serventList.push('<div class="mui-media-body">')
-		    					serventList.push('<div class="mui-row">')
-									serventList.push('<span class="mui-pull-left">'+data.data.servantList[i].userName+'</span>')
-									if(data.data.servantList[i].status==1) {
-										serventList.push('<div class="qwxz  mui-pull-right">服务经验：<font>'+data.data.servantList[i].workExp+'</font>个月</div>')
-									}else{
-										serventList.push('<div class="qwxz  mui-pull-right">期望薪资：<font>'+data.data.servantList[i].expectSalary+'</font>/月</div>')
-									};
-									
-								serventList.push('</div>')
-								serventList.push('<div class="mui-row">')
-											if(data.data.servantList[i].status==1) {
-												serventList.push('<div class="ckxz">所属机构：'+data.data.servantList[i].branchName+'</div>')
-												serventList.push('<div class="selfEval">自我评价：'+data.data.servantList[i].selfEval+'</div>')
-											}else{
-												if (data.data.servantList[i].price){
-													serventList.push('<div class="ckxz">小元参考薪资：<font>'+data.data.servantList[i].price+'</font>/月</div>')
+	    		
+	    		if (clear) {
+			    		$('#getServantList').empty();
+			    		var scroll = mui('#pullrefresh').scroll(); 
+			    		if (scroll.y!='0') {
+			    			mui('#pullrefresh').pullRefresh().scrollTo(0,0,1000)
+			    			//mui('#pullrefresh').pullRefresh().disablePullupToRefresh();
+			    			//mui('#pullrefresh').pullRefresh().enablePullupToRefresh();
+			    		};
+			    	};
+	    		if (data.data.servantList.length>0) {
+    				for(var i =0;i<data.data.servantList.length;i++){
+			    		serventList.push('<li class="mui-table-view-cell mui-media" userID="'+data.data.servantList[i].userID+'" status="'+data.data.servantList[i].status+'">')
+			    			serventList.push('<a class="mui-navigate-right">')
+				    			if (data.data.servantList[i].avatarUrl) {
+				    				serventList.push('<img class="mui-media-object mui-pull-left" src="'+data.data.servantList[i].avatarUrl+'">')
+				    			}else{
+				    				serventList.push('<img class="mui-media-object mui-pull-left" src="images/timg.jpg">')
+				    			};
+			    				serventList.push('<div class="mui-media-body">')
+			    					serventList.push('<div class="mui-row">')
+										serventList.push('<span class="mui-pull-left">'+data.data.servantList[i].userName+'</span>')
+										if(data.data.servantList[i].status==1) {
+											serventList.push('<div class="qwxz  mui-pull-right">服务经验：<font>'+data.data.servantList[i].workExp+'</font>个月</div>')
+										}else{
+											serventList.push('<div class="qwxz  mui-pull-right">期望薪资：<font>'+data.data.servantList[i].expectSalary+'</font>/月</div>')
+										};
+										
+									serventList.push('</div>')
+									serventList.push('<div class="mui-row">')
+												if(data.data.servantList[i].status==1) {
+													serventList.push('<div class="ckxz">所属机构：'+data.data.servantList[i].branchName+'</div>')
+													serventList.push('<div class="selfEval">自我评价：'+data.data.servantList[i].selfEval+'</div>')
+												}else{
+													if (data.data.servantList[i].price){
+														serventList.push('<div class="ckxz">小元参考薪资：<font>'+data.data.servantList[i].price+'</font>/月</div>')
+													}
+													if (data.data.servantList[i].sysTag) {
+														serventList.push('<div class="kbd_div mui-pull-left">')
+															var sysTag=data.data.servantList[i].sysTag.split('|')
+															if (sysTag[0]=='小元认证') {
+																serventList.push('<div class="kbd"><img src="images/shi.png"/></div>')
+															};
+															if (sysTag[0]=='小元体检') {
+																serventList.push('<div class="kbd"><img src="images/jian.png"/></div>')
+															};
+															if (sysTag[1]=='小元体检') {
+																serventList.push('<div class="kbd"><img src="images/jian.png"/></div>')
+															};
+														serventList.push('</div>')
+													};
 												}
-												if (data.data.servantList[i].sysTag) {
-													serventList.push('<div class="kbd_div mui-pull-left">')
-														var sysTag=data.data.servantList[i].sysTag.split('|')
-														if (sysTag[0]=='小元认证') {
-															serventList.push('<div class="kbd"><img src="images/shi.png"/></div>')
-														};
-														if (sysTag[0]=='小元体检') {
-															serventList.push('<div class="kbd"><img src="images/jian.png"/></div>')
-														};
-														if (sysTag[1]=='小元体检') {
-															serventList.push('<div class="kbd"><img src="images/jian.png"/></div>')
-														};
-													serventList.push('</div>')
-												};
-											}
-								serventList.push('</div>')
-		    				serventList.push('</div>')
-		    				if (data.data.servantList[i].sysComment) {
-		    					serventList.push('<p class="mui-ellipsis">'+data.data.servantList[i].sysComment+'</p>')
-		    				};
-		    				/*serventList.push('<p class="mui-ellipsis">小元评价：改服务员态度好，服务号，做饭好，什么都好</p>')*/
-		    			serventList.push('</a>')
-	    			serventList.push('</li>')
-		    	}
-		    	var serventList = serventList.join('')
-		    	if (clear) {
-		    		$('#getServantList').empty();
-		    		var scroll = mui('#pullrefresh').scroll(); 
-		    		if (scroll.y!='0') {
-		    			mui('#pullrefresh').pullRefresh().scrollTo(0,0,1000)
-		    			console.log(scroll.y);
-		    			//mui('#pullrefresh').pullRefresh().disablePullupToRefresh();
-		    			//mui('#pullrefresh').pullRefresh().enablePullupToRefresh();
-		    		};
-		    	};
-		    	$('#getServantList').append(serventList)
-				mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > data.data.totalPages));
+									serventList.push('</div>')
+			    				serventList.push('</div>')
+			    				if (data.data.servantList[i].sysComment) {
+			    					serventList.push('<p class="mui-ellipsis">'+data.data.servantList[i].sysComment+'</p>')
+			    				};
+			    				/*serventList.push('<p class="mui-ellipsis">小元评价：改服务员态度好，服务号，做饭好，什么都好</p>')*/
+			    			serventList.push('</a>')
+		    			serventList.push('</li>')
+			    	}
+		    		var serventList = serventList.join('')
+		    		
+			    	$('#getServantList').append(serventList)
+					mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > data.data.totalPages));
+	    		}else{
+	    			$('.no_tips').show();
+	    			getServantList()
+	    		}
 	    	};
 	    },
 	    error: function(xhr, textStatus, errorThrown) {
