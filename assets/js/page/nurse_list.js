@@ -436,6 +436,10 @@ $('#txt').on('tap',function(){
 	window.location.href='MaternityMatron.html'
 })
 */
+$('.fwsc').on('tap',function(){
+	$('.fwsc').removeClass('onselect')
+	$(this).addClass('onselect')
+})
 var scroll = mui('#pullrefresh').scroll(); 
 document.getElementById('pullrefresh').addEventListener('scroll', function (e ) { 
 	var title = $('.choosein_btn').html();
