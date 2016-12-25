@@ -28,7 +28,7 @@ $('.old_tag').on('tap', function(event) {
  		{value:'202',text:'老人半自理'},
  		{value:'203',text:'老人不自理'},
 	]);
-	old_tag.pickers[0].setSelectedIndex(1, 10);
+	old_tag.pickers[0].setSelectedIndex(1, 1000);
 	old_tag.show(function(items) {
 		_this.html(items[0].text);
 		_this.attr('tagID',items[0].value);
@@ -51,7 +51,7 @@ $('.child_tag').on('tap', function(event) {
  		{value:'102',text:'小孩1到3岁'},
  		{value:'103',text:'小孩大于1岁'},
 	]);
-	child_tag.pickers[0].setSelectedIndex(1, 10);
+	child_tag.pickers[0].setSelectedIndex(1, 1000);
 	child_tag.show(function(items) {
 		_this.html(items[0].text);
 		_this.attr('tagID',items[0].value);
@@ -437,8 +437,9 @@ $('#txt').on('tap',function(){
 })
 */
 $('.fwsc').on('tap',function(){
-	$('.fwsc').removeClass('onselect')
-	$(this).addClass('onselect')
+	//$('.fwsc').removeClass('onselect')
+	$(this).toggleClass('onselect')
+	$(this).siblings().removeClass('onselect')
 })
 var scroll = mui('#pullrefresh').scroll(); 
 document.getElementById('pullrefresh').addEventListener('scroll', function (e ) { 
