@@ -360,7 +360,7 @@ function getServantList(dataList,clear){
 									serventList.push('</div>')
 									serventList.push('<div class="mui-row">')
 												if(data.data.servantList[i].status==1) {
-													serventList.push('<div class="ckxz">所属机构：'+data.data.servantList[i].branchName+'</div>')
+													serventList.push('<div class="ckxz">合作伙伴：'+data.data.servantList[i].branchName+'</div>')
 													serventList.push('<div class="selfEval">自我评价：'+data.data.servantList[i].selfEval+'</div>')
 												}else{
 													if (data.data.servantList[i].price){

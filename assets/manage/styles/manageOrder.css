@@ -1,0 +1,75 @@
+.mui-card-header{font-size: 14px;}
+.pay{color: #fc5b3e;position: absolute !important;right: 0;padding: 0 20px;}
+.getOrderDetail{color: #333;float: right;}
+.choose {
+	background-color: #fff;
+	padding: 10px 15px;
+}
+
+.choose .mui-btn {
+	float: left;
+	width: auto;
+	width: 20%;
+	padding: 5px 2.5%;
+	margin: 7px 15px 0 0;
+	background-color: #f0f2f5;
+	border: 1px solid #f0f2f5;
+	border-radius: 5px;
+	font-size: 13px;
+}
+
+.choose .mui-btn:active {
+	background-color: #fff;
+	color: #fc5b3e;
+}
+
+.choose .mui-btn:last-child {
+	margin-right: 0
+}
+.choose .choosein_btn {
+	color: #fc5b3e;
+	background-color: #fff;
+	border: 1px solid #fc5b3e;
+}
+
+.mui-card-header p{
+	margin-bottom: 0
+}
+.mui-card-content{
+	padding: 5px
+}
+#pullrefresh {
+    top: 108px;
+    height: 100%;
+    padding-bottom: 160px;
+}
+.mui-table-view{
+	margin-top: 0;
+	padding-top: 10px;
+}
+.mui-card-content-inner{
+	padding: 5px 10px;
+}
+.mui-card{
+	box-shadow: none;
+	border:1px solid #c8c7cc;
+	margin: 0 10px 10px 10px;
+	border-radius: 5px;
+}
+.mui-scroll-wrapper, .mui-scroll{
+	background-color: #fff;
+}
+.tips{
+	position: absolute;
+	z-index: 999999;
+	top: 104px;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background-color: #fff;
+	text-align: center;
+	display: none
+}
+.tips .mui-spinner{width: 24px;height: 24px;margin-top: 50%}
+.mui-card-footer{    display: inherit;}
