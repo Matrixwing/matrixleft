@@ -142,6 +142,7 @@ module.exports = {
     var limit =req.param('limit',5);
     var opts = {
       adminID : req.session.userID,
+      userID:'',
       status : req.param('status',100),//完成交易：0 等待交易：1 取消交易：2  全部：100
       limit  : limit,
       start  : (req.param('start',1)-1)*limit,
@@ -160,6 +161,8 @@ module.exports = {
       if(admin=='')  return res.send('{"msgNo":"9999","msgInfo":"想要处理订单？快加入我们，成为微元汇的小伙伴吧！"}');
       opts.branchID=admin[0].id;
       order.getOrderList(opts,function(err,result){
+        //console.log(err);
+        //console.log(result);
         if (err) return res.send('{"msgNo":"9999","msgInfo":"请您稍后再试"}');
         if (result.orderList=='') return res.send('{"msgNo":"4000","msgInfo":"似乎没有您能处理的订单"}');
         var str = JSON.stringify(result);

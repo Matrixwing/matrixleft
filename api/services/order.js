@@ -11,67 +11,67 @@ module.exports = {
 
   //下单
   order : function(opts,cb){
-    var now = new Date(); //现在时间
-    var expire=new Date(now.getTime()+10*24*60*60*1000); //过期时间
-    var newOrder = {
-      userID:opts.userID,
-      orderID:dateformat(now,'yyyymmddHHMMss')+Math.random().toString().substr(2, 4),
-      servantID:opts.servantID,
-      createTime:dateformat(now,'isoDateTime'),
-      validTime:dateformat(expire,'isoDateTime'),
-      remark : JSON.stringify({
-        title:opts.title,
-        apptTime:opts.apptTime,
-        apptPlace:opts.apptPlace,
-        expectSalary:opts.expectSalary,
-        tags:opts.tags
-      }),
-    }
-    Order.create(newOrder).exec(function(err,order){
-      if(err) return cb(err)
-      var result={
-        orderID:order.orderID
-      };
-      //想雇主，服务员，管理员发微信消息
-      async.parallel([
-        function(next){
-          User.find({userID:order.userID}).exec(function(err,userInfo){
-            if(err) return next(err);
-            if(userInfo == '') return next('用户为空');
-            userInfo[0].genderName='';
-            if(userInfo[0].gender==1) userInfo[0].genderName='先生';
-            else if(userInfo[0].gender==1) userInfo[0].genderName='女士'
-            return next(null,userInfo[0]);
-          })
-        },
-        function(next) {
-          User.find({userID: order.servantID, role: 2}).exec(function (err, servantInfo) {
-            if (err) return next(err);
-            if (servantInfo == '') return next('用户为空');
-            //console.log(servantInfo[0].phone);
-            if(servantInfo[0].phone) servantInfo[0].phone='电话'+servantInfo[0].phone;
-            else servantInfo[0].phone='';
-            servantInfo[0].genderName='';
-            if(servantInfo[0].gender==1) servantInfo[0].genderName='先生';
-            else if(servantInfo[0].gender==1) servantInfo[0].genderName='女士'
-            return next(null,servantInfo[0]);
-          })
-        }
-      ],function(err,results){
-        newOrder.apptTime= opts.apptTime,'yyyy-mm-dd HH:MM:ss';
-        newOrder.apptPlace=opts.apptPlace;
-        newOrder.createTime=dateformat(newOrder.createTime,'yyyy-mm-dd HH:MM:ss');
-        newOrder.validTime=dateformat(newOrder.validTime,'yyyy-mm-dd HH:MM:ss');
-        msg=[newOrder,results[0],results[1]];
-        WxMessage.sendWxMsgAfterOrderDone(msg);
-      })
-      User.find({userID:order.servantID}).exec(function(err,userInfo){
+    User.find({userID:opts.servantID}).exec(function(err,userInfo){
+     // if(userInfo[0])
+      var now = new Date(); //现在时间
+      var expire=new Date(now.getTime()+356*24*60*60*1000); //过期时间
+      var newOrder = {
+        userID:opts.userID,
+        orderID:dateformat(now,'yyyymmddHHMMss')+Math.random().toString().substr(2, 4),
+        servantID:opts.servantID,
+        createTime:dateformat(now,'isoDateTime'),
+        validTime:dateformat(expire,'isoDateTime'),
+        remark : JSON.stringify({
+          title:opts.title,
+          apptTime:opts.apptTime,
+          apptPlace:opts.apptPlace,
+          expectSalary:opts.expectSalary,
+          tags:opts.tags
+        }),
+      }
+      Order.create(newOrder).exec(function(err,order){
+        if(err) return cb(err)
+        var result={
+          orderID:order.orderID
+        };
+        //想雇主，服务员，管理员发微信消息
+        async.parallel([
+          function(next){
+            User.find({userID:order.userID}).exec(function(err,userInfo){
+              if(err) return next(err);
+              if(userInfo == '') return next('用户为空');
+              userInfo[0].genderName='';
+              if(userInfo[0].gender==1) userInfo[0].genderName='先生';
+              else if(userInfo[0].gender==1) userInfo[0].genderName='女士'
+              return next(null,userInfo[0]);
+            })
+          },
+          function(next) {
+            User.find({userID: order.servantID, role: 2}).exec(function (err, servantInfo) {
+              if (err) return next(err);
+              if (servantInfo == '') return next('用户为空');
+              //console.log(servantInfo[0].phone);
+              if(servantInfo[0].phone) servantInfo[0].phone='电话'+servantInfo[0].phone;
+              else servantInfo[0].phone='';
+              servantInfo[0].genderName='';
+              if(servantInfo[0].gender==1) servantInfo[0].genderName='先生';
+              else if(servantInfo[0].gender==1) servantInfo[0].genderName='女士'
+              return next(null,servantInfo[0]);
+            })
+          }
+        ],function(err,results){
+          newOrder.apptTime= opts.apptTime,'yyyy-mm-dd HH:MM:ss';
+          newOrder.apptPlace=opts.apptPlace;
+          newOrder.createTime=dateformat(newOrder.createTime,'yyyy-mm-dd HH:MM:ss');
+          newOrder.validTime=dateformat(newOrder.validTime,'yyyy-mm-dd HH:MM:ss');
+          msg=[newOrder,results[0],results[1]];
+          WxMessage.sendWxMsgAfterOrderDone(msg);
+        })
+          if(err) return cb(err);
+          result.servantStatus=userInfo[0].status;
 
-        if(err) return cb(err);
-        result.servantStatus=userInfo[0].status;
-
-        return cb(null,result)
-      })
+          return cb(null,result)
+        })
 
     })
   },
@@ -89,7 +89,9 @@ module.exports = {
     if(opts.status==2){statusString=' and od.status ='+opts.status };
     if(opts.userID!=''){userString=' od.`userID` ='+opts.userID };
     if(opts.branchID!=''){branchString=' od.`branchID` ='+opts.branchID};
-    var queryString = util.format('SELECT od.`orderID`,(SELECT  userName FROM `user` u WHERE u.userID = od.servantID) AS servantName, (SELECT `status` FROM `user` u WHERE u.userID = od.servantID) AS servantStatus,IFNULL((SELECT  `d`.`define`  ' +
+    var queryString = util.format('SELECT od.`orderID`,ifnull((SELECT  userName FROM `user` u WHERE u.userID = od.servantID),"") AS servantName,' +
+      'ifnull((SELECT  userName FROM `user` u WHERE u.userID = od.userID),"") AS userName,ifnull((SELECT  phone FROM `user` u WHERE u.userID = od.userID),"") AS userPhone,' +
+      ' ifnull((SELECT `status` FROM `user` u WHERE u.userID = od.servantID),"") AS servantStatus,IFNULL((SELECT  `d`.`define`  ' +
       'FROM `Dict` `d` WHERE (( `d`.`columnName` = "order.stauts") AND (`d`.`value` = `od`.`status`) )),"") AS `status`,od.createTime,remark,od.`validTime` ' +
       ' FROM`order` od  WHERE  %s %s %s %s ORDER BY validTime DESC limit %s,%s;',userString,branchString,statusString,exprieString,opts.start,opts.limit);
     var countString = util.format('SELECT count(orderID) as totalRow '+

@@ -45,11 +45,11 @@ module.exports = {
    * @param cb 回调函数 cb(err,result)  err为错误信息  result为拉取的用户信息
    */
   validateRegisterByOpenID : function (opts,cb){
-    console.log('opts',opts);
+
     var queryObj ={
       openid:opts.openid
     };
-    console.log(queryObj);
+
     User.find(queryObj).exec(function(err,result){
 
       if (err) return cb(err);
