@@ -23,6 +23,9 @@ module.exports = {
     },
     condition:{
       type:'datatime'
+    },
+    validTime:{
+      type:'integer'
     }
   }
 };

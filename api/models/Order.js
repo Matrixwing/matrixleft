@@ -28,7 +28,7 @@ module.exports = {
       type:'integer'
     },
     branchID:{
-      type:'string'
+      type:'integer'
     },
     createTime:{
       type: 'datetime',

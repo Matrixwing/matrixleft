@@ -13,9 +13,11 @@ module.exports = {
   order : function(opts,cb){
     User.find({userID:opts.servantID}).exec(function(err,userInfo){
       var branchID = null;
-      if(userInfo[0].stauts==2){
-        branchID=userInfo[0].branchID;
+      //console.log('userInfo',userInfo);
+      if(userInfo[0].status==1){
+        branchID=userInfo[0].branch;
       }
+      //console.log('branchID',branchID);
       var now = new Date(); //现在时间
       var expire=new Date(now.getTime()+356*24*60*60*1000); //过期时间
       var newOrder = {
@@ -166,7 +168,7 @@ module.exports = {
   },
 
   adminConfirmOrder :function(opts,cb){
-    //todo 只能修改一次//
+    //todo 只能修改一次
     Order.find({orderID:opts.orderID,branchID:opts.branchID}).exec(function(err,order){
       if(err) return cb(err);
       if(order=='') return cb(null,order);
@@ -176,6 +178,15 @@ module.exports = {
       Order.update({orderID:opts.orderID,branchID:opts.branchID},{status:opts.status}).exec(function(err,reslut){
         if(err) return cb(err);
         //console.log(reslut);
+        if(reslut!=''){
+          if(opts.status==0){//成单之后发红包
+            var red ={
+              userID:order[0].userID,
+              reds:[5]
+            }
+            //Reds.sendRedsToUser(red);
+          }
+        }
         return cb(null,reslut);
       })
     })

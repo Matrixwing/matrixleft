@@ -1,7 +1,9 @@
 /**
  * Created by Administrator on 2016/12/23.
  */
+var dateformat = require('dateformat');
 var util = require('util');
+var async = require('async');
 module.exports = {
 
   getRedList : function (opts,cb){
@@ -46,10 +48,24 @@ module.exports = {
 
   },
 
-  //给
+  //给用户发红包
   sendRedsToUser : function(opts,cb){
-    var data ={
-
+    var now = new Date(); //现在时间
+    for(var i=0;i<opts.reds.length;i++){
+      Red.find({id:opts.reds[i]}).exec(function(err,red){
+        if(err) return cb(err);
+        if(red=='') return cb('没有这个红包');
+        var expire=new Date(now.getTime()+red[0].validTime*24*60*60*1000); //过期时间
+        var newRed ={
+          userID:opts.userID,
+          redID:red[0].id,
+          expireAt:dateformat(expire,'yyyy-mm-dd'),
+        }
+        RedUserRe.create(newRed).exec(function(err,rur){
+          if(err) return cb(err);
+        })
+      })
+      return cb(null,'');
     }
   }
 }

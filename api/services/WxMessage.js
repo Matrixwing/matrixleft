@@ -57,7 +57,7 @@ module.exports = {
         var msg = {
           apptTime:opts[0].apptTime,
           msg:invMsg,
-          remark:'诸君请及时处理'
+          remark:'点击即可开始处理'
         }
         WxMessage.sendPayMsgToAdmin(msg,function(err,result){
           if(err) return next(err)
@@ -177,6 +177,7 @@ module.exports = {
         var post_data = JSON.stringify({
           touser: weixinConfig.adminOpenid[admin].openid,
           template_id: weixinConfig.newOrderTemp,
+          url:weixinConfig.url+'manage/manageOrder.html',
           data: {
             first: {
               value: "新的订单",
