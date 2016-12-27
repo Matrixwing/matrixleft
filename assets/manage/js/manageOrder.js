@@ -37,14 +37,14 @@ function getOrderList (status,clear) {
 		var data ={
 	    	'status':status,
 	    	'start':count,
-	    	'limit':2
+	    	'limit':8
 	    }
 	    od_s=status;
 	}else{
 		var data ={
 			'status':od_s,
 	    	'start':count,
-	    	'limit':2
+	    	'limit':8
 	    }
 	};
 	
@@ -63,7 +63,11 @@ function getOrderList (status,clear) {
 	    		if (list) {
 	    			var html=[];
 	    			for(var i=0;i<list.length;i++){
-	    				html.push('<div class="mui-card lia">')
+	    				if (list[i].status==1 ||list[i].status==10 ) {
+	    					html.push('<div class="mui-card lia" orderID="'+list[i].orderID+'">')
+	    				}else{
+	    					html.push('<div class="mui-card" orderID="'+list[i].orderID+'">')
+	    				};
 							html.push('<div class="mui-card-content">')
 								html.push('<div class="mui-card-content-inner">')
 									html.push('<span>雇主：'+list[i].userName+'</span>')
@@ -104,6 +108,8 @@ mui.ready(function() {
 	mui('#pullrefresh').pullRefresh().pullupLoading();
 });
 $('#getOrderList').on('tap','.lia',function(){
+	var orderID= $(this).attr('orderid');
+	$('.ylx').attr('orderid',orderID)
 	if ($('.choosein_btn').index()==0) {
 		mui('#sheet1').popover('toggle');
 	}else{
@@ -111,5 +117,30 @@ $('#getOrderList').on('tap','.lia',function(){
 	};
 })
 $('.ylx').on('tap',function(){
-	mui('#sheet1').popover('toggle');
+	var orderID= $(this).attr('orderid');
+	var status= $(this).attr('status');
+	var  type= $(this).attr('type');
+	confirmOrder(orderID,status,type)
 })
+function confirmOrder(orderID,status,type){
+	$.ajax({
+	    type: 'get',
+	    url: '../admin/confirmOrder',
+	    data:{"orderID":orderID,"status":status},
+	    dataType: 'json',
+	    success: function(data) {
+    		
+	    	if (data.msgNo==0000) {
+	    		var status = $('.choosein_btn').attr('status');
+				getOrderList(status,1)
+	    	}	
+	    	mui('#sheet'+type).popover('toggle');
+	    },
+	    error: function(xhr, textStatus, errorThrown) {
+	    	if (xhr.status == 401) {
+	    		var href =eval('(' + xhr.responseText + ')');
+	    		window.location.href=href.loginPage;
+	    	}
+	    }
+	});
+}
