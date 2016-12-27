@@ -45,6 +45,8 @@ module.exports = {
     })
 
   },
+
+  //给
   sendRedsToUser : function(opts,cb){
     var data ={
 

@@ -90,13 +90,13 @@ module.exports = {
     //console.log(opts.userID);
     if(opts.status==0){statusString=' and od.status ='+opts.status };
     if(opts.status==1){exprieString = 'AND NOW() < od.`validTime` ';statusString=' and od.status ='+opts.status };
+    if(opts.status==10){exprieString = 'AND NOW() < od.`validTime` ';statusString=' and od.status ='+opts.status };
     if(opts.status==2){statusString=' and od.status ='+opts.status };
     if(opts.userID!=''){userString=' od.`userID` ='+opts.userID };
     if(opts.branchID!=''){branchString=' od.`branchID` ='+opts.branchID};
     var queryString = util.format('SELECT od.`orderID`,ifnull((SELECT  userName FROM `user` u WHERE u.userID = od.servantID),"") AS servantName,' +
       'ifnull((SELECT  userName FROM `user` u WHERE u.userID = od.userID),"") AS userName,ifnull((SELECT  phone FROM `user` u WHERE u.userID = od.userID),"") AS userPhone,' +
-      ' ifnull((SELECT `status` FROM `user` u WHERE u.userID = od.servantID),"") AS servantStatus,IFNULL((SELECT  `d`.`define`  ' +
-      'FROM `Dict` `d` WHERE (( `d`.`columnName` = "order.stauts") AND (`d`.`value` = `od`.`status`) )),"") AS `status`,od.createTime,remark,od.`validTime` ' +
+      ' ifnull((SELECT `status` FROM `user` u WHERE u.userID = od.servantID),"") AS servantStatus, od.`status`,od.createTime,remark,od.`validTime` ' +
       ' FROM`order` od  WHERE  %s %s %s %s ORDER BY validTime DESC limit %s,%s;',userString,branchString,statusString,exprieString,opts.start,opts.limit);
     var countString = util.format('SELECT count(orderID) as totalRow '+
       ' FROM`order` od  WHERE  %s %s %s %s  ORDER BY validTime DESC',userString,branchString,statusString,exprieString);
@@ -167,11 +167,19 @@ module.exports = {
 
   adminConfirmOrder :function(opts,cb){
     //todo 只能修改一次//
-    Order.update({orderID:opts.orderID,branchID:opts.branchID},{status:opts.status}).exec(function(err,reslut){
+    Order.find({orderID:opts.orderID,branchID:opts.branchID}).exec(function(err,order){
       if(err) return cb(err);
-      //console.log(reslut);
-      return cb(null,reslut);
+      if(order=='') return cb(null,order);
+      if(order[0].status==1) opts.status=10;
+      if(order[0].status==10&&!(opts.status==2||opts.status==0)) return cb(null,[]);//前端发的参数不为 2 或者 0
+      if(order[0].status==0||order[0].status==2)return cb(null,[])
+      Order.update({orderID:opts.orderID,branchID:opts.branchID},{status:opts.status}).exec(function(err,reslut){
+        if(err) return cb(err);
+        //console.log(reslut);
+        return cb(null,reslut);
+      })
     })
+
   },
 
   //服务员响应邀请

@@ -176,7 +176,7 @@ module.exports = {
         //console.log(err);
         //console.log(result);
         if (err) return res.send('{"msgNo":"9999","msgInfo":"请您稍后再试"}');
-        if (result=='') return res.send('{"msgNo":"9999","msgInfo":"非常抱歉，这个订单是属于其他小伙伴的"}');
+        if (result=='') return res.send('{"msgNo":"9999","msgInfo":"非常抱歉，这个订单已经处理过了"}');
         var str = JSON.stringify(result[0]);
         result = util.format('{"msgNo":"0000","msgInfo":"修改成功"}');
         res.send(result);
