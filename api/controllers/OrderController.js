@@ -147,18 +147,9 @@ module.exports = {
       limit  : limit,
       start  : (req.param('start',1)-1)*limit,
     };
-
-    //var opts = {
-    //  adminID : req.session.userID,
-    //  userID:'',
-    //  status :  req.param('status',100),//完成交易：0 等待交易：1 取消交易：2  全部：100
-    //  limit  :  5,
-    //  start  :  0,
-    //};
-    //console.log(opts);
     Branch.find({userID:opts.adminID}).exec(function(err,admin){
       if(err) return res.send('{"msgNo":"9999","msgInfo":"请您稍后再试"}');
-      if(admin=='')  return res.send('{"msgNo":"9999","msgInfo":"想要处理订单？快加入我们，成为微元汇的小伙伴吧！"}');
+      if(admin=='')  return res.send('{"msgNo":"9999","msgInfo":"不能处理订单？快加入我们，成为微元汇的小伙伴吧！"}');
       opts.branchID=admin[0].id;
       order.getOrderList(opts,function(err,result){
         //console.log(err);
@@ -169,6 +160,27 @@ module.exports = {
         result = util.format('{"msgNo":"0000","msgInfo":"查询成功","data":%s}', str);
         res.send(result);
       });
+    })
+  },
+  adminConfirmOrder : function(req,res){
+    var opts = {
+      adminID : req.session.userID,
+      orderID : req.param('orderID',0),
+      status  : req.param('status',0)
+    }
+    Branch.find({userID:opts.adminID}).exec(function(err,admin) {
+      if(err) return res.send('{"msgNo":"9999","msgInfo":"请您稍后再试"}');
+      if(admin=='')  return res.send('{"msgNo":"9999","msgInfo":"不能处理订单？快加入我们，成为微元汇的小伙伴吧！"}');
+      opts.branchID=admin[0].id;
+      order.adminConfirmOrder(opts,function(err,result){
+        //console.log(err);
+        //console.log(result);
+        if (err) return res.send('{"msgNo":"9999","msgInfo":"请您稍后再试"}');
+        if (result=='') return res.send('{"msgNo":"9999","msgInfo":"非常抱歉，这个订单是属于其他小伙伴的"}');
+        var str = JSON.stringify(result[0]);
+        result = util.format('{"msgNo":"0000","msgInfo":"修改成功"}');
+        res.send(result);
+      })
     })
   }
 };

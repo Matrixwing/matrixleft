@@ -12,7 +12,10 @@ module.exports = {
   //下单
   order : function(opts,cb){
     User.find({userID:opts.servantID}).exec(function(err,userInfo){
-     // if(userInfo[0])
+      var branchID = null;
+      if(userInfo[0].stauts==2){
+        branchID=userInfo[0].branchID;
+      }
       var now = new Date(); //现在时间
       var expire=new Date(now.getTime()+356*24*60*60*1000); //过期时间
       var newOrder = {
@@ -21,6 +24,7 @@ module.exports = {
         servantID:opts.servantID,
         createTime:dateformat(now,'isoDateTime'),
         validTime:dateformat(expire,'isoDateTime'),
+        branchID:branchID,
         remark : JSON.stringify({
           title:opts.title,
           apptTime:opts.apptTime,
@@ -161,15 +165,23 @@ module.exports = {
     })
   },
 
+  adminConfirmOrder :function(opts,cb){
+    //todo 只能修改一次//
+    Order.update({orderID:opts.orderID,branchID:opts.branchID},{status:opts.status}).exec(function(err,reslut){
+      if(err) return cb(err);
+      //console.log(reslut);
+      return cb(null,reslut);
+    })
+  },
 
   //服务员响应邀请
   answerInvitation : function(opt,cb){
 
   },
 
+
   //用户响应邀请
   UserAnswerAppt : function(opt,cb){
-
   },
 
   buyIns : function (opts,cb){

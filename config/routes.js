@@ -69,6 +69,7 @@ module.exports.routes = {
   "get /life/getResult" :{controller:"TagController",action:"getResult"},
   "post /red/getRedList" : {controller:"RedController",action:"getRedList"},
   "post /admin/getOrderList" : {controller : "OrderController", action : "adminGetOrderList"}  ,
+  "get /admin/confirmOrder" : {controller : "OrderController", action : "adminConfirmOrder"}  ,
   //"post /getTotalFee" : {controller : "PayController", action : "jsApiAccess"}  ,
    /***************************************************************************
   *                                                                          *
