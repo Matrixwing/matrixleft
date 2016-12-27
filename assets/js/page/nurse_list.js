@@ -308,15 +308,16 @@ $('#tag_sure').on('tap',function(){
 })
 var count = 1;
 var d_e='';
+var o_dataList='';
 function getServantList(dataList,clear){
-	if (!dataList) {
-		dataList = '';
+	if (dataList) {
+		o_dataList =dataList;
 	};
 	if (clear) {
 		count=1;
     	mui('#pullrefresh').pullRefresh().refresh(true);
 	}
-	var dataList = JSON.stringify(dataList)
+	var dataList = JSON.stringify(o_dataList)
 	$.ajax({
 	    type: 'post',
 	    url: '/getServantList',

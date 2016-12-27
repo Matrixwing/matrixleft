@@ -21,14 +21,15 @@
 		</header>
 		<div class="mui-content">
 			<div class="choose mui-row">
-				<button type="button" class="mui-btn mui-pull-left choosein_btn" status="10">未处理</button>
-				<button type="button" class="mui-btn mui-pull-left" status="1">等待交易</button>
+				<button type="button" class="mui-btn mui-pull-left choosein_btn" status="1">未处理</button>
+				<button type="button" class="mui-btn mui-pull-left" status="10">等待交易</button>
 				<button type="button" class="mui-btn mui-pull-left" status="0">已成单</button> 
 				<button type="button" class="mui-btn mui-pull-left" status="2">未成单</button>
 			</div>
 			<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
 				<div class="mui-scroll">
 					<!--数据列表-->
+					<div class="noorder">暂无订单</div>
 					<ul class="mui-table-view mui-table-view-chevron" id="getOrderList">
 						<!-- <div class="mui-card lia">
 							<div class="mui-card-content">
@@ -51,19 +52,29 @@
 				</div>
 			</div>
 			<div id="sheet1" class="mui-popover mui-popover-bottom mui-popover-action ">
-			    <!-- 可选择菜单 -->
 			    <ul class="mui-table-view">
 			      <li class="mui-table-view-cell">
-			        <a href="#">菜单1</a>
-			      </li>
-			      <li class="mui-table-view-cell">
-			        <a href="#">菜单2</a>
+			        <a href="###" class="ylx">已电话联系</a>
 			      </li>
 			    </ul>
-			    <!-- 取消菜单 -->
 			    <ul class="mui-table-view">
 			      <li class="mui-table-view-cell">
 			        <a href="#sheet1"><b>取消</b></a>
+			      </li>
+			    </ul>
+			</div>
+			<div id="sheet2" class="mui-popover mui-popover-bottom mui-popover-action ">
+			    <ul class="mui-table-view">
+			      <li class="mui-table-view-cell">
+			        <a href="#">已成单</a>
+			      </li>
+			       <li class="mui-table-view-cell">
+			        <a href="#">未成单</a>
+			      </li>
+			    </ul>
+			    <ul class="mui-table-view">
+			      <li class="mui-table-view-cell">
+			        <a href="#sheet2"><b>取消</b></a>
 			      </li>
 			    </ul>
 			</div>

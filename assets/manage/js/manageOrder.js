@@ -24,19 +24,27 @@ $('.choose').on('tap','button',function(){
 	getOrderList()
 })*/
 var count = 1;
+var od_s=1;
 function getOrderList (status,clear) {
-	$('.tips').show()
+	$('.noorder').hide()
+	if (clear) {
+		count=1;
+		$('.tips').show()
+		mui('#pullrefresh').pullRefresh().refresh(true);
+	};
+	
 	if (status!= undefined) {
 		var data ={
 	    	'status':status,
 	    	'start':count,
-	    	'limit':8
+	    	'limit':2
 	    }
+	    od_s=status;
 	}else{
 		var data ={
-			'status':10,
+			'status':od_s,
 	    	'start':count,
-	    	'limit':8
+	    	'limit':2
 	    }
 	};
 	
@@ -46,7 +54,7 @@ function getOrderList (status,clear) {
 	    data:data,
 	    dataType: 'json',
 	    success: function(data) {
-	    	$('.tips').hide()
+    		$('.tips').hide()
     		if (clear) {
     			$('#getOrderList').empty();
     		};
@@ -58,17 +66,17 @@ function getOrderList (status,clear) {
 	    				html.push('<div class="mui-card lia">')
 							html.push('<div class="mui-card-content">')
 								html.push('<div class="mui-card-content-inner">')
-									html.push('<span>雇主：汪仕彬</span>')
-									html.push('<span>手机：18888888888</span>')
+									html.push('<span>雇主：'+list[i].userName+'</span>')
+									html.push('<span>手机：'+list[i].userPhone+'</span>')
 								html.push('</div>')
 								html.push('<div class="mui-card-content-inner">')
-									html.push('<span>雇主服务员：汪仕彬</span>')
+									html.push('<span>服务员：'+list[i].servantName+'</span>')
 								html.push('</div>')
 								html.push('<div class="mui-card-content-inner">')
-									html.push('<span>预约时间：2016年12月27日11:25:17</span>')
+									html.push('<span>预约时间：'+list[i].apptTime+'</span>')
 								html.push('</div>')
 								html.push('<div class="mui-card-content-inner">')
-									html.push('<span>订单编号：1010299282</span>')
+									html.push('<span>订单编号：'+list[i].orderID+'</span>')
 								html.push('</div>')
 							html.push('</div>')
 						html.push('</div>')
@@ -79,8 +87,9 @@ function getOrderList (status,clear) {
 	    		}else{
 	    			mui.toast(data.msgInfo);
 	    		};
-	    	}else{
-
+	    	}else if (data.msgNo==4000){
+	    		$('.noorder').show();
+	    		mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
 	    	};
 	    },
 	    error: function(xhr, textStatus, errorThrown) {
@@ -95,5 +104,12 @@ mui.ready(function() {
 	mui('#pullrefresh').pullRefresh().pullupLoading();
 });
 $('#getOrderList').on('tap','.lia',function(){
+	if ($('.choosein_btn').index()==0) {
+		mui('#sheet1').popover('toggle');
+	}else{
+		mui('#sheet2').popover('toggle');
+	};
+})
+$('.ylx').on('tap',function(){
 	mui('#sheet1').popover('toggle');
 })

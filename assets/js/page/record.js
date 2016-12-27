@@ -24,6 +24,7 @@ $('.choose').on('tap','button',function(){
 	getOrderList()
 })*/
 var count = 1;
+var od_s=1;
 function getOrderList (status,clear) {
 	$('.tips').show()
 	if (clear) {
@@ -36,9 +37,11 @@ function getOrderList (status,clear) {
 	    	'start':count,
 	    	'limit':8
 	    }
+	    
+	    od_s=status;
 	}else{
 		var data ={
-			'status':1,
+			'status':od_s,
 	    	'start':count,
 	    	'limit':8
 	    }

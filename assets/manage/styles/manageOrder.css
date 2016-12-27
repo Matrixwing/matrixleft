@@ -73,3 +73,7 @@
 }
 .tips .mui-spinner{width: 24px;height: 24px;margin-top: 50%}
 .mui-card-footer{    display: inherit;}
+.noorder{text-align: center;display: none;font-size: 14px;padding: 20px;}
+.mui-popover .mui-table-view{
+	padding: 0
+}
