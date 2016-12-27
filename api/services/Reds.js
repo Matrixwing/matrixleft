@@ -44,5 +44,10 @@ module.exports = {
       cb(null,newResults);
     })
 
+  },
+  sendRedsToUser : function(opts,cb){
+    var data ={
+
+    }
   }
 }

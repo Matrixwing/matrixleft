@@ -1,13 +1,13 @@
 /**
- * InsOrder.js
+ * Branch.js
  *
- * @description :: 保险
+ * @description ::机构/门店
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
 
 module.exports = {
   connection: 'localMysqlServer',
-  table: 'insorder',
+  table: 'branch',
   autoCreatedAt: false,
   autoUpdatedAt: false,
   autoid: false,
@@ -15,28 +15,20 @@ module.exports = {
     id : {
       type: 'integer',
     },
-    insureID:{
+    name:{
       type: 'string',
     },
-    orderID:{
+    address:{
       type: 'string',
+      size:512
     },
-    insSpecID:{
+    userID: {
       type: 'integer',
-    },
-    beneficiaryID:{
-      type: 'integer',
-    },
-    status:{
-      type: 'integer',
-    },
-    desc:{
-      type: 'string',
     },
     remark : {
       type : 'string',
+      size:512
     }
   },
-
-
 };
+

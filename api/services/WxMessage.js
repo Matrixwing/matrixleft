@@ -32,17 +32,25 @@ module.exports = {
           return next(null,result);
         });
       },
-      function(next){//发支付信息
+      function(next){//向用户发支付信息或者成功预约通知
         var msg = {
           openid : opts[1].openid,
           orderID:opts[0].orderID,
           createTime:opts[0].createTime,
-          validTime:opts[0].validTime
+          validTime:opts[0].validTime,
+          servantStatus:opts[2].status
         }
-        WxMessage.sendPayMsgToUser(msg,function(err,result){
-          if(err) return next(err)
-          return next(null,result);
-        });
+        if(msg.servantStatus==2){
+          WxMessage.sendPayMsgToUser(msg,function(err,result){
+            if(err) return next(err)
+            return next(null,result);
+          });
+        }else{
+          WxMessage.sendApptMsgToUser(msg,function(err,result){
+            if(err) return next(err)
+            return next(null,result);
+          })
+        }
       },
       function(next){//发管理员通知
         var invMsg = util.format('雇主%s%s，电话%s 邀请服务员%s%s，%s于%s在%s面试',opts[1].userName,opts[1].genderName,opts[1].phone,opts[2].userName,opts[2].genderName,opts[2].phone,opts[0].apptTime,opts[0].apptPlace);
@@ -60,7 +68,6 @@ module.exports = {
       console.log('----err-----------------',err);
       console.log('-------result-----------',result);
     })
-
   },
 
   //给雇主发支付通知
@@ -115,8 +122,55 @@ module.exports = {
     })
   },
 
+  /**
+   * 下单完成之后
+   * 如果预约的服务员是2b的服务员，那么像用户发送预约成功消息
+   * @api private
+   * @param  {Object} `opts`  需要发送的信息
+   * @param {Function} cb
+   * @return {*}
+   */
+  sendApptMsgToUser : function(opts,cb){
+      WxAccess.validateToken(function(err,token){
+        var postData = JSON.stringify({
+          touser: opts.openid,
+          template_id: weixinConfig.newApptTemp,
+          data: {
+            first: {
+              value: "预约成功!稍后会有工作人员与您联系:D",
+              color: "#173177"
+            },
+            keyword1: {
+              value: opts.orderID,
+              color: "#173177"
+            },
+            keyword2: {
+              value: '等待面试',
+              color: "#173177"
+            },
+            keyword3: {
+              value: '面试时协商',
+              color: "#173177"
+            },
+            //remark: {
+            //  value: opts.remark,
+            //  color: "#173177"
+            //},
+          }
+        });
+
+        request({
+          url: "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=" + token.access_token,
+          method: 'POST',
+          body: postData,
+        }, function (err, response, body) {
+          console.log(body);
+        });
+      })
+  },
+
   //发送消息给管理员，告知管理员订单情况
-  //目前发给whl，ljh，tj，老李四个人这固定的四人，后续需要发给 user.role == 4 即运营人员
+  //目前发给whl，ljh，tj，老李，田野，后续需要发给 user.role == 4 即运营人员
   sendPayMsgToAdmin : function (opts,cb){
     WxAccess.validateToken(function(err,token){
       for(var admin in weixinConfig.adminOpenid) { //目前发给whl，ljh，tj，老李四个人这固定的四人，后续需要发给 user.role == 4 即运营人员
@@ -197,7 +251,8 @@ module.exports = {
       }, function(err, response, body){
         console.log(body);
       });
-
     })
   }
+
+
 }

@@ -81,18 +81,20 @@ module.exports = {
     //todo 过期的等待支付？
     var exprieString = '';
     var statusString = '';
-
+    var userString   = '';
+    var branchString     = ''
+    //console.log(opts.userID);
     if(opts.status==0){statusString=' and od.status ='+opts.status };
     if(opts.status==1){exprieString = 'AND NOW() < od.`validTime` ';statusString=' and od.status ='+opts.status };
     if(opts.status==2){statusString=' and od.status ='+opts.status };
-
+    if(opts.userID!=''){userString=' od.`userID` ='+opts.userID };
+    if(opts.branchID!=''){branchString=' od.`branchID` ='+opts.branchID};
     var queryString = util.format('SELECT od.`orderID`,(SELECT  userName FROM `user` u WHERE u.userID = od.servantID) AS servantName, (SELECT `status` FROM `user` u WHERE u.userID = od.servantID) AS servantStatus,IFNULL((SELECT  `d`.`define`  ' +
       'FROM `Dict` `d` WHERE (( `d`.`columnName` = "order.stauts") AND (`d`.`value` = `od`.`status`) )),"") AS `status`,od.createTime,remark,od.`validTime` ' +
-      ' FROM`order` od  WHERE od.`userID` = %s  %s   %s ORDER BY validTime DESC limit %s,%s;',opts.userID,statusString,exprieString,opts.start,opts.limit);
-
+      ' FROM`order` od  WHERE  %s %s %s %s ORDER BY validTime DESC limit %s,%s;',userString,branchString,statusString,exprieString,opts.start,opts.limit);
     var countString = util.format('SELECT count(orderID) as totalRow '+
-      ' FROM`order` od  WHERE od.`userID` = %s  %s %s  ORDER BY validTime DESC',opts.userID,statusString,exprieString);
-    console.log(queryString);
+      ' FROM`order` od  WHERE  %s %s %s %s  ORDER BY validTime DESC',userString,branchString,statusString,exprieString);
+    //console.log(queryString);
     async.parallel([
       function(next){
         Order.query(queryString,(function(err,orderList){
@@ -106,11 +108,8 @@ module.exports = {
           return next(null,orderList)
         }))
       },
-
     ],function(err,results){
-
       if(err) return cb(err);
-
       var orderList = results[0];
       for ( var x in orderList ){
         orderList[x].apptTime = JSON.parse(orderList[x].remark).apptTime;
@@ -119,15 +118,12 @@ module.exports = {
         orderList[x].validTime = dateformat(orderList[x].validTime,'yyyy-mm-dd HH:MM:ss'),
         delete orderList[x].remark;
       }
-
       var newResults = {
         orderList : orderList,
         totalPages : Math.ceil(results[1][0].totalRow/opts.limit)
       };
-
       cb(null,newResults);
     })
-
   },
 
   //订单详情
@@ -166,6 +162,11 @@ module.exports = {
 
   //服务员响应邀请
   answerInvitation : function(opt,cb){
+
+  },
+
+  //用户响应邀请
+  UserAnswerAppt : function(opt,cb){
 
   },
 

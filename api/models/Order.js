@@ -24,6 +24,12 @@ module.exports = {
     servantID:{
       type: 'integer',
     },
+    type:{
+      type:'integer'
+    },
+    branchID:{
+      type:'string'
+    },
     createTime:{
       type: 'datetime',
     },

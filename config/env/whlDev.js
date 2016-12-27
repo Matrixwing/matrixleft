@@ -22,6 +22,7 @@ module.exports = {
     perPayTemp:'_xuKsTWtEL8w_eg-n2tZtLY-i_VvKJksSlO-RrB98HI',//待支付订单提醒
     interTemp: 'vZCuH9JB73JzWrxXK322Lf5dfGsQrEm8-olG-jM7Hvs',//面试通知
     newOrderTemp:'FQa1YyjBO8WaECPc3DlzZpjjBkNC2_ROPiGq7WV84dU',//新订单通知
+    newApptTemp:'yvlciVi1v5RTzjC2aCztCSJKKp3iAF-LoP3N-EyQkc8',//新预约通知
   },
 
   qiniu:{
