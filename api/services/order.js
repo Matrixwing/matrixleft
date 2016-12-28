@@ -8,7 +8,6 @@ var dateformat = require('dateformat');
 var util = require('util');
 var async = require('async');
 module.exports = {
-
   //下单
   order : function(opts,cb){
     User.find({userID:opts.servantID}).exec(function(err,userInfo){
@@ -91,8 +90,10 @@ module.exports = {
     var branchString     = ''
     //console.log(opts.userID);
     if(opts.status==0){statusString=' and od.status ='+opts.status };
-    if(opts.status==1){exprieString = 'AND NOW() < od.`validTime` ';statusString=' and od.status ='+opts.status };
-    if(opts.status==10){exprieString = 'AND NOW() < od.`validTime` ';statusString=' and od.status ='+opts.status };
+    if(opts.status==1&&opts.branchID!=''){exprieString = 'AND NOW() < od.`validTime` ';statusString=' and od.status ='+opts.status };
+    if(opts.status==10&&opts.branchID!=''){exprieString = 'AND NOW() < od.`validTime` ';statusString=' and od.status ='+opts.status };
+    if(opts.status==1&&opts.userID!=''){exprieString = 'AND NOW() < od.`validTime` ';statusString=' and (od.status =1 or od.status =10 )'};
+    if(opts.status==10&&opts.userID!=''){exprieString = 'AND NOW() < od.`validTime` ';statusString=' and (od.status =1 or od.status =10 )' };
     if(opts.status==2){statusString=' and od.status ='+opts.status };
     if(opts.userID!=''){userString=' od.`userID` ='+opts.userID };
     if(opts.branchID!=''){branchString=' od.`branchID` ='+opts.branchID};
@@ -174,7 +175,7 @@ module.exports = {
       if(order=='') return cb(null,order);
       if(order[0].status==1) opts.status=10;
       if(order[0].status==10&&!(opts.status==2||opts.status==0)) return cb(null,[]);//前端发的参数不为 2 或者 0
-      if(order[0].status==0||order[0].status==2)return cb(null,[])
+      if(order[0].status==0||order[0].status==2) return cb(null,[])
       Order.update({orderID:opts.orderID,branchID:opts.branchID},{status:opts.status}).exec(function(err,reslut){
         if(err) return cb(err);
         //console.log(reslut);
@@ -184,7 +185,9 @@ module.exports = {
               userID:order[0].userID,
               reds:[5]
             }
-            //Reds.sendRedsToUser(red);
+            Reds.sendRedsToUser(red,function(err,result){
+
+            });
           }
         }
         return cb(null,reslut);

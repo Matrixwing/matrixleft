@@ -7,7 +7,7 @@
 
 module.exports = {
   connection: 'localMysqlServer',
-  table: 'redenvelope',
+  tableName: 'redenvelope',
   autoCreatedAt: false,
   autoUpdatedAt: false,
   autoid: false,

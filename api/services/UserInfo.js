@@ -20,7 +20,7 @@ module.exports = {
     // 更新用户基本信息
     // 更新类型
     User.find({userName:userInfo.userName,IDCard:userInfo.IDCard,openid:null,status:1}).exec(function(err,tobuser){
-      console.log('2buser',tobuser)
+      console.log('2buser',tobuser);
       if (err) return cb(err);
       if(tobuser=='') {
         async.parallel([
@@ -31,8 +31,25 @@ module.exports = {
             })
           },
           function (next) {
-
             if (userTag !== '') {
+              console.log(userTag);
+              var isAllDay=0;
+              var isHalfDay=0;
+              if(userInfo.role==2){
+                for(var a in userTag){
+                  if(userTag[a].tagID==0||userTag[a].tagID==1||userTag[a].tagID==3){
+                    isAllDay=1;
+                  }
+                  if(userTag[a].tagID==2){
+                    isHalfDay=1
+                  }
+                }
+                if(isAllDay==1) userTag.push({tagID:23});
+                if(isHalfDay==1) userTag.push({tagID:22});
+                if(isAllDay==1||isHalfDay==1) userTag.push({tagID:21});
+                userTag.push({tagID:28});
+              }
+              console.log(userTag);
               TagUserRe.updataTagUserRe(userInfo.userID, userTag, function (err, results) {
                 if (err) return next(err);
                 return next(null, results)
@@ -46,7 +63,6 @@ module.exports = {
           return cb(null, '');
         });
       }else{
-
          User.update({userID:userInfo.userID},{openid:null}).exec(function(err,olduser){
            if(err) return cb(err)
            var data ={

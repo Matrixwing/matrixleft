@@ -25,7 +25,7 @@ module.exports = {
       type:'datatime'
     },
     expireAt:{
-      type:'datatime'
+      type:'string'
     },
     usedAt:{
       type:'datatime'

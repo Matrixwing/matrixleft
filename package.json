@@ -33,6 +33,7 @@
     "skipper": "^0.7.2",
     "urllib": "^2.17.0",
     "weixin-pay": "^1.1.7",
+    "weixin-redpack": "^1.1.1",
     "xml2js": "^0.4.17"
   },
   "scripts": {

@@ -197,7 +197,6 @@ module.exports = {
             },
           }
         });
-
         request({
           url: "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=" + token.access_token,
           method: 'POST',
@@ -253,7 +252,52 @@ module.exports = {
         console.log(body);
       });
     })
+  },
+
+  sendCoApplyToAdmin : function(opts,cb){
+    WxAccess.validateToken(function(err,token){
+      for(var admin in weixinConfig.adminOpenid) { //发送给管理员
+        var post_data = JSON.stringify({
+          touser: weixinConfig.adminOpenid[admin].openid,
+          template_id: weixinConfig.newCompTemp,
+          data: {
+            first: {
+              value: "有新的小伙伴申请加入微元汇",
+              color: "#173177"
+            },
+            keyword1: {
+              value: opts.branchName,
+              color: "#173177"
+            },
+            keyword2: {
+              value: '',
+              color: "#173177"
+            },
+            keyword3: {
+              value: opts.applyTime,
+              color: "#173177"
+            },
+            keyword4: {
+              value: opts.userInfo,
+              color: "#173177"
+            },
+            remark: {
+              //value:opts.tags,
+              value: '机会不容错过，大家奔走相告',
+              color: "#173177"
+            },
+          }
+        });
+        console.log('post_data', post_data);
+        request({
+          url: "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=" + token.access_token,
+          method: 'POST',
+          body: post_data,
+        }, function (err, response, body) {
+          console.log(body);
+        });
+      }
+    })
+
   }
-
-
 }

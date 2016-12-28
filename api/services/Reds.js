@@ -4,8 +4,24 @@
 var dateformat = require('dateformat');
 var util = require('util');
 var async = require('async');
-module.exports = {
+//var Redpack = require('weixin-redpack').Redpack;
+var fs=require('fs');
+var weixinConfig = sails.config.weixin;
 
+//var redpack = Redpack({
+//  wxappid:weixinConfig.appid,
+//  mch_id:weixinConfig.mch_id,
+//  pfx: fs.readFileSync('./cert/apiclient_cert.p12'),
+//  partner_key: weixinConfig.partner_key, //微信商户平台API密钥
+//});
+//var redpack = Redpack({
+//  wxappid:'wx8306afd398ab31e5',
+//  mch_id:'1402095402',
+//  pfx: fs.readFileSync('./cert/apiclient_cert.p12'),
+//  partner_key: 'qd20160725scfkilejlmatrix7u8x0kd', //微信商户平台API密钥
+//});
+
+module.exports = {
   getRedList : function (opts,cb){
     //console.log(opts);
     var statusString = '';
@@ -29,7 +45,6 @@ module.exports = {
           return next(null,orderList)
         }))
       },
-
     ],function(err,results){
       if(err) return cb(err);
       var redList = results[0];
@@ -45,7 +60,6 @@ module.exports = {
       };
       cb(null,newResults);
     })
-
   },
 
   //给用户发红包
@@ -53,6 +67,8 @@ module.exports = {
     var now = new Date(); //现在时间
     for(var i=0;i<opts.reds.length;i++){
       Red.find({id:opts.reds[i]}).exec(function(err,red){
+        console.log(err);
+        console.log(red);
         if(err) return cb(err);
         if(red=='') return cb('没有这个红包');
         var expire=new Date(now.getTime()+red[0].validTime*24*60*60*1000); //过期时间
@@ -65,7 +81,22 @@ module.exports = {
           if(err) return cb(err);
         })
       })
-      return cb(null,'');
     }
+  //  redpack.send({
+  //    mch_billno: '123426900220150325'+Math.random().toString().substr(2,10),
+  //    send_name: '红包来自',
+  //    wishing: '新人大礼包',
+  //    re_openid: 'ovSs8w7mUy1j1SkeLBsmWpjVpkGM',
+  //    total_amount: 100,//单位分
+  //    total_num: 1,
+  //    client_ip: '14.23.102.146',
+  //    nick_name: 'XXXX',
+  //    act_name: '新人大礼包',
+  //    remark: 'remark'
+  //  }, function(err, result){
+  //    console.log(err);
+  //    console.log(result);
+  //  })
+  //  return cb(null,'');
   }
 }

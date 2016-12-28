@@ -70,6 +70,7 @@ module.exports.routes = {
   "post /red/getRedList" : {controller:"RedController",action:"getRedList"},
   "post /admin/getOrderList" : {controller : "OrderController", action : "adminGetOrderList"}  ,
   "get /admin/confirmOrder" : {controller : "OrderController", action : "adminConfirmOrder"}  ,
+  "post /admin/cooperateApply" : {controller : "AdminController", action : "cooperateApply"}  ,
   //"post /getTotalFee" : {controller : "PayController", action : "jsApiAccess"}  ,
    /***************************************************************************
   *                                                                          *
