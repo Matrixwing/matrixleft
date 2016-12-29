@@ -83,7 +83,7 @@
 				font-size: 16px;
 			}
 		</style>
-		
+
 	</head>
 
 	<body>
@@ -165,9 +165,11 @@
 			    dataType: 'json',
 			    success: function(data) {
 					mui('#reg_add').button('reset');
-					if (data.msgNo==0000) {
+					if (data.msgNo) {
+            mui.toast(data.msgInfo);
 						$('#succ').show();
 						$('#main').hide();
+            //mui('#reg_add').button('disable');
 					};
 			    },
 			    error: function(xhr, textStatus, errorThrown) {

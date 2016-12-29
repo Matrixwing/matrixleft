@@ -46,6 +46,10 @@ module.exports.policies = {
     getCertInfo:true
 
   },
+
+  AdminController:{
+    '*':true
+  }
   //sails说明
   /***************************************************************************
   *                                                                          *
