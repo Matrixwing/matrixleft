@@ -294,7 +294,7 @@ module.exports = {
           method: 'POST',
           body: post_data,
         }, function (err, response, body) {
-
+          console.log(body);
           cb(null,body);
         });
       }
