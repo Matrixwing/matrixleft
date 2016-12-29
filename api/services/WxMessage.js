@@ -270,7 +270,7 @@ module.exports = {
               color: "#173177"
             },
             keyword2: {
-              value: '',
+              value: '成都',
               color: "#173177"
             },
             keyword3: {
