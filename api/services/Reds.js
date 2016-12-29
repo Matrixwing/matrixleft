@@ -51,7 +51,8 @@ module.exports = {
       console.log(JSON.parse(results[0][0].condition))
       for (var x in results[0]){
         if(results[0][x]!=''){
-          results[0][x].condition=JSON.parse(results[0][0].condition)
+          console.log('sdffadsf',results[0][x]);
+          results[0][x].condition=JSON.parse(results[0][x].condition)
         }
       }
       var newResults = {

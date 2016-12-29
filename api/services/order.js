@@ -185,9 +185,11 @@ module.exports = {
               userID:order[0].userID,
               reds:[5]
             }
-            Reds.sendRedsToUser(red,function(err,result){
+            if(red.userID==1302||red.userID==1299||red.userID==1297||red.userID==1301){
+              Reds.sendRedsToUser(red,function(err,result){
 
-            });
+              });
+            }
           }
         }
         return cb(null,reslut);
