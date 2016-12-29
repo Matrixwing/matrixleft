@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>商务合作</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../styles/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../styles/main.css"/>
+		<style type="text/css">
+			.mui-content{
+				width: 100%;
+				height: 100%;
+				background: url(../../images/swhz.jpg);
+				background-size:100% 100%;
+				background-repeat:no-repeat;
+				margin: 0;
+				padding: 0;
+			    position: absolute;
+			    left: 0;
+			    right: 0;
+			    top: 0;
+			    bottom: 0;
+			}
+			body{
+				background: none
+			}
+			.main,.succ{
+				position: absolute;
+				bottom: 5%;
+				text-align: center;
+				width: 100%;
+			}
+			.succ{
+				bottom: 20%
+			}
+			.title{
+				margin: 20px;
+				font-size: 20px;
+				font-weight: 700;
+			}
+			.mui-input-group{
+				margin: 0 10px;
+				background: none;
+			}
+			.mui-input-row label{
+				padding: 11px 10px;
+				text-align: right;
+			}
+			#reg_add,#return {
+			    width: 100% !important;
+			    font-size: 14px;
+			    background-color: #fc5b3e;
+			    border-color: #fc5b3e;
+			    padding: 10px;
+			}
+			#return{
+				margin-top: 20px
+			}
+			#reg_add .mui-spinner{
+			    width: 19px;
+			    height: 19px;
+			    margin-top: -5px;
+			    position: relative;
+			    top: 5px;
+			}
+			.mui-input-group .mui-input-row:after{
+				left: 10px;
+			}
+			.info{
+				margin:10px 10px 0 10px;
+				font-size: 16px;
+				text-align: left;
+			}
+			.success .yycg{
+				color: #91c54c;
+				width: 30%;
+				margin-bottom: 10px;
+			}
+			.success p{
+				font-size: 16px;
+			}
+		</style>
+		
+	</head>
+
+	<body>
+	<div class="mui-content">
+		<div class="main">
+			<div class="title">微元汇商务合作</div>
+			<form class="mui-input-group">
+					<div class="mui-input-row">
+						<label>公司名称：</label>
+						<input id='branchName' type="text" class="mui-input" placeholder="请输入公司名称" value="">
+					</div>
+					<div class="mui-input-row">
+						<label>联系人：</label>
+						<input id='name' type="text" class="mui-input" placeholder="请输入联系人姓名">
+					</div>
+					<div class="mui-input-row">
+						<label>联系电话：</label>
+						<input id='phone' type="number" class="mui-input" placeholder="请输入联系电话" value="">
+					</div>
+				</form>
+			<div class="info">
+				提交信息后会有专员联系您，洽谈合作事宜。
+			</div>
+			<div class="mui-content-padded">
+			<a id='reg_add' class="mui-btn mui-btn-primary" data-loading-text="提交中">提交</a>
+			</div>
+		</div>
+		<div class="succ"  style="display:none">
+			<div class="success">
+				<img src="../images/yycg.png" class="yycg">
+				<p>信息提交成功，我们将尽快与您联系。</p>
+			</div>
+			<div class="mui-content-padded">
+				<a href="../nurseList.html" id='return' class="mui-btn mui-btn-primary" data-loading-text="提交中">回到首页</a>
+			</div>
+		</div>
+	</div>
+		<!-- <div class="tips"><div class=" mui-icon mui-spinner"></div></div> -->
+	</body>
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/mui/mui.min.js"></script>
+	<script src="https://s4.cnzz.com/z_stat.php?id=1260604409&web_id=1260604409" language="JavaScript"></script>
+	<script type="text/javascript">
+		function phoneCheck(str) {
+	        var regPhone = /^0{0,1}(13[^4]|15[^4]|14[57]|17[0-9]|18[0-9])[0-9]{8}$|134[0-8][0-9]{7}$/;
+	        if (regPhone.test(str)) {
+	            return true;
+	        } else {
+	            return false;
+	        }
+	    }
+		$('#reg_add').on('tap',function(){
+			var branchName = $('#branchName').val();
+			var name = $('#name').val();
+			var phone = $('#phone').val();
+			if (!branchName) {
+				mui.toast('请填写您的公司名称');
+				return;
+			};
+			if (!name) {
+				mui.toast('请填写联系人姓名');
+				return;
+			};
+			if (!phoneCheck(phone)) {
+				mui.toast('请填写正确的联系电话');
+				return;
+			};
+			var data={
+				branchName:branchName,
+				name:name,
+				phone:phone
+			}
+
+			mui('#reg_add').button('loading');
+			$.ajax({
+			    type: 'post',
+			    url: '../admin/cooperateApply',
+			    data:data,
+			    dataType: 'json',
+			    success: function(data) {
+					mui('#reg_add').button('reset');
+					if (data.msgNo==0000) {
+						$('#succ').show();
+						$('#main').hide();
+					};
+			    },
+			    error: function(xhr, textStatus, errorThrown) {
+			    	if (xhr.status == 401) {
+			    		var href =eval('(' + xhr.responseText + ')');
+			    		window.location.href=href.loginPage;
+			    	}
+			    }
+			});
+		})
+	</script>
+</html>
