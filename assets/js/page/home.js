@@ -41,9 +41,9 @@ $(function() {
                     $('.nickname').attr('userID', data.data[0].userID);
                 };
                 if (data.data[0].gender == 1) {
-                    $('.gender').val('女');
+                    $('.gender').html('男');
                 } else {
-                    $('.gender').val('男');
+                    $('.gender').html('女');
                 };
 
                 if (data.data[0].phone) {
@@ -190,13 +190,28 @@ $('#edit').on('tap',function(){
     $('.save_btn').show();
     $('.file').show();
     $('.editinfos input').removeAttr("readOnly");
-    $('.gender').attr('readOnly','readOnly')
+    $('.gender').addClass('c_gender')
+    //$('.gender').attr('readOnly','readOnly')
 })
+$('.editinfos').on('tap','.c_gender', function(event) {
+    var _this = $(this);
+    var c_gender_tag = new mui.PopPicker();
+    c_gender_tag.setData([
+        {value:'1',text:'男'},
+        {value:'2',text:'女'}
+    ]);
+    c_gender_tag.show(function(items) {
+        _this.html(items[0].text);
+        _this.attr('tagID',items[0].value);
+       
+    });
+});
 $('#save').on('tap',function(){
     var userName = $('#userName').val();
     var IDCard = $('#IDCard').val();
     var nickname = $('#nickname').val();
     var phone = $('#phone').val();
+    var gender = $('.gender').attr('tagID');
     if (!base.phoneCheck(phone)) {
         mui.toast('请输入正确的手机号');
         return;
@@ -210,6 +225,7 @@ $('#save').on('tap',function(){
         'IDCard':IDCard,
         'nickname':nickname,
         'phone':phone,
+        'gender':gender,
         'role':1
     }
     $.ajax({

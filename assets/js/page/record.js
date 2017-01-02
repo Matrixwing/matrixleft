@@ -66,7 +66,13 @@ function getOrderList (status,clear) {
 							html.push('<div class="mui-card-header">')
 								html.push('<p id="orderID">订单编号：'+list[i].orderID+'</p>')
 								if (list[i].servantStatus==2) {
-									html.push('<span id="status">'+list[i].status+'</span>')
+									if (list[i].status==1) {
+										html.push('<span id="status">等待交易</span>')
+									};
+									if (list[i].status==0) {
+										html.push('<span id="status">完成交易</span>')
+									};
+									
 								}
 							html.push('</div>')
 							html.push('<div class="mui-card-content">')
@@ -76,13 +82,13 @@ function getOrderList (status,clear) {
 									/*html.push('<p>订单金额：111元</p>')*/
 								html.push('</div>')
 							html.push('</div>')
-							if (list[i].status=='等待交易') {
+							if (list[i].status=='1') {
 								html.push('<div class="mui-card-footer">')
 
 									html.push('<a class="mui-card-link getOrderDetail" orderID='+list[i].orderID+' >查看详情</a>')
-									if (list[i].servantStatus==2) {
+									/*if (list[i].servantStatus==2) {
 										html.push('<a class="mui-card-link pay" servantName='+list[i].servantName+' orderID='+list[i].orderID+' expectSalary='+list[i].expectSalary+'>去支付</a>')
-									};
+									};*/
 									
 								html.push('</div>')
 							}else{

@@ -225,6 +225,12 @@
 .editinfos input{
 	text-align: right;
 }
+.gender{
+	width: 74% !important;
+	text-align: right;
+	float: right;
+	padding: 10px 15px;
+}
 /*兼容性*/
 
 @media screen and (max-width: 320px) {

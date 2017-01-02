@@ -40,7 +40,6 @@ $('.old_tag').on('tap', function(event) {
 		};
 	});
 });
-//
 
 $('.child_tag').on('tap', function(event) {
 	var _this = $(this);
@@ -299,7 +298,6 @@ $('#tag_sure').on('tap',function(){
 			})
 		};
 	}
-	d_e = dataList;
 	getServantList(dataList,'clear')
 	base.setCookie('needs',JSON.stringify(needs));
 	$('.no_tips').hide();
@@ -307,12 +305,12 @@ $('#tag_sure').on('tap',function(){
 	_czc.push(["_trackEvent", "筛选", "确定", "", "", ""]);
 })
 var count = 1;
-var d_e='';
 var o_dataList='';
 function getServantList(dataList,clear){
 	if (dataList) {
 		o_dataList =dataList;
 	};
+	console.log(o_dataList);
 	if (clear) {
 		count=1;
     	mui('#pullrefresh').pullRefresh().refresh(true);
@@ -397,6 +395,7 @@ function getServantList(dataList,clear){
 					mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > data.data.totalPages));
 	    		}else{
 	    			$('.no_tips').show();
+	    			o_dataList=''
 	    			getServantList()
 	    		}
 	    	};
