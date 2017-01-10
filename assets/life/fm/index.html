@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>问你一个问题你敢答应吗</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="stylesheet" href="animate.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="convo">  
+        <ul class="chat-thread">
+            <li class="send li1" id="li1">
+                你家里小孩谁带？
+                <a tid="1" class="on">A：自己</a>
+                <a tid="2">B：父母</a>
+                <a tid="3">C：老公/老婆</a>
+                <a tid="4">D：还在生产中</a>
+            </li>
+            <li class="send" id="li2">
+                你家里卫生谁打扫？
+                <a tid="1">A：自己</a>
+                <a tid="2">B：父母</a>
+                <a tid="3">C：老公/老婆</a>
+            </li>
+            <li class="send" id="li3">
+                你家里谁做饭？
+                <a tid="1">A：自己</a>
+                <a tid="2">B：父母</a>
+                <a tid="3">C：老公/老婆</a>
+            </li>
+            <li class="send" id="li4">
+                吃完饭后谁洗碗？
+                <a tid="1">A：自己</a>
+                <a tid="2">B：父母</a>
+                <a tid="3">C：老公/老婆</a>
+            </li>
+            <li class="receive" id="li5">
+                <img src="images/jq.png">
+            </li>
+
+            <li class="send" id="li6">
+                <img src="images/yj.png">
+            </li>
+            <li class="tips" id="li7"><span>3分钟过去了...</span></li>
+            <li class="send" id="li8">
+                <img src="images/jdl.png">
+            </li>
+            <li class="send" id="li9">
+                你们家干活最多的居然是：<font>你自己</font>，干活量居然超过了<font>80%</font>的人群
+            </li>
+            <li class="receive" id="li10">
+                <img src="images/cry.png">
+            </li>
+            <li class="send" id="li11">
+                别人的时间放在挣他一个亿的小目标上面，你的时间居然都放在了干家务活上。
+            </li>
+            <li class="send" id="li12">
+                <img src="images/xmb.png">
+            </li>
+            <li class="receive" id="li13">
+                <img src="images/jfzj.png">
+            </li>
+            <li class="send"  id="li14">
+                你觉得找保姆中介费贵吗？
+                <a tid="1">A：贵</a>
+                <a tid="2">B：贵</a>
+                <a tid="3">C：贵</a>
+            </li>
+            <li class="send" id="li15">
+                给你一个实在的30元现金红包，抵扣中介费，帮你回血，可好？
+            </li>
+            <li class="receive" id="li16">
+                <img src="images/haha.png">
+            </li>
+            <li class="send" id="li17">
+                <img src="images/warning.png"><br>
+                实在的红包说明：<br>
+                1、关注微元汇公众号（不关注一定没有红包）<br>
+                2.在微元汇平台挑选中意的保姆。<br>
+                3.面试完成后签单。<br>
+                4.微元汇发给你现金红包30元，诚不欺你
+            </li>
+            <li class="send" id="li18">
+                <img src="images/yjh.png">
+            </li>
+            <li class="send" id="li19">
+                 我先讲为敬！<br>
+                教会你家保姆使用微元汇找工作，你下次找保姆，就没有中介费了哦~
+            </li>
+            <li class="receive" id="li20">
+                <img src="images/o.png">
+            </li>
+        </ul>
+        <div class="btndiv" id="li21">
+            <a class="btn">去找保姆领红包</a>
+            <a class="btn">看看朋友加谁干活</a>
+        </div>
+    </div>
+    <div style="text-align:center;clear:both">
+    <div class="bottom">
+        <img src="images/bottom.png">
+    </div>
+    <audio src="images/20.mp3" id="paly"></audio>
+    <!-- Swiper JS -->
+    <script src="jquery-1.10.1.min.js"></script>
+    <script src="swiper.animate1.0.2.min.js"></script>
+    <script>
+    var x = document.getElementById("paly"); 
+
+    function playAudio()
+    { 
+          x.play(); 
+    } 
+    $('.send a').on('click',function(){
+       $(this).siblings().removeClass('on');
+       $(this).addClass('on');
+      
+       if ($(this).parent().index()==3) {
+        var _this = $(this);
+            _this.parent().next().show();
+            playAudio();
+            for(var i=0;i<$('.on').length;i++){
+                console.log($('.on').eq(i).attr('tid'));
+            }
+            setTimeout(function(){
+                $('#li6').show()
+                playAudio();  
+                $('html, body, .chat-thread').animate({scrollTop: $(document).height()}, 300); 
+            }, 1000);
+            setTimeout(function(){
+                $('#li7').show()
+                playAudio();  
+                $('html, body, .chat-thread').animate({scrollTop: $(document).height()}, 300); 
+            }, 2000);
+            setTimeout(function(){
+                $('#li8').show()
+                playAudio();  
+                $('html, body, .chat-thread').animate({scrollTop: $(document).height()}, 300); 
+            }, 3000);
+            setTimeout(function(){
+                $('#li9').show()
+                playAudio();  
+                $('html, body, .chat-thread').animate({scrollTop: $(document).height()}, 300); 
+            }, 4000);
+            setTimeout(function(){
+                $('#li10').show()
+                playAudio();  
+                $('html, body, .chat-thread').animate({scrollTop: $(document).height()}, 300); 
+            }, 7000);
+            setTimeout(function(){
+                $('#li11').show()
+                playAudio();  
+                $('html, body, .chat-thread').animate({scrollTop: $(document).height()}, 300); 
+            }, 8000);
+            setTimeout(function(){
+                $('#li12').show()
+                playAudio();  
+                $('html, body, .chat-thread').animate({scrollTop: $(document).height()}, 300); 
+            }, 11000);
+            setTimeout(function(){
+                $('#li13').show()
+                playAudio();  
+                $('html, body, .chat-thread').animate({scrollTop: $(document).height()}, 300); 
+            }, 12000);
+            setTimeout(function(){
+                $('#li14').show()
+                playAudio();  
+                $('html, body, .chat-thread').animate({scrollTop: $(document).height()}, 300); 
+            }, 13000);
+       }else if ($(this).parent().index()==13){
+         var _this = $(this);
+            $(this).parent().next().show();
+            playAudio();
+            setTimeout(function(){
+                $('#li16').show()
+                playAudio();  
+                $('html, body, .chat-thread').animate({scrollTop: $(document).height()}, 300); 
+            }, 2000);
+            setTimeout(function(){
+                $('#li17').show()
+                playAudio();  
+                $('html, body, .chat-thread').animate({scrollTop: $(document).height()}, 300); 
+            }, 3000);
+            setTimeout(function(){
+                $('#li18').show()
+                playAudio();  
+                $('html, body, .chat-thread').animate({scrollTop: $(document).height()}, 300); 
+            }, 6000);
+            setTimeout(function(){
+                $('#li19').show()
+                playAudio();  
+                $('html, body, .chat-thread').animate({scrollTop: $(document).height()}, 300); 
+            }, 7000);
+            setTimeout(function(){
+                $('#li20').show()
+                playAudio();  
+                $('html, body, .chat-thread').animate({scrollTop: $(document).height()}, 300); 
+            }, 8000);
+            setTimeout(function(){
+                $('#li21').show()
+                playAudio();  
+                $('html, body, .chat-thread').animate({scrollTop: $(document).height()}, 300); 
+            }, 9000);
+       }else{
+            $(this).parent().next().show();
+            playAudio();
+       };
+       var h =$('.chat-thread').height();
+       var dh=$(window).height()
+       if ((dh-50)<h) {
+            $('html, body, .chat-thread').animate({scrollTop: $(document).height()}, 300); 
+       };
+    })
+    $('.chat-thread li a').on('click',function(){
+
+    })
+    </script>
+</body>
+</html>
